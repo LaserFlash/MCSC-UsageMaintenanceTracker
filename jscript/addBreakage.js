@@ -20,6 +20,11 @@ $('.addValue').on("click", function( event ) {
             }
         })
         breakageForm.reset();
+
+        var snackbarContainer = document.querySelector('#toast');
+        var data = {message: 'Breakage Submited'};
+        snackbarContainer.MaterialSnackbar.showSnackbar(data);
+        
         updateThreeBreakages();
     } else {
       alert('Please fill at at least name or email!');
@@ -35,7 +40,7 @@ function contactHtmlFromObject(issue){
       html += '<div class="mdl-card__supporting-text mdl-color-text--grey-600">'
                 + "Category: " + issue.breakage.category
                 + '</br>'
-                + "Breakage Details: " +issue.breakage.details
+                + "Breakage Details: " +issue.breakage.details.substr(0,100)
                 +'<br />'
                 + "Reported by: " + issue.breakage.name
                 +'</div>';
@@ -45,7 +50,8 @@ function contactHtmlFromObject(issue){
 }
 
 function updateThreeBreakages(){
-  $('.breakage-card').remove();
+  $('.breakages-added').remove();
+  $('.separator').remove();
   issueRef.limitToLast(3).on("child_added", function(snap) {
     console.log("added", snap.key(), snap.val());
     $('#breakages').append(contactHtmlFromObject(snap.val()));

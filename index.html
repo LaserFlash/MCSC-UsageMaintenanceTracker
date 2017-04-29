@@ -15,6 +15,10 @@
     <link rel="stylesheet" href="styles/styles.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
+    <!--getmdl-select-->
+    <link rel="stylesheet" href="https://cdn.rawgit.com/CreativeIT/getmdl-select/master/getmdl-select.min.css">
+    <script defer src="https://cdn.rawgit.com/CreativeIT/getmdl-select/master/getmdl-select.min.js"></script>
+
 </head>
 
 <body>
@@ -40,10 +44,9 @@
                 <a class="mdl-navigation__link" href="contact.html">Contact</a>
             </nav>
         </div>
-        <main class="mdl-layout__content">
+        <main class="mdl-layout__content portfolio-contact">
 
             <div class="mdl-grid portfolio-max-width">
-
                 <div class="mdl-grid mdl-cell mdl-cell--8-col mdl-cell--8-col-tablet mdl-card mdl-shadow--4dp">
                     <div class="mdl-card__title">
                         <h2 class="mdl-card__title-text">U23 Squad Boat Breakages</h2>
@@ -59,9 +62,19 @@
                             <input type="email" class="mdl-textfield__input" id="email" required placeholder="Enter Email">
                         </div>
                         <h3>Breakage</h3>
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <label class="mdl-textfield__label" for="boatID">Boat Number</label>
-                            <input type="text" class="mdl-textfield__input" id="boatID" placeholder="Boat Number">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fullwidth">
+
+                            <label for="boatID" class="mdl-textfield__label">Boat Number</label>
+                            <input class="mdl-textfield__input" type="text" id="boatID" readonly tabIndex="-1">
+
+                            <ul for="boatID" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+                                <li class="mdl-menu__item">1</li>
+                                <li class="mdl-menu__item">2</li>
+                                <li class="mdl-menu__item">3</li>
+                                <li class="mdl-menu__item">4</li>
+                                <li class="mdl-menu__item">5</li>
+                                <li class="mdl-menu__item">6</li>
+                            </ul>
                         </div>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                             <label class="mdl-textfield__label" for="category">Category</label>
@@ -79,13 +92,16 @@
                     </form>
                 </div>
                 <div id="breakages" class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing ">
-                        <!-- Conatct Object li.list-group-item.contact will be added here by js -->
+                    <!-- Conatct Object li.list-group-item.contact will be added here by js -->
                 </div>
+            </div>
+
+            <div id="toast" class="mdl-js-snackbar mdl-snackbar">
+                <div class="mdl-snackbar__text"></div>
+                <button class="mdl-snackbar__action" type="button"></button>
             </div>
         </main>
     </div>
-
-
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
