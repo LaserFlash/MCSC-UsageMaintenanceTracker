@@ -4,6 +4,10 @@
   background-repeat: no-repeat;
 }
 
+.separator {
+  margin: 8px;
+}
+
 .portfolio-header {
   position: relative;
 }
