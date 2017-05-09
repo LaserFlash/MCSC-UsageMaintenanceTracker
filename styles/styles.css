@@ -38,10 +38,10 @@
 }
 
 .portfolio-logo {
-  background: url(../images/logo.png) 50% no-repeat;
+  background: url(../images/logo.png) 100% no-repeat;
   background-size: cover;
   height: 150px;
-  width: 157px;
+  width: 150px;
   margin: auto auto 10px;
 }
 
