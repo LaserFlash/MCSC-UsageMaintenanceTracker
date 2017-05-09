@@ -4,10 +4,42 @@ var issueRef = dbRef.child('issues');
 //load older conatcts as well as any newly added one...
 updateThreeBreakages();
 
+
+//Prevent enter from submtiing form when not ready\
+function validationFunction() {
+    if ($('#name').val() == '') {
+        return false;
+    }
+    if ($('#email').val() == '') {
+        return false;
+    }
+    if ($('#boatID').val() == '') {
+        return false;
+    }
+    if ($('#category').val() == '') {
+        return false;
+    }
+    if ($('#details').val() == '') {
+        return false;
+    }
+    return true;
+
+  }
+
+$(document).ready(function() {
+  $(window).keydown(function(event){
+    if( (event.keyCode == 13) && (validationFunction() == false) ) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+
+
 //save contact
 $('.addValue').on("click", function( event ) {
     event.preventDefault();
-    if( $('#name').val() != '' || $('#email').val() != '' ){
+    if( $('#name').val() != '' && $('#email').val() != '' ){
       issueRef
         .push({
             breakage: {
@@ -24,7 +56,7 @@ $('.addValue').on("click", function( event ) {
         var snackbarContainer = document.querySelector('#toast');
         var data = {message: 'Breakage Submited'};
         snackbarContainer.MaterialSnackbar.showSnackbar(data);
-        
+
         updateThreeBreakages();
     } else {
       alert('Please fill at at least name or email!');
