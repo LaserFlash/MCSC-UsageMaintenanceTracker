@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="styles/material.min.css" />
     <link rel="stylesheet" href="styles/styles.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link re="stylesheet" href="styles/dialog-polyfill.css"  />
+    <script src="jscript/dialog-polyfill.css"></script>
 
     <!--getmdl-select-->
     <link rel="stylesheet" href="https://cdn.rawgit.com/CreativeIT/getmdl-select/master/getmdl-select.min.css">
@@ -80,7 +82,7 @@
                             </ul>
                         </div>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fullwidth">
-                            <label for="category" class="mdl-textfield__label" >Category</label>
+                            <label for="category" class="mdl-textfield__label">Category</label>
                             <input class="mdl-textfield__input" type="text" id="category" required readonly tabIndex="-1">
                             <ul for="category" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
                                 <li class="mdl-menu__item">Urgent (boat out of action)</li>
@@ -110,14 +112,27 @@
                 <button class="mdl-snackbar__action" type="button"></button>
             </div>
 
+            <dialog id="dialog" class="mdl-dialog">
+                <h3 class="mdl-dialog__title">Confirm Removal</h3>
+                <div class="mdl-dialog__content">
+                    <p>
+                        Are you sure you want to remove this breakage
+                    </p>
+                </div>
+                <div class="mdl-dialog__actions">
+                    <button type="button" class="mdl-button close">Cancel</button>
+                    <button type="button" class="mdl-button remove" enabled>Remove</button>
+                </div>
+            </dialog>
+
             <footer class="mdl-mini-footer">
-              <div class="mdl-mini-footer__left-section">
-                <div class="mdl-logo">Bryn Bennett</div>
-                <ul class="mdl-mini-footer__link-list">
-                  <li><a href="index.html">Report Boat Breakage</a></li>
-                  <li><a href="viewBreakages.html">View Boat Breakages</a></li>
-                </ul>
-              </div>
+                <div class="mdl-mini-footer__left-section">
+                    <div class="mdl-logo">Bryn Bennett</div>
+                    <ul class="mdl-mini-footer__link-list">
+                        <li><a href="index.html">Report Boat Breakage</a></li>
+                        <li><a href="viewBreakages.html">View Boat Breakages</a></li>
+                    </ul>
+                </div>
                 <div class="mdl-mini-footer__right-section">
                 </div>
             </footer>

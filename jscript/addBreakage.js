@@ -74,8 +74,24 @@ $('.addValue').on("click", function(event) {
 //remove breakage
 $('#breakages').on("click", '.removeBreakage', function(event) {
     //TODO Confirmation of removal
-    issueRef.child(event.target.id).remove();
-    console.log("Remove " + event.target.id + " from database");
+
+
+    var dialog = document.querySelector('dialog');
+
+    if (! dialog.showModal) {
+      dialogPolyfill.registerDialog(dialog);
+    }
+    dialog.showModal();
+    dialog.querySelector('.close').addEventListener('click', function() {
+      dialog.close();
+    });
+
+    dialog.querySelector('.remove').addEventListener('click', function() {
+        issueRef.child(event.target.id).remove();
+        dialog.close();
+        console.log("Remove " + event.target.id + " from database");
+    });
+
 });
 
 //prepare conatct object's HTML
