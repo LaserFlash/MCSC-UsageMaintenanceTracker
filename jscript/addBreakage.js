@@ -5,7 +5,17 @@ var issueRef = dbRef.child('issues');
 updateThreeBreakages();
 
 
-//Prevent enter from submtiing form when not ready\
+/**
+*   Prevent enter key from submitting form with out all fields filled in
+**/
+$(document).ready(function() {
+    $(window).keydown(function(event) {
+        if ((event.keyCode == 13) && (validationFunction() == false)) {
+            event.preventDefault();
+            return false;
+        }
+    });
+});
 function validationFunction() {
     if ($('#name').val() == '') {
         return false;
@@ -26,14 +36,6 @@ function validationFunction() {
 
 }
 
-$(document).ready(function() {
-    $(window).keydown(function(event) {
-        if ((event.keyCode == 13) && (validationFunction() == false)) {
-            event.preventDefault();
-            return false;
-        }
-    });
-});
 
 
 //add breakage
@@ -100,5 +102,5 @@ function updateThreeBreakages() {
         console.log("added", snap.key(), snap.val());
         $('#breakages').append(breakageHtmlFromObject(snap.val(), snap.key()));
     });
-    
+
 }

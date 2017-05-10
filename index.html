@@ -79,9 +79,15 @@
                                 <li class="mdl-menu__item">6</li>
                             </ul>
                         </div>
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <label class="mdl-textfield__label" for="category">Category</label>
-                            <input type="text" class="mdl-textfield__input" id="category" required placeholder="Enter Category of Breakage">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fullwidth">
+                            <label for="category" class="mdl-textfield__label" >Category</label>
+                            <input class="mdl-textfield__input" type="text" id="category" required readonly tabIndex="-1">
+                            <ul for="category" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+                                <li class="mdl-menu__item">Urgent (boat out of action)</li>
+                                <li class="mdl-menu__item">High (boat usable if needed)</li>
+                                <li class="mdl-menu__item">Medium (boat usable)</li>
+                                <li class="mdl-menu__item">Low (breakage does not yet affect use)</li>
+                            </ul>
                         </div>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                             <label class="mdl-textfield__label" for="details">Details</label>
