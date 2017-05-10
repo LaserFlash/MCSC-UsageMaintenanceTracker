@@ -1,8 +1,13 @@
 //create firebase reference
 var dbRef = new Firebase("https://u23-breakages.firebaseio.com/");
 var issueRef = dbRef.child('issues');
-//load older conatcts as well as any newly added one...
-updateThreeBreakages();
+
+/**
+*   Keep 3 displayed breakages upto date
+**/
+issueRef.limitToLast(3).on("value", function(snapshot) {
+  updateThreeBreakages(snapshot);
+});
 
 
 /**
@@ -61,7 +66,6 @@ $('.addValue').on("click", function(event) {
         };
         snackbarContainer.MaterialSnackbar.showSnackbar(data);
 
-        updateThreeBreakages();
     } else {
         alert('Please fill at at least name or email!');
     }
@@ -70,14 +74,16 @@ $('.addValue').on("click", function(event) {
 //remove breakage
 $('#breakages').on("click", '.removeBreakage', function(event) {
     //TODO Confirmation of removal
-    //issueRef.child(event.target.id).remove();
-    //console.log("Remove " + event.target.id + " from database");
+    issueRef.child(event.target.id).remove();
+    console.log("Remove " + event.target.id + " from database");
 });
 
 //prepare conatct object's HTML
-function breakageHtmlFromObject(issue, key) {
-    console.log(issue);
+function breakageHtmlFromObject(data) {
     var html = '';
+    var issue = data.val();
+    var key = data.key();
+
     html += '<div class= "breakages-added mdl-card mdl-shadow--4dp mdl-cell--12-col-phone mdl-cell--12-col-tablet mdl-cell--12-col-desktop">';
     html += '<div class= "breakage-card mdl-card__title mdl-card--expand mdl-color--blue">' + '<h2 class="mdl-card__title-text">' + "Boat " + issue.breakage.boatID + '</h2>' + '</div>';
     html += '<div class="mdl-card__supporting-text mdl-color-text--grey-600">' +
@@ -92,15 +98,15 @@ function breakageHtmlFromObject(issue, key) {
         '</div>';
     html += '</div>';
     html += '<div class="separator"></div>';
-    return html;
+    console.log(issue);
+    $('#breakages').append(html);
 }
 
-function updateThreeBreakages() {
+function updateThreeBreakages(snap) {
     $('.breakages-added').remove();
     $('.separator').remove();
-    issueRef.limitToLast(3).on("child_added", function(snap) {
-        console.log("added", snap.key(), snap.val());
-        $('#breakages').append(breakageHtmlFromObject(snap.val(), snap.key()));
-    });
 
+    snap.forEach(function(childSnap){
+        breakageHtmlFromObject(childSnap);
+    });
 }
