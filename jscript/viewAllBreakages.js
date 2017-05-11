@@ -1,23 +1,37 @@
-//create firebase reference
+/**
+*   Create firebase reference
+**/
 var dbRef = new Firebase("https://u23-breakages.firebaseio.com/");
 var issueRef = dbRef.child('issues');
 var fixedRef = dbRef.child('fixed');
 
+
+/**
+*   Change displayed cards when new breakage added
+**/
 issueRef.on("child_added",function(snap){
     breakageHtmlFromObject(snap);
 });
 
+/**
+*   Change displayed cards when breakage removed
+**/
 issueRef.on("child_removed",function(snap){
     removeHtml(snap);
 });
 
+/**
+*   Remove a card bassed on breakage ID / Entry
+**/
 function removeHtml(data){
     var issue = data.val();
     key = data.key();
     $('#DIV_' + key).remove();
 }
 
-//prepare conatct object's HTML
+/**
+*   Create card to display breakage
+**/
 function breakageHtmlFromObject(data) {
     var html = '';
     var issue = data.val();
@@ -48,7 +62,9 @@ function breakageHtmlFromObject(data) {
     $('#breakageDiv').append(html);
 }
 
-//mark fixed
+/**
+*   Mark breakage as fixed
+**/
 $('#breakageDiv').on("click", '.fixBreakage', function(event) {
     //TODO Confirmation of removal & only remove if succesful
 

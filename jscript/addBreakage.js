@@ -1,4 +1,6 @@
-//create firebase reference
+/**
+*   Create firebase reference
+**/
 var dbRef = new Firebase("https://u23-breakages.firebaseio.com/");
 var issueRef = dbRef.child('issues');
 
@@ -9,7 +11,7 @@ if (!dialog.showModal) {
 }
 
 /**
-*   Keep 3 displayed breakages upto date
+*   Keep the 3 displayed breakages upto date
 **/
 issueRef.limitToLast(3).on("value", function(snapshot) {
   updateThreeBreakages(snapshot);
@@ -47,8 +49,6 @@ function validationFunction() {
 
 }
 
-
-
 //add breakage
 $('.addValue').on("click", function(event) {
     event.preventDefault();
@@ -77,9 +77,12 @@ $('.addValue').on("click", function(event) {
     }
 });
 
-//remove breakage
+/**
+*   Remove a breakage
+*   Intended use is for removing a breakage that was submitted incorrectly
+**/
 $('#breakages').on("click", '.removeBreakage', function(event) {
-    //TODO Confirmation of removal
+
     dialog.showModal();
     dialog.querySelector('.close').addEventListener('click', function() {
       dialog.close();
@@ -93,7 +96,9 @@ $('#breakages').on("click", '.removeBreakage', function(event) {
 
 });
 
-//prepare conatct object's HTML
+/**
+*   Create a card to display breakage
+**/
 function breakageHtmlFromObject(data) {
     var html = '';
     var issue = data.val();
