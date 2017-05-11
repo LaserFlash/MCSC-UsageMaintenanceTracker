@@ -14,7 +14,7 @@ function breakageHtmlFromObject(data) {
 
     var date = new Date(issue.breakage.timestamp);
 
-    html += '<div class= "breakages-added mdl-card mdl-shadow--4dp mdl-cell--3-col-phone mdl-cell--3-col-tablet mdl-cell--3-col-desktop">';
+    html += '<div class= "breakages-added mdl-card mdl-cell mdl-shadow--4dp mdl-cell--12-col-phone mdl-cell--4-col-tablet mdl-cell--3-col-desktop">';
     html += '<div class= "breakage-card mdl-card__title mdl-card--expand mdl-color--blue">' + '<h2 class="mdl-card__title-text">' + "Boat " + issue.breakage.boatID + '</h2>' + '</div>';
     html += '<div class="mdl-card__supporting-text mdl-color-text--grey-600">' +
         "Category: " + issue.breakage.category +
@@ -31,7 +31,6 @@ function breakageHtmlFromObject(data) {
         '<br />' +
         '</div>';
     html += '</div>';
-    html += '<div class="separator"></div>';
     console.log(issue);
     $('#breakageDiv').append(html);
 }
