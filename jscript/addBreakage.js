@@ -2,6 +2,12 @@
 var dbRef = new Firebase("https://u23-breakages.firebaseio.com/");
 var issueRef = dbRef.child('issues');
 
+var dialog = document.querySelector('dialog');
+if (!dialog.showModal) {
+  dialogPolyfill.registerDialog(dialog);
+  console.log("register dialog");
+}
+
 /**
 *   Keep 3 displayed breakages upto date
 **/
@@ -75,12 +81,6 @@ $('.addValue').on("click", function(event) {
 $('#breakages').on("click", '.removeBreakage', function(event) {
     //TODO Confirmation of removal
 
-
-    var dialog = document.querySelector('dialog');
-
-    if (! dialog.showModal) {
-      dialogPolyfill.registerDialog(dialog);
-    }
     dialog.showModal();
     dialog.querySelector('.close').addEventListener('click', function() {
       dialog.close();
