@@ -61,7 +61,7 @@ $('.addValue').on("click", function(event) {
                     email: $('#email').val(),
                     category: $('#category').val(),
                     details: $('#details').val(),
-                    timestamp: Date.now(),
+                    timestamp: new Date().getTime(),
                 }
             })
         breakageForm.reset();
