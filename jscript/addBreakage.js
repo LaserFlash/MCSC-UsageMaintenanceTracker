@@ -73,14 +73,13 @@ $('.addValue').on("click", function(event) {
         snackbarContainer.MaterialSnackbar.showSnackbar(data);
 
     } else {
-        alert('Please fill at at least name or email!');
+        alert('Please fill in at least name or email!');
     }
 });
 
 //remove breakage
 $('#breakages').on("click", '.removeBreakage', function(event) {
     //TODO Confirmation of removal
-
     dialog.showModal();
     dialog.querySelector('.close').addEventListener('click', function() {
       dialog.close();
@@ -99,6 +98,7 @@ function breakageHtmlFromObject(data) {
     var html = '';
     var issue = data.val();
     var key = data.key();
+    var date = new Date(issue.breakage.timestamp);
 
     html += '<div class= "breakages-added mdl-card mdl-cell mdl-shadow--4dp mdl-cell--12-col-phone mdl-cell--12-col-tablet mdl-cell--12-col-desktop">';
     html += '<div class= "breakage-card mdl-card__title mdl-card--expand mdl-color--blue">' + '<h2 class="mdl-card__title-text">' + "Boat " + issue.breakage.boatID + '</h2>' + '</div>';
@@ -108,6 +108,8 @@ function breakageHtmlFromObject(data) {
         "Breakage Details: " + issue.breakage.details.substr(0, 100) +
         '<br />' +
         "Reported by: " + issue.breakage.name +
+        '<br />' +
+        "Date Reported: " + date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear() +
         '<br />' +
         '<br />' +
         '<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent removeBreakage" id=' + key + '>Remove</button>' +
