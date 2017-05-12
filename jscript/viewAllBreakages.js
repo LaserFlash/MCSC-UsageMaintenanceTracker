@@ -90,11 +90,12 @@ $('#breakageDiv').on("click", '.fixBreakage', function(event) {
           fixedRef.push({
                   breakage: {
                       boatID: item.breakage.boatID,
-                      name: item.breakage.name,
-                      email: item.breakage.email,
                       category: item.breakage.category,
                       details: item.breakage.details,
-                      timeStampReported:item.breakage.timestamp,
+                      email: item.breakage.email,
+                      mobile: item.breakage.mobile,
+                      name: item.breakage.name,
+                      timestampReported:item.breakage.timestamp,
                       timestampFixed: new Date().getTime(),
                   }
           });
