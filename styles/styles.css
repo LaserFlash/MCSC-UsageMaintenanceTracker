@@ -24,9 +24,16 @@
   border-bottom: 4px solid transparent;
 }
 
-  .navigation .mdl-navigation__link:hover {
-    border-bottom: 4px solid #1c54af;
-  }
+.navigation .mdl-navigation__link:hover {
+  border-bottom: 4px solid #1c54af;
+}
+
+.navigation-container .is-active {
+  position: relative;
+  font-weight: bold;
+  border-bottom: 4px solid #1c54af;
+}
+
 
 
 .navigation-container {
@@ -91,6 +98,10 @@ img.article-image {
 
 .no-bottom-padding {
   padding-bottom: 0;
+}
+
+.breakageReport  .mdl-textfield {
+  width: 100%;
 }
 
 .breakageReport form {
