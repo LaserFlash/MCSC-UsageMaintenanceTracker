@@ -50,7 +50,9 @@ function breakageHtmlFromObject(data) {
         '<br />' +
         "Reported by: " + issue.breakage.name +
         '<br />' +
-        "Contact: " + issue.breakage.email +
+        "Contact Email: " + issue.breakage.email +
+        '<br />' +
+        "Contact Mobile: " + issue.breakage.mobile +
         '<br />' +
         "Date Reported: " + date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear() +
         '<br />' +

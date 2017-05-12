@@ -36,6 +36,9 @@ function validationFunction() {
     if ($('#email').val() == '') {
         return false;
     }
+    if ($('#mobile').val() == '') {
+        return false;
+    }
     if ($('#boatID').val() == '') {
         return false;
     }
@@ -59,6 +62,7 @@ $('.addValue').on("click", function(event) {
                     boatID: $('#boatID').val(),
                     name: $('#name').val(),
                     email: $('#email').val(),
+                    mobile: $('#mobile').val(),
                     category: $('#category').val(),
                     details: $('#details').val(),
                     timestamp: new Date().getTime(),
