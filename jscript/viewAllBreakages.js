@@ -5,6 +5,12 @@ var dbRef = new Firebase("https://u23-breakages.firebaseio.com/");
 var issueRef = dbRef.child('issues');
 var fixedRef = dbRef.child('fixed');
 
+var dialog = document.querySelector('dialog');
+if (!dialog.showModal) {
+  dialogPolyfill.registerDialog(dialog);
+  console.log("register dialog");
+}
+
 
 /**
 *   Change displayed cards when new breakage added
@@ -69,41 +75,38 @@ function breakageHtmlFromObject(data) {
 **/
 $('#breakageDiv').on("click", '.fixBreakage', function(event) {
     //TODO Confirmation of removal & only remove if succesful
-
-//    dialog.showModal();
-//    dialog.querySelector('.close').addEventListener('click', function() {
-//      dialog.close();
-//    });
-
-//    dialog.querySelector('.remove').addEventListener('click', function() {
-//        issueRef.child(event.target.id).remove();
-//        dialog.close();
-//        console.log("Remove " + event.target.id + " from database");
-//    });
     event.preventDefault();
-    issueRef.child(event.target.id).once('value', function(snap) {
-        var item = snap.val();
-        console.log("Item " + item);
-        fixedRef.push({
-                breakage: {
-                    boatID: item.breakage.boatID,
-                    name: item.breakage.name,
-                    email: item.breakage.email,
-                    category: item.breakage.category,
-                    details: item.breakage.details,
-                    timeStampReported:item.breakage.timestamp,
-                    timestampFixed: new Date().getTime(),
-                }
-        });
+
+    dialog.showModal();
+    dialog.querySelector('.close').addEventListener('click', function() {
+      dialog.close();
     });
 
-    var snackbarContainer = document.querySelector('#toast');
-    var data = {
-        message: 'Breakage Marked as Fixed'
-    };
-    snackbarContainer.MaterialSnackbar.showSnackbar(data);
+    dialog.querySelector('.fix').addEventListener('click', function() {
+      dialog.close();
+      issueRef.child(event.target.id).once('value', function(snap) {
+          var item = snap.val();
+          console.log("Item " + item);
+          fixedRef.push({
+                  breakage: {
+                      boatID: item.breakage.boatID,
+                      name: item.breakage.name,
+                      email: item.breakage.email,
+                      category: item.breakage.category,
+                      details: item.breakage.details,
+                      timeStampReported:item.breakage.timestamp,
+                      timestampFixed: new Date().getTime(),
+                  }
+          });
+          var snackbarContainer = document.querySelector('#toast');
+          var data = {
+              message: 'Breakage Marked as Fixed'
+          };
+          snackbarContainer.MaterialSnackbar.showSnackbar(data);
 
-    issueRef.child(event.target.id).remove();
-    console.log("Moved " + event.target.id + " to fixed database");
+          issueRef.child(event.target.id).remove();
+          console.log("Moved " + event.target.id + " to fixed database");
+      });
+    });
 
 });

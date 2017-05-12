@@ -29,6 +29,7 @@ $(document).ready(function() {
         }
     });
 });
+
 function validationFunction() {
     if ($('#name').val() == '') {
         return false;
