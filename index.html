@@ -77,11 +77,13 @@
       <div class="mdl-color--blue-grey-50">
 
         <div class="mdl-grid breakageReport-max-width">
-          <div class="mdl-grid mdl-cell mdl-cell--8-col mdl-cell--8-col-tablet mdl-card mdl-shadow--4dp">
+          <div class="mdl-grid mdl-cell mdl-cell--8-col mdl-card mdl-shadow--4dp">
+
             <form method="post" name="breakageForm">
 
-              <h3 class="">Boat Breakage Form</h3>
+              <h3>Boat Breakage Form</h3>
               <h4>Your Info</h4>
+              
               <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                 <label class="mdl-textfield__label" for="name">Name</label>
                 <input type="text" class="mdl-textfield__input" id="name" required placeholder="Enter Name">
@@ -99,7 +101,7 @@
               <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fullwidth">
 
                 <label for="boatID" class="mdl-textfield__label">Boat Number</label>
-                <input class="mdl-textfield__input" type="text" id="boatID" required readonly tabIndex="-1">
+                <input class="mdl-textfield__input" type="text" id="boatID" required readonly tabIndex="-1" placeholder="Select Boat">
 
                 <ul for="boatID" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
                   <li class="mdl-menu__item">1</li>
@@ -110,10 +112,11 @@
                   <li class="mdl-menu__item">6</li>
                   <li class="mdl-menu__item">RIB</li>
                 </ul>
+
               </div>
               <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fullwidth">
                 <label for="category" class="mdl-textfield__label">Category</label>
-                <input class="mdl-textfield__input" type="text" id="category" required readonly tabIndex="-1">
+                <input class="mdl-textfield__input" type="text" id="category" required readonly tabIndex="-1" placeholder="Select Category">
                 <ul for="category" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
                   <li class="mdl-menu__item">Urgent (boat out of action)</li>
                   <li class="mdl-menu__item">High (boat usable if needed)</li>
@@ -125,6 +128,12 @@
                 <label class="mdl-textfield__label" for="details">Details</label>
                 <textarea class="mdl-textfield__input" type="text" rows="5" id="details" required placeholder="Enter Breakage Details"></textarea>
               </div>
+
+              <br />
+              <br />
+              <br />
+              <br />
+
               <p>
                 <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent addValue" type="submit">
                             Submit

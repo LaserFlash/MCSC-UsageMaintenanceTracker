@@ -50,11 +50,6 @@
   }
 }
 
-
-
-
-
-
 .portfolio-header {
   position: relative;
 }
@@ -74,21 +69,6 @@
 
 .is-compact .mdl-layout__title span {
   display: none;
-}
-
-
-.portfolio-card .mdl-card__title {
-  padding-bottom: 0;
-}
-
-.portfolio-blog-card-compact .mdl-card__title {
-  padding-bottom: 0;
-}
-
-.portfolio-blog-card-bg>.mdl-card__actions {
-  height: 52px;
-  padding: 16px;
-  background: rgba(0, 0, 0, 0.2);
 }
 
 img.article-image {
