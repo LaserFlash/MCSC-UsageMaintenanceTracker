@@ -7,7 +7,7 @@
   <meta name='pagename' content="WYST Maintenance" />
   <meta name="description" content="Keep track of maintenance and issues with the WYST Boats" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
-  <meta name="application-name" content="WYST Boat Maintenance"/>
+  <meta name="application-name" content="WYST Boat Maintenance" />
 
   <!--Meta Tags for Social Media -->
   <meta property="og:title" content="WYST Boat Maintenance" />
@@ -166,6 +166,12 @@
       <footer class="mdl-mini-footer">
         <div class="mdl-mini-footer__left-section">
           <div class="mdl-logo">&copy Bryn Bennett</div>
+          <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent " onclick="printPage()">Print this page</button>
+          <script>
+            function printPage() {
+              window.print();
+            }
+          </script>
         </div>
         <div class="mdl-mini-footer__right-section">
           <ul class="mdl-mini-footer__link-list">
