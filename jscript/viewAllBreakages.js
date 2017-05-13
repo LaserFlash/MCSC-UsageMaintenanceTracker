@@ -33,6 +33,7 @@ function removeHtml(data){
     var issue = data.val();
     key = data.key();
     $('#DIV_' + key).remove();
+    console.log("Removed card" + '#DIV_' + key);
 }
 
 /**
