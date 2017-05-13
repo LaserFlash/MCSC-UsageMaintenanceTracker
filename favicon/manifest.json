@@ -37,7 +37,5 @@
       "type": "image/png",
       "density": "4.0"
     }
-  ],
-  "start_url":"/U23-Reports/index.html",
-  "display": "standalone"
+  ]
 }
