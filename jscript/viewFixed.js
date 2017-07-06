@@ -1,7 +1,8 @@
 /**
 *   Create firebase reference
 **/
-var dbRef = new Firebase("https://u23-breakages.firebaseio.com/");
+//var dbRef = new Firebase("https://u23-breakages.firebaseio.com/");
+var dbRef = new Firebase("https://breakagestest.firebaseio.com/");
 var issueRef = dbRef.child('issues');
 var fixedRef = dbRef.child('fixed');
 
@@ -49,14 +50,20 @@ function breakageHtmlFromObject(data) {
         '<br />' +
         "Reported by: " + issue.breakage.name +
         '<br />' +
-        "Contact Email: " + issue.breakage.email +
-        '<br />' +
-        "Contact Mobile: " + issue.breakage.mobile +
-        '<br />' +
+        getInfoSafe("Contact: ", issue.breakage.contact) +
+        getInfoSafe("Email: ", issue.breakage.email) +
+        getInfoSafe("Mobile: ", issue.breakage.mobile) +
         "Date Fixed: " + date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear() +
         '<br />' +
         '</div>';
     html += '</div>';
     console.log(issue);
     $('#breakageDiv').append(html);
+}
+
+function getInfoSafe(descriptor, ref) {
+  if (ref == undefined || ref == "") {
+    return "";
+  }
+  return descriptor + ref + '<br />';
 }

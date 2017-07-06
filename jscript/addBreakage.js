@@ -1,7 +1,8 @@
 /**
  *   Create firebase reference
  **/
-var dbRef = new Firebase("https://u23-breakages.firebaseio.com/");
+//var dbRef = new Firebase("https://u23-breakages.firebaseio.com/");
+var dbRef = new Firebase("https://breakagestest.firebaseio.com/");
 var issueRef = dbRef.child('issues');
 
 var dialog = document.querySelector('dialog');
@@ -18,28 +19,6 @@ issueRef.limitToLast(3).on("value", function(snapshot) {
 });
 
 
-$('#email').on('input', function() {
-  var regex = /.+@.+\..+/i;
-
-  if (regex.test($('#email').val())) {
-    $('#mobile').prop('required',false);
-
-  }else{
-    $('#mobile').prop('required',true);
-  }
-});
-
-$('#mobile').on('input', function() {
-  var regex = /^[0-9]{9,12}$/;
-
-  if (regex.test($('#mobile').val())) {
-    $('#email').prop('required',false);
-  }else {
-    $('#email').prop('required',true);
-  }
-});
-
-
 /**
  *   Prevent enter key from submitting form with out all fields filled in
  **/
@@ -53,10 +32,12 @@ $(document).ready(function() {
 });
 
 function validationFunction() {
+  var email = /.+@.+\..+/i;
+  var mobile = /^[0-9]{9,12}$/;
   if ($('#name').val() == '') {
     return false;
   }
-  if ($('#email').val() == '' && $('#mobile').val() == '') {
+  if (!email.test($('#contact').val()) && !mobile.test($('#contact').val())){
     return false;
   }
   if ($('#boatID').val() == '') {
@@ -80,8 +61,7 @@ $('.addValue').on("click", function(event) {
         breakage: {
           boatID: $('#boatID').val(),
           name: $('#name').val(),
-          email: $('#email').val(),
-          mobile: $('#mobile').val(),
+          contact: $('#contact').val(),
           category: $('#category').val(),
           details: $('#details').val(),
           timestamp: new Date().getTime(),
