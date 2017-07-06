@@ -1,8 +1,7 @@
 /**
 *   Create firebase reference
 **/
-//var dbRef = new Firebase("https://u23-breakages.firebaseio.com/");
-var dbRef = new Firebase("https://breakagestest.firebaseio.com/");
+var dbRef = new Firebase("https://u23-breakages.firebaseio.com/");
 var issueRef = dbRef.child('issues');
 var fixedRef = dbRef.child('fixed');
 
