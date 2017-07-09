@@ -38,9 +38,11 @@ function validationFunction() {
     console.log("Not a valid name");
     return false;
   }
-  if (!email.test($('#contact').val()) && !mobile.test($('#contact').val())) {
-    console.log("Not a valid contact");
-    return false;
+  if ($('#contact').val() != '') {
+    if (!email.test($('#contact').val()) && !mobile.test($('#contact').val())) {
+      console.log("Not a valid contact");
+      return false;
+    }
   }
   if ($('#boatID').val() == '') {
     console.log("Not a valid boatID");
