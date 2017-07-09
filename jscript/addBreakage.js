@@ -33,21 +33,28 @@ $(document).ready(function() {
 function validationFunction() {
   var email = /.+@.+\..+/i;
   var mobile = /^[0-9]{9,12}$/;
+
   if ($('#name').val() == '') {
+    console.log("Not a valid name");
     return false;
   }
-  if (!email.test($('#contact').val()) && !mobile.test($('#contact').val())){
+  if (!email.test($('#contact').val()) && !mobile.test($('#contact').val())) {
+    console.log("Not a valid contact");
     return false;
   }
   if ($('#boatID').val() == '') {
+    console.log("Not a valid boatID");
     return false;
   }
   if ($('#category').val() == '') {
+    console.log("Not a valid category");
     return false;
   }
   if ($('#details').val() == '') {
+    console.log("Not a valid details");
     return false;
   }
+  console.log("Suitable");
   return true;
 }
 
@@ -134,4 +141,5 @@ function updateThreeBreakages(snap) {
   snap.forEach(function(childSnap) {
     breakageHtmlFromObject(childSnap);
   });
+  console.log("Added breakage cards");
 }
