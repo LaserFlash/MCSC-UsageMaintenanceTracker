@@ -8,7 +8,7 @@ import { ReportUsageComponent }  from './report-usage/report-usage.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/report', pathMatch: 'full' },
+  { path: '', redirectTo: '/reportUsage', pathMatch: 'full' },
   { path: 'report',  component: ReportIssueComponent },
   { path: 'reported', component: ViewIssuesComponent },
   { path: 'fixed',     component: ViewFixedComponent },

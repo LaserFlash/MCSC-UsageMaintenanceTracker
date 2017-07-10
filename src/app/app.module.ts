@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule }    from '@angular/forms';
+import { FormsModule, ReactiveFormsModule }    from '@angular/forms';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
@@ -10,6 +10,11 @@ import { MdListModule } from '@angular/material';
 import { MdToolbarModule } from '@angular/material';
 import { MdButtonModule } from '@angular/material';
 import { MdIconModule } from '@angular/material';
+import { MdCardModule } from '@angular/material';
+import {MdRadioModule} from '@angular/material';
+import {MdInputModule} from '@angular/material';
+import {MdDatepickerModule} from '@angular/material';
+import {MdNativeDateModule} from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { ReportIssueComponent } from './report-issue/report-issue.component';
@@ -17,7 +22,7 @@ import { ViewIssuesComponent } from './view-issues/view-issues.component';
 import { ViewFixedComponent } from './view-fixed/view-fixed.component';
 import { AppRoutingModule }   from './app-routing.module';
 
-import {OverlayContainer} from '@angular/material';
+import { OverlayContainer } from '@angular/material';
 import { ReportUsageComponent } from './report-usage/report-usage.component';
 
 @NgModule({
@@ -39,6 +44,12 @@ import { ReportUsageComponent } from './report-usage/report-usage.component';
     MdButtonModule,
     MdIconModule,
     AppRoutingModule,
+    MdCardModule,
+    MdRadioModule,
+    MdInputModule,
+    MdDatepickerModule,
+    MdNativeDateModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
