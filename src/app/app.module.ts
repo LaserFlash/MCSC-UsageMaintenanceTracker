@@ -17,12 +17,16 @@ import { ViewIssuesComponent } from './view-issues/view-issues.component';
 import { ViewFixedComponent } from './view-fixed/view-fixed.component';
 import { AppRoutingModule }   from './app-routing.module';
 
+import {OverlayContainer} from '@angular/material';
+import { ReportUsageComponent } from './report-usage/report-usage.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     ReportIssueComponent,
     ViewIssuesComponent,
     ViewFixedComponent,
+    ReportUsageComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,4 +43,8 @@ import { AppRoutingModule }   from './app-routing.module';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(overlayContainer: OverlayContainer) {
+    overlayContainer.themeClass = 'my-app-theme';
+  }
+}
