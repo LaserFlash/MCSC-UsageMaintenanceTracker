@@ -25,6 +25,8 @@ md-sidenav-container.app-dark {
 }
 
 #logo-image-drawer {
+  display:block;
+  margin:auto;
   height: 150px;
 }
 
