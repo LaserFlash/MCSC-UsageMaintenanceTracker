@@ -2,17 +2,17 @@
     <md-card-title>{{title}}</md-card-title>
   </md-card-header>
   <md-card-content>
-    <form (ngSubmit)="onSubmit()" #usageForm="ngForm">
+    <form (ngSubmit)="onSubmit()" [formGroup]="usageForm" novalidate>
       <table>
         <tr>
           <td>
-            <md-radio-group class="radio-group" [(ngModel)]="selectedBoat" name="boat" required [formControl]="boatFormControl">
+            <md-radio-group class="radio-group" formControlName="boatID" required>
               <label> Boat Number</label>
               <md-radio-button class="radio-button" *ngFor="let id of boats" [value]="id">
                 {{id}}
               </md-radio-button>
-              <md-error *ngIf="boatFormControl.hasError('required')">
-                This is a required field
+              <md-error *ngIf="formErrors.boatID">
+                {{formErrors.boatID}}
               </md-error>
             </md-radio-group>
             <br />
@@ -21,21 +21,18 @@
             <table>
               <tr>
                 <md-input-container>
-                  <input mdInput type="number" [(ngModel)]="duration" placeholder="Duration in hours" name="duration" [min]=0 required [formControl]="durationFormControl">
-                  <md-error *ngIf="durationFormControl.hasError('pattern')">
-                    Please enter a valid duration in hours
-                  </md-error>
-                  <md-error *ngIf="durationFormControl.hasError('required')">
-                    This is a required field
+                  <input mdInput type="number" placeholder="Duration in hours" [min]="0" formControlName="duration" required>
+                  <md-error *ngIf="formErrors.duration">
+                    {{formErrors.duration}}
                   </md-error>
                 </md-input-container>
               </tr>
               <tr>
                 <md-input-container>
-                  <input mdInput [mdDatepicker]="picker" [max]="maxDate" [(ngModel)]="date" placeholder="Choose a date" name="date" required [formControl]="dateFormControl">
+                  <input mdInput [mdDatepicker]="picker" formControlName="date" placeholder="Choose a Date" required [max]="maxDate">
                   <button mdSuffix [mdDatepickerToggle]="picker"></button>
-                  <md-error *ngIf="dateFormControl.hasError('required')">
-                    This is a required field
+                  <md-error *ngIf="formErrors.date">
+                    {{formErrors.date}}
                   </md-error>
                 </md-input-container>
                 <md-datepicker #picker></md-datepicker>
@@ -45,7 +42,7 @@
         </tr>
       </table>
       <br  />
-    <button md-raised-button color="primary" [disabled]="!(this.durationFormControl.valid && this.dateFormControl.valid && this.boatFormControl.valid)" type="submit">Submit</button>
+    <button md-raised-button color="primary" type="submit">Submit</button>
     </form>
 
   </md-card-content>

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DateAdapter } from '@angular/material';
-import { FormControl, Validators } from '@angular/forms';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import {MdSnackBar} from '@angular/material';
 
 import { BoatUsageService } from '../boat-usage.service'
 import { UsageInfo } from '../objects/usageInfo'
@@ -15,50 +15,89 @@ const NUMBER_REGEX = /[0-9]+/;
   styleUrls: ['./report-usage.component.css']
 })
 export class ReportUsageComponent implements OnInit {
+  constructor(private dateAdapter: DateAdapter<Date>, private usageService: BoatUsageService, private fb: FormBuilder, public snackBar: MdSnackBar) {
+    this.dateAdapter.setLocale('en-nz');
+    this.createForm();
+  }
+
   title = "Report Boat Usage";
   maxDate = new Date();
   boats = [
     '1', '2', '3', '4'
   ];
 
-  usageForm: NgForm;
-  @ViewChild('usageForm') currentForm: NgForm;
-  ngAfterViewChecked() {
-    this.formChanged();
-  }
-  formChanged() {
-    this.usageForm = this.currentForm;
-  }
-  selectedBoat: string;
-  duration: number;
-  date: Date;
+  usageForm: FormGroup;
+  createForm() {
+    this.usageForm = this.fb.group({
+      boatID: ['', Validators.required],
+      duration: ['', [Validators.required, Validators.pattern(/[0-9]+/), Validators.min(0)]],
+      date: new FormControl({value:this.maxDate,disabled:true},Validators.required)
+    });
 
-  constructor(private dateAdapter: DateAdapter<Date>, private usageService: BoatUsageService) {
-    this.dateAdapter.setLocale('en-nz');
+    this.usageForm.valueChanges
+      .subscribe(data => this.onValueChanged(data));
 
+    this.onValueChanged(); // (re)set validation messages now
   }
+
+  onValueChanged(data?: any) {
+    if (!this.usageForm) { return; }
+    const form = this.usageForm;
+
+    for (const field in this.formErrors) {
+      // clear previous error message (if any)
+      this.formErrors[field] = '';
+      const control = form.get(field);
+
+      if (control && control.dirty && !control.valid) {
+        const messages = this.validationMessages[field];
+        for (const key in control.errors) {
+          this.formErrors[field] += messages[key] + ' ';
+        }
+      }
+    }
+  }
+
+  formErrors = {
+    'boatID': '',
+    'duration': '',
+    'date': ''
+  };
+
+  validationMessages = {
+    'boatID': {
+      'required': 'Boat is required.'
+    },
+    'duration': {
+      'required': 'Duration is required.',
+      'min': 'Duration must be at least 0',
+      'pattern': 'Duration must be at least 0'
+    },
+    'date': {
+      'required': 'Date is required.'
+    }
+  };
 
   ngOnInit() {
   }
 
-  durationFormControl = new FormControl('', [Validators.required, Validators.pattern(NUMBER_REGEX)]);
-  dateFormControl = new FormControl('', [Validators.required, Validators.nullValidator]);
-  boatFormControl = new FormControl('', [Validators.required, Validators.nullValidator]);
-
   onSubmit() {
-    if (this.durationFormControl.valid && this.dateFormControl.valid && this.boatFormControl.valid) {
-      var usage = new UsageInfo(this.selectedBoat,this.duration,this.date)
-
+    if (this.usageForm.valid) {
+      var usage = new UsageInfo(this.usageForm.get("boatID").value, this.usageForm.get("duration").value, this.usageForm.get("date").value)
       this.usageService.addUsageInfo(usage).then(
         () => (
-          console.log("Form Submitted!")
+          this.snackBar.open("Usage Succesfully Submited", "Close", {
+            duration: 2000,
+          }),
+          this.createForm()
         )
       )
-      .catch(
-        ()=>
-        console.log("failed")
-      );
+        .catch(
+        () =>
+          this.snackBar.open("Something Went Wrong", "Close", {
+            duration: 2000,
+          })
+        );
     }
   }
-
 }
