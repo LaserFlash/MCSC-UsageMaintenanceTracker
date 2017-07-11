@@ -1,4 +1,4 @@
-<md-sidenav-container fullscreen>
+<md-sidenav-container fullscreen [class.app-dark]="isDarkTheme">
   <md-sidenav #sidenav mode="push">
     <img id="logo-image-drawer" src="assets/images/logoNoText.png" />
     <md-nav-list>
@@ -6,6 +6,7 @@
           {{routeLink.label}}
       </a>
     </md-nav-list>
+     <button md-button (click)="isDarkTheme = !isDarkTheme">TOGGLE DARK THEME</button>
   </md-sidenav>
 
   <div>

@@ -8,7 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'WYST Boat Maintenance';
-
+  isDarkTheme: boolean = false;
+  
   activeLinkIndex = 0;
   routeLinks = [
   { label: 'Report Usage', link: 'reportUsage' },
