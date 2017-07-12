@@ -24,7 +24,7 @@ export class ReportIssueComponent implements OnInit {
     'Urgent (boat out of action)',
     'High (boat usable if needed)',
     'Medium (boat usable)',
-    'Low (breakage does not yet affect use)'
+    'Low (not affecting use)'
   ];
 
   breakages : FirebaseListObservable<BreakageInfo[]>;
@@ -38,7 +38,7 @@ export class ReportIssueComponent implements OnInit {
     private breakageService: BoatBreakageService,
   ) {
     this.createForm();
-    this.breakages = breakageService.getBreakageInfo();
+    this.breakages = breakageService.getLastThreeBreakageInfo();
   }
 
   breakageForm: FormGroup;
