@@ -11,7 +11,7 @@
     </md-input-container>
 
     <md-input-container class="full-width">
-      <input mdInput type="email" placeholder="Contact" formControlName="contact" required>
+      <input mdInput type="email" placeholder="Contact" formControlName="contact">
       <md-error *ngIf="formErrors.contact">
         {{formErrors.contact}}
       </md-error>
@@ -25,8 +25,10 @@
         {{formErrors.boatID}}
       </md-error>
     </md-select>
+
     <br />
     <br />
+    
     <md-select class="select-width" placeholder="Importance" formControlName="importance" required>
       <md-option *ngFor="let id of levels" [value]="id">{{id}}</md-option>
       <md-error *ngIf="formErrors.importance">
@@ -35,7 +37,8 @@
     </md-select>
 
     <md-input-container class="full-width">
-      <textarea mdInput type="text" placeholder="Describe the Issue" formControlName="details" required rows="5"> </textarea>
+      <textarea mdInput type="text" placeholder="Describe the Issue" formControlName="details" #details required rows="4" maxlength="256"> </textarea>
+      <md-hint align="end">{{details.value.length}} / 256</md-hint>
       <md-error *ngIf="formErrors.details">
         {{formErrors.details}}
       </md-error>

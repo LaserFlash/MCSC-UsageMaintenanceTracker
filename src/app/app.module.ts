@@ -21,13 +21,17 @@ import { MdSelectModule }             from '@angular/material';
 
 import { AppComponent }               from './app.component';
 import { ReportIssueComponent }       from './report-issue/report-issue.component';
+import { ReportUsageComponent }       from './report-usage/report-usage.component';
 import { ViewIssuesComponent }        from './view-issues/view-issues.component';
 import { ViewFixedComponent }         from './view-fixed/view-fixed.component';
 import { AppRoutingModule }           from './app-routing.module';
+
 import { BoatUsageService }           from './boat-usage.service'
+import { BoatBreakageService }        from './boat-breakage.service'
 
 import { OverlayContainer }           from '@angular/material';
-import { ReportUsageComponent }       from './report-usage/report-usage.component';
+
+
 
 import { AngularFireModule }          from 'angularfire2';
 import { AngularFireDatabaseModule }  from 'angularfire2/database';
@@ -66,7 +70,7 @@ import { CookieModule }               from 'ngx-cookie';
     MdSnackBarModule,
     CookieModule.forRoot(),
   ],
-  providers: [BoatUsageService],
+  providers: [BoatUsageService,BoatBreakageService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
