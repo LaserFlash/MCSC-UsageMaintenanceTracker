@@ -17,6 +17,7 @@ import { MdInputModule }              from '@angular/material';
 import { MdDatepickerModule }         from '@angular/material';
 import { MdNativeDateModule }         from '@angular/material';
 import { MdSnackBarModule }           from '@angular/material';
+import { MdSelectModule }             from '@angular/material';
 
 import { AppComponent }               from './app.component';
 import { ReportIssueComponent }       from './report-issue/report-issue.component';
@@ -58,6 +59,7 @@ import { CookieModule }               from 'ngx-cookie';
     MdDatepickerModule,
     MdNativeDateModule,
     ReactiveFormsModule,
+    MdSelectModule,
     FlexLayoutModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
