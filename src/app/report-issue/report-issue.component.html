@@ -1,3 +1,4 @@
+<md-card>
 <h2>{{title}}</h2>
 <md-card-content>
   <form (ngSubmit)="onSubmit()" [formGroup]="breakageForm" novalidate>
@@ -28,7 +29,7 @@
 
     <br />
     <br />
-    
+
     <md-select class="select-width" placeholder="Importance" formControlName="importance" required>
       <md-option *ngFor="let id of levels" [value]="id">{{id}}</md-option>
       <md-error *ngIf="formErrors.importance">
@@ -50,3 +51,10 @@
   </form>
 
 </md-card-content>
+</md-card>
+
+<ul>
+  <li class="text" *ngFor="let item of breakages | async">
+    {{item.boatID}}
+  </li>
+</ul>

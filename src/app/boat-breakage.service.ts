@@ -6,7 +6,7 @@ import { AngularFireDatabase, FirebaseListObservable} from 'angularfire2/databas
 @Injectable()
 export class BoatBreakageService {
 
-  items: FirebaseListObservable<any>;
+  items: FirebaseListObservable<BreakageInfo[]>;
   constructor(db: AngularFireDatabase) {
     this.items = db.list('/issues');
   }
@@ -22,5 +22,9 @@ export class BoatBreakageService {
         timestamp:breakage.timestamp.getTime()
       }
     ));
+  }
+
+  getBreakageInfo() : FirebaseListObservable<BreakageInfo[]>{
+    return this.items;
   }
 }

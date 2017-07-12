@@ -7,6 +7,8 @@ import { ContactValidator } from '../validators/ContactValidator'
 import { BreakageInfo } from '../objects/breakageInfo';
 import { BoatBreakageService } from '../boat-breakage.service'
 
+import { FirebaseListObservable } from 'angularfire2/database';
+
 @Component({
   selector: 'report-issue',
   templateUrl: './report-issue.component.html',
@@ -25,6 +27,8 @@ export class ReportIssueComponent implements OnInit {
     'Low (breakage does not yet affect use)'
   ];
 
+  breakages : FirebaseListObservable<BreakageInfo[]>;
+
   ngOnInit() {
   }
 
@@ -34,6 +38,7 @@ export class ReportIssueComponent implements OnInit {
     private breakageService: BoatBreakageService,
   ) {
     this.createForm();
+    this.breakages = breakageService.getBreakageInfo();
   }
 
   breakageForm: FormGroup;
