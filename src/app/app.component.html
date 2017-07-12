@@ -6,7 +6,7 @@
           {{routeLink.label}}
       </a>
     </md-nav-list>
-    <button md-button (click)="toggleDark()">TOGGLE DARK THEME</button>
+    <button md-button (click)="toggleDark(); sidenav.close()">TOGGLE DARK THEME</button>
   </md-sidenav>
 
   <div>
@@ -41,7 +41,7 @@
 
       </div>
       <div fxFlex>
-          <router-outlet></router-outlet>        
+          <router-outlet></router-outlet>
       </div>
 
       <div fxFlex="20" fxFlex.lt-md="2">
