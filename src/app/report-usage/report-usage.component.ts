@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DateAdapter } from '@angular/material';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import {MdSnackBar} from '@angular/material';
+import { MdSnackBar } from '@angular/material';
 
 import { BoatUsageService } from '../boat-usage.service'
 import { UsageInfo } from '../objects/usageInfo'
