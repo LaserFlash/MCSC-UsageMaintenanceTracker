@@ -10,7 +10,6 @@ export class AppComponent {
   title = 'WYST Boat Maintenance';
   isDarkTheme: boolean;
 
-  activeLinkIndex = 0;
   routeLinks = [
   { label: 'Report Usage', link: 'reportUsage' },
   { label: 'Report Breakage', link: 'report' },

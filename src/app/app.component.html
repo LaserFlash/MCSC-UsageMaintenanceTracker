@@ -2,11 +2,11 @@
   <md-sidenav #sidenav mode="push">
     <img id="logo-image-drawer" src="assets/images/logoNoText.png" />
     <md-nav-list>
-      <a md-list-item *ngFor="let routeLink of routeLinks; let i = index" [routerLink]="routeLink.link" (click)="activeLinkIndex = i; sidenav.close()">
+      <a md-list-item *ngFor="let routeLink of routeLinks; let i = index" [routerLink]="routeLink.link" (click)="sidenav.close()">
           {{routeLink.label}}
       </a>
     </md-nav-list>
-     <button md-button (click)="toggleDark()">TOGGLE DARK THEME</button>
+    <button md-button (click)="toggleDark()">TOGGLE DARK THEME</button>
   </md-sidenav>
 
   <div>
@@ -29,8 +29,8 @@
           <a md-tab-link
               *ngFor="let routeLink of routeLinks; let i = index"
               [routerLink]="routeLink.link"
-              [active]="activeLinkIndex === i"
-              (click)="activeLinkIndex = i">
+              routerLinkActive #rla="routerLinkActive"
+              [active]="rla.isActive">
               {{routeLink.label}}
           </a>
         </nav>
