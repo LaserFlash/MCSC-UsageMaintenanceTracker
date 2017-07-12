@@ -7,6 +7,7 @@ import { BoatUsageService } from '../boat-usage.service'
 import { UsageInfo } from '../objects/usageInfo'
 
 
+
 const NUMBER_REGEX = /[0-9]+/;
 
 @Component({
@@ -15,10 +16,16 @@ const NUMBER_REGEX = /[0-9]+/;
   styleUrls: ['./report-usage.component.css']
 })
 export class ReportUsageComponent implements OnInit {
-  constructor(private dateAdapter: DateAdapter<Date>, private usageService: BoatUsageService, private fb: FormBuilder, public snackBar: MdSnackBar) {
-    this.dateAdapter.setLocale('en-nz');
-    this.createForm();
-  }
+  constructor(
+    private dateAdapter: DateAdapter<Date>,
+    private usageService: BoatUsageService,
+    private fb: FormBuilder,
+    public snackBar: MdSnackBar
+    )
+    {
+      this.dateAdapter.setLocale('en-nz');
+      this.createForm();
+    }
 
   title = "Report Boat Usage";
   maxDate = new Date();

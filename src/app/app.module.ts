@@ -32,6 +32,8 @@ import { AngularFireModule }          from 'angularfire2';
 import { AngularFireDatabaseModule }  from 'angularfire2/database';
 import { environment }                from '../environments/environment';
 
+import { CookieModule }               from 'ngx-cookie';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,6 +62,7 @@ import { environment }                from '../environments/environment';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     MdSnackBarModule,
+    CookieModule.forRoot(),
   ],
   providers: [BoatUsageService],
   bootstrap: [AppComponent]
