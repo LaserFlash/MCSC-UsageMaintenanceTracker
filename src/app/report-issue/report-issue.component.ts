@@ -12,7 +12,12 @@ export class ReportIssueComponent implements OnInit {
   boats = [
     '1', '2', '3', '4', 'RIB'
   ];
-  levels = ['Urgent (boat out of action)','High (boat usable if needed)','Medium (boat usable)','Low (breakage does not yet affect use)']
+  levels = [
+    'Urgent (boat out of action)',
+    'High (boat usable if needed)',
+    'Medium (boat usable)',
+    'Low (breakage does not yet affect use)'
+  ];
 
   ngOnInit() {
   }
