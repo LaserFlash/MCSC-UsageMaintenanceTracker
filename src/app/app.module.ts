@@ -2,7 +2,7 @@ import { BrowserModule }              from '@angular/platform-browser';
 import { NgModule }                   from '@angular/core';
 import { ReactiveFormsModule }        from '@angular/forms';
 
-import {BrowserAnimationsModule}      from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule }      from '@angular/platform-browser/animations';
 import { FlexLayoutModule }           from "@angular/flex-layout";
 
 import { MdSidenavModule }            from '@angular/material';
@@ -26,6 +26,7 @@ import { ReportUsageComponent }       from './report-usage/report-usage.componen
 import { ViewIssuesComponent }        from './view-issues/view-issues.component';
 import { ViewFixedComponent }         from './view-fixed/view-fixed.component';
 import { AppRoutingModule }           from './app-routing.module';
+import { BreakageCardComponent }      from'./breakage-card/breakage-card.component';
 
 import { BoatUsageService }           from './boat-usage.service'
 import { BoatBreakageService }        from './boat-breakage.service'
@@ -45,6 +46,7 @@ import { CookieModule }               from 'ngx-cookie';
     ViewIssuesComponent,
     ViewFixedComponent,
     ReportUsageComponent,
+    BreakageCardComponent,
   ],
   imports: [
     BrowserModule,

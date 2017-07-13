@@ -4,7 +4,7 @@ import { MdSnackBar } from '@angular/material';
 
 import { ContactValidator } from '../validators/ContactValidator'
 
-import {DialogsService} from '../dialog/dialogs.service';
+import { DialogsService } from '../dialog/dialogs.service';
 
 import { BreakageInfo } from '../objects/breakageInfo';
 import { BoatBreakageService } from '../boat-breakage.service'
@@ -136,7 +136,7 @@ export class ReportIssueComponent implements OnInit {
     this.dialogsService
       .confirm('Confirm Removal', 'Are you sure you want to do this?')
       .subscribe(result => {
-        if (result){          
+        if (result){
           this.breakages.remove(key);
         }
     });

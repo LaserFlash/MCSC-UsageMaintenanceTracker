@@ -12,9 +12,10 @@ export class BoatBreakageService {
     this.items = db.list('/issues');
     this.recentThreeItems = db.list('/issues', {
       query: {
-        limitToLast: 3,        
+        limitToLast: 3,
+        orderByChild: 'timestamp'
       }
-    });
+    }).map((array) => array.reverse()) as FirebaseListObservable<BreakageInfo[]>;
   }
 
   addBreakageInfo(breakage: BreakageInfo) {

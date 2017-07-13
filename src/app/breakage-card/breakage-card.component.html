@@ -1,3 +1,35 @@
-<p>
-  breakage-card works!
-</p>
+<md-card class="breakage-card" *ngFor="let item of breakages | async">
+  <md-card-content>
+    <div fxLayout="row" fxLayout.xs="column" fxFlex>
+      <div class="breakage-card-left">
+        <ul class="breakage-card-list">
+          <li>
+            Boat: {{item.boatID}}
+          </li>
+          <li>
+            {{item.importance}}
+          </li>
+          <li>
+            Reported by: {{item.name}}
+          </li>
+          <li>
+            {{item.contact}}
+          </li>
+        </ul>
+      </div>
+
+      <div fxFlex>
+        <p class="breakage-card-details">
+          Details: <br /> {{item.details}}
+        </p>
+      </div>
+
+    </div>
+
+  </md-card-content>
+    <hr />
+    <md-card-actions >
+      <button md-button color="warn" (click)="openDialog(item)">Remove</button>
+    </md-card-actions>
+
+</md-card>
