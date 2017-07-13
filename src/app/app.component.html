@@ -26,7 +26,7 @@
 </md-toolbar>
 <md-sidenav-container class="content" fullscreen [class.app-dark]="isDarkTheme">
   <md-sidenav class="sidenav" #sidenav mode="push">
-    <img id="logo-image-drawer" src="assets/images/logoNoText.png" />
+    <img id="logo-image-drawer" src="assets/images/logo.png" />
     <md-nav-list>
       <a md-list-item *ngFor="let routeLink of routeLinks; let i = index" [routerLink]="routeLink.link" (click)="sidenav.close()">
           {{routeLink.label}}
