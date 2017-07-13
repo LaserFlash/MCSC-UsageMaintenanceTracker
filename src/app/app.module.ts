@@ -18,6 +18,7 @@ import { MdDatepickerModule }         from '@angular/material';
 import { MdNativeDateModule }         from '@angular/material';
 import { MdSnackBarModule }           from '@angular/material';
 import { MdSelectModule }             from '@angular/material';
+import { DialogsModule }              from './dialog/dialogs.module';
 
 import { AppComponent }               from './app.component';
 import { ReportIssueComponent }       from './report-issue/report-issue.component';
@@ -30,8 +31,6 @@ import { BoatUsageService }           from './boat-usage.service'
 import { BoatBreakageService }        from './boat-breakage.service'
 
 import { OverlayContainer }           from '@angular/material';
-
-
 
 import { AngularFireModule }          from 'angularfire2';
 import { AngularFireDatabaseModule }  from 'angularfire2/database';
@@ -69,6 +68,7 @@ import { CookieModule }               from 'ngx-cookie';
     AngularFireDatabaseModule,
     MdSnackBarModule,
     CookieModule.forRoot(),
+    DialogsModule,
   ],
   providers: [BoatUsageService,BoatBreakageService],
   bootstrap: [AppComponent]
