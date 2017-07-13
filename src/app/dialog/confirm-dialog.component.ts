@@ -8,8 +8,8 @@ import { Component } from '@angular/core';
         <md-dialog-content>{{ message }}</md-dialog-content>
         <md-dialog-actions>
         <span style='flex: 1 1 auto;'></span>
-          <button md-button md-dialog-close=false>Cancel</button>
-          <button md-button color="warn" md-dialog-close=true>Remove</button>
+          <button md-button (click)="dialogRef.close()">Cancel</button>
+          <button md-button color="warn" (click)="dialogRef.close(true)">Remove</button>
         </md-dialog-actions>
     `,
 })

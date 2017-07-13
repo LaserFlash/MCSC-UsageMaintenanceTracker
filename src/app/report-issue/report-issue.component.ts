@@ -131,10 +131,14 @@ export class ReportIssueComponent implements OnInit {
     }
   }
 
-  openDialog() {
-    var selectedOption;
+  openDialog(key: any) {
+
     this.dialogsService
-      .confirm('Confirm Dialog', 'Are you sure you want to do this?')
-      .subscribe(res => selectedOption = res);
+      .confirm('Confirm Removal', 'Are you sure you want to do this?')
+      .subscribe(result => {
+        if (result){          
+          this.breakages.remove(key);
+        }
+    });
   }
 }
