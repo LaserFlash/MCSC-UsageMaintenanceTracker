@@ -1,6 +1,31 @@
+<md-toolbar color="primary">
+    <button md-icon-button (click)="sidenav.toggle()">
+      <md-icon>menu</md-icon>
+    </button>
+    <span id="menuSpacer"></span>
+    <span><img id="menuLogo" src="assets/images/logoNoText.png" /></span>
+    <span id="menuSpacer"></span>
+    <span id="menuTitle">
+    {{title}}
+  </span>
 
+    <!-- This fills the remaining space of the current row -->
+    <span class="toolbar-spacer"></span>
+
+    <span fxHide.lt-md>
+    <nav md-tab-nav-bar>
+      <a md-tab-link
+          *ngFor="let routeLink of routeLinks; let i = index"
+          [routerLink]="routeLink.link"
+          routerLinkActive #rla="routerLinkActive"
+          [active]="rla.isActive">
+          {{routeLink.label}}
+      </a>
+    </nav>
+  </span>
+</md-toolbar>
 <md-sidenav-container class="content" fullscreen [class.app-dark]="isDarkTheme">
-  <md-sidenav #sidenav mode="push">
+  <md-sidenav class="sidenav" #sidenav mode="push">
     <img id="logo-image-drawer" src="assets/images/logoNoText.png" />
     <md-nav-list>
       <a md-list-item *ngFor="let routeLink of routeLinks; let i = index" [routerLink]="routeLink.link" (click)="sidenav.close()">
@@ -9,39 +34,14 @@
     </md-nav-list>
     <button md-button (click)="toggleDark(); sidenav.close()">TOGGLE DARK THEME</button>
   </md-sidenav>
-  <md-toolbar color="primary" class="fixed-header">
-    <button md-icon-button (click)="sidenav.toggle()">
-        <md-icon>menu</md-icon>
-      </button>
-    <span id="menuSpacer"></span>
-    <span><img id="menuLogo" src="assets/images/logoNoText.png" /></span>
-    <span id="menuSpacer"></span>
-    <span id="menuTitle">
-      {{title}}
-    </span>
 
-    <!-- This fills the remaining space of the current row -->
-    <span class="toolbar-spacer"></span>
-
-    <span fxHide.lt-md>
-      <nav md-tab-nav-bar>
-        <a md-tab-link
-            *ngFor="let routeLink of routeLinks; let i = index"
-            [routerLink]="routeLink.link"
-            routerLinkActive #rla="routerLinkActive"
-            [active]="rla.isActive">
-            {{routeLink.label}}
-        </a>
-      </nav>
-    </span>
-  </md-toolbar>
-  <div>
+  <div class="sidenav-content">
     <div fxLayout="row">
       <div fxFlex="20" fxFlex.lt-md="2">
 
       </div>
       <div fxFlex>
-          <router-outlet></router-outlet>
+        <router-outlet></router-outlet>
       </div>
 
       <div fxFlex="20" fxFlex.lt-md="2">

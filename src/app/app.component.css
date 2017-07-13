@@ -1,3 +1,18 @@
+md-toolbar.mat-toolbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 10;
+  padding: 0 16px 0 0;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .3);
+}
+.mat-toolbar {
+    min-height: 56px;
+}
+.sidenav{
+  margin-top: 56px;
+}
 md-sidenav-container {
   background: #eceff1;
 }
@@ -5,7 +20,9 @@ md-sidenav-container {
 md-sidenav-container.app-dark {
   background: #212121;
 }
-
+.sidenav-content {
+  padding-top:80px;
+}
 .toolbar-spacer {
   flex: 1 1 auto;
 }
@@ -15,7 +32,7 @@ md-sidenav-container.app-dark {
 }
 
 #menuLogo {
-  height: 55px;
+  height: 50px;
   vertical-align: middle;
 }
 
@@ -25,8 +42,8 @@ md-sidenav-container.app-dark {
 }
 
 #logo-image-drawer {
-  display:block;
-  margin:auto;
+  display: block;
+  margin: auto;
   height: 150px;
 }
 
