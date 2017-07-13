@@ -5,11 +5,11 @@ import { Component } from '@angular/core';
     selector: 'confirm-dialog',
     template: `
         <h1 md-dialog-title>{{ title }}</h1>
-        <md-dialog-content>{{ message }}</md-dialog-content>
-        <md-dialog-actions>
+        <md-dialog-content style='font-family: Roboto, "Helvetica Neue", sans-serif;'>{{ message }}</md-dialog-content>
+        <md-dialog-actions style='padding: 8px; padding-left:0px; margin-right:-24px;'>
         <span style='flex: 1 1 auto;'></span>
           <button md-button (click)="dialogRef.close()">Cancel</button>
-          <button md-button color="warn" (click)="dialogRef.close(true)">Remove</button>
+          <button md-button style='margin-left: 8px;'color="warn" (click)="dialogRef.close(true)">Remove</button>
         </md-dialog-actions>
     `,
 })
