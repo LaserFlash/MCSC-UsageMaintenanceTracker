@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MdSnackBar } from '@angular/material';
 
@@ -16,7 +16,7 @@ import { FirebaseListObservable } from 'angularfire2/database';
   templateUrl: './report-issue.component.html',
   styleUrls: ['./report-issue.component.css']
 })
-export class ReportIssueComponent implements OnInit {
+export class ReportIssueComponent {
 
   title = "Report Boat Breakage";
   boats = [
@@ -30,10 +30,6 @@ export class ReportIssueComponent implements OnInit {
   ];
 
   breakages: BreakageInfo[];
-  cardButtonText = "Remove";
-
-  ngOnInit() {
-  }
 
   constructor(
     private fb: FormBuilder,
@@ -107,6 +103,7 @@ export class ReportIssueComponent implements OnInit {
 
   onSubmit() {
     if (this.breakageForm.valid) {
+
       var breakage = new BreakageInfo(
         this.breakageForm.get("name").value,
         this.breakageForm.get("contact").value,
@@ -115,31 +112,37 @@ export class ReportIssueComponent implements OnInit {
         this.breakageForm.get("details").value,
         new Date().getTime()
       );
-      this.breakageService.addBreakageInfo(breakage).then(
-        () => (
-          this.snackBar.open("Breakage Succesfully Submited", "Close", {
-            duration: 2000,
-          }),
-          this.createForm()
-        )
-      )
-        .catch(
-        () =>
-          this.snackBar.open("Something Went Wrong", "Close", {
-            duration: 2000,
-          })
-        );
+      this.openDialog(breakage);
     }
   }
 
-  openDialog(key: any) {
+  openDialog(breakage: BreakageInfo) {
+    var message = "";
+    message += "Name: " + breakage.name + '\n';
+    message += "Contact: " + breakage.contact + '\n';
+    message += "Boat: " + breakage.boatID + '\n';
+    message += "Importance: " + breakage.importance + '\n';
+    message += "Details: " + breakage.details + '\n';
 
     this.dialogsService
-      .confirm('Confirm Removal', 'Are you sure you want to do this?', this.cardButtonText)
+      .confirm('Confirm Submission', message, "Submit")
       .subscribe(result => {
-        if (result){
-          this.breakageService.remove(key);
+        if (result) {
+          this.breakageService.addBreakageInfo(breakage).then(
+            () => (
+              this.snackBar.open("Breakage Succesfully Submited", "Close", {
+                duration: 2000,
+              }),
+              this.createForm()
+            )
+          )
+            .catch(
+            () =>
+              this.snackBar.open("Something Went Wrong", "Close", {
+                duration: 2000,
+              })
+            );
         }
-    });
+      });
   }
 }

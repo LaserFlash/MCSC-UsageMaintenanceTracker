@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
     selector: 'confirm-dialog',
     template: `
         <h1 md-dialog-title>{{ title }}</h1>
-        <md-dialog-content style='font-family: Roboto, "Helvetica Neue", sans-serif;'>{{ message }}</md-dialog-content>
+        <md-dialog-content style='font-family: Roboto, "Helvetica Neue", sans-serif;'><pre style='margin:0px; font-family: Roboto, "Helvetica Neue", sans-serif;'>{{message}}</pre></md-dialog-content>
         <md-dialog-actions style='padding: 8px; padding-left:0px; margin-right:-24px;'>
         <span style='flex: 1 1 auto;'></span>
           <button md-button (click)="dialogRef.close()">Cancel</button>
