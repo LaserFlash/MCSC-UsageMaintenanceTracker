@@ -40,6 +40,7 @@ import { AngularFireDatabaseModule }  from 'angularfire2/database';
 import { environment }                from '../environments/environment';
 
 import { CookieModule }               from 'ngx-cookie';
+import { SortFilterBarComponent } from './sort-filter-bar/sort-filter-bar.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { CookieModule }               from 'ngx-cookie';
     ViewFixedComponent,
     ReportUsageComponent,
     BreakageCardComponent,
+    SortFilterBarComponent,
   ],
   imports: [
     BrowserModule,
