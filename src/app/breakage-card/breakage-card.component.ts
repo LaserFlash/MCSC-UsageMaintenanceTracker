@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { BreakageInfo } from '../objects/breakageInfo'
 
 @Component({
   selector: 'breakage-card',
@@ -6,7 +7,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./breakage-card.component.css']
 })
 export class BreakageCardComponent{
-  @Input() breakages: any;
+  @Input('buttonText') buttonText: string ="hi";
+  @Input() breakages: BreakageInfo[];
   constructor() { }
 
   @Output() onRemove = new EventEmitter<boolean>();

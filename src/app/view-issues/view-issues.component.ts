@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { BreakageInfo } from '../objects/breakageInfo';
 import { BoatBreakageService } from '../boat-breakage.service'
+
+import { DialogsService } from '../dialog/dialogs.service';
 
 import { FirebaseListObservable } from 'angularfire2/database';
 
@@ -9,10 +11,11 @@ import { FirebaseListObservable } from 'angularfire2/database';
   templateUrl: './view-issues.component.html',
   styleUrls: ['./view-issues.component.css']
 })
-export class ViewIssuesComponent implements OnInit {
+export class ViewIssuesComponent{
 
   constructor(
-    private breakageService: BoatBreakageService
+    private breakageService: BoatBreakageService,
+    private dialogsService: DialogsService
   ) {
     this.breakages = breakageService.items;
   }
@@ -22,6 +25,8 @@ export class ViewIssuesComponent implements OnInit {
   filterList = ["1", "2", "3", "4", "RIB"];
   appliedFilters = [];
   sortBy = "Sort by";
+
+  cardButtonText = "Fix";
 
   addFilter(key: string) {
     var i = this.appliedFilters.indexOf(key);
@@ -89,7 +94,14 @@ export class ViewIssuesComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
+  openDialog(key: any) {
+    this.dialogsService
+      .confirm('Confirm Mark as Fixed', 'Are you sure you want to do this?', this.cardButtonText)
+      .subscribe(result => {
+        if (result){
+          this.breakageService.markFixed(key);
+        }
+    });
   }
 
 }

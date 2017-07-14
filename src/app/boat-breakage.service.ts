@@ -7,9 +7,12 @@ import { AngularFireDatabase, FirebaseListObservable} from 'angularfire2/databas
 export class BoatBreakageService {
   public items: BreakageInfo[] =[];
   public recentItems: BreakageInfo[] =[];
+  public fixedItems: BreakageInfo[] =[];
 
   private itemsData: FirebaseListObservable<BreakageInfo[]>;
   private recentThreeItems: FirebaseListObservable<BreakageInfo[]>;
+  private fixedItemsData: FirebaseListObservable<BreakageInfo[]>;
+
   constructor(private db: AngularFireDatabase) {
     this.itemsData = db.list('/issues');
     this.itemsData.subscribe(val => { this.buildBreakages(val,this.items); });
@@ -20,7 +23,8 @@ export class BoatBreakageService {
       }
     })
     this.recentThreeItems.subscribe(val => { this.buildBreakages(val, this.recentItems); });
-
+    this.fixedItemsData = db.list('/fixed');
+    this.fixedItemsData.subscribe(val => { this.buildBreakages(val,this.fixedItems); });
   }
 
   addBreakageInfo(breakage: BreakageInfo) {
@@ -31,13 +35,28 @@ export class BoatBreakageService {
         boatID: breakage.boatID,
         importance: breakage.importance,
         details: breakage.details,
-        timestamp: breakage.timestamp.getTime()
+        timestamp: breakage.timestamp
       }
     ));
   }
 
-  remove(key){
-    this.itemsData.remove(key);
+  remove(breakage){
+    this.itemsData.remove(breakage);
+  }
+
+  markFixed(breakage){
+    this.fixedItemsData.push(
+          {
+            name: breakage.name,
+            contact: breakage.contact,
+            boatID: breakage.boatID,
+            importance: breakage.importance,
+            details: breakage.details,
+            timestampFixed: new Date().getTime(),
+            timestampReported: breakage.timestamp
+          }
+        );
+    this.remove(breakage);
   }
 
   private buildBreakages(val: BreakageInfo[], array: BreakageInfo[]) {

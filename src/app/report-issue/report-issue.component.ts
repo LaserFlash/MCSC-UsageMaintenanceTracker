@@ -30,6 +30,7 @@ export class ReportIssueComponent implements OnInit {
   ];
 
   breakages: BreakageInfo[];
+  cardButtonText = "Remove";
 
   ngOnInit() {
   }
@@ -134,7 +135,7 @@ export class ReportIssueComponent implements OnInit {
   openDialog(key: any) {
 
     this.dialogsService
-      .confirm('Confirm Removal', 'Are you sure you want to do this?')
+      .confirm('Confirm Removal', 'Are you sure you want to do this?', this.cardButtonText)
       .subscribe(result => {
         if (result){
           this.breakageService.remove(key);
