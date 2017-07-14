@@ -3,6 +3,9 @@ import { DateAdapter } from '@angular/material';
 import { FormControl, Validators } from '@angular/forms';
 import { NgForm } from '@angular/forms';
 
+import { BoatUsageService } from '../boat-usage.service'
+import { UsageInfo } from '../objects/usageInfo'
+
 
 const NUMBER_REGEX = /[0-9]+/;
 
@@ -18,7 +21,6 @@ export class ReportUsageComponent implements OnInit {
     '1', '2', '3', '4'
   ];
 
-
   usageForm: NgForm;
   @ViewChild('usageForm') currentForm: NgForm;
   ngAfterViewChecked() {
@@ -28,11 +30,12 @@ export class ReportUsageComponent implements OnInit {
     this.usageForm = this.currentForm;
   }
   selectedBoat: string;
-  duration: Number;
+  duration: number;
   date: Date;
 
-  constructor(private dateAdapter: DateAdapter<Date>) {
+  constructor(private dateAdapter: DateAdapter<Date>, private usageService: BoatUsageService) {
     this.dateAdapter.setLocale('en-nz');
+
   }
 
   ngOnInit() {
@@ -44,8 +47,17 @@ export class ReportUsageComponent implements OnInit {
 
   onSubmit() {
     if (this.durationFormControl.valid && this.dateFormControl.valid && this.boatFormControl.valid) {
-      console.log("Form Submitted!");
-      this.usageForm.reset();
+      var usage = new UsageInfo(this.selectedBoat,this.duration,this.date)
+
+      this.usageService.addUsageInfo(usage).then(
+        () => (
+          console.log("Form Submitted!")
+        )
+      )
+      .catch(
+        ()=>
+        console.log("failed")
+      );
     }
   }
 
