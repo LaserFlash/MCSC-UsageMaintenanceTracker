@@ -6,8 +6,6 @@ import { MdSnackBar } from '@angular/material';
 import { BoatUsageService } from '../boat-usage.service'
 import { UsageInfo } from '../objects/usageInfo'
 
-
-
 const NUMBER_REGEX = /[0-9]+/;
 
 @Component({
