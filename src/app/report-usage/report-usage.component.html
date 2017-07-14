@@ -1,0 +1,48 @@
+<md-card>
+  <h2>{{title}}</h2>
+  <md-card-content>
+    <form (ngSubmit)="onSubmit()" [formGroup]="usageForm" novalidate>
+      <table>
+        <tr>
+          <td>
+            <md-radio-group class="radio-group" formControlName="boatID" required>
+              <label> Boat Number</label>
+              <md-radio-button class="radio-button" *ngFor="let id of boats" [value]="id">
+                {{id}}
+              </md-radio-button>
+              <md-error *ngIf="formErrors.boatID">
+                {{formErrors.boatID}}
+              </md-error>
+            </md-radio-group>
+            <br />
+          </td>
+          <td>
+            <table>
+              <tr>
+                <md-input-container>
+                  <input mdInput type="number" placeholder="Duration in hours" [min]="0" formControlName="duration" required>
+                  <md-error *ngIf="formErrors.duration">
+                    {{formErrors.duration}}
+                  </md-error>
+                </md-input-container>
+              </tr>
+              <tr>
+                <md-input-container>
+                  <input mdInput [mdDatepicker]="picker" formControlName="date" placeholder="Choose a Date" required [max]="maxDate">
+                  <button mdSuffix [mdDatepickerToggle]="picker"></button>
+                  <md-error *ngIf="formErrors.date">
+                    {{formErrors.date}}
+                  </md-error>
+                </md-input-container>
+                <md-datepicker #picker></md-datepicker>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+      <br  />
+    <button md-raised-button color="accent" type="submit">Submit</button>
+    </form>
+
+  </md-card-content>
+</md-card>

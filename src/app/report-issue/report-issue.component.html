@@ -1,0 +1,55 @@
+<md-card>
+  <h2>{{title}}</h2>
+  <md-card-content>
+    <form (ngSubmit)="onSubmit()" [formGroup]="breakageForm" novalidate>
+
+      <h3>Personal Details</h3>
+
+      <md-input-container class="full-width"> <input mdInput type="text" placeholder="Name" formControlName="name" required>
+        <md-error *ngIf="formErrors.name">
+          {{formErrors.name}}
+        </md-error>
+      </md-input-container>
+
+      <md-input-container class="full-width">
+        <input mdInput type="email" placeholder="Contact" formControlName="contact">
+        <md-error *ngIf="formErrors.contact">
+          {{formErrors.contact}}
+        </md-error>
+      </md-input-container>
+
+      <h3>Breakage Info</h3>
+
+      <md-select class="select-width" placeholder="Boat Number" formControlName="boatID" required>
+        <md-option *ngFor="let id of boats" [value]="id">{{id}}</md-option>
+        <md-error *ngIf="formErrors.boatID">
+          {{formErrors.boatID}}
+        </md-error>
+      </md-select>
+
+      <br />
+      <br />
+
+      <md-select class="select-width" placeholder="Importance" formControlName="importance" required>
+        <md-option *ngFor="let id of levels" [value]="id">{{id}}</md-option>
+        <md-error *ngIf="formErrors.importance">
+          {{formErrors.importance}}
+        </md-error>
+      </md-select>
+
+      <md-input-container class="full-width">
+        <textarea mdInput type="text" placeholder="Describe the Issue" formControlName="details" #details required rows="4" maxlength="256"> </textarea>
+        <md-hint align="end">{{details.value.length}} / 256</md-hint>
+        <md-error *ngIf="formErrors.details">
+          {{formErrors.details}}
+        </md-error>
+      </md-input-container>
+
+      <br />
+      <br />
+      <button md-raised-button color="accent" type="submit">Submit</button>
+    </form>
+
+  </md-card-content>
+</md-card>
+<breakage-card [breakages]="breakages" (onRemove)="openDialog($event)"></breakage-card>

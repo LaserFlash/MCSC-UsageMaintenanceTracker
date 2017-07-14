@@ -1,0 +1,69 @@
+md-toolbar.mat-toolbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 10;
+  padding: 0 16px 0 0;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .3);
+}
+.mat-toolbar {
+    min-height: 56px;
+}
+.sidenav{
+  margin-top: 56px;
+}
+md-sidenav-container {
+  background: #eceff1;
+}
+
+md-sidenav-container.app-dark {
+  background: #212121;
+}
+.sidenav-content {
+  padding-top:80px;
+}
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+#menuSpacer {
+  width: 10px;
+}
+
+#menuLogo {
+  height: 50px;
+  vertical-align: middle;
+}
+
+#menuTitle {
+  text-align: center;
+  font-weight: 300;
+}
+
+#logo-image-drawer {
+  display: block;
+  margin: auto;
+  height: 150px;
+}
+
+/deep/ .mat-tab-link {
+  line-height: 28px !important;
+  height: 28px !important;
+}
+
+/deep/ .mat-tab-header {
+  color: white !important;
+  border-radius: 5px 5px 0px 0px;
+}
+
+/deep/ .mat-tab-link {
+  font-size: 16px;
+  opacity: 1 !important;
+  color: white !important;
+}
+
+/deep/ .mat-ink-bar {
+  background-color: #0077c2 !important;
+  min-width: 120px;
+}
