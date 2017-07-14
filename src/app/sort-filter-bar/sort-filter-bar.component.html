@@ -1,6 +1,20 @@
-<span>
+<md-card>
+  <span>
   <button style="width:150px; text-align:left;" md-button [mdMenuTriggerFor]="sort"><md-icon>sort</md-icon>{{sortBy}}</button>
   <md-menu #sort="mdMenu">
     <button md-menu-item *ngFor="let sort of sortList" (click)="changeSort(sort)"> {{sort}}</button>
   </md-menu>
 </span>
+  <span>
+  <button md-button [mdMenuTriggerFor]="filter"><md-icon>filter_list</md-icon> Filter by</button>
+  <md-menu #filter="mdMenu">
+    <button md-menu-item *ngFor="let filter of filterList" (click)="addFilter(filter)"> Boat {{filter}} </button>
+  </md-menu>
+</span>
+
+  <md-chip-list>
+    <md-chip *ngFor="let filter of appliedFilters" (click)="addFilter(filter)" selected="true"> Boat {{filter}}
+      <md-icon style="font-size:16px;height:16px;width:16px;">cancel</md-icon>
+    </md-chip>
+  </md-chip-list>
+</md-card>
