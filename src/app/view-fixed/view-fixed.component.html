@@ -1,5 +1,2 @@
-<md-card>
-<p>
-  view-fixed works!
-</p>
-</md-card>
+<sort-filter-bar [breakages]="breakages"></sort-filter-bar>
+<breakage-card [breakages]="breakages" (onRemove)="openDialog($event)"></breakage-card>
