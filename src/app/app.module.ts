@@ -19,6 +19,8 @@ import { MdNativeDateModule }         from '@angular/material';
 import { MdSnackBarModule }           from '@angular/material';
 import { MdSelectModule }             from '@angular/material';
 import { DialogsModule }              from './dialog/dialogs.module';
+import { MdMenuModule }               from '@angular/material';
+import { MdChipsModule }              from '@angular/material';
 
 import { AppComponent }               from './app.component';
 import { ReportIssueComponent }       from './report-issue/report-issue.component';
@@ -71,6 +73,8 @@ import { CookieModule }               from 'ngx-cookie';
     MdSnackBarModule,
     CookieModule.forRoot(),
     DialogsModule,
+    MdMenuModule,
+    MdChipsModule,
   ],
   providers: [BoatUsageService,BoatBreakageService],
   bootstrap: [AppComponent]

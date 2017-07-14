@@ -29,7 +29,7 @@ export class ReportIssueComponent implements OnInit {
     'Low (not affecting use)'
   ];
 
-  breakages: FirebaseListObservable<BreakageInfo[]>;
+  breakages: BreakageInfo[];
 
   ngOnInit() {
   }
@@ -41,7 +41,7 @@ export class ReportIssueComponent implements OnInit {
     private dialogsService: DialogsService
   ) {
     this.createForm();
-    this.breakages = breakageService.getLastThreeBreakageInfo();
+    this.breakages = breakageService.recentItems;
   }
 
   breakageForm: FormGroup;
@@ -137,7 +137,7 @@ export class ReportIssueComponent implements OnInit {
       .confirm('Confirm Removal', 'Are you sure you want to do this?')
       .subscribe(result => {
         if (result){
-          this.breakages.remove(key);
+          this.breakageService.remove(key);
         }
     });
   }

@@ -5,21 +5,26 @@ import { AngularFireDatabase, FirebaseListObservable} from 'angularfire2/databas
 
 @Injectable()
 export class BoatBreakageService {
+  public items: BreakageInfo[] =[];
+  public recentItems: BreakageInfo[] =[];
 
-  items: FirebaseListObservable<BreakageInfo[]>;
-  recentThreeItems: FirebaseListObservable<BreakageInfo[]>;
-  constructor(db: AngularFireDatabase) {
-    this.items = db.list('/issues');
+  private itemsData: FirebaseListObservable<BreakageInfo[]>;
+  private recentThreeItems: FirebaseListObservable<BreakageInfo[]>;
+  constructor(private db: AngularFireDatabase) {
+    this.itemsData = db.list('/issues');
+    this.itemsData.subscribe(val => { this.buildBreakages(val,this.items); });
     this.recentThreeItems = db.list('/issues', {
       query: {
         limitToLast: 3,
         orderByChild: 'timestamp'
       }
-    }).map((array) => array.reverse()) as FirebaseListObservable<BreakageInfo[]>;
+    })
+    this.recentThreeItems.subscribe(val => { this.buildBreakages(val, this.recentItems); });
+
   }
 
   addBreakageInfo(breakage: BreakageInfo) {
-    return Promise.resolve(this.items.push(
+    return Promise.resolve(this.itemsData.push(
       {
         name: breakage.name,
         contact: breakage.contact,
@@ -31,10 +36,14 @@ export class BoatBreakageService {
     ));
   }
 
-  getBreakageInfo(): FirebaseListObservable<BreakageInfo[]> {
-    return this.items;
+  remove(key){
+    this.itemsData.remove(key);
   }
-  getLastThreeBreakageInfo(): FirebaseListObservable<BreakageInfo[]> {
-    return this.recentThreeItems;
-  }
+
+  private buildBreakages(val: BreakageInfo[], array: BreakageInfo[]) {
+        array.length = 0;
+        val.forEach(element => {
+            array.push(element);
+        });
+    }
 }

@@ -1,5 +1,21 @@
 <md-card>
-<p>
-  view-issues works!
-</p>
+  <span>
+    <button md-icon-button (click)="sort.open()"><md-icon>sort</md-icon></button>
+    <md-select style="width:150px;"#sort placeholder="Sort by">
+      <md-option *ngFor="let sort of sortList" value="sort">{{sort}}</md-option>
+    </md-select>
+  </span>
+  <span>
+    <button md-button [mdMenuTriggerFor]="filter"><md-icon>filter_list</md-icon> Filter by</button>
+    <md-menu #filter="mdMenu">
+      <button md-menu-item *ngFor="let filter of filterList" (click)="addFilter(filter)"> Boat {{filter}} </button>
+    </md-menu>
+    <md-chip-list>
+      <md-chip *ngFor="let filter of appliedFilters" (click)="addFilter(filter)" selected="true"> Boat {{filter}}
+        <md-icon style="font-size:14px;height:14px;width:14px;font-size:14px;">cancel</md-icon>
+      </md-chip>
+    </md-chip-list>
+  </span>
 </md-card>
+
+<breakage-card [breakages]="breakages" (onRemove)="openDialog($event)"></breakage-card>
