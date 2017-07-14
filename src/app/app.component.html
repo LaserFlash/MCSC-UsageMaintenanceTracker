@@ -1,0 +1,31 @@
+<md-sidenav-container fullscreen>
+  <md-sidenav #sidenav mode="push">
+    <md-nav-list>
+      <a md-list-item routerLink="/report" routerLinkActive="active">Report Breakage</a>
+      <a md-list-item routerLink="/reported" routerLinkActive="active">Reported Breakages</a>
+      <a md-list-item routerLink="/fixed" routerLinkActive="active">Fixed Breakages</a>
+    </md-nav-list>
+  </md-sidenav>
+
+  <div>
+    <md-toolbar color="accent">
+        <button md-icon-button (click)="sidenav.open()">
+          <md-icon>menu</md-icon>
+        </button>
+      <span>{{title}}</span>
+
+      <!-- This fills the remaining space of the current row -->
+      <span class="toolbar-spacer"></span>
+
+      <span>
+        <nav md-tab-nav-bar>
+          <a md-tab-link routerLink="/report" routerLinkActive>Report Breakage</a>
+          <a md-tab-link routerLink="/reported" routerLinkActive>Reported Breakages</a>
+          <a md-tab-link routerLink="/fixed" routerLinkActive>Fixed Breakages</a>
+        </nav>
+      </span>
+    </md-toolbar>
+
+    <router-outlet></router-outlet>
+  </div>
+</md-sidenav-container>
