@@ -1,3 +1,6 @@
-<p>
-  sort-filter-bar works!
-</p>
+<span>
+  <button style="width:150px; text-align:left;" md-button [mdMenuTriggerFor]="sort"><md-icon>sort</md-icon>{{sortBy}}</button>
+  <md-menu #sort="mdMenu">
+    <button md-menu-item *ngFor="let sort of sortList" (click)="changeSort(sort)"> {{sort}}</button>
+  </md-menu>
+</span>

@@ -19,7 +19,6 @@ export class ViewIssuesComponent{
   ) {
     this.breakages = breakageService.items;
   }
-  Allbreakages: BreakageInfo[];
   breakages: BreakageInfo[];
   sortList = ["Newest", "Oldest", "Most Important", "Least Important","Boat"];
   filterList = ["1", "2", "3", "4", "RIB"];

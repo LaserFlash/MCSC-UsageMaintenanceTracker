@@ -1,10 +1,5 @@
 <md-card>
-  <span>
-    <button style="width:150px; text-align:left;" md-button [mdMenuTriggerFor]="sort"><md-icon>sort</md-icon>{{sortBy}}</button>
-    <md-menu #sort="mdMenu">
-      <button md-menu-item *ngFor="let sort of sortList" (click)="changeSort(sort)"> {{sort}}</button>
-    </md-menu>
-  </span>
+<sort-filter-bar [breakages]="breakages"></sort-filter-bar>
   <span>
     <button md-button [mdMenuTriggerFor]="filter"><md-icon>filter_list</md-icon> Filter by</button>
     <md-menu #filter="mdMenu">
