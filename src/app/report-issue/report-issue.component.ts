@@ -112,7 +112,7 @@ export class ReportIssueComponent implements OnInit {
         this.breakageForm.get("boatID").value,
         this.breakageForm.get("importance").value,
         this.breakageForm.get("details").value,
-        new Date()
+        new Date().getTime()
       );
       this.breakageService.addBreakageInfo(breakage).then(
         () => (

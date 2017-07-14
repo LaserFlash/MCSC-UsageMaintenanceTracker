@@ -1,9 +1,9 @@
 <md-card>
   <span>
-    <button md-icon-button (click)="sort.open()"><md-icon>sort</md-icon></button>
-    <md-select style="width:150px;"#sort placeholder="Sort by">
-      <md-option *ngFor="let sort of sortList" value="sort">{{sort}}</md-option>
-    </md-select>
+    <button style="width:150px; text-align:left;" md-button [mdMenuTriggerFor]="sort"><md-icon>sort</md-icon>{{sortBy}}</button>
+    <md-menu #sort="mdMenu">
+      <button md-menu-item *ngFor="let sort of sortList" (click)="changeSort(sort)"> {{sort}}</button>
+    </md-menu>
   </span>
   <span>
     <button md-button [mdMenuTriggerFor]="filter"><md-icon>filter_list</md-icon> Filter by</button>

@@ -6,6 +6,8 @@ export class BreakageInfo {
     public boatID: string,
     public importance: string,
     public details: string,
-    public timestamp: Date,
-  ) {  }
+    public timestamp: number
+  )
+  {
+  }
 }
