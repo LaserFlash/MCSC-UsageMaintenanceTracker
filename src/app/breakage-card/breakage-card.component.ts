@@ -7,7 +7,7 @@ import { BreakageInfo } from '../objects/breakageInfo'
   styleUrls: ['./breakage-card.component.css']
 })
 export class BreakageCardComponent{
-  @Input('buttonText') buttonText: string;
+  @Input() buttonText: string;
   @Input() breakages: BreakageInfo[];
   constructor() { }
 

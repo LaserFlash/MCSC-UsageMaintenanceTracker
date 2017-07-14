@@ -19,6 +19,6 @@ export class ViewFixedComponent{
   ) {
     this.breakages = breakageService.fixedItems;
   }
-  breakages: BreakageInfo[];
+  breakages: BreakageInfo[]; 
 
 }
