@@ -1,4 +1,4 @@
-import { Component,  Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { BreakageInfo } from '../objects/breakageInfo';
 import { BoatBreakageService } from '../boat-breakage.service'
 
@@ -9,7 +9,8 @@ import { BoatBreakageService } from '../boat-breakage.service'
 })
 export class SortFilterBarComponent {
   @Input() breakages: BreakageInfo[];
-  constructor(private breakageService: BoatBreakageService,) { }
+  @Input() original: BreakageInfo[];
+  constructor(private breakageService: BoatBreakageService, ) { }
 
   sortList = ["Newest", "Oldest", "Most Important", "Least Important", "Boat"];
   filterList = ["1", "2", "3", "4", "RIB"];
@@ -24,20 +25,29 @@ export class SortFilterBarComponent {
       this.appliedFilters.push(key);
     }
 
+    var filtered;
+
     if (this.appliedFilters.length == 0) {
-      this.breakages = this.breakageService.items;
-      return;
+      filtered = this.original;
+    } else {
+      filtered = this.original.filter(
+        item => {
+          return this.appliedFilters.some(
+            filter => {
+              if (item.boatID == filter) {
+                return true;
+              }
+            });
+        });
     }
 
-    this.breakages = this.breakageService.items.filter(
-      item => {
-        return this.appliedFilters.some(
-          filter => {
-            if (item.boatID == filter) {
-              return true;
-            }
-          });
-      });
+
+    this.breakages.splice(0,this.breakages.length);
+
+    for(var i = 0; i < filtered.length; i++){
+      this.breakages.push(filtered[i]);
+    }
+
 
   }
 
