@@ -41,6 +41,7 @@ import { environment }                from '../environments/environment';
 
 import { CookieModule }               from 'ngx-cookie';
 import { SortFilterBarComponent } from './sort-filter-bar/sort-filter-bar.component';
+import { InfoComponent } from './info/info.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { SortFilterBarComponent } from './sort-filter-bar/sort-filter-bar.compon
     ReportUsageComponent,
     BreakageCardComponent,
     SortFilterBarComponent,
+    InfoComponent,
   ],
   imports: [
     BrowserModule,

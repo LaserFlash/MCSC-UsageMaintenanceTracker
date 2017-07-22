@@ -5,6 +5,7 @@ import { ReportIssueComponent }   from './report-issue/report-issue.component';
 import { ViewIssuesComponent }      from './view-issues/view-issues.component';
 import { ViewFixedComponent }  from './view-fixed/view-fixed.component';
 import { ReportUsageComponent }  from './report-usage/report-usage.component';
+import { InfoComponent }  from './info/info.component';
 
 
 const routes: Routes = [
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'reported', component: ViewIssuesComponent },
   { path: 'fixed',     component: ViewFixedComponent },
   { path: 'reportUsage',     component: ReportUsageComponent },
+  { path: 'info',     component: InfoComponent },
 ];
 
 @NgModule({
