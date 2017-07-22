@@ -18,8 +18,10 @@ export class ViewIssuesComponent{
     private dialogsService: DialogsService
   ) {
     this.breakages = breakageService.items;
+    this.original = breakageService.original;
   }
   breakages: BreakageInfo[];
+  original: BreakageInfo[];
 
   cardButtonText = "Fix";
 

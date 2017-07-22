@@ -18,7 +18,9 @@ export class ViewFixedComponent{
     private dialogsService: DialogsService
   ) {
     this.breakages = breakageService.fixedItems;
+    this.original = breakageService.fixedItemsOriginal;
   }
-  breakages: BreakageInfo[]; 
+  breakages: BreakageInfo[];
+  original: BreakageInfo[];
 
 }
