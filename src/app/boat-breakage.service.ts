@@ -6,8 +6,10 @@ import { AngularFireDatabase, FirebaseListObservable} from 'angularfire2/databas
 @Injectable()
 export class BoatBreakageService {
   public items: BreakageInfo[] =[];
+  public original: BreakageInfo[] =[];
   public recentItems: BreakageInfo[] =[];
   public fixedItems: BreakageInfo[] =[];
+  public fixedItemsOriginal: BreakageInfo[] =[];
 
   private itemsData: FirebaseListObservable<BreakageInfo[]>;
   private recentThreeItems: FirebaseListObservable<BreakageInfo[]>;
@@ -16,6 +18,7 @@ export class BoatBreakageService {
   constructor(private db: AngularFireDatabase) {
     this.itemsData = db.list('/issues');
     this.itemsData.subscribe(val => { this.buildBreakages(val,this.items); });
+    this.itemsData.subscribe(val => { this.buildBreakages(val,this.original); });
     this.recentThreeItems = db.list('/issues', {
       query: {
         limitToLast: 3,
@@ -25,6 +28,7 @@ export class BoatBreakageService {
     this.recentThreeItems.subscribe(val => { this.buildBreakages(val, this.recentItems); });
     this.fixedItemsData = db.list('/fixed');
     this.fixedItemsData.subscribe(val => { this.buildBreakages(val,this.fixedItems); });
+    this.fixedItemsData.subscribe(val => { this.buildBreakages(val,this.fixedItemsOriginal); });
   }
 
   addBreakageInfo(breakage: BreakageInfo) {
