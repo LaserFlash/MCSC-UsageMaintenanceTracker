@@ -11,23 +11,21 @@ export class AppComponent {
   isDarkTheme: boolean;
 
   routeLinks = [
-    { label: 'Report Usage', link: 'reportUsage' },
-    { label: 'Report Breakage', link: 'report' },
-    { label: 'View Breakages', link: 'reported' },
-    { label: 'View Fixed', link: 'fixed' },
-    { label: 'Info', link: 'info' },
-  ];
+  { label: 'Report Usage', link: 'reportUsage' },
+  { label: 'Report Breakage', link: 'report' },
+  { label: 'View Breakages', link: 'reported' },
+  { label: 'View Fixed', link: 'fixed' }];
 
-  constructor(private cookieService: CookieService) {
+  constructor(private cookieService:CookieService){
     this.isDarkTheme = this.cookieService.get('wyst') == '1';
 
   }
 
-  toggleDark() {
+  toggleDark(){
     this.isDarkTheme = !this.isDarkTheme;
-    if (this.isDarkTheme) {
+    if(this.isDarkTheme){
       this.cookieService.put('wyst', '1');
-    } else {
+    }else {
       this.cookieService.put('wyst', '0');
     }
   }
