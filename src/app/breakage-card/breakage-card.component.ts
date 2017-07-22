@@ -6,14 +6,18 @@ import { BreakageInfo } from '../objects/breakageInfo'
   templateUrl: './breakage-card.component.html',
   styleUrls: ['./breakage-card.component.css']
 })
-export class BreakageCardComponent{
+export class BreakageCardComponent {
   @Input() buttonText: string;
   @Input() breakages: BreakageInfo[];
   constructor() { }
 
   @Output() onRemove = new EventEmitter<boolean>();
 
-  openDialog(key:any){
+  dateDisplay(val) {
+    var date = new Date(val);
+    return date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear();
+  }
+  openDialog(key: any) {
     this.onRemove.emit(key);
   }
 }
