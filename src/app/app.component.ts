@@ -7,7 +7,7 @@ import { CookieService } from 'ngx-cookie';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'WYST Boat Maintenance';
+  title = 'WYST';
   isDarkTheme: boolean;
 
   routeLinks = [
