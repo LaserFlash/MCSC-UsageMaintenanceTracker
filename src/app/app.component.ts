@@ -7,14 +7,16 @@ import { CookieService } from 'ngx-cookie';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'WYST Boat Maintenance';
+  title = 'WYST';
   isDarkTheme: boolean;
 
   routeLinks = [
   { label: 'Report Usage', link: 'reportUsage' },
   { label: 'Report Breakage', link: 'report' },
   { label: 'View Breakages', link: 'reported' },
-  { label: 'View Fixed', link: 'fixed' }];
+  { label: 'View Fixed', link: 'fixed' },
+  { label: 'Safety Docs', link: 'safety' },
+];
 
   constructor(private cookieService:CookieService){
     this.isDarkTheme = this.cookieService.get('wyst') == '1';
