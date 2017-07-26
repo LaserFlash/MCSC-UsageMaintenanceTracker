@@ -1,18 +1,18 @@
 <md-toolbar color="primary">
-    <button style="margin-left:5px;" md-icon-button (click)="sidenav.toggle()">
+  <button style="margin-left:5px;" md-icon-button (click)="sidenav.toggle()">
       <md-icon>menu</md-icon>
     </button>
-    <span id="menuSpacer"></span>
-    <span><img id="menuLogo" src="assets/images/logoNoText.png" /></span>
-    <span id="menuSpacer"></span>
-    <span id="menuTitle">
+  <span id="menuSpacer"></span>
+  <span><img id="menuLogo" src="assets/images/logoNoText.png" /></span>
+  <span id="menuSpacer"></span>
+  <span id="menuTitle">
     {{title}}
   </span>
 
-    <!-- This fills the remaining space of the current row -->
-    <span class="toolbar-spacer"></span>
+  <!-- This fills the remaining space of the current row -->
+  <span class="toolbar-spacer"></span>
 
-    <span fxHide.lt-md>
+  <span fxHide.lt-md>
     <nav md-tab-nav-bar>
       <a md-tab-link
           *ngFor="let routeLink of routeLinks; let i = index"
