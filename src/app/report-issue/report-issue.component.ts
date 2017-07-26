@@ -29,6 +29,19 @@ export class ReportIssueComponent {
     'Low (not affecting use)'
   ];
 
+  parts = [
+    "Sails",
+    "Hull",
+    "Deck Fittings",
+    "Mast",
+    "Boom",
+    "Halyards / Sheets",
+    "Rudder / Tiller",
+    "Control Lines",
+    "Cover",
+    "Other"
+  ];
+
   breakages: BreakageInfo[];
 
   constructor(
