@@ -22,7 +22,7 @@
     <md-chip *ngFor="let filter of appliedFilters" (click)="addFilter(filter) " selected="true"> Boat {{filter}}
       <md-icon style="font-size:16px;height:16px;width:16px;">cancel</md-icon>
     </md-chip>
-    <md-chip *ngFor="let filter of partappliedFilters" (click)="addPartFilter(filter) " selected="true"> {{filter}}
+    <md-chip *ngFor="let filter of partappliedFilters" (click)="addPartFilter(filter)" selected="true"> {{filter}}
       <md-icon style="font-size:16px;height:16px;width:16px;">cancel</md-icon>
     </md-chip>
   </md-chip-list>

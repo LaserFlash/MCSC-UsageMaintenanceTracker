@@ -93,7 +93,7 @@ export class ReportIssueComponent {
     'contact': '',
     'boatID': '',
     'importance': '',
-    'parts':'',
+    'part':'',
     'details': ''
   };
 
@@ -110,7 +110,7 @@ export class ReportIssueComponent {
     'importance': {
       'required': 'Category is required'
     },
-    'parts': {
+    'part': {
       'required': 'Category is required'
     },
     'details': {
