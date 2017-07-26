@@ -1,11 +1,26 @@
 <md-card>
-  <md-list>
-    <h3 md-subheader>Health and Safety Documents</h3>
-    <md-list-item *ngFor="let link of links">
-      <a md-list-item href="{{link.a}}" target="_blank">
-        <md-icon md-list-icon>insert_drive_file</md-icon>
-        {{link.text}}
-      </a>
-    </md-list-item>
-  </md-list>
+  <md-tab-group>
+    <md-tab label="Incident Form">
+      <md-list>
+        <md-list-item>
+          <a md-list-item href="https://goo.gl/1Epo9z" target="_blank">
+            <md-icon md-list-icon>assignment</md-icon>
+            Accident, Near Miss or Incident Reporting Form
+          </a>
+        </md-list-item>
+      </md-list>
+    </md-tab>
+    <md-tab label="Documents">
+      <md-list>
+        <h3 md-subheader>Health and Safety Documents</h3>
+        <md-list-item *ngFor="let link of links">
+          <a md-list-item href="{{link.a}}" target="_blank">
+            <md-icon md-list-icon>insert_drive_file</md-icon>
+            {{link.text}}
+          </a>
+        </md-list-item>
+      </md-list>
+    </md-tab>
+  </md-tab-group>
+
 </md-card>
