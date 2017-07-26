@@ -61,6 +61,7 @@ export class ReportIssueComponent {
       contact: ['', ContactValidator.emailAndMobile],
       boatID: ['', Validators.required],
       importance: ['', Validators.required],
+      part: ['',Validators.required],
       details: ['', [Validators.required, Validators.maxLength(256)]]
     });
     this.breakageForm.valueChanges
@@ -92,6 +93,7 @@ export class ReportIssueComponent {
     'contact': '',
     'boatID': '',
     'importance': '',
+    'parts':'',
     'details': ''
   };
 
@@ -106,6 +108,9 @@ export class ReportIssueComponent {
       'required': 'Boat number is required'
     },
     'importance': {
+      'required': 'Category is required'
+    },
+    'parts': {
       'required': 'Category is required'
     },
     'details': {
