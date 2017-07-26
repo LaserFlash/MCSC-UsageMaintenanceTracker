@@ -4,16 +4,25 @@
   <md-menu #sort="mdMenu">
     <button md-menu-item *ngFor="let sort of sortList" (click)="changeSort(sort)"> {{sort}}</button>
   </md-menu>
-</span>
+  </span>
   <span>
-  <button md-button [mdMenuTriggerFor]="filter"><md-icon>filter_list</md-icon> Filter by</button>
+  <button md-button [mdMenuTriggerFor]="filter"><md-icon>filter_list</md-icon> Filter by Boat</button>
   <md-menu #filter="mdMenu">
     <button md-menu-item *ngFor="let filter of filterList" (click)="addFilter(filter)"> Boat {{filter}} </button>
   </md-menu>
 </span>
+  <span>
+<button md-button [mdMenuTriggerFor]="Pfilter"><md-icon>filter_list</md-icon> Filter by Part</button>
+<md-menu #Pfilter="mdMenu">
+  <button md-menu-item *ngFor="let filter of partfilterList" (click)="addPartFilter(filter)"> {{filter}} </button>
+</md-menu>
+</span>
 
   <md-chip-list>
-    <md-chip *ngFor="let filter of appliedFilters" (click)="addFilter(filter)" selected="true"> Boat {{filter}}
+    <md-chip *ngFor="let filter of appliedFilters" (click)="addFilter(filter) " selected="true"> Boat {{filter}}
+      <md-icon style="font-size:16px;height:16px;width:16px;">cancel</md-icon>
+    </md-chip>
+    <md-chip *ngFor="let filter of partappliedFilters" (click)="addPartFilter(filter) " selected="true"> {{filter}}
       <md-icon style="font-size:16px;height:16px;width:16px;">cancel</md-icon>
     </md-chip>
   </md-chip-list>

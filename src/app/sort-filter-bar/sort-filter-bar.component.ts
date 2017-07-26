@@ -14,7 +14,20 @@ export class SortFilterBarComponent {
 
   sortList = ["Newest", "Oldest", "Most Important", "Least Important", "Boat"];
   filterList = ["1", "2", "3", "4", "RIB"];
+  partfilterList = [
+    "Sails",
+    "Hull",
+    "Deck Fittings",
+    "Mast",
+    "Boom",
+    "Halyards / Sheets",
+    "Rudder / Tiller",
+    "Control Lines",
+    "Cover",
+    "Other"
+  ];
   appliedFilters = [];
+  partappliedFilters = [];
   sortBy = "Sort by";
 
   addFilter(key: string) {
@@ -28,27 +41,63 @@ export class SortFilterBarComponent {
     var filtered;
 
     if (this.appliedFilters.length == 0) {
-      filtered = this.original;
+      filtered = this.original.filter(item => this.partFilter(item));
     } else {
-      filtered = this.original.filter(
-        item => {
-          return this.appliedFilters.some(
-            filter => {
-              if (item.boatID == filter) {
-                return true;
-              }
-            });
-        });
+      filtered = this.original.filter(item => this.boatFilter(item)).filter(item => this.partFilter(item));
     }
 
 
-    this.breakages.splice(0,this.breakages.length);
+    this.breakages.splice(0, this.breakages.length);
 
-    for(var i = 0; i < filtered.length; i++){
+    for (var i = 0; i < filtered.length; i++) {
       this.breakages.push(filtered[i]);
     }
+  }
 
+  addPartFilter(key: string) {
+    var i = this.partappliedFilters.indexOf(key);
+    if (i != -1) {
+      this.partappliedFilters.splice(i, 1);
+    } else {
+      this.partappliedFilters.push(key);
+    }
 
+    var filtered;
+
+    if (this.partappliedFilters.length == 0) {
+      filtered = this.original.filter(item => this.boatFilter(item));
+    } else {
+      filtered = this.breakages.filter(item => this.partFilter(item)).filter(item => this.boatFilter(item));
+    }
+
+    this.breakages.splice(0, this.breakages.length);
+
+    for (var i = 0; i < filtered.length; i++) {
+      this.breakages.push(filtered[i]);
+    }
+  }
+
+  boatFilter(item) {
+    if (this.appliedFilters.length == 0) {
+      return true;
+    }
+    return this.appliedFilters.some(
+      filter => {
+        if (item.boatID == filter) {
+          return true;
+        }
+      });
+  }
+  partFilter(item) {
+    if (this.partappliedFilters.length == 0) {
+      return true;
+    }
+    return this.partappliedFilters.some(
+      filter => {
+        if (item.part == filter) {
+          return true;
+        }
+      });
   }
 
   changeSort(sort: string) {
