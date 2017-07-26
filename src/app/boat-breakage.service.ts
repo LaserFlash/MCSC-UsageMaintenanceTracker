@@ -38,6 +38,7 @@ export class BoatBreakageService {
         contact: breakage.contact,
         boatID: breakage.boatID,
         importance: breakage.importance,
+        part: breakage.part,
         details: breakage.details,
         timestamp: breakage.timestamp
       }
