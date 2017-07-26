@@ -9,6 +9,9 @@
           <li>
             {{item.importance}}
           </li>
+          <li *ngIf="item.part">
+            Part: {{item.part}}
+          </li>
           <li>
             Reported by: {{item.name}}
           </li>

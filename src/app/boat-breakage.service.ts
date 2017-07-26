@@ -57,6 +57,7 @@ export class BoatBreakageService {
             boatID: breakage.boatID,
             importance: breakage.importance,
             details: breakage.details,
+            part:breakage.part,
             timestampFixed: new Date().getTime(),
             timestampReported: breakage.timestamp
           }

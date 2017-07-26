@@ -141,6 +141,7 @@ export class ReportIssueComponent {
     message += "Contact: " + breakage.contact + '\n';
     message += "Boat: " + breakage.boatID + '\n';
     message += "Importance: " + breakage.importance + '\n';
+    message += "Part: " + breakage.part + '\n';
     message += "Details: " + breakage.details + '\n';
 
     this.dialogsService
