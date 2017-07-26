@@ -37,6 +37,16 @@
         </md-error>
       </md-select>
 
+      <br />
+      <br />
+
+      <md-select class="select-width" placeholder="Part" formControlName="part" required>
+        <md-option *ngFor="let p of parts" [value]="p">{{p}}</md-option>
+        <md-error *ngIf="formErrors.part">
+          {{formErrors.part}}
+        </md-error>
+      </md-select>
+
       <md-input-container class="full-width">
         <textarea mdInput type="text" placeholder="Describe the Issue" formControlName="details" #details required rows="4" maxlength="256"> </textarea>
         <md-hint align="end">{{details.value.length}} / 256</md-hint>

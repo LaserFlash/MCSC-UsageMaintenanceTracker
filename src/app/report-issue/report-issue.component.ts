@@ -127,6 +127,7 @@ export class ReportIssueComponent {
         this.breakageForm.get("contact").value,
         this.breakageForm.get("boatID").value,
         this.breakageForm.get("importance").value,
+        this.breakageForm.get("part").value,
         this.breakageForm.get("details").value,
         new Date().getTime()
       );
