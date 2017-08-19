@@ -21,6 +21,7 @@ import { MdSelectModule }             from '@angular/material';
 import { DialogsModule }              from './dialog/dialogs.module';
 import { MdMenuModule }               from '@angular/material';
 import { MdChipsModule }              from '@angular/material';
+import { MdProgressBarModule }        from '@angular/material';
 
 import { AppComponent }               from './app.component';
 import { ReportIssueComponent }       from './report-issue/report-issue.component';
@@ -79,6 +80,7 @@ import { SafetyProceduresComponent } from './safety-procedures/safety-procedures
     DialogsModule,
     MdMenuModule,
     MdChipsModule,
+    MdProgressBarModule,
   ],
   providers: [BoatUsageService,BoatBreakageService],
   bootstrap: [AppComponent]

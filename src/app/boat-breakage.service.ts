@@ -11,6 +11,7 @@ export class BoatBreakageService {
   public fixedItems: BreakageInfo[] =[];
   public fixedItemsOriginal: BreakageInfo[] =[];
 
+
   private itemsData: FirebaseListObservable<BreakageInfo[]>;
   private recentThreeItems: FirebaseListObservable<BreakageInfo[]>;
   private fixedItemsData: FirebaseListObservable<BreakageInfo[]>;

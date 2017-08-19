@@ -43,6 +43,7 @@ export class ReportIssueComponent {
   ];
 
   breakages: BreakageInfo[];
+  loadingBreakages = true;
 
   constructor(
     private fb: FormBuilder,
