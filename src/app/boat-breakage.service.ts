@@ -49,15 +49,15 @@ export class BoatBreakageService {
     this.itemsData.remove(breakage);
   }
 
-  markFixed(breakage){
+  markFixed(breakage: BreakageInfo){
     this.fixedItemsData.push(
           {
             name: breakage.name,
             contact: breakage.contact,
             boatID: breakage.boatID,
             importance: breakage.importance,
+            part: breakage.part == undefined ? null : breakage.part,
             details: breakage.details,
-            part:breakage.part,
             timestampFixed: new Date().getTime(),
             timestampReported: breakage.timestamp
           }
