@@ -20,7 +20,7 @@ export class ReportIssueComponent {
 
   title = "Report Boat Breakage";
   boats = [
-    '1', '2', '3', '4', 'RIB'
+    '1', '2', '3', '4','New 5', 'New 6', 'New 7', 'New 8', 'RIB'
   ];
   levels = [
     'Urgent (boat out of action)',
