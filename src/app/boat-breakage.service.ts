@@ -5,12 +5,14 @@ import { AngularFireDatabase, FirebaseListObservable} from 'angularfire2/databas
 
 @Injectable()
 export class BoatBreakageService {
-  public items: BreakageInfo[] =[];
-  public original: BreakageInfo[] =[];
-  public recentItems: BreakageInfo[] =[];
-  public fixedItems: BreakageInfo[] =[];
-  public fixedItemsOriginal: BreakageInfo[] =[];
 
+  public done: boolean = false;
+
+  public items: BreakageInfo[]=[];
+  public original: BreakageInfo[]=[];
+  public recentItems: BreakageInfo[]=[];
+  public fixedItems: BreakageInfo[]=[];
+  public fixedItemsOriginal: BreakageInfo[]=[];
 
   private itemsData: FirebaseListObservable<BreakageInfo[]>;
   private recentThreeItems: FirebaseListObservable<BreakageInfo[]>;

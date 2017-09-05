@@ -1,2 +1,3 @@
 <sort-filter-bar [breakages]="breakages" [original]="original"></sort-filter-bar>
+<md-progress-bar mode="indeterminate" *ngIf = "breakages.length <= 0" ></md-progress-bar>
 <breakage-card [buttonText]="cardButtonText" [breakages]="breakages" (onRemove)="openDialog($event)"></breakage-card>

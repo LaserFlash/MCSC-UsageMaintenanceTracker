@@ -3,13 +3,9 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { MdSnackBar } from '@angular/material';
 
 import { ContactValidator } from '../validators/ContactValidator'
-
 import { DialogsService } from '../dialog/dialogs.service';
-
 import { BreakageInfo } from '../objects/breakageInfo';
 import { BoatBreakageService } from '../boat-breakage.service'
-
-import { FirebaseListObservable } from 'angularfire2/database';
 
 @Component({
   selector: 'report-issue',

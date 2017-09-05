@@ -62,5 +62,5 @@
 
   </md-card-content>
 </md-card>
-<md-progress-bar mode="indeterminate" *ngIf = "breakages" ></md-progress-bar>
+<md-progress-bar mode="indeterminate" *ngIf = "breakages.length <= 0" ></md-progress-bar>
 <breakage-card [breakages]="breakages" (onRemove)="openDialog($event)"></breakage-card>
