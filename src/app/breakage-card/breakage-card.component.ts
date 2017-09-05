@@ -15,7 +15,7 @@ export class BreakageCardComponent {
 
   dateDisplay(val) {
     var date = new Date(val);
-    return date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear();
+    return date.getDate() + "/" + date.getMonth() + 1 + "/" + date.getFullYear();
   }
   openDialog(key: any) {
     this.onRemove.emit(key);
