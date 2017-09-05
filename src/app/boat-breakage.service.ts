@@ -61,7 +61,7 @@ export class BoatBreakageService {
             importance: breakage.importance,
             part: breakage.part == undefined ? null : breakage.part,
             details: breakage.details,
-            timestampFixed: new Date().getTime(),
+            timestamp: new Date().getTime(),
             timestampReported: breakage.timestamp
           }
         );
