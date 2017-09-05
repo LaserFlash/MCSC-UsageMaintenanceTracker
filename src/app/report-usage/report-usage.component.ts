@@ -28,7 +28,7 @@ export class ReportUsageComponent implements OnInit {
   title = "Report Boat Usage";
   maxDate = new Date();
   boats = [
-    '1', '2', '3', '4'
+    '1', '2', '3', '4', 'New 5', 'New 6', 'New 7', 'New 8'
   ];
 
   usageForm: FormGroup;
