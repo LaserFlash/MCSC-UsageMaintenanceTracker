@@ -13,7 +13,7 @@ const NUMBER_REGEX = /[0-9]+/;
   templateUrl: './report-usage.component.html',
   styleUrls: ['./report-usage.component.css']
 })
-export class ReportUsageComponent implements OnInit {
+export class ReportUsageComponent {
   constructor(
     private dateAdapter: DateAdapter<Date>,
     private usageService: BoatUsageService,
@@ -30,9 +30,10 @@ export class ReportUsageComponent implements OnInit {
   boats = [
     '1', '2', '3', '4', 'New 5', 'New 6', 'New 7', 'New 8'
   ];
-
   usageForm: FormGroup;
-  createForm() {
+
+  /** Build the form */
+  private createForm() {
     this.usageForm = this.fb.group({
       boatID: ['', Validators.required],
       duration: ['', [Validators.required, Validators.pattern(/[0-9]+/), Validators.min(0)]],
@@ -45,7 +46,8 @@ export class ReportUsageComponent implements OnInit {
     this.onValueChanged(); // (re)set validation messages now
   }
 
-  onValueChanged(data?: any) {
+  /** Update error messages due to validation */
+  private onValueChanged(data?: any) {
     if (!this.usageForm) { return; }
     const form = this.usageForm;
 
@@ -83,10 +85,8 @@ export class ReportUsageComponent implements OnInit {
     }
   };
 
-  ngOnInit() {
-  }
-
-  onSubmit() {
+  /** Build BreakageInfo Object from submited data */
+  private onSubmit() {
     if (this.usageForm.valid) {
       var usage = new UsageInfo(this.usageForm.get("boatID").value, this.usageForm.get("duration").value, this.usageForm.get("date").value)
       this.usageService.addUsageInfo(usage).then(
