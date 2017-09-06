@@ -7,17 +7,18 @@ import { BreakageInfo } from '../objects/breakageInfo'
   styleUrls: ['./breakage-card.component.css']
 })
 export class BreakageCardComponent {
-  @Input() buttonText: string;
-  @Input() breakages: BreakageInfo[];
   constructor() { }
 
+  @Input() buttonText: string;
+  @Input() breakages: BreakageInfo[];
   @Output() onRemove = new EventEmitter<boolean>();
 
-  dateDisplay(val) {
+  /**Generate string to represent timestamp dd/mm/yyyy format*/
+  private dateDisplay(val) {
     var date = new Date(val);
     return date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
   }
-  openDialog(key: any) {
+  private openDialog(key: any) {
     this.onRemove.emit(key);
   }
 }

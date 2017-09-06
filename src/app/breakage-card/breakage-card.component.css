@@ -1,24 +1,14 @@
 .breakage-card {
   margin-top: 10px;
 }
-
-.breakage-card-header{
-
-}
-
 .breakage-card-left{
   width: 200px;
 }
-
 .breakage-card-list {
   list-style-type: none;
   padding-left: 0px;
 }
-
-.breakage-card-details{
-
-}
-
+.breakage-card-details{}
 .remove-button {
   width: 80px;
   height: 100%;
