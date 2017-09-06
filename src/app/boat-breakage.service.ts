@@ -6,8 +6,6 @@ import { AngularFireDatabase, FirebaseListObservable} from 'angularfire2/databas
 @Injectable()
 export class BoatBreakageService {
 
-  public done: boolean = false;
-
   public items: BreakageInfo[]=[];
   public original: BreakageInfo[]=[];
   public recentItems: BreakageInfo[]=[];
@@ -19,6 +17,7 @@ export class BoatBreakageService {
   private fixedItemsData: FirebaseListObservable<BreakageInfo[]>;
 
   constructor(private db: AngularFireDatabase) {
+    /* Download data from firebase */
     this.itemsData = db.list('/issues');
     this.itemsData.subscribe(val => { this.buildBreakages(val,this.items); });
     this.itemsData.subscribe(val => { this.buildBreakages(val,this.original); });
@@ -34,7 +33,8 @@ export class BoatBreakageService {
     this.fixedItemsData.subscribe(val => { this.buildBreakages(val,this.fixedItemsOriginal); });
   }
 
-  addBreakageInfo(breakage: BreakageInfo) {
+  /** Push breakage to firebase */
+  public addBreakageInfo(breakage: BreakageInfo) {
     return Promise.resolve(this.itemsData.push(
       {
         name: breakage.name,
@@ -48,11 +48,13 @@ export class BoatBreakageService {
     ));
   }
 
-  remove(breakage){
+
+  private remove(breakage){
     this.itemsData.remove(breakage);
   }
 
-  markFixed(breakage: BreakageInfo){
+  /** Move a current breakage from an issue to fixed */
+  public markFixed(breakage: BreakageInfo){
     this.fixedItemsData.push(
           {
             name: breakage.name,
