@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CookieService } from 'ngx-cookie';
+import { CookieService, CookieOptions } from 'ngx-cookie';
 
 @Component({
   selector: 'app-root',
@@ -25,13 +25,11 @@ export class AppComponent {
 
   toggleDark(){
     this.isDarkTheme = !this.isDarkTheme;
+    var cookieOptions :CookieOptions = { expires: new Date(32525112147000)}
     if(this.isDarkTheme){
-      this.cookieService.put('wyst', '1');
+      this.cookieService.put('wyst', '1', cookieOptions);
     }else {
-      this.cookieService.put('wyst', '0');
+      this.cookieService.put('wyst', '0', cookieOptions);
     }
   }
-
-
-
 }
