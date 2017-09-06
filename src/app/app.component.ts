@@ -19,11 +19,12 @@ export class AppComponent {
 ];
 
   constructor(private cookieService:CookieService){
+    /* Apply theme at start */
     this.isDarkTheme = this.cookieService.get('wyst') == '1';
-
   }
 
-  toggleDark(){
+  /** Change state of dark theme, updating cookie */
+  private toggleDark(){
     this.isDarkTheme = !this.isDarkTheme;
     var cookieOptions :CookieOptions = { expires: new Date(32525112147000)}
     if(this.isDarkTheme){
