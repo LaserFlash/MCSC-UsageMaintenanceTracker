@@ -1,5 +1,4 @@
 export class BreakageInfo {
-
   constructor(
     public name: string,
     public contact: string,
@@ -9,6 +8,5 @@ export class BreakageInfo {
     public details: string,
     public timestamp: number
   )
-  {
-  }
+  {}
 }
