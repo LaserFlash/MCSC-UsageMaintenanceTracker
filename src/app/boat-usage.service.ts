@@ -5,8 +5,8 @@ import { AngularFireDatabase, FirebaseListObservable} from 'angularfire2/databas
 
 @Injectable()
 export class BoatUsageService {
-
   items: FirebaseListObservable<any>;
+
   constructor(db: AngularFireDatabase) {
     this.items = db.list('/usage');
   }
