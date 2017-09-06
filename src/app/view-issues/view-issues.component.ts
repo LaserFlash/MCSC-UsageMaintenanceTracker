@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { BreakageInfo } from '../objects/breakageInfo';
 import { BoatBreakageService } from '../boat-breakage.service'
-
 import { DialogsService } from '../dialog/dialogs.service';
 
 import { FirebaseListObservable } from 'angularfire2/database';
@@ -22,10 +21,9 @@ export class ViewIssuesComponent{
   }
   breakages: BreakageInfo[];
   original: BreakageInfo[];
-
   cardButtonText = "Fix";
 
-  openDialog(key: any) {
+  private openDialog(key: any) {
     this.dialogsService
       .confirm('Confirm Mark as Fixed', 'Are you sure you want to do this?', this.cardButtonText)
       .subscribe(result => {
