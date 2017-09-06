@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MdSnackBar } from '@angular/material';
 
@@ -16,7 +16,7 @@ export class ReportIssueComponent {
 
   title = "Report Boat Breakage";
   boats = [
-    '1', '2', '3', '4','New 5', 'New 6', 'New 7', 'New 8', 'RIB'
+    '1', '2', '3', '4', 'New 5', 'New 6', 'New 7', 'New 8', 'RIB'
   ];
   levels = [
     'Urgent (boat out of action)',
@@ -39,6 +39,7 @@ export class ReportIssueComponent {
   ];
 
   breakages: BreakageInfo[];
+  breakageForm: FormGroup;
   loadingBreakages = true;
 
   constructor(
@@ -51,23 +52,22 @@ export class ReportIssueComponent {
     this.breakages = breakageService.recentItems;
   }
 
-  breakageForm: FormGroup;
-  createForm() {
+  /** Build the form */
+  private createForm() {
     this.breakageForm = this.fb.group({
       name: ['', Validators.required],
       contact: ['', ContactValidator.emailAndMobile],
       boatID: ['', Validators.required],
       importance: ['', Validators.required],
-      part: ['',Validators.required],
+      part: ['', Validators.required],
       details: ['', [Validators.required, Validators.maxLength(256)]]
     });
-    this.breakageForm.valueChanges
-      .subscribe(data => this.onValueChanged(data));
-
+    this.breakageForm.valueChanges.subscribe(data => this.onValueChanged(data));
     this.onValueChanged(); // (re)set validation messages now
   }
 
-  onValueChanged(data?: any) {
+  /** Update error messages due to validation */
+  private onValueChanged(data?: any) {
     if (!this.breakageForm) { return; }
     const form = this.breakageForm;
 
@@ -90,7 +90,7 @@ export class ReportIssueComponent {
     'contact': '',
     'boatID': '',
     'importance': '',
-    'part':'',
+    'part': '',
     'details': ''
   };
 
@@ -116,10 +116,10 @@ export class ReportIssueComponent {
     }
   };
 
-  onSubmit() {
+  /** Build BreakageInfo Object from submited data */
+  private onSubmit() {
     if (this.breakageForm.valid) {
-
-      var breakage = new BreakageInfo(
+      let breakage = new BreakageInfo(
         this.breakageForm.get("name").value,
         this.breakageForm.get("contact").value,
         this.breakageForm.get("boatID").value,
@@ -128,12 +128,14 @@ export class ReportIssueComponent {
         this.breakageForm.get("details").value,
         new Date().getTime()
       );
+      /* Confirm submission of data */
       this.openDialog(breakage);
     }
   }
 
-  openDialog(breakage: BreakageInfo) {
-    var message = "";
+  /** Produce dialog message and handle user input from dialog */
+  private openDialog(breakage: BreakageInfo) {
+    let message = "";
     message += "Name: " + breakage.name + '\n';
     message += "Contact: " + breakage.contact + '\n';
     message += "Boat: " + breakage.boatID + '\n';
