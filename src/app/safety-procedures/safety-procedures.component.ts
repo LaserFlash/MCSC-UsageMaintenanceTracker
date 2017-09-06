@@ -6,8 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./safety-procedures.component.css']
 })
 export class SafetyProceduresComponent {
-
-  constructor() { }
+  constructor() {}
+  
   links =
   [
     {a:"https://drive.google.com/file/d/0BwFE4hc768gQeGRkSTItS01iR0k", text:"Anti-Fouling"},
