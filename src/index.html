@@ -36,7 +36,7 @@
   <link rel="manifest" href="assets/favicon/manifest.json" />
   <meta name="theme-color" content="#03a9f4" />
   <meta name="mobile-web-app-capable" content="yes">
-  <link rel="shortcut icon" sizes="192x192" href="assets/favicon/android-icon-192x192.png"> 
+  <link rel="shortcut icon" sizes="192x192" href="assets/favicon/android-icon-192x192.png">
 
   <meta name="msapplication-TileColor" content="#03a9f4" />
   <meta name="msapplication-TileImage" content="assets/favicon/ms-icon-144x144.png" />
@@ -59,5 +59,15 @@
     <app-root></app-root>
   </section>
 </body>
-
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('\/U23-Reports/service-worker.js').then(function(registration) {
+      // Registration was successful
+      console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    }).catch(function(err) {
+      // registration failed :(
+      console.log('ServiceWorker registration failed: ', err);
+    });
+  }
+</script>
 </html>
