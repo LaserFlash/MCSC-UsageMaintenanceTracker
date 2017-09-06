@@ -14,12 +14,8 @@ import { Component } from '@angular/core';
     `,
 })
 export class ConfirmDialog {
-
     public title: string;
     public message: string;
     public button: string;
-
-    constructor(public dialogRef: MdDialogRef<ConfirmDialog>) {
-
-    }
+    constructor(public dialogRef: MdDialogRef<ConfirmDialog>) {}
 }
