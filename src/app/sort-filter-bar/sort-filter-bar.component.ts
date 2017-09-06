@@ -7,10 +7,11 @@ import { BoatBreakageService } from '../boat-breakage.service'
   templateUrl: './sort-filter-bar.component.html',
   styleUrls: ['./sort-filter-bar.component.css']
 })
+
 export class SortFilterBarComponent {
   @Input() breakages: BreakageInfo[];
   @Input() original: BreakageInfo[];
-  constructor(private breakageService: BoatBreakageService, ) { }
+  constructor(private breakageService: BoatBreakageService) {}
 
   sortList = ["Newest", "Oldest", "Most Important", "Least Important", "Boat"];
   filterList = ["1", "2", "3", "4", "RIB"];
@@ -30,40 +31,42 @@ export class SortFilterBarComponent {
   partappliedFilters = [];
   sortBy = "Sort by";
 
-  addFilter(key: string) {
-    var i = this.appliedFilters.indexOf(key);
-    if (i != -1) {
-      this.appliedFilters.splice(i, 1);
+  /** Add a boat filter to the displayed data */
+  private addFilter(key: string) {
+    let index = this.appliedFilters.indexOf(key);
+    /* Remove filter if already applied */
+    if (index != -1) {
+      this.appliedFilters.splice(index, 1);
     } else {
-      this.appliedFilters.push(key);
+      this.appliedFilters.push(key);  //add filter
     }
 
-    var filtered;
-
+    let filtered;
+    /* Apply filters taking into account any part filters also applied */
     if (this.appliedFilters.length == 0) {
       filtered = this.original.filter(item => this.partFilter(item));
     } else {
       filtered = this.original.filter(item => this.boatFilter(item)).filter(item => this.partFilter(item));
     }
 
-
     this.breakages.splice(0, this.breakages.length);
-
-    for (var i = 0; i < filtered.length; i++) {
+    for (let i = 0; i < filtered.length; i++) {
       this.breakages.push(filtered[i]);
     }
   }
 
-  addPartFilter(key: string) {
-    var i = this.partappliedFilters.indexOf(key);
-    if (i != -1) {
-      this.partappliedFilters.splice(i, 1);
+  /** Add a part filter to the displayed data */
+  private addPartFilter(key: string) {
+    let index = this.partappliedFilters.indexOf(key);
+    /* Remove filter if already applied */
+    if (index != -1) {
+      this.partappliedFilters.splice(index, 1);
     } else {
       this.partappliedFilters.push(key);
     }
 
-    var filtered;
-
+    let filtered;
+    /* Apply filters taking into account any boat filters also applied */
     if (this.partappliedFilters.length == 0) {
       filtered = this.original.filter(item => this.boatFilter(item));
     } else {
@@ -71,13 +74,13 @@ export class SortFilterBarComponent {
     }
 
     this.breakages.splice(0, this.breakages.length);
-
-    for (var i = 0; i < filtered.length; i++) {
+    for (let i = 0; i < filtered.length; i++) {
       this.breakages.push(filtered[i]);
     }
   }
 
-  boatFilter(item) {
+  /** Get the data that meets the filter */
+  private boatFilter(item) {
     if (this.appliedFilters.length == 0) {
       return true;
     }
@@ -88,7 +91,9 @@ export class SortFilterBarComponent {
         }
       });
   }
-  partFilter(item) {
+
+  /** Get the data that meets the filter */
+  private partFilter(item) {
     if (this.partappliedFilters.length == 0) {
       return true;
     }
@@ -100,7 +105,8 @@ export class SortFilterBarComponent {
       });
   }
 
-  changeSort(sort: string) {
+  /** Sort the data */
+  private changeSort(sort: string) {
     this.sortBy = sort;
     if (sort == "Newest") {
       this.breakages.sort((a, b) => { return b.timestamp - a.timestamp; });
