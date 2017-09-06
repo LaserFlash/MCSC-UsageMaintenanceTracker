@@ -1,5 +1,6 @@
 {
-  "name": "WYST",
+  "short_name":"WYST",
+  "name": "Wellington Youth Sailing Trust",
   "icons": [{
       "src": "\/U23-Reports/assets/favicon/android-icon-36x36.png",
       "sizes": "36x36",
