@@ -2,8 +2,10 @@ import { BrowserModule }              from '@angular/platform-browser';
 import { NgModule }                   from '@angular/core';
 import { ReactiveFormsModule }        from '@angular/forms';
 
-import { BrowserAnimationsModule }      from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule }    from '@angular/platform-browser/animations';
 import { FlexLayoutModule }           from "@angular/flex-layout";
+
+import { ChartsModule }               from 'ng2-charts';
 
 import { MdSidenavModule }            from '@angular/material';
 import { MdTabsModule }               from '@angular/material';
@@ -43,6 +45,7 @@ import { environment }                from '../environments/environment';
 import { CookieModule }               from 'ngx-cookie';
 import { SortFilterBarComponent } from './sort-filter-bar/sort-filter-bar.component';
 import { SafetyProceduresComponent } from './safety-procedures/safety-procedures.component';
+import { UsageGraphsComponent } from './usage-graphs/usage-graphs.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +57,7 @@ import { SafetyProceduresComponent } from './safety-procedures/safety-procedures
     BreakageCardComponent,
     SortFilterBarComponent,
     SafetyProceduresComponent,
+    UsageGraphsComponent,
   ],
   imports: [
     BrowserModule,
@@ -81,6 +85,7 @@ import { SafetyProceduresComponent } from './safety-procedures/safety-procedures
     MdMenuModule,
     MdChipsModule,
     MdProgressBarModule,
+    ChartsModule,
   ],
   providers: [BoatUsageService,BoatBreakageService],
   bootstrap: [AppComponent]
