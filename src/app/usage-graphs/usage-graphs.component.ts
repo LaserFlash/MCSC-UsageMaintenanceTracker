@@ -28,9 +28,10 @@ export class UsageGraphsComponent {
 
   public barChartOptions:any = {
      scaleShowVerticalLines: false,
-     responsive: true
+     responsive: true,
+     maintainAspectRatio: true,
    };
    public barChartLabels:string[] = ['Boat 1', 'Boat 2', 'Boat 3', 'Boat 4', 'Boat 5', 'Boat 6', 'Boat 7', 'Boat 8'];
    public barChartType:string = 'bar';
-   public barChartLegend:boolean = false;
+   public barChartLegend:boolean = true;
 }
