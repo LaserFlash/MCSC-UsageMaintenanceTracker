@@ -117,7 +117,7 @@ export class ReportIssueComponent {
   };
 
   /** Build BreakageInfo Object from submited data */
-  private onSubmit() {
+  public onSubmit() {
     if (this.breakageForm.valid) {
       let breakage = new BreakageInfo(
         this.breakageForm.get("name").value,
@@ -134,7 +134,7 @@ export class ReportIssueComponent {
   }
 
   /** Produce dialog message and handle user input from dialog */
-  private openDialog(breakage: BreakageInfo) {
+  public openDialog(breakage: BreakageInfo) {
     let message = "";
     message += "Name: " + breakage.name + '\n';
     message += "Contact: " + breakage.contact + '\n';

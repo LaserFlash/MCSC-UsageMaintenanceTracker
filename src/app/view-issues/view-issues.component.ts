@@ -23,7 +23,7 @@ export class ViewIssuesComponent{
   original: BreakageInfo[];
   cardButtonText = "Fix";
 
-  private openDialog(key: any) {
+  public openDialog(key: any) {
     this.dialogsService
       .confirm('Confirm Mark as Fixed', 'Are you sure you want to do this?', this.cardButtonText)
       .subscribe(result => {

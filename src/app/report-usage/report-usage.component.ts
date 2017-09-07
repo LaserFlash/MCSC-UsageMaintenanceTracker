@@ -86,7 +86,7 @@ export class ReportUsageComponent {
   };
 
   /** Build BreakageInfo Object from submited data */
-  private onSubmit() {
+  public onSubmit() {
     if (this.usageForm.valid) {
       let usage = new UsageInfo(this.usageForm.get("boatID").value, this.usageForm.get("duration").value, this.usageForm.get("date").value)
       this.usageService.addUsageInfo(usage).then(
