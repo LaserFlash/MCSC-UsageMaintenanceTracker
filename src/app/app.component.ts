@@ -24,7 +24,7 @@ export class AppComponent {
   }
 
   /** Change state of dark theme, updating cookie */
-  private toggleDark(){
+  public toggleDark(){
     this.isDarkTheme = !this.isDarkTheme;
     var cookieOptions :CookieOptions = { expires: new Date(32525112147000)}
     if(this.isDarkTheme){
