@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { BoatUsageService } from '../boat-usage.service'
 import { UsageInfo } from '../objects/usageInfo';
+import { Boats } from '../Utils/menuNames'
 
 
 @Component({
@@ -31,7 +32,7 @@ export class UsageGraphsComponent {
      responsive: true,
      maintainAspectRatio: true,
    };
-   public barChartLabels:string[] = ['Boat 1', 'Boat 2', 'Boat 3', 'Boat 4', 'Boat 5', 'Boat 6', 'Boat 7', 'Boat 8'];
+   public barChartLabels:string[] = Boats;
    public barChartType:string = 'bar';
    public barChartLegend:boolean = true;
 }

@@ -5,6 +5,7 @@ import { MdSnackBar } from '@angular/material';
 
 import { BoatUsageService } from '../boat-usage.service'
 import { UsageInfo } from '../objects/usageInfo'
+import { Boats } from '../Utils/menuNames'
 
 const NUMBER_REGEX = /[0-9]+/;
 
@@ -27,9 +28,7 @@ export class ReportUsageComponent {
 
   title = "Report Boat Usage";
   maxDate = new Date();
-  boats = [
-    '1', '2', '3', '4', 'New 5', 'New 6', 'New 7', 'New 8'
-  ];
+  boats = Boats;
   usageForm: FormGroup;
 
   /** Build the form */

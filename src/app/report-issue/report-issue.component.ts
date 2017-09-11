@@ -7,6 +7,9 @@ import { DialogsService } from '../dialog/dialogs.service';
 import { BreakageInfo } from '../objects/breakageInfo';
 import { BoatBreakageService } from '../boat-breakage.service'
 
+import { Boats,Levels,Parts } from '../Utils/menuNames'
+
+
 @Component({
   selector: 'report-issue',
   templateUrl: './report-issue.component.html',
@@ -15,28 +18,9 @@ import { BoatBreakageService } from '../boat-breakage.service'
 export class ReportIssueComponent {
 
   title = "Report Boat Breakage";
-  boats = [
-    '1', '2', '3', '4', 'New 5', 'New 6', 'New 7', 'New 8', 'RIB'
-  ];
-  levels = [
-    'Urgent (boat out of action)',
-    'High (boat usable if needed)',
-    'Medium (boat usable)',
-    'Low (not affecting use)'
-  ];
-
-  parts = [
-    "Sails",
-    "Hull",
-    "Deck Fittings",
-    "Mast",
-    "Boom",
-    "Halyards / Sheets",
-    "Rudder / Tiller",
-    "Control Lines",
-    "Cover",
-    "Other"
-  ];
+  boats = Boats;
+  levels = Levels;
+  parts = Parts;
 
   breakages: BreakageInfo[];
   breakageForm: FormGroup;

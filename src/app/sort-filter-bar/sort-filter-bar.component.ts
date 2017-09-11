@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core';
 import { BreakageInfo } from '../objects/breakageInfo';
 import { BoatBreakageService } from '../boat-breakage.service'
 
+import { Boats,Parts } from '../Utils/menuNames'
+
 @Component({
   selector: 'sort-filter-bar',
   templateUrl: './sort-filter-bar.component.html',
@@ -14,19 +16,8 @@ export class SortFilterBarComponent {
   constructor(private breakageService: BoatBreakageService) {}
 
   sortList = ["Newest", "Oldest", "Most Important", "Least Important", "Boat"];
-  filterList = ["1", "2", "3", "4", "RIB"];
-  partfilterList = [
-    "Sails",
-    "Hull",
-    "Deck Fittings",
-    "Mast",
-    "Boom",
-    "Halyards / Sheets",
-    "Rudder / Tiller",
-    "Control Lines",
-    "Cover",
-    "Other"
-  ];
+  filterList = Boats;
+  partfilterList = Parts;
   appliedFilters = [];
   partappliedFilters = [];
   sortBy = "Sort by";
