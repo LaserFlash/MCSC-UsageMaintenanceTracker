@@ -15,10 +15,11 @@ const routes: Routes = [
   { path: 'fixed', component: ViewFixedComponent },
   { path: 'reportUsage', component: ReportUsageComponent },
   { path: 'safety', component: SafetyProceduresComponent },
+  { path: '**', redirectTo: '/report' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
