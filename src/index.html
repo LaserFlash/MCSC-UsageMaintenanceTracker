@@ -51,58 +51,57 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet" type="text/css" media="none" onload="this.media='all';">
   <title>WYST</title>
   <base href="/" />
+  <style>
+  .centered {
+    display: block;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -72px;
+    margin-left: -72px;
+  }
+  .loading {
+  		animation: loading 1s infinite;
+  }
+  @keyframes loading
+  {
+    0%
+    {
+      transform: scale( .75 );
+    }
+    20%
+    {
+      transform: scale( 1 );
+    }
+    40%
+    {
+      transform: scale( .75 );
+    }
+    60%
+    {
+      transform: scale( 1 );
+    }
+    80%
+    {
+      transform: scale( .75 );
+    }
+    100%
+    {
+      transform: scale( .75 );
+    }
+  }
 
+
+  @-webkit-keyframes rotation {
+  		from {
+  				-webkit-transform: rotate(0deg);
+  		}
+  		to {
+  				-webkit-transform: rotate(359deg);
+  		}
+  }
+  </style>
 </head>
-<style>
-.centered {
-  display: block;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  margin-top: -72px;
-  margin-left: -72px;
-}
-.loading {
-		animation: loading 1s infinite;
-}
-@keyframes loading
-{
-  0%
-  {
-    transform: scale( .75 );
-  }
-  20%
-  {
-    transform: scale( 1 );
-  }
-  40%
-  {
-    transform: scale( .75 );
-  }
-  60%
-  {
-    transform: scale( 1 );
-  }
-  80%
-  {
-    transform: scale( .75 );
-  }
-  100%
-  {
-    transform: scale( .75 );
-  }
-}
-
-
-@-webkit-keyframes rotation {
-		from {
-				-webkit-transform: rotate(0deg);
-		}
-		to {
-				-webkit-transform: rotate(359deg);
-		}
-}
-</style>
 <body>
   <noscript>
   This site requires JavaScript to function
