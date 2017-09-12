@@ -13,14 +13,15 @@ import { Boats,Parts } from '../Utils/menuNames'
 export class SortFilterBarComponent {
   @Input() breakages: BreakageInfo[];
   @Input() original: BreakageInfo[];
+
   constructor(private breakageService: BoatBreakageService) {}
 
-  sortList = ["Newest", "Oldest", "Most Important", "Least Important", "Boat"];
-  filterList = Boats;
-  partfilterList = Parts;
-  appliedFilters = [];
-  partappliedFilters = [];
-  sortBy = "Sort by";
+  sortList:string[] = ["Newest", "Oldest", "Most Important", "Least Important", "Boat"];
+  filterList:string[] = Boats;
+  partfilterList:string[] = Parts;
+  appliedFilters:string[] = [];
+  partappliedFilters:string[] = [];
+  sortBy:string = "Sort by";
 
   /** Add a boat filter to the displayed data */
   private addFilter(key: string) {
