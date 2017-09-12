@@ -52,63 +52,59 @@
   <title>WYST</title>
   <base href="/" />
   <style>
-  .centered {
-    display: block;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    margin-top: -72px;
-    margin-left: -72px;
-  }
-  .loading {
-  		animation: loading 1s infinite;
-  }
-  @keyframes loading
-  {
-    0%
-    {
-      transform: scale( .75 );
+    .centered {
+      display: block;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      margin-top: -72px;
+      margin-left: -72px;
     }
-    20%
-    {
-      transform: scale( 1 );
+
+    .loading {
+      animation: loading 1s infinite;
     }
-    40%
-    {
-      transform: scale( .75 );
+
+    @keyframes loading {
+      0% {
+        transform: scale( .75);
+      }
+      20% {
+        transform: scale( 1);
+      }
+      40% {
+        transform: scale( .75);
+      }
+      60% {
+        transform: scale( 1);
+      }
+      80% {
+        transform: scale( .75);
+      }
+      100% {
+        transform: scale( .75);
+      }
     }
-    60%
-    {
-      transform: scale( 1 );
-    }
-    80%
-    {
-      transform: scale( .75 );
-    }
-    100%
-    {
-      transform: scale( .75 );
-    }
-  }
 
 
-  @-webkit-keyframes rotation {
-  		from {
-  				-webkit-transform: rotate(0deg);
-  		}
-  		to {
-  				-webkit-transform: rotate(359deg);
-  		}
-  }
+    @-webkit-keyframes rotation {
+      from {
+        -webkit-transform: rotate(0deg);
+      }
+      to {
+        -webkit-transform: rotate(359deg);
+      }
+    }
   </style>
 </head>
+
 <body>
   <noscript>
   This site requires JavaScript to function
 </noscript>
   <section class="mat-typography">
     <app-root>
-      <img class="loading centered" src="assets/images/logo.png" alt="Wellington Youth Sailing Trust Logo"/>
+      <img class="loading centered" src="assets/images/logo.png" alt="Wellington Youth Sailing Trust Logo" />
     </app-root>
   </section>
 </body>
