@@ -18,11 +18,11 @@
           <li>
             {{item.contact}}
           </li>
-          <li *ngIf="item.timestampReported">
-            Reported: {{dateDisplay(item.timestampReported)}}
-          </li>
           <li *ngIf="item.timestamp">
-            Fixed: {{dateDisplay(item.timestamp)}}
+            Reported: {{dateDisplay(item.timestamp)}}
+          </li>
+          <li *ngIf="item.timestampFixed">
+            Fixed: {{dateDisplay(item.timestampFixed)}}
           </li>
         </ul>
       </div>

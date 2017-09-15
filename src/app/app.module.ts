@@ -47,6 +47,8 @@ import { SortFilterBarComponent } from './sort-filter-bar/sort-filter-bar.compon
 import { SafetyProceduresComponent } from './safety-procedures/safety-procedures.component';
 import { UsageGraphsComponent } from './usage-graphs/usage-graphs.component';
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
