@@ -1,5 +1,8 @@
 <div fxFlex="0" fxFlex.lt-mat="1"></div>
 <mat-card fxFlex="100" fxFlex.lt-mat="98" class="card_top_pad">
-      <canvas baseChart [datasets]="barChartData" [colors]="colors" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType"></canvas>
+  <mat-card-title>Total Usage Graph</mat-card-title>
+  <mat-card-content>
+    <canvas baseChart [datasets]="barChartData" [colors]="colors" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType"></canvas>
+  </mat-card-content>
 </mat-card>
 <div fxFlex="0" fxFlex.lt-mat="1"></div>
