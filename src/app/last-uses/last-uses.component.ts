@@ -13,9 +13,13 @@ export class LastUsesComponent implements OnInit {
   private usage: UsageInfo[];
 
   constructor(private boatUsageService: BoatUsageService) {
-    this.usage = boatUsageService.usageData;
+    this.usage = boatUsageService.lastUsageEachBoat;
   }
 
   ngOnInit() {}
 
+  private dateDisplay(val) {
+    var date = new Date(val);
+    return date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
+  }
 }

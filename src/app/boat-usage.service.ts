@@ -10,6 +10,9 @@ export class BoatUsageService {
   private itemsCollection : AngularFirestoreCollection<UsageInfo>
   public items: Observable<UsageInfo[]>;
 
+  private sortedUsage : Observable<UsageInfo[]>;
+  public lastUsageEachBoat: UsageInfo[] = [];
+
   public usageData:UsageInfo[] = [];
   public usageTimes:number[] = [0,0,0,0,0,0,0,0];
 
@@ -17,6 +20,19 @@ export class BoatUsageService {
     this.itemsCollection = db.collection<UsageInfo>('/usage');
     this.items = this.itemsCollection.valueChanges();
     this.items.subscribe(val => { this.buildDataList(val,this.usageData); });
+
+    this.sortedUsage = db.collection<UsageInfo>('/usage' , ref => ref.orderBy("date","desc").orderBy("boatID")).valueChanges();
+
+    this.sortedUsage.subscribe(val => {
+      var tmp: String[] = [];
+      this.lastUsageEachBoat.length = 0;
+      val.forEach(element => {
+        if(tmp.indexOf(element.boatID) < 0){
+          tmp.push(element.boatID);
+          this.lastUsageEachBoat.push(element);
+        }
+      });
+    });
 
     this.items.subscribe((list:UsageInfo[]) => {
       this.usageTimes.splice(0,this.usageTimes.length,0,0,0,0,0,0,0,0);

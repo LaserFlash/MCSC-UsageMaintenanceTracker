@@ -5,8 +5,7 @@
   <mat-list>
     <mat-list-item *ngFor="let u of usage">
       <!--<img matListAvatar src="" alt="" />-->
-      {{u.boatID}}
-      {{u.duration}} for {{u.date}}
+      Boat {{u.boatID}} for {{u.duration}} hours on {{dateDisplay(u.date)}}
     </mat-list-item>
   </mat-list>
 </mat-card-content>
