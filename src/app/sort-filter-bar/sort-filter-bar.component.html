@@ -1,29 +1,29 @@
-<md-card>
+<mat-card>
   <span>
-  <button style="width:150px; text-align:left;" md-button [mdMenuTriggerFor]="sort"><md-icon>sort</md-icon>{{sortBy}}</button>
-  <md-menu #sort="mdMenu">
-    <button md-menu-item *ngFor="let sort of sortList" (click)="changeSort(sort)"> {{sort}}</button>
-  </md-menu>
+  <button style="width:150px; text-align:left;" mat-button [matMenuTriggerFor]="sort"><mat-icon>sort</mat-icon>{{sortBy}}</button>
+  <mat-menu #sort="matMenu">
+    <button mat-menu-item *ngFor="let sort of sortList" (click)="changeSort(sort)"> {{sort}}</button>
+  </mat-menu>
   </span>
   <span>
-  <button md-button [mdMenuTriggerFor]="filter"><md-icon>filter_list</md-icon> Filter by Boat</button>
-  <md-menu #filter="mdMenu">
-    <button md-menu-item *ngFor="let filter of filterList" (click)="addFilter(filter)"> Boat {{filter}} </button>
-  </md-menu>
+  <button mat-button [matMenuTriggerFor]="filter"><mat-icon>filter_list</mat-icon> Filter by Boat</button>
+  <mat-menu #filter="matMenu">
+    <button mat-menu-item *ngFor="let filter of filterList" (click)="addFilter(filter)"> Boat {{filter}} </button>
+  </mat-menu>
 </span>
   <span>
-<button md-button [mdMenuTriggerFor]="Pfilter"><md-icon>filter_list</md-icon> Filter by Part</button>
-<md-menu #Pfilter="mdMenu">
-  <button md-menu-item *ngFor="let filter of partfilterList" (click)="addPartFilter(filter)"> {{filter}} </button>
-</md-menu>
+<button mat-button [matMenuTriggerFor]="Pfilter"><mat-icon>filter_list</mat-icon> Filter by Part</button>
+<mat-menu #Pfilter="matMenu">
+  <button mat-menu-item *ngFor="let filter of partfilterList" (click)="addPartFilter(filter)"> {{filter}} </button>
+</mat-menu>
 </span>
 
-  <md-chip-list>
-    <md-chip *ngFor="let filter of appliedFilters" (click)="addFilter(filter) " selected="true"> Boat {{filter}}
-      <md-icon style="font-size:16px;height:16px;width:16px;">cancel</md-icon>
-    </md-chip>
-    <md-chip *ngFor="let filter of partappliedFilters" (click)="addPartFilter(filter)" selected="true"> {{filter}}
-      <md-icon style="font-size:16px;height:16px;width:16px;">cancel</md-icon>
-    </md-chip>
-  </md-chip-list>
-</md-card>
+  <mat-chip-list>
+    <mat-chip *ngFor="let filter of appliedFilters" (click)="addFilter(filter) " selected="true"> Boat {{filter}}
+      <mat-icon style="font-size:16px;height:16px;width:16px;">cancel</mat-icon>
+    </mat-chip>
+    <mat-chip *ngFor="let filter of partappliedFilters" (click)="addPartFilter(filter)" selected="true"> {{filter}}
+      <mat-icon style="font-size:16px;height:16px;width:16px;">cancel</mat-icon>
+    </mat-chip>
+  </mat-chip-list>
+</mat-card>

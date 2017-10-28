@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { MdSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 
 import { ContactValidator } from '../validators/ContactValidator'
 import { DialogsService } from '../dialog/dialogs.service';
@@ -28,7 +28,7 @@ export class ReportIssueComponent {
 
   constructor(
     private fb: FormBuilder,
-    private snackBar: MdSnackBar,
+    private snackBar: MatSnackBar,
     private breakageService: BoatBreakageService,
     private dialogsService: DialogsService
   ) {
@@ -110,6 +110,7 @@ export class ReportIssueComponent {
         this.breakageForm.get("importance").value,
         this.breakageForm.get("part").value,
         this.breakageForm.get("details").value,
+        null,
         new Date().getTime()
       );
       /* Confirm submission of data */

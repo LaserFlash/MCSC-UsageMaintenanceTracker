@@ -2,10 +2,6 @@
   width: 100%;
 }
 
-.select-width {
-  width: 300px;
-}
-
 /deep/ .mat-option:hover {
   color: #29b6f6;
 }

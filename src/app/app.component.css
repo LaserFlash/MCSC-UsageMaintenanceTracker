@@ -1,4 +1,4 @@
-md-toolbar.mat-toolbar {
+mat-toolbar.mat-toolbar {
   position: fixed;
   top: 0;
   right: 0;
@@ -13,11 +13,11 @@ md-toolbar.mat-toolbar {
 .sidenav{
   margin-top: 56px;
 }
-md-sidenav-container {
+mat-sidenav-container {
   background: #eceff1;
 }
 
-md-sidenav-container.app-dark {
+mat-sidenav-container.app-dark {
   background: #212121;
 }
 .sidenav-content {

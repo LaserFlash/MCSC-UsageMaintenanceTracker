@@ -1,17 +1,21 @@
 import { Injectable } from '@angular/core';
 import { UsageInfo } from './objects/usageInfo';
-import { AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+
+import { Observable } from 'rxjs/Observable';
 
 
 @Injectable()
 export class BoatUsageService {
-  public items: FirebaseListObservable<UsageInfo[]>;
+  private itemsCollection : AngularFirestoreCollection<UsageInfo>
+  public items: Observable<UsageInfo[]>;
 
   public usageData:UsageInfo[] = [];
   public usageTimes:number[] = [0,0,0,0,0,0,0,0];
 
-  constructor(db: AngularFireDatabase) {
-    this.items = db.list('/usage');
+  constructor(db: AngularFirestore) {
+    this.itemsCollection = db.collection<UsageInfo>('/usage');
+    this.items = this.itemsCollection.valueChanges();
     this.items.subscribe(val => { this.buildDataList(val,this.usageData); });
 
     this.items.subscribe((list:UsageInfo[]) => {
@@ -24,7 +28,7 @@ export class BoatUsageService {
   }
 
   addUsageInfo(usage: UsageInfo){
-    return Promise.resolve(this.items.push({boatID:usage.boatID,duration:usage.duration,date:usage.date.getTime()}));
+    return Promise.resolve(this.itemsCollection.add({boatID:usage.boatID,duration:usage.duration,date:usage.date}));
   }
 
   private buildDataList(val: UsageInfo[], array: UsageInfo[]){

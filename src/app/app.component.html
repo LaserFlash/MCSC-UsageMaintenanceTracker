@@ -1,6 +1,6 @@
-<md-toolbar color="primary">
-  <button style="margin-left:5px;" md-icon-button (click)="sidenav.toggle()">
-      <md-icon>menu</md-icon>
+<mat-toolbar color="primary">
+  <button style="margin-left:5px;" mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
     </button>
   <span id="menuSpacer"></span>
   <span><img id="menuLogo" src="assets/images/logoNoText.png" alt="WYST Logo" /></span>
@@ -12,8 +12,8 @@
   <span class="toolbar-spacer"></span>
 
   <span fxHide.lt-md>
-    <nav md-tab-nav-bar>
-      <a md-tab-link
+    <nav mat-tab-nav-bar>
+      <a mat-tab-link
           *ngFor="let routeLink of routeLinks; let i = index"
           [routerLink]="routeLink.link"
           routerLinkActive #rla="routerLinkActive"
@@ -22,18 +22,19 @@
       </a>
     </nav>
   </span>
-</md-toolbar>
-<md-sidenav-container class="content" fullscreen [class.app-dark]="isDarkTheme">
-  <md-sidenav class="sidenav" #sidenav mode="push">
+</mat-toolbar>
+
+<mat-sidenav-container class="content" fullscreen [class.app-dark]="isDarkTheme">
+  <mat-sidenav class="sidenav" #sidenav mode="push">
     <img id="logo-image-drawer" src="assets/images/logo.png" alt="WYST Logo" />
-    <md-nav-list>
-      <a md-list-item *ngFor="let routeLink of routeLinks; let i = index" [routerLink]="routeLink.link" (click)="sidenav.close()">
+    <mat-nav-list>
+      <a mat-list-item *ngFor="let routeLink of routeLinks; let i = index" [routerLink]="routeLink.link" (click)="sidenav.close()">
           {{routeLink.label}}
       </a>
-    </md-nav-list>
+    </mat-nav-list>
     <br/>
-    <button md-button (click)="toggleDark(); sidenav.close()">TOGGLE DARK THEME</button>
-  </md-sidenav>
+    <button mat-button (click)="toggleDark(); sidenav.close()">TOGGLE DARK THEME</button>
+  </mat-sidenav>
 
   <div class="sidenav-content">
     <div fxLayout="row">
@@ -44,4 +45,4 @@
       <div fxFlex="20" fxFlex.lt-md="2"></div>
     </div>
   </div>
-</md-sidenav-container>
+</mat-sidenav-container>

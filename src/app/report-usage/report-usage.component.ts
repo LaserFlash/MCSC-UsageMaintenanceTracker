@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DateAdapter } from '@angular/material';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { MdSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 
 import { BoatUsageService } from '../boat-usage.service'
 import { UsageInfo } from '../objects/usageInfo'
@@ -19,7 +19,7 @@ export class ReportUsageComponent {
     private dateAdapter: DateAdapter<Date>,
     private usageService: BoatUsageService,
     private fb: FormBuilder,
-    public snackBar: MdSnackBar
+    public snackBar: MatSnackBar
     )
     {
       this.dateAdapter.setLocale('en-nz');
