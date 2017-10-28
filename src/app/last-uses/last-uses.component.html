@@ -1,5 +1,7 @@
-<mat-card>
-  <h2>Last Use</h2>
+<div fxFlex="0" fxFlex.lt-mat="1"></div>
+<mat-card fxFlex="100" fxFlex.lt-mat="98" class="card_top_pad">
+  <mat-card-title>Last Use</mat-card-title>
+  <mat-card-content>
   <mat-list>
     <mat-list-item *ngFor="let u of usage">
       <!--<img matListAvatar src="" alt="" />-->
@@ -7,4 +9,5 @@
       {{u.duration}} for {{u.date}}
     </mat-list-item>
   </mat-list>
+</mat-card-content>
 </mat-card>
