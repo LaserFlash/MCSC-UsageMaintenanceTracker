@@ -1,7 +1,12 @@
 
-export const Boats:string[] = [
-  '1', '2', '3', '4', 'New 5', 'New 6', 'New 7', 'New 8', 'RIB'
+export const Boats:number[] = [
+  0, 5, 6, 7, 8
 ];
+
+export const UserFriendlyBoats:string[] = [
+  "RIB", "Boat 1", "Boat 2", "Boat 3", "Boat 4", "Boat 5", "Boat 6", "Boat 7", "Boat 8"
+];
+
 export const Levels:string[] = [
   'Urgent (boat out of action)',
   'High (boat usable if needed)',

@@ -1,51 +1,51 @@
-<md-card>
+<mat-card>
   <h2>{{title}}</h2>
-  <md-card-content>
+  <mat-card-content>
     <form (ngSubmit)="onSubmit()" [formGroup]="usageForm" novalidate>
       <table>
         <tr>
           <td>
-            <md-radio-group class="radio-group" formControlName="boatID" required>
+            <mat-radio-group class="radio-group" formControlName="boatID" required>
               <label> Boat Number</label>
-              <md-radio-button class="radio-button" *ngFor="let id of boats" [value]="id">
+              <mat-radio-button class="radio-button" *ngFor="let id of boats" [value]="id">
                 {{id}}
-              </md-radio-button>
-              <md-error *ngIf="formErrors.boatID">
+              </mat-radio-button>
+              <mat-error *ngIf="formErrors.boatID">
                 {{formErrors.boatID}}
-              </md-error>
-            </md-radio-group>
+              </mat-error>
+            </mat-radio-group>
             <br />
           </td>
           <td>
             <table>
               <tr>
-                <md-input-container>
-                  <input mdInput type="number" placeholder="Duration in hours" [min]="0" formControlName="duration" required>
-                  <md-error *ngIf="formErrors.duration">
+                <mat-input-container>
+                  <input matInput type="number" placeholder="Duration in hours" [min]="0" formControlName="duration" required>
+                  <mat-error *ngIf="formErrors.duration">
                     {{formErrors.duration}}
-                  </md-error>
-                </md-input-container>
+                  </mat-error>
+                </mat-input-container>
               </tr>
               <tr>
-                <md-form-field>
-                  <input mdInput [mdDatepicker]="picker" formControlName="date" placeholder="Choose a Date" required [max]="maxDate">
-                  <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
-                  <md-datepicker #picker [startAt]="maxDate"></md-datepicker>
-                  <md-error *ngIf="formErrors.date">
+                <mat-form-field>
+                  <input matInput [matDatepicker]="picker" formControlName="date" placeholder="Choose a Date" required [max]="maxDate">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker [startAt]="maxDate"></mat-datepicker>
+                  <mat-error *ngIf="formErrors.date">
                     {{formErrors.date}}
-                  </md-error>
-                </md-form-field>
-                <md-datepicker #picker></md-datepicker>
+                  </mat-error>
+                </mat-form-field>
+                <mat-datepicker #picker></mat-datepicker>
               </tr>
             </table>
           </td>
         </tr>
       </table>
       <br  />
-    <button md-raised-button color="accent" type="submit">Submit</button>
+    <button mat-raised-button color="accent" type="submit">Submit</button>
     </form>
 
-  </md-card-content>
-</md-card>
-
-<app-usage-graphs></app-usage-graphs>
+  </mat-card-content>
+</mat-card>
+<last-uses  fxLayout="row" fxLayout.lt-md="column"></last-uses>
+<app-usage-graphs fxLayout="row" fxLayout.lt-md="column"></app-usage-graphs>

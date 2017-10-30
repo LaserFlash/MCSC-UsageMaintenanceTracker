@@ -1,29 +1,31 @@
-import { BrowserModule }              from '@angular/platform-browser';
-import { NgModule }                   from '@angular/core';
-import { ReactiveFormsModule }        from '@angular/forms';
+import { BrowserModule }               from '@angular/platform-browser';
+import { NgModule }                    from '@angular/core';
+import { ReactiveFormsModule }         from '@angular/forms';
 
-import { BrowserAnimationsModule }    from '@angular/platform-browser/animations';
-import { FlexLayoutModule }           from "@angular/flex-layout";
+import { BrowserAnimationsModule }     from '@angular/platform-browser/animations';
+import { FlexLayoutModule }            from "@angular/flex-layout";
 
-import { ChartsModule }               from 'ng2-charts';
+import { ChartsModule }                from 'ng2-charts';
 
-import { MdSidenavModule }            from '@angular/material';
-import { MdTabsModule }               from '@angular/material';
-import { MdListModule }               from '@angular/material';
-import { MdToolbarModule }            from '@angular/material';
-import { MdButtonModule }             from '@angular/material';
-import { MdIconModule }               from '@angular/material';
-import { MdCardModule }               from '@angular/material';
-import { MdRadioModule }              from '@angular/material';
-import { MdInputModule }              from '@angular/material';
-import { MdDatepickerModule }         from '@angular/material';
-import { MdNativeDateModule }         from '@angular/material';
-import { MdSnackBarModule }           from '@angular/material';
-import { MdSelectModule }             from '@angular/material';
+import { MatSidenavModule }            from '@angular/material';
+import { MatTabsModule }               from '@angular/material';
+import { MatListModule }               from '@angular/material';
+import { MatToolbarModule }            from '@angular/material';
+import { MatButtonModule }             from '@angular/material';
+import { MatIconModule }               from '@angular/material';
+import { MatCardModule }               from '@angular/material';
+import { MatRadioModule }              from '@angular/material';
+import { MatInputModule }              from '@angular/material';
+import { MatDatepickerModule }         from '@angular/material';
+import { MatNativeDateModule }         from '@angular/material';
+import { MatSnackBarModule }           from '@angular/material';
+import { MatSelectModule }             from '@angular/material';
+import { MatMenuModule }               from '@angular/material';
+import { MatChipsModule }              from '@angular/material';
+import { MatProgressBarModule }        from '@angular/material';
+import { MatCheckboxModule }           from '@angular/material';
+
 import { DialogsModule }              from './dialog/dialogs.module';
-import { MdMenuModule }               from '@angular/material';
-import { MdChipsModule }              from '@angular/material';
-import { MdProgressBarModule }        from '@angular/material';
 
 import { AppComponent }               from './app.component';
 import { ReportIssueComponent }       from './report-issue/report-issue.component';
@@ -33,19 +35,21 @@ import { ViewFixedComponent }         from './view-fixed/view-fixed.component';
 import { AppRoutingModule }           from './app-routing.module';
 import { BreakageCardComponent }      from'./breakage-card/breakage-card.component';
 
+import { OverlayContainer }             from '@angular/cdk/overlay';
+
 import { BoatUsageService }           from './boat-usage.service'
 import { BoatBreakageService }        from './boat-breakage.service'
 
-import { OverlayContainer }           from '@angular/material';
-
 import { AngularFireModule }          from 'angularfire2';
-import { AngularFireDatabaseModule }  from 'angularfire2/database';
+import { AngularFirestoreModule }     from 'angularfire2/firestore';
+
 import { environment }                from '../environments/environment';
 
 import { CookieModule }               from 'ngx-cookie';
-import { SortFilterBarComponent } from './sort-filter-bar/sort-filter-bar.component';
-import { SafetyProceduresComponent } from './safety-procedures/safety-procedures.component';
-import { UsageGraphsComponent } from './usage-graphs/usage-graphs.component';
+import { SortFilterBarComponent }     from './sort-filter-bar/sort-filter-bar.component';
+import { SafetyProceduresComponent }  from './safety-procedures/safety-procedures.component';
+import { UsageGraphsComponent }       from './usage-graphs/usage-graphs.component';
+import { LastUsesComponent }          from './last-uses/last-uses.component';
 
 
 
@@ -60,40 +64,43 @@ import { UsageGraphsComponent } from './usage-graphs/usage-graphs.component';
     SortFilterBarComponent,
     SafetyProceduresComponent,
     UsageGraphsComponent,
+    LastUsesComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MdSidenavModule,
-    MdTabsModule,
-    MdListModule,
-    MdToolbarModule,
-    MdButtonModule,
-    MdIconModule,
+    MatSidenavModule,
+    MatTabsModule,
+    MatListModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
     AppRoutingModule,
-    MdCardModule,
-    MdRadioModule,
-    MdInputModule,
-    MdDatepickerModule,
-    MdNativeDateModule,
+    MatCardModule,
+    MatRadioModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     ReactiveFormsModule,
-    MdSelectModule,
+    MatSelectModule,
     FlexLayoutModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule,
-    MdSnackBarModule,
+    AngularFirestoreModule.enablePersistence(),
+    MatSnackBarModule,
     CookieModule.forRoot(),
     DialogsModule,
-    MdMenuModule,
-    MdChipsModule,
-    MdProgressBarModule,
+    MatMenuModule,
+    MatChipsModule,
+    MatProgressBarModule,
     ChartsModule,
+    MatListModule,
+    MatCheckboxModule,
   ],
   providers: [BoatUsageService,BoatBreakageService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
   constructor(overlayContainer: OverlayContainer) {
-    overlayContainer.themeClass = 'my-app-theme';
+    overlayContainer.getContainerElement().classList.add('my-app-theme');
   }
 }

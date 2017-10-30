@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import { BreakageInfo } from './objects/breakageInfo';
-import { AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { Observable } from 'rxjs/Observable';
 
 
 @Injectable()
 export class BoatBreakageService {
+  private itemsCollectionBroken : AngularFirestoreCollection<BreakageInfo>;
+  private itemsCollectionFixed : AngularFirestoreCollection<BreakageInfo>;
 
   public items: BreakageInfo[]=[];
   public original: BreakageInfo[]=[];
@@ -12,30 +15,35 @@ export class BoatBreakageService {
   public fixedItems: BreakageInfo[]=[];
   public fixedItemsOriginal: BreakageInfo[]=[];
 
-  private itemsData: FirebaseListObservable<BreakageInfo[]>;
-  private recentThreeItems: FirebaseListObservable<BreakageInfo[]>;
-  private fixedItemsData: FirebaseListObservable<BreakageInfo[]>;
+  private itemsData: Observable<BreakageInfo[]>;
+  private recentThreeItems: Observable<BreakageInfo[]>;
+  private fixedItemsData: Observable<BreakageInfo[]>;
 
-  constructor(private db: AngularFireDatabase) {
+  constructor(private db: AngularFirestore) {
+
+    this.itemsCollectionBroken = db.collection<BreakageInfo>('/boatBreakages', ref => ref.orderBy("timestamp","desc"));
+    this.itemsCollectionFixed = db.collection<BreakageInfo>('/boatBreakagesFixed', ref => ref.orderBy("timestampFixed","desc"));
     /* Download data from firebase */
-    this.itemsData = db.list('/issues');
+    this.itemsData = this.itemsCollectionBroken.snapshotChanges().map(actions => {
+      return actions.map(action => {
+        const data = action.payload.doc.data() as BreakageInfo;
+        const id = action.payload.doc.id;
+        return {...data, id};
+      })
+    });
     this.itemsData.subscribe(val => { this.buildBreakages(val,this.items); });
     this.itemsData.subscribe(val => { this.buildBreakages(val,this.original); });
-    this.recentThreeItems = db.list('/issues', {
-      query: {
-        limitToLast: 3,
-        orderByChild: 'timestamp'
-      }
-    })
+    this.recentThreeItems = db.collection<BreakageInfo>('/boatBreakages', ref => ref.orderBy("timestamp","desc").limit(3)).valueChanges();
+
     this.recentThreeItems.subscribe(val => { this.buildBreakages(val, this.recentItems); });
-    this.fixedItemsData = db.list('/fixed');
+    this.fixedItemsData = this.itemsCollectionFixed.valueChanges();
     this.fixedItemsData.subscribe(val => { this.buildBreakages(val,this.fixedItems); });
     this.fixedItemsData.subscribe(val => { this.buildBreakages(val,this.fixedItemsOriginal); });
   }
 
   /** Push breakage to firebase */
   public addBreakageInfo(breakage: BreakageInfo) {
-    return Promise.resolve(this.itemsData.push(
+    return Promise.resolve(this.itemsCollectionBroken.add(
       {
         name: breakage.name,
         contact: breakage.contact,
@@ -43,19 +51,21 @@ export class BoatBreakageService {
         importance: breakage.importance,
         part: breakage.part,
         details: breakage.details,
-        timestamp: breakage.timestamp
+        timestampFixed: null,
+        timestamp: breakage.timestamp,
+        id: null
       }
     ));
   }
 
 
   private remove(breakage){
-    this.itemsData.remove(breakage);
+    this.itemsCollectionBroken.doc(breakage.id).delete();
   }
 
   /** Move a current breakage from an issue to fixed */
   public markFixed(breakage: BreakageInfo){
-    this.fixedItemsData.push(
+    this.itemsCollectionFixed.add(
           {
             name: breakage.name,
             contact: breakage.contact,
@@ -63,8 +73,9 @@ export class BoatBreakageService {
             importance: breakage.importance,
             part: breakage.part == undefined ? null : breakage.part,
             details: breakage.details,
-            timestampFixed: new Date().getTime(),
-            timestamp: breakage.timestamp
+            timestampFixed: new Date(),
+            timestamp: breakage.timestamp,
+            id: null
           }
         );
     this.remove(breakage);

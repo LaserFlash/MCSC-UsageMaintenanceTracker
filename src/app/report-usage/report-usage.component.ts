@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DateAdapter } from '@angular/material';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { MdSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 
 import { BoatUsageService } from '../boat-usage.service'
 import { UsageInfo } from '../objects/usageInfo'
-import { Boats } from '../Utils/menuNames'
+import { Boats, UserFriendlyBoats } from '../Utils/menuNames'
+import { BoatNameConversionHelper } from '../Utils/nameConversion'
 
 const NUMBER_REGEX = /[0-9]+/;
 
@@ -19,7 +20,7 @@ export class ReportUsageComponent {
     private dateAdapter: DateAdapter<Date>,
     private usageService: BoatUsageService,
     private fb: FormBuilder,
-    public snackBar: MdSnackBar
+    public snackBar: MatSnackBar
     )
     {
       this.dateAdapter.setLocale('en-nz');
@@ -28,7 +29,14 @@ export class ReportUsageComponent {
 
   title = "Report Boat Usage";
   maxDate = new Date();
-  boats = Boats;
+  boats = UserFriendlyBoats.filter((s,i)=>{
+    let yes: boolean = false;
+    Boats.forEach(j=>{
+      yes ? true: yes = i == j;
+    })
+    return yes;
+  });
+
   usageForm: FormGroup;
 
   /** Build the form */
@@ -87,7 +95,12 @@ export class ReportUsageComponent {
   /** Build BreakageInfo Object from submited data */
   public onSubmit() {
     if (this.usageForm.valid) {
-      let usage = new UsageInfo(this.usageForm.get("boatID").value, this.usageForm.get("duration").value, this.usageForm.get("date").value)
+      let usage = new UsageInfo(
+        BoatNameConversionHelper.numberFromUserFriendlyName(this.usageForm.get("boatID").value),
+        this.usageForm.get("duration").value,
+        this.usageForm.get("date").value
+      )
+      
       this.usageService.addUsageInfo(usage).then(
         () => (
           this.snackBar.open("Usage Succesfully Submited", "Close", {

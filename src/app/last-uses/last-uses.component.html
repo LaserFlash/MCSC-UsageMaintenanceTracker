@@ -1,0 +1,15 @@
+
+<mat-card fxFlex="100" fxFlex.lt-md="98" class="card_top_pad">
+  <mat-card-title>Last Use</mat-card-title>
+  <mat-card-content>
+  <mat-list>
+    <mat-list-item *ngFor="let u of usage">
+      <mat-icon *ngIf="u.boatID != '0'" mat-list-icon>filter_{{u.boatID}}</mat-icon>
+      <mat-icon *ngIf="u.boatID == '0'" mat-list-icon>directions_boat</mat-icon>
+      <h4 mat-line>{{u.duration}} hours</h4>
+      <p mat-line> {{u.date | date}} </p>
+    </mat-list-item>
+    </mat-list>
+
+  </mat-card-content>
+</mat-card>

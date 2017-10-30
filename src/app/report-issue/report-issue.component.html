@@ -1,66 +1,65 @@
-<md-card>
+<mat-card>
   <h2>{{title}}</h2>
-  <md-card-content>
+  <mat-card-content>
     <form (ngSubmit)="onSubmit()" [formGroup]="breakageForm" novalidate>
 
       <h3>Personal Details</h3>
 
-      <md-input-container class="full-width"> <input mdInput type="text" placeholder="Name" formControlName="name" required>
-        <md-error *ngIf="formErrors.name">
+      <mat-input-container class="full-width"> <input matInput type="text" placeholder="Name" formControlName="name" required>
+        <mat-error *ngIf="formErrors.name">
           {{formErrors.name}}
-        </md-error>
-      </md-input-container>
+        </mat-error>
+      </mat-input-container>
 
-      <md-input-container class="full-width">
-        <input mdInput type="email" placeholder="Contact" formControlName="contact">
-        <md-error *ngIf="formErrors.contact">
+      <mat-input-container class="full-width">
+        <input matInput type="email" placeholder="Contact" formControlName="contact">
+        <mat-error *ngIf="formErrors.contact">
           {{formErrors.contact}}
-        </md-error>
-      </md-input-container>
+        </mat-error>
+      </mat-input-container>
 
       <h3>Breakage Info</h3>
-
-      <md-select class="select-width" placeholder="Boat Number" formControlName="boatID" required>
-        <md-option *ngFor="let id of boats" [value]="id">{{id}}</md-option>
-        <md-error *ngIf="formErrors.boatID">
-          {{formErrors.boatID}}
-        </md-error>
-      </md-select>
-
+      <mat-form-field>
+        <mat-select placeholder="Boat Number" formControlName="boatID" required>
+          <mat-option *ngFor="let id of boats" [value]="id">{{id}}</mat-option>
+          <mat-error *ngIf="formErrors.boatID">
+            {{formErrors.boatID}}
+          </mat-error>
+        </mat-select>
+      </mat-form-field>
       <br />
+      <mat-form-field>
+        <mat-select placeholder="Importance" formControlName="importance" required>
+          <mat-option *ngFor="let id of levels" [value]="id">{{id}}</mat-option>
+          <mat-error *ngIf="formErrors.importance">
+            {{formErrors.importance}}
+          </mat-error>
+        </mat-select>
+      </mat-form-field>
       <br />
+      <mat-form-field>
+        <mat-select placeholder="Part" formControlName="part" required>
+          <mat-option *ngFor="let p of parts" [value]="p">{{p}}</mat-option>
+          <mat-error *ngIf="formErrors.part">
+            {{formErrors.part}}
+          </mat-error>
+        </mat-select>
+      </mat-form-field>
 
-      <md-select class="select-width" placeholder="Importance" formControlName="importance" required>
-        <md-option *ngFor="let id of levels" [value]="id">{{id}}</md-option>
-        <md-error *ngIf="formErrors.importance">
-          {{formErrors.importance}}
-        </md-error>
-      </md-select>
-
-      <br />
-      <br />
-
-      <md-select class="select-width" placeholder="Part" formControlName="part" required>
-        <md-option *ngFor="let p of parts" [value]="p">{{p}}</md-option>
-        <md-error *ngIf="formErrors.part">
-          {{formErrors.part}}
-        </md-error>
-      </md-select>
-
-      <md-input-container class="full-width">
-        <textarea mdInput type="text" placeholder="Describe the Issue" formControlName="details" #details required rows="4" maxlength="256"> </textarea>
-        <md-hint align="end">{{details.value.length}} / 256</md-hint>
-        <md-error *ngIf="formErrors.details">
+      <mat-input-container class="full-width">
+        <textarea matInput type="text" placeholder="Describe the Issue" formControlName="details" #details required rows="4" maxlength="256"> </textarea>
+        <mat-hint align="end">{{details.value.length}} / 256</mat-hint>
+        <mat-error *ngIf="formErrors.details">
           {{formErrors.details}}
-        </md-error>
-      </md-input-container>
+        </mat-error>
+      </mat-input-container>
 
       <br />
       <br />
-      <button md-raised-button color="accent" type="submit">Submit</button>
+      <button mat-raised-button color="accent" type="submit">Submit</button>
     </form>
 
-  </md-card-content>
-</md-card>
-<md-progress-bar mode="indeterminate" *ngIf = "breakages.length <= 0" ></md-progress-bar>
+  </mat-card-content>
+</mat-card>
+<mat-progress-bar mode="indeterminate" *ngIf="breakages.length <= 0"></mat-progress-bar>
 <breakage-card [breakages]="breakages" (onRemove)="openDialog($event)"></breakage-card>

@@ -1,11 +1,11 @@
 export const environment = {
   production: true,
   firebase: {
-    apiKey: "AIzaSyCakOdn6WyLRWMyUNsG-69byb_HmDkz2hE",
-    authDomain: "u23-breakages.firebaseapp.com",
-    databaseURL: "https://u23-breakages.firebaseio.com",
-    projectId: "u23-breakages",
-    storageBucket: "u23-breakages.appspot.com",
-    messagingSenderId: "173006122917"
+    apiKey: "AIzaSyD-WLPK8SX993vT2KPnK3fa0KoffJzhlmc",
+    authDomain: "wyst-maintenance.firebaseapp.com",
+    databaseURL: "https://wyst-maintenance.firebaseio.com",
+    projectId: "wyst-maintenance",
+    storageBucket: "wyst-maintenance.appspot.com",
+    messagingSenderId: "495447073887"
   }
 };
