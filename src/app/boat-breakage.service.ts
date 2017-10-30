@@ -21,10 +21,16 @@ export class BoatBreakageService {
 
   constructor(private db: AngularFirestore) {
 
-    this.itemsCollectionBroken = db.collection<BreakageInfo>('/boatBreakages');
-    this.itemsCollectionFixed = db.collection<BreakageInfo>('/boatBreakagesFixed');
+    this.itemsCollectionBroken = db.collection<BreakageInfo>('/boatBreakages', ref => ref.orderBy("timestamp","desc"));
+    this.itemsCollectionFixed = db.collection<BreakageInfo>('/boatBreakagesFixed', ref => ref.orderBy("timestampFixed","desc"));
     /* Download data from firebase */
-    this.itemsData = this.itemsCollectionBroken.valueChanges();
+    this.itemsData = this.itemsCollectionBroken.snapshotChanges().map(actions => {
+      return actions.map(action => {
+        const data = action.payload.doc.data() as BreakageInfo;
+        const id = action.payload.doc.id;
+        return {...data, id};
+      })
+    });
     this.itemsData.subscribe(val => { this.buildBreakages(val,this.items); });
     this.itemsData.subscribe(val => { this.buildBreakages(val,this.original); });
     this.recentThreeItems = db.collection<BreakageInfo>('/boatBreakages', ref => ref.orderBy("timestamp","desc").limit(3)).valueChanges();
@@ -46,14 +52,15 @@ export class BoatBreakageService {
         part: breakage.part,
         details: breakage.details,
         timestampFixed: null,
-        timestamp: breakage.timestamp
+        timestamp: breakage.timestamp,
+        id: null
       }
     ));
   }
 
 
   private remove(breakage){
-    this.itemsCollectionBroken.doc(breakage).delete();
+    this.itemsCollectionBroken.doc(breakage.id).delete();
   }
 
   /** Move a current breakage from an issue to fixed */
@@ -67,7 +74,8 @@ export class BoatBreakageService {
             part: breakage.part == undefined ? null : breakage.part,
             details: breakage.details,
             timestampFixed: new Date(),
-            timestamp: breakage.timestamp
+            timestamp: breakage.timestamp,
+            id: null
           }
         );
     this.remove(breakage);
