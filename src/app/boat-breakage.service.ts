@@ -21,13 +21,13 @@ export class BoatBreakageService {
 
   constructor(private db: AngularFirestore) {
 
-    this.itemsCollectionBroken = db.collection<BreakageInfo>('/issues');
-    this.itemsCollectionFixed = db.collection<BreakageInfo>('/fixed');
+    this.itemsCollectionBroken = db.collection<BreakageInfo>('/boatBreakages');
+    this.itemsCollectionFixed = db.collection<BreakageInfo>('/boatBreakagesFixed');
     /* Download data from firebase */
     this.itemsData = this.itemsCollectionBroken.valueChanges();
     this.itemsData.subscribe(val => { this.buildBreakages(val,this.items); });
     this.itemsData.subscribe(val => { this.buildBreakages(val,this.original); });
-    this.recentThreeItems = db.collection<BreakageInfo>('/issues', ref => ref.orderBy("timestamp","desc").limit(3)).valueChanges();
+    this.recentThreeItems = db.collection<BreakageInfo>('/boatBreakages', ref => ref.orderBy("timestamp","desc").limit(3)).valueChanges();
 
     this.recentThreeItems.subscribe(val => { this.buildBreakages(val, this.recentItems); });
     this.fixedItemsData = this.itemsCollectionFixed.valueChanges();
@@ -66,7 +66,7 @@ export class BoatBreakageService {
             importance: breakage.importance,
             part: breakage.part == undefined ? null : breakage.part,
             details: breakage.details,
-            timestampFixed: new Date().getTime(),
+            timestampFixed: new Date(),
             timestamp: breakage.timestamp
           }
         );
