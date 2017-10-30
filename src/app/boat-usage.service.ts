@@ -17,11 +17,11 @@ export class BoatUsageService {
   public usageTimes:number[] = [0,0,0,0,0,0,0,0];
 
   constructor(db: AngularFirestore) {
-    this.itemsCollection = db.collection<UsageInfo>('/usage');
+    this.itemsCollection = db.collection<UsageInfo>('/boatUsage');
     this.items = this.itemsCollection.valueChanges();
     this.items.subscribe(val => { this.buildDataList(val,this.usageData); });
 
-    this.sortedUsage = db.collection<UsageInfo>('/usage' , ref => ref.orderBy("date","desc").orderBy("boatID")).valueChanges();
+    this.sortedUsage = db.collection<UsageInfo>('/boatUsage' , ref => ref.orderBy("date","desc").orderBy("boatID")).valueChanges();
 
     this.sortedUsage.subscribe(val => {
       var tmp: String[] = [];
@@ -37,8 +37,8 @@ export class BoatUsageService {
     this.items.subscribe((list:UsageInfo[]) => {
       this.usageTimes.splice(0,this.usageTimes.length,0,0,0,0,0,0,0,0);
       list.forEach((val:UsageInfo) => {
-        let original = this.usageTimes[parseInt(val.boatID.replace("New ","0")) - 1];
-        this.usageTimes.splice(parseInt(val.boatID.replace("New ","0")) - 1, 1,  original + val.duration);
+        let original = this.usageTimes[parseInt(val.boatID) - 1];
+        this.usageTimes.splice(parseInt(val.boatID) - 1, 1,  original + val.duration);
       }
       )});
   }
