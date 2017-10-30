@@ -2,8 +2,8 @@ export class BreakageInfo {
   constructor(
     public name: string,
     public contact: string,
-    public boatID: string,
-    public importance: string,
+    public boatID: number,
+    public importance: number,
     public part: string,
     public details: string,
     public timestampFixed: Date,

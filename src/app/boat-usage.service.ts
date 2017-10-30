@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { UsageInfo } from './objects/usageInfo';
+import { Boats } from './Utils/menuNames'
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 
 import { Observable } from 'rxjs/Observable';
@@ -24,7 +25,7 @@ export class BoatUsageService {
     this.sortedUsage = db.collection<UsageInfo>('/boatUsage' , ref => ref.orderBy("date","desc").orderBy("boatID")).valueChanges();
 
     this.sortedUsage.subscribe(val => {
-      var tmp: String[] = [];
+      var tmp: number[] = [];
       this.lastUsageEachBoat.length = 0;
       val.forEach(element => {
         if(tmp.indexOf(element.boatID) < 0){
@@ -34,11 +35,13 @@ export class BoatUsageService {
       });
     });
 
+    //TODO Do this better
+    /*Build or rearrange the UsageInfo into a list where each boats is in index order and added together*/
     this.items.subscribe((list:UsageInfo[]) => {
-      this.usageTimes.splice(0,this.usageTimes.length,0,0,0,0,0,0,0,0);
+      this.usageTimes.splice(0,this.usageTimes.length,0,0,0,0,0);
       list.forEach((val:UsageInfo) => {
-        let original = this.usageTimes[parseInt(val.boatID) - 1];
-        this.usageTimes.splice(parseInt(val.boatID) - 1, 1,  original + val.duration);
+        let original = this.usageTimes[Boats.indexOf(val.boatID)];
+        this.usageTimes.splice(Boats.indexOf(val.boatID), 1,  original + val.duration);
       }
       )});
   }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { BoatUsageService } from '../boat-usage.service'
 import { UsageInfo } from '../objects/usageInfo';
-import { UserFriendlyBoats } from '../Utils/menuNames'
+import { Boats, UserFriendlyBoats } from '../Utils/menuNames'
 
 
 @Component({
@@ -32,7 +32,13 @@ export class UsageGraphsComponent {
      responsive: true,
      maintainAspectRatio: true,
    };
-   public barChartLabels:string[] = UserFriendlyBoats;
+   public barChartLabels:string[] = UserFriendlyBoats.filter((s,i)=>{
+     let yes: boolean = false;
+     Boats.forEach(j=>{
+       yes ? true: yes = i == j;
+     })
+     return yes;
+   });
    public barChartType:string = 'bar';
    public barChartLegend:boolean = true;
 }
