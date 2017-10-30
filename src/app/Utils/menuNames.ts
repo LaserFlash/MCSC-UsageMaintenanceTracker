@@ -1,10 +1,10 @@
 
 export const Boats:number[] = [
-  5, 6, 7, 8, 0
+  0, 5, 6, 7, 8
 ];
 
 export const UserFriendlyBoats:string[] = [
-  "Boat 5", "Boat 6", "Boat 7", "Boat 8", "RIB"
+  "RIB", "Boat 1", "Boat 2", "Boat 3", "Boat 4", "Boat 5", "Boat 6", "Boat 7", "Boat 8"
 ];
 
 export const Levels:string[] = [
