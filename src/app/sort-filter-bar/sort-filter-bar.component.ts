@@ -105,36 +105,12 @@ export class SortFilterBarComponent {
     } else if (sort == "Oldest") {
       this.breakages.sort((a, b) => { return a.timestamp.getDate() - b.timestamp.getDate(); });
     } else if (sort == "Boat") {
-      this.breakages.sort((a, b) => { return a.boatID.charCodeAt(0) - b.boatID.charCodeAt(0); });
+      this.breakages.sort((a, b) => { return a.boatID - b.boatID; });
     } else {
       if (sort == "Most Important") {
-        this.breakages.sort((a, b) => {
-          var aimp;
-          if (a.importance.startsWith("U")) { aimp = 0; }
-          else if (a.importance.startsWith("H")) { aimp = 1; }
-          else if (a.importance.startsWith("M")) { aimp = 2; }
-          else { aimp = 3; }
-          var bimp;
-          if (b.importance.startsWith("U")) { bimp = 0; }
-          else if (b.importance.startsWith("H")) { bimp = 1; }
-          else if (b.importance.startsWith("M")) { bimp = 2; }
-          else { bimp = 3; }
-          return aimp - bimp;
-        });
+        this.breakages.sort((a, b) => { return a.importance - b.importance;});
       } else if (sort == "Least Important") {
-        this.breakages.sort((a, b) => {
-          var aimp;
-          if (a.importance.startsWith("U")) { aimp = 0; }
-          else if (a.importance.startsWith("H")) { aimp = 1; }
-          else if (a.importance.startsWith("M")) { aimp = 2; }
-          else { aimp = 3; }
-          var bimp;
-          if (b.importance.startsWith("U")) { bimp = 0; }
-          else if (b.importance.startsWith("H")) { bimp = 1; }
-          else if (b.importance.startsWith("M")) { bimp = 2; }
-          else { bimp = 3; }
-          return bimp - aimp;
-        });
+        this.breakages.sort((a, b) => { return b.importance - a.importance;});
       }
     }
   }
