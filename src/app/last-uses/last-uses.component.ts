@@ -10,7 +10,7 @@ import { UsageInfo } from '../objects/usageInfo'
 })
 export class LastUsesComponent implements OnInit {
 
-  private usage: UsageInfo[];
+  usage: UsageInfo[];
 
   constructor(private boatUsageService: BoatUsageService) {
     this.usage = boatUsageService.lastUsageEachBoat;
