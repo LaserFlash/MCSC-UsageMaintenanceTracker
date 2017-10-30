@@ -3,6 +3,7 @@ import { BreakageInfo } from '../objects/breakageInfo';
 import { BoatBreakageService } from '../boat-breakage.service'
 
 import { UserFriendlyBoats,Boats,Parts } from '../Utils/menuNames'
+import { BoatNameConversionHelper } from '../Utils/nameConversion'
 
 @Component({
   selector: 'sort-filter-bar',
@@ -24,6 +25,7 @@ export class SortFilterBarComponent {
     })
     return yes;
   });
+
   partfilterList:string[] = Parts;
   appliedFilters:string[] = [];
   partappliedFilters:string[] = [];
@@ -84,7 +86,7 @@ export class SortFilterBarComponent {
     }
     return this.appliedFilters.some(
       filter => {
-        if (item.boatID == filter) {
+        if (item.boatID == BoatNameConversionHelper.numberFromUserFriendlyName(filter)) {
           return true;
         }
       });
