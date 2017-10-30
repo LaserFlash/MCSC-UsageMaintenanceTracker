@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { BreakageInfo } from '../objects/breakageInfo';
 import { BoatBreakageService } from '../boat-breakage.service'
 
-import { Boats,Parts } from '../Utils/menuNames'
+import { UserFriendlyBoats,Boats,Parts } from '../Utils/menuNames'
 
 @Component({
   selector: 'sort-filter-bar',
@@ -17,7 +17,13 @@ export class SortFilterBarComponent {
   constructor(private breakageService: BoatBreakageService) {}
 
   sortList:string[] = ["Newest", "Oldest", "Most Important", "Least Important", "Boat"];
-  filterList:number[] = Boats;
+  filterList:string[] = UserFriendlyBoats.filter((s,i)=>{
+    let yes: boolean = false;
+    Boats.forEach(j=>{
+      yes ? true: yes = i == j;
+    })
+    return yes;
+  });
   partfilterList:string[] = Parts;
   appliedFilters:string[] = [];
   partappliedFilters:string[] = [];

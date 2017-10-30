@@ -8,7 +8,7 @@
   <span>
   <button mat-button [matMenuTriggerFor]="filter"><mat-icon>filter_list</mat-icon> Filter by Boat</button>
   <mat-menu #filter="matMenu">
-    <button mat-menu-item *ngFor="let filter of filterList" (click)="addFilter(filter)"> Boat {{filter}} </button>
+    <button mat-menu-item *ngFor="let filter of filterList" (click)="addFilter(filter)"> {{filter}} </button>
   </mat-menu>
 </span>
   <span>
@@ -19,7 +19,7 @@
 </span>
 
   <mat-chip-list>
-    <mat-chip *ngFor="let filter of appliedFilters" (click)="addFilter(filter) " selected="true"> Boat {{filter}}
+    <mat-chip *ngFor="let filter of appliedFilters" (click)="addFilter(filter) " selected="true"> {{filter}}
       <mat-icon style="font-size:16px;height:16px;width:16px;">cancel</mat-icon>
     </mat-chip>
     <mat-chip *ngFor="let filter of partappliedFilters" (click)="addPartFilter(filter)" selected="true"> {{filter}}
