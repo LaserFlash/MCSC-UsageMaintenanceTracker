@@ -17,7 +17,7 @@ export class SortFilterBarComponent {
   constructor(private breakageService: BoatBreakageService) {}
 
   sortList:string[] = ["Newest", "Oldest", "Most Important", "Least Important", "Boat"];
-  filterList:string[] = Boats;
+  filterList:number[] = Boats;
   partfilterList:string[] = Parts;
   appliedFilters:string[] = [];
   partappliedFilters:string[] = [];
@@ -101,9 +101,9 @@ export class SortFilterBarComponent {
   private changeSort(sort: string) {
     this.sortBy = sort;
     if (sort == "Newest") {
-      this.breakages.sort((a, b) => { return b.timestamp - a.timestamp; });
+      this.breakages.sort((a, b) => { return b.timestamp.getDate() - a.timestamp.getDate(); });
     } else if (sort == "Oldest") {
-      this.breakages.sort((a, b) => { return a.timestamp - b.timestamp; });
+      this.breakages.sort((a, b) => { return a.timestamp.getDate() - b.timestamp.getDate(); });
     } else if (sort == "Boat") {
       this.breakages.sort((a, b) => { return a.boatID.charCodeAt(0) - b.boatID.charCodeAt(0); });
     } else {

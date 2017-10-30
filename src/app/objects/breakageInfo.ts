@@ -6,8 +6,8 @@ export class BreakageInfo {
     public importance: string,
     public part: string,
     public details: string,
-    public timestampFixed: number,
-    public timestamp: number
+    public timestampFixed: Date,
+    public timestamp: Date
   )
   {}
 }
