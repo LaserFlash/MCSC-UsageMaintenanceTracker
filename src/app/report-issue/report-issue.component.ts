@@ -119,7 +119,8 @@ export class ReportIssueComponent {
         this.breakageForm.get("part").value,
         this.breakageForm.get("details").value,
         null,
-        new Date()
+        new Date(),
+        null
       );
       /* Confirm submission of data */
       this.openDialog(breakage);
