@@ -16,6 +16,6 @@ export class ImportanceConversionHelper{
   }
 
   public static importanceFromNumber(n){
-    return Levels[0];
+    return Levels[n];
   }
 }

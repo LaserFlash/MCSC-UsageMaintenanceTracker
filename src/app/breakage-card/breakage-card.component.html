@@ -7,7 +7,7 @@
             {{getBoatName(item.boatID)}}
           </li>
           <li>
-            {{item.importance}}
+            {{getImportanceName(item.importance)}}
           </li>
           <li *ngIf="item.part">
             Part: {{item.part}}
