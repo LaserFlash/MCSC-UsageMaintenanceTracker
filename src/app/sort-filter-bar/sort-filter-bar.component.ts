@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { BreakageInfo } from '../objects/breakageInfo';
 import { BoatBreakageService } from '../boat-breakage.service'
 
-import { UserFriendlyBoats,Boats,Parts } from '../Utils/menuNames'
+import { UserFriendlyBoats, Boats, Parts } from '../Utils/menuNames'
 import { BoatNameConversionHelper } from '../Utils/nameConversion'
 
 @Component({
@@ -15,21 +15,21 @@ export class SortFilterBarComponent {
   @Input() breakages: BreakageInfo[];
   @Input() original: BreakageInfo[];
 
-  constructor(private breakageService: BoatBreakageService) {}
+  constructor(private breakageService: BoatBreakageService) { }
 
-  sortList:string[] = ["Newest", "Oldest", "Most Important", "Least Important", "Boat"];
-  filterList:string[] = UserFriendlyBoats.filter((s,i)=>{
+  sortList: string[] = ["Newest", "Oldest", "Most Important", "Least Important", "Boat"];
+  filterList: string[] = UserFriendlyBoats.filter((s, i) => {
     let yes: boolean = false;
-    Boats.forEach(j=>{
-      yes ? true: yes = i == j;
+    Boats.forEach(j => {
+      yes ? true : yes = i == j;
     })
     return yes;
   });
 
-  partfilterList:string[] = Parts;
-  appliedFilters:string[] = [];
-  partappliedFilters:string[] = [];
-  sortBy:string = "Sort by";
+  partfilterList: string[] = Parts;
+  appliedFilters: string[] = [];
+  partappliedFilters: string[] = [];
+  sortBy: string = "Sort by";
 
   /** Add a boat filter to the displayed data */
   private addFilter(key: string) {
@@ -109,16 +109,26 @@ export class SortFilterBarComponent {
   private changeSort(sort: string) {
     this.sortBy = sort;
     if (sort == "Newest") {
-      this.breakages.sort((a, b) => { return b.timestamp.getDate() - a.timestamp.getDate(); });
+      this.breakages.sort((a, b) => {
+        if (a.timestampFixed != undefined && b.timestampFixed != undefined) {
+          return b.timestampFixed.getTime() - a.timestampFixed.getTime();
+        }
+        return b.timestamp.getTime() - a.timestamp.getTime();
+      });
     } else if (sort == "Oldest") {
-      this.breakages.sort((a, b) => { return a.timestamp.getDate() - b.timestamp.getDate(); });
+      this.breakages.sort((a, b) => {
+        if (a.timestampFixed != undefined && b.timestampFixed != undefined) {
+          return a.timestampFixed.getTime() - b.timestampFixed.getTime();
+        }
+        return a.timestamp.getTime() - b.timestamp.getTime();
+      });
     } else if (sort == "Boat") {
       this.breakages.sort((a, b) => { return a.boatID - b.boatID; });
     } else {
       if (sort == "Most Important") {
-        this.breakages.sort((a, b) => { return a.importance - b.importance;});
+        this.breakages.sort((a, b) => { return a.importance - b.importance; });
       } else if (sort == "Least Important") {
-        this.breakages.sort((a, b) => { return b.importance - a.importance;});
+        this.breakages.sort((a, b) => { return b.importance - a.importance; });
       }
     }
   }
