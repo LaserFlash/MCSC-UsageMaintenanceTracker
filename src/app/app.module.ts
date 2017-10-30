@@ -23,6 +23,7 @@ import { MatSelectModule }             from '@angular/material';
 import { MatMenuModule }               from '@angular/material';
 import { MatChipsModule }              from '@angular/material';
 import { MatProgressBarModule }        from '@angular/material';
+import { MatCheckboxModule }           from '@angular/material';
 
 import { DialogsModule }              from './dialog/dialogs.module';
 
@@ -93,6 +94,7 @@ import { LastUsesComponent }          from './last-uses/last-uses.component';
     MatProgressBarModule,
     ChartsModule,
     MatListModule,
+    MatCheckboxModule,
   ],
   providers: [BoatUsageService,BoatBreakageService],
   bootstrap: [AppComponent]

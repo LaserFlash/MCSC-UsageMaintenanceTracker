@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 
-import { ContactValidator } from '../validators/ContactValidator'
+import { ContactValidator } from '../validators/CustomValidators'
 import { DialogsService } from '../dialog/dialogs.service';
 import { BreakageInfo } from '../objects/breakageInfo';
 import { BoatBreakageService } from '../boat-breakage.service'
