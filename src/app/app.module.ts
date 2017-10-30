@@ -84,7 +84,7 @@ import { LastUsesComponent }          from './last-uses/last-uses.component';
     MatSelectModule,
     FlexLayoutModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,
+    AngularFirestoreModule.enablePersistence(),
     MatSnackBarModule,
     CookieModule.forRoot(),
     DialogsModule,

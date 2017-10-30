@@ -4,15 +4,8 @@
   <mat-card-content>
   <mat-list>
     <mat-list-item *ngFor="let u of usage">
-      <mat-icon *ngIf="u.boatID == '1'" mat-list-icon>filter_1</mat-icon>
-      <mat-icon *ngIf="u.boatID == '2'" mat-list-icon>filter_2</mat-icon>
-      <mat-icon *ngIf="u.boatID == '3'" mat-list-icon>filter_3</mat-icon>
-      <mat-icon *ngIf="u.boatID == '4'" mat-list-icon>filter_4</mat-icon>
-      <mat-icon *ngIf="u.boatID == 'New 5'" mat-list-icon>filter_5</mat-icon>
-      <mat-icon *ngIf="u.boatID == 'New 6'" mat-list-icon>filter_6</mat-icon>
-      <mat-icon *ngIf="u.boatID == 'New 7'" mat-list-icon>filter_7</mat-icon>
-      <mat-icon *ngIf="u.boatID == 'New 8'" mat-list-icon>filter_8</mat-icon>
-      <mat-icon *ngIf="u.boatID == 'RIB'" mat-list-icon>directions_boat</mat-icon>
+      <mat-icon *ngIf="u.boatID != '0'" mat-list-icon>filter_{{u.boatID}}</mat-icon>
+      <mat-icon *ngIf="u.boatID == '0'" mat-list-icon>directions_boat</mat-icon>
       <h4 mat-line>{{u.duration}} hours</h4>
       <p mat-line> {{u.date | date}} </p>
     </mat-list-item>

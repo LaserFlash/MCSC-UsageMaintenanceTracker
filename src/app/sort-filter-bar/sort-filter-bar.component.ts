@@ -2,7 +2,8 @@ import { Component, Input } from '@angular/core';
 import { BreakageInfo } from '../objects/breakageInfo';
 import { BoatBreakageService } from '../boat-breakage.service'
 
-import { Boats,Parts } from '../Utils/menuNames'
+import { UserFriendlyBoats, Boats, Parts } from '../Utils/menuNames'
+import { BoatNameConversionHelper } from '../Utils/nameConversion'
 
 @Component({
   selector: 'sort-filter-bar',
@@ -14,14 +15,21 @@ export class SortFilterBarComponent {
   @Input() breakages: BreakageInfo[];
   @Input() original: BreakageInfo[];
 
-  constructor(private breakageService: BoatBreakageService) {}
+  constructor(private breakageService: BoatBreakageService) { }
 
-  sortList:string[] = ["Newest", "Oldest", "Most Important", "Least Important", "Boat"];
-  filterList:string[] = Boats;
-  partfilterList:string[] = Parts;
-  appliedFilters:string[] = [];
-  partappliedFilters:string[] = [];
-  sortBy:string = "Sort by";
+  sortList: string[] = ["Newest", "Oldest", "Most Important", "Least Important", "Boat"];
+  filterList: string[] = UserFriendlyBoats.filter((s, i) => {
+    let yes: boolean = false;
+    Boats.forEach(j => {
+      yes ? true : yes = i == j;
+    })
+    return yes;
+  });
+
+  partfilterList: string[] = Parts;
+  appliedFilters: string[] = [];
+  partappliedFilters: string[] = [];
+  sortBy: string = "Sort by";
 
   /** Add a boat filter to the displayed data */
   private addFilter(key: string) {
@@ -78,7 +86,7 @@ export class SortFilterBarComponent {
     }
     return this.appliedFilters.some(
       filter => {
-        if (item.boatID == filter) {
+        if (item.boatID == BoatNameConversionHelper.numberFromUserFriendlyName(filter)) {
           return true;
         }
       });
@@ -101,40 +109,26 @@ export class SortFilterBarComponent {
   private changeSort(sort: string) {
     this.sortBy = sort;
     if (sort == "Newest") {
-      this.breakages.sort((a, b) => { return b.timestamp - a.timestamp; });
+      this.breakages.sort((a, b) => {
+        if (a.timestampFixed != undefined && b.timestampFixed != undefined) {
+          return b.timestampFixed.getTime() - a.timestampFixed.getTime();
+        }
+        return b.timestamp.getTime() - a.timestamp.getTime();
+      });
     } else if (sort == "Oldest") {
-      this.breakages.sort((a, b) => { return a.timestamp - b.timestamp; });
+      this.breakages.sort((a, b) => {
+        if (a.timestampFixed != undefined && b.timestampFixed != undefined) {
+          return a.timestampFixed.getTime() - b.timestampFixed.getTime();
+        }
+        return a.timestamp.getTime() - b.timestamp.getTime();
+      });
     } else if (sort == "Boat") {
-      this.breakages.sort((a, b) => { return a.boatID.charCodeAt(0) - b.boatID.charCodeAt(0); });
+      this.breakages.sort((a, b) => { return a.boatID - b.boatID; });
     } else {
       if (sort == "Most Important") {
-        this.breakages.sort((a, b) => {
-          var aimp;
-          if (a.importance.startsWith("U")) { aimp = 0; }
-          else if (a.importance.startsWith("H")) { aimp = 1; }
-          else if (a.importance.startsWith("M")) { aimp = 2; }
-          else { aimp = 3; }
-          var bimp;
-          if (b.importance.startsWith("U")) { bimp = 0; }
-          else if (b.importance.startsWith("H")) { bimp = 1; }
-          else if (b.importance.startsWith("M")) { bimp = 2; }
-          else { bimp = 3; }
-          return aimp - bimp;
-        });
+        this.breakages.sort((a, b) => { return a.importance - b.importance; });
       } else if (sort == "Least Important") {
-        this.breakages.sort((a, b) => {
-          var aimp;
-          if (a.importance.startsWith("U")) { aimp = 0; }
-          else if (a.importance.startsWith("H")) { aimp = 1; }
-          else if (a.importance.startsWith("M")) { aimp = 2; }
-          else { aimp = 3; }
-          var bimp;
-          if (b.importance.startsWith("U")) { bimp = 0; }
-          else if (b.importance.startsWith("H")) { bimp = 1; }
-          else if (b.importance.startsWith("M")) { bimp = 2; }
-          else { bimp = 3; }
-          return bimp - aimp;
-        });
+        this.breakages.sort((a, b) => { return b.importance - a.importance; });
       }
     }
   }

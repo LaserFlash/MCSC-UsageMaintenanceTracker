@@ -7,7 +7,8 @@ import { DialogsService } from '../dialog/dialogs.service';
 import { BreakageInfo } from '../objects/breakageInfo';
 import { BoatBreakageService } from '../boat-breakage.service'
 
-import { Boats,Levels,Parts } from '../Utils/menuNames'
+import { Boats, UserFriendlyBoats,Levels,Parts } from '../Utils/menuNames'
+import { BoatNameConversionHelper, ImportanceConversionHelper } from '../Utils/nameConversion'
 
 
 @Component({
@@ -18,7 +19,14 @@ import { Boats,Levels,Parts } from '../Utils/menuNames'
 export class ReportIssueComponent {
 
   title = "Report Boat Breakage";
-  boats = Boats;
+  boats = UserFriendlyBoats.filter((s,i)=>{
+    let yes: boolean = false;
+    Boats.forEach(j=>{
+      yes ? true: yes = i == j;
+    })
+    return yes;
+  });
+
   levels = Levels;
   parts = Parts;
 
@@ -106,12 +114,13 @@ export class ReportIssueComponent {
       let breakage = new BreakageInfo(
         this.breakageForm.get("name").value,
         this.breakageForm.get("contact").value,
-        this.breakageForm.get("boatID").value,
-        this.breakageForm.get("importance").value,
+        BoatNameConversionHelper.numberFromUserFriendlyName(this.breakageForm.get("boatID").value),
+        ImportanceConversionHelper.numberFromImportance(this.breakageForm.get("importance").value),
         this.breakageForm.get("part").value,
         this.breakageForm.get("details").value,
         null,
-        new Date().getTime()
+        new Date(),
+        null
       );
       /* Confirm submission of data */
       this.openDialog(breakage);
@@ -123,8 +132,8 @@ export class ReportIssueComponent {
     let message = "";
     message += "Name: " + breakage.name + '\n';
     message += "Contact: " + breakage.contact + '\n';
-    message += "Boat: " + breakage.boatID + '\n';
-    message += "Importance: " + breakage.importance + '\n';
+    message += "Boat: " + BoatNameConversionHelper.boatNameFromNumber(breakage.boatID) + '\n';
+    message += "Importance: " + ImportanceConversionHelper.importanceFromNumber(breakage.importance) + '\n';
     message += "Part: " + breakage.part + '\n';
     message += "Details: " + breakage.details + '\n';
 
