@@ -17,9 +17,4 @@ export class LastUsesComponent implements OnInit {
   }
 
   ngOnInit() {}
-
-  private dateDisplay(val) {
-    var date = new Date(val);
-    return date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
-  }
 }
