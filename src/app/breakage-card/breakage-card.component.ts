@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { BreakageInfo } from '../objects/breakageInfo'
+import { UserFriendlyBoats } from '../Utils/menuNames'
+import { BoatNameConversionHelper, ImportanceConversionHelper } from '../Utils/nameConversion'
 
 @Component({
   selector: 'breakage-card',
@@ -20,5 +22,13 @@ export class BreakageCardComponent {
   }
   private openDialog(key: any) {
     this.onRemove.emit(key);
+  }
+
+  private getBoatName(v) {
+    return BoatNameConversionHelper.boatNameFromNumber(v);
+  }
+
+  private getImportanceName(v) {
+    return ImportanceConversionHelper.importanceFromNumber(v);
   }
 }
