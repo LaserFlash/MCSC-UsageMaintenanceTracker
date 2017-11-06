@@ -12,7 +12,7 @@ export class BoatNameConversionHelper{
 
 export class ImportanceConversionHelper{
   public static numberFromImportance(s){
-    return Levels.indexOf(s);
+    return Levels.length - 1 - Levels.indexOf(s);
   }
 
   public static importanceFromNumber(n){
