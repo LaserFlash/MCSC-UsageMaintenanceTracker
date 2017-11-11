@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class SafetyProceduresComponent {
   constructor() {}
-  
+
   links =
   [
     {a:"https://drive.google.com/file/d/0BwFE4hc768gQeGRkSTItS01iR0k", text:"Anti-Fouling"},
@@ -15,6 +15,7 @@ export class SafetyProceduresComponent {
     {a:"https://drive.google.com/open?id=0BwFE4hc768gQMXA3X0x1cjZRQ2M", text:"Mast raising and lowering"},
     {a:"https://drive.google.com/open?id=0BwFE4hc768gQLWhxazZwVkF1d0U ", text:"Refueling"},
     {a:"https://drive.google.com/open?id=0BwFE4hc768gQbEQ5WFRVSGNITkk", text:"Towing"},
+    {a:"https://drive.google.com/open?id=1HZgNjuljOz8qGlhxl24tNIDvJNd4vMLW", text:"Hoisting Up Mast"},
   ]
 
 }
