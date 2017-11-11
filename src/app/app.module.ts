@@ -39,6 +39,7 @@ import { OverlayContainer }             from '@angular/cdk/overlay';
 
 import { BoatUsageService }           from './boat-usage.service'
 import { BoatBreakageService }        from './boat-breakage.service'
+import { SafetyDocsService }        from './safety-docs.service'
 
 import { AngularFireModule }          from 'angularfire2';
 import { AngularFirestoreModule }     from 'angularfire2/firestore';
@@ -96,7 +97,7 @@ import { LastUsesComponent }          from './last-uses/last-uses.component';
     MatListModule,
     MatCheckboxModule,
   ],
-  providers: [BoatUsageService,BoatBreakageService],
+  providers: [BoatUsageService,BoatBreakageService,SafetyDocsService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { DocLink } from '../objects/docLink';
+
+import { SafetyDocsService } from '../safety-docs.service'
 
 @Component({
   selector: 'app-safety-procedures',
@@ -6,16 +9,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./safety-procedures.component.css']
 })
 export class SafetyProceduresComponent {
-  constructor() {}
-
-  links =
-  [
-    {a:"https://drive.google.com/file/d/0BwFE4hc768gQeGRkSTItS01iR0k", text:"Anti-Fouling"},
-    {a:"https://drive.google.com/open?id=0BwFE4hc768gQbmlZY204andYcU0", text:"Confined Spaces"},
-    {a:"https://drive.google.com/open?id=0BwFE4hc768gQMXA3X0x1cjZRQ2M", text:"Mast raising and lowering"},
-    {a:"https://drive.google.com/open?id=0BwFE4hc768gQLWhxazZwVkF1d0U ", text:"Refueling"},
-    {a:"https://drive.google.com/open?id=0BwFE4hc768gQbEQ5WFRVSGNITkk", text:"Towing"},
-    {a:"https://drive.google.com/open?id=1HZgNjuljOz8qGlhxl24tNIDvJNd4vMLW", text:"Hoisting Up Mast"},
-  ]
-
+  links: DocLink[];
+  constructor(private safetyDocsService: SafetyDocsService,) {
+    this.links = safetyDocsService.safetyDocLinks;
+  }
 }
