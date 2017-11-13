@@ -1,6 +1,16 @@
 <mat-card>
 
   <mat-tab-group>
+      <mat-list>
+        <h3 mat-subheader>Health and Safety Documents</h3>
+        <mat-list-item *ngFor="let link of links">
+          <a mat-list-item href="{{link.url}}" target="_blank">
+            <mat-icon mat-list-icon>insert_drive_file</mat-icon>
+            {{link.title}}
+          </a>
+        </mat-list-item>
+      </mat-list>
+    </mat-tab>
     <mat-tab label="Incident Form">
       <mat-list>
         <mat-list-item>
@@ -12,16 +22,6 @@
       </mat-list>
     </mat-tab>
     <mat-tab label="Documents">
-      <mat-list>
-        <h3 mat-subheader>Health and Safety Documents</h3>
-        <mat-list-item *ngFor="let link of links">
-          <a mat-list-item href="{{link.url}}" target="_blank">
-            <mat-icon mat-list-icon>insert_drive_file</mat-icon>
-            {{link.title}}
-          </a>
-        </mat-list-item>
-      </mat-list>
-    </mat-tab>
   </mat-tab-group>
 
 </mat-card>
