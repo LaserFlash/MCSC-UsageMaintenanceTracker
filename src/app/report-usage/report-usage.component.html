@@ -41,11 +41,11 @@
           </td>
         </tr>
       </table>
-      <br  />
-    <button mat-raised-button color="accent" type="submit">Submit</button>
+      <br />
+      <button mat-raised-button color="accent" type="submit">Submit</button>
     </form>
 
   </mat-card-content>
 </mat-card>
-<last-uses  fxLayout="row" fxLayout.lt-md="column"></last-uses>
-<app-usage-graphs fxLayout="row" fxLayout.lt-md="column"></app-usage-graphs>
+<last-uses fxLayout="row" fxLayout.lt-md="column"></last-uses>
+<usage-graphs [dataLabel]="'Hours used'" [chartTitle]="'Total Boat Usage'" fxLayout="row" fxLayout.lt-md="column"></usage-graphs>
