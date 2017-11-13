@@ -41,9 +41,9 @@ export class BreakageCardComponent {
   private getBGColour(n:number){
     if(this.isDarkTheme){
       if(n == 3) return "#b61827"
-      if(n == 2) return "#ff5722"
-      if(n == 1) return "#c49000"
-      if(n == 0) return "#005cb2"
+      if(n == 2) return "#b53d00"
+      if(n == 1) return "#c6a700"
+      if(n == 0) return "#001064"
     }
     if(n == 3) return "#ff867c"
     if(n == 2) return "#ff8a50"
