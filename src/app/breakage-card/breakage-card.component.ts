@@ -3,13 +3,19 @@ import { BreakageInfo } from '../objects/breakageInfo'
 import { UserFriendlyBoats } from '../Utils/menuNames'
 import { BoatNameConversionHelper, ImportanceConversionHelper } from '../Utils/nameConversion'
 
+import { ThemeTrackerService } from '../theme-tracker.service'
+
 @Component({
   selector: 'breakage-card',
   templateUrl: './breakage-card.component.html',
   styleUrls: ['./breakage-card.component.css']
 })
 export class BreakageCardComponent {
-  constructor() { }
+  constructor(private themeTracker: ThemeTrackerService ) {
+    this.isDarkTheme = themeTracker.isDark;
+  }
+
+  isDarkTheme:boolean;
 
   @Input() buttonText: string;
   @Input() breakages: BreakageInfo[];
@@ -30,5 +36,18 @@ export class BreakageCardComponent {
 
   private getImportanceName(v) {
     return ImportanceConversionHelper.importanceFromNumber(v);
+  }
+
+  private getBGColour(n:number){
+    if(this.isDarkTheme){
+      if(n == 3) return "#b61827"
+      if(n == 2) return "#ff5722"
+      if(n == 1) return "#c49000"
+      if(n == 0) return "#005cb2"
+    }
+    if(n == 3) return "#ff867c"
+    if(n == 2) return "#ff8a50"
+    if(n == 1) return "#fff263"
+    if(n == 0) return "#6ab7ff"
   }
 }
