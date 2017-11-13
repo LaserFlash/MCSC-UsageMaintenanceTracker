@@ -8,8 +8,8 @@ export const UserFriendlyBoats:string[] = [
 ];
 
 export const Levels:string[] = [
-  'Urgent (boat out of action)',
-  'High (boat usable if needed)',
+  'Urgent (out of action)',
+  'High (usable if needed)',
   'Medium (boat usable)',
   'Low (not affecting use)'
 ];
