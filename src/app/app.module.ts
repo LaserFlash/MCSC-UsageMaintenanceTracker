@@ -35,11 +35,12 @@ import { ViewFixedComponent }         from './view-fixed/view-fixed.component';
 import { AppRoutingModule }           from './app-routing.module';
 import { BreakageCardComponent }      from'./breakage-card/breakage-card.component';
 
-import { OverlayContainer }             from '@angular/cdk/overlay';
+import { OverlayContainer }           from '@angular/cdk/overlay';
 
 import { BoatUsageService }           from './boat-usage.service'
 import { BoatBreakageService }        from './boat-breakage.service'
-import { SafetyDocsService }        from './safety-docs.service'
+import { SafetyDocsService }          from './safety-docs.service'
+import { ThemeTrackerService }        from './theme-tracker.service'
 
 import { AngularFireModule }          from 'angularfire2';
 import { AngularFirestoreModule }     from 'angularfire2/firestore';
@@ -97,7 +98,7 @@ import { LastUsesComponent }          from './last-uses/last-uses.component';
     MatListModule,
     MatCheckboxModule,
   ],
-  providers: [BoatUsageService,BoatBreakageService,SafetyDocsService],
+  providers: [BoatUsageService,BoatBreakageService,SafetyDocsService,ThemeTrackerService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

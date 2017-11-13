@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CookieService, CookieOptions } from 'ngx-cookie';
+import { ThemeTrackerService } from './theme-tracker.service'
 
 @Component({
   selector: 'app-root',
@@ -18,19 +18,14 @@ export class AppComponent {
   { label: 'Safety Docs', link: 'safety' },
 ];
 
-  constructor(private cookieService:CookieService){
+  constructor(private themeTracker:ThemeTrackerService){
     /* Apply theme at start */
-    this.isDarkTheme = this.cookieService.get('wyst') == '1';
+    this.isDarkTheme = themeTracker.isDark;
   }
 
   /** Change state of dark theme, updating cookie */
   public toggleDark(){
     this.isDarkTheme = !this.isDarkTheme;
-    var cookieOptions :CookieOptions = { expires: new Date(32525112147000)}
-    if(this.isDarkTheme){
-      this.cookieService.put('wyst', '1', cookieOptions);
-    }else {
-      this.cookieService.put('wyst', '0', cookieOptions);
-    }
+    this.themeTracker.setDark(this.isDarkTheme);
   }
 }
