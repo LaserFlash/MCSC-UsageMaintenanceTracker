@@ -10,35 +10,38 @@ import { Boats, UserFriendlyBoats } from '../Utils/menuNames'
   styleUrls: ['./usage-graphs.component.css']
 })
 export class UsageGraphsComponent {
-  public barChartData:any[] = [{data:[0,0,0,0,0,0,0,0],label:'Hours Used'}];
+  public chartData: any[] = [{ data: [0, 0, 0, 0, 0, 0, 0, 0], label: 'Hours Used' }];
 
-  constructor(private boatUsageService: BoatUsageService){
-    boatUsageService.items.subscribe(()=>{
-      this.barChartData = [{data:this.boatUsageService.usageTimes, label:'Hours Used'}];
+  constructor(private boatUsageService: BoatUsageService) {
+    boatUsageService.items.subscribe(() => {
+      this.chartData = [{ data: this.boatUsageService.usageTimes, label: 'Hours Used' }];
     })
   }
 
-  public colors:Array<any> = [{ // first color
-      backgroundColor: 'rgba(66,165,245,1)',
-      borderColor: 'rgba(225,10,241)',
-      pointBackgroundColor: 'rgba(66,165,245,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(66,165,245,1)'
-    }];
+  public colors: Array<any> = [{
+    backgroundColor: 'rgba(66,165,245,1)',
+    borderColor: 'rgba(225,10,241)',
+    pointBackgroundColor: 'rgba(66,165,245,1)',
+    pointBorderColor: '#fff',
+    pointHoverBackgroundColor: '#fff',
+    pointHoverBorderColor: 'rgba(66,165,245,1)'
+  }];
 
-  public barChartOptions:any = {
-     scaleShowVerticalLines: false,
-     responsive: true,
-     maintainAspectRatio: true,
-   };
-   public barChartLabels:string[] = UserFriendlyBoats.filter((s,i)=>{
-     let yes: boolean = false;
-     Boats.forEach(j=>{
-       yes ? true: yes = i == j;
-     })
-     return yes;
-   });
-   public barChartType:string = 'bar';
-   public barChartLegend:boolean = true;
+  public chartOptions: any = {
+    scaleShowVerticalLines: false,
+    responsive: true,
+    maintainAspectRatio: true,
+  };
+
+  //Only use boat data for boats with a userfriendly name
+  public chartLabels: string[] = UserFriendlyBoats.filter((s, i) => {
+    let yes: boolean = false;
+    Boats.forEach(j => {
+      yes ? true : yes = i == j;
+    })
+    return yes;
+  });
+
+  public chartType: string = 'bar';
+  public chartLegend: boolean = true;
 }
