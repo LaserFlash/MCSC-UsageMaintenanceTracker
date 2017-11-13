@@ -126,9 +126,9 @@ export class SortFilterBarComponent {
       this.breakages.sort((a, b) => { return a.boatID - b.boatID; });
     } else {
       if (sort == "Most Important") {
-        this.breakages.sort((a, b) => { return a.importance - b.importance; });
-      } else if (sort == "Least Important") {
         this.breakages.sort((a, b) => { return b.importance - a.importance; });
+      } else if (sort == "Least Important") {
+        this.breakages.sort((a, b) => { return a.importance - b.importance; });
       }
     }
   }
