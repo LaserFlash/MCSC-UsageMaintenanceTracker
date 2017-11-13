@@ -1,46 +1,45 @@
 <mat-card [style.backgroundColor]="getBGColour(item.importance)" class="breakage-card" *ngFor="let item of breakages">
-  <mat-card-header  >
-    <mat-card-title>{{getBoatName(item.boatID)}}</mat-card-title>
+  <mat-card-header>
+    <mat-card-title><b>{{getBoatName(item.boatID)}}</b></mat-card-title>
+    <mat-card-subtitle>{{getImportanceName(item.importance)}}</mat-card-subtitle>
+    <div mat-card-avatar>
+      <mat-icon *ngIf="item.boatID != '0'" mat-list-icon>filter_{{item.boatID}}</mat-icon>
+      <mat-icon *ngIf="item.boatID == '0'" mat-list-icon>directions_boat</mat-icon>
+    </div>
   </mat-card-header>
   <mat-card-content>
     <div fxLayout="row" fxLayout.xs="column" fxFlex>
       <div class="breakage-card-left">
         <ul class="breakage-card-list">
-          <li>
-            {{getBoatName(item.boatID)}}
-          </li>
-          <li>
-            {{getImportanceName(item.importance)}}
-          </li>
           <li *ngIf="item.part">
-            Part: {{item.part}}
+            <b>Part:</b> {{item.part}}
           </li>
           <li>
-            Reported by: {{item.name}}
+            <b>Reported by:</b> {{item.name}}
           </li>
           <li>
             {{item.contact}}
           </li>
           <li *ngIf="item.timestamp">
-            Reported: {{dateDisplay(item.timestamp)}}
+            <b>Reported:</b> {{dateDisplay(item.timestamp)}}
           </li>
           <li *ngIf="item.timestampFixed">
-            Fixed: {{dateDisplay(item.timestampFixed)}}
+            <b>Fixed:</b> {{dateDisplay(item.timestampFixed)}}
           </li>
         </ul>
       </div>
 
       <div fxFlex>
         <p class="breakage-card-details">
-          Details: <br /> {{item.details}}
+          <b>Details:</b> <br /> {{item.details}}
         </p>
       </div>
 
     </div>
 
   </mat-card-content>
-    <mat-card-actions >
-      <button mat-button color="warn" (click)="openDialog(item)">{{buttonText}}</button>
-    </mat-card-actions>
+  <mat-card-actions>
+    <button mat-button color="warn" (click)="openDialog(item)"><b>{{buttonText}}</b></button>
+  </mat-card-actions>
 
 </mat-card>
