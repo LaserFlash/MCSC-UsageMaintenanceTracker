@@ -3,6 +3,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { BoatUsageService } from '../boat-usage.service'
 import { UsageInfo } from '../objects/usageInfo'
 
+import { BoatNameConversionHelper } from '../Utils/nameConversion'
+
 @Component({
   selector: 'last-uses',
   templateUrl: './last-uses.component.html',
@@ -17,4 +19,8 @@ export class LastUsesComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+  private getBoatName(v) {
+    return BoatNameConversionHelper.boatNameFromNumber(v);
+  }
 }

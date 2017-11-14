@@ -1,11 +1,8 @@
 <mat-card [style.backgroundColor]="getBGColour(item.importance)" class="breakage-card" *ngFor="let item of breakages">
   <mat-card-header>
-    <mat-card-title><b>{{getBoatName(item.boatID)}}</b></mat-card-title>
+    <img mat-card-avatar src="/assets/images/boat_{{item.boatID}}.png" alt={{getBoatName(item.boatID)}} />
+    <mat-card-title><b>{{getBoatName(item.boatID)}}</b><br /></mat-card-title>
     <mat-card-subtitle>{{getImportanceName(item.importance)}}</mat-card-subtitle>
-    <div mat-card-avatar>
-      <mat-icon *ngIf="item.boatID != '0'" mat-list-icon>filter_{{item.boatID}}</mat-icon>
-      <mat-icon *ngIf="item.boatID == '0'" mat-list-icon>directions_boat</mat-icon>
-    </div>
   </mat-card-header>
   <mat-card-content>
     <div fxLayout="row" fxLayout.xs="column" fxFlex>
