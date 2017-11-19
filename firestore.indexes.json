@@ -1,0 +1,14 @@
+{
+  "indexes": [{
+    "collectionId": "boatUsage",
+    "fields": [{
+        "fieldPath": "date",
+        "mode": "DESCENDING"
+      },
+      {
+        "fieldPath": "boatID",
+        "mode": "ASCENDING"
+      }
+    ]
+  }]
+}
