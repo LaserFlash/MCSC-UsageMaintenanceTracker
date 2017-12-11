@@ -46,11 +46,11 @@
 
   <div class="sidenav-content">
     <div fxLayout="row">
-      <div fxFlex="20" fxFlex.lt-md="2"></div>
-      <div fxFlex>
+      <div fxFlex.gt-lg="calc(50% -1000px)" fxFlex="20" fxFlex.lt-md="2"></div>
+      <div fxFlex.gt-lg="1280px" fxFlex>
         <router-outlet></router-outlet>
       </div>
-      <div fxFlex="20" fxFlex.lt-md="2"></div>
+      <div fxFlex.gt-lg="calc(50% -1000px)" fxFlex="20" fxFlex.lt-md="2"></div>
     </div>
   </div>
 </mat-sidenav-container>
