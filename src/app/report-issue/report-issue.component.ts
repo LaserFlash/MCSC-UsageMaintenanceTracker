@@ -2,13 +2,16 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 
-import { ContactValidator } from '../validators/CustomValidators'
+import { ContactValidator } from '../validators/CustomValidators';
 import { DialogsService } from '../dialog/dialogs.service';
 import { BreakageInfo } from '../objects/breakageInfo';
-import { BoatBreakageService } from '../boat-breakage.service'
+import { BoatBreakageService } from '../boat-breakage.service';
 
-import { Boats, UserFriendlyBoats,Levels,Parts } from '../Utils/menuNames'
-import { BoatNameConversionHelper, ImportanceConversionHelper } from '../Utils/nameConversion'
+import { Boats, UserFriendlyBoats, Levels, Parts } from '../Utils/menuNames';
+import { BoatNameConversionHelper, ImportanceConversionHelper } from '../Utils/nameConversion';
+
+import { FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
+import {Cloudinary} from '@cloudinary/angular-5.x';
 
 
 @Component({
@@ -16,13 +19,24 @@ import { BoatNameConversionHelper, ImportanceConversionHelper } from '../Utils/n
   templateUrl: './report-issue.component.html',
   styleUrls: ['./report-issue.component.css']
 })
+
 export class ReportIssueComponent {
+  isLinear = false;
+
+  imageLoaded = true;
+  imageID = "";
+
+  breakageForm: FormGroup;
+  firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
+
+  breakage: BreakageInfo[] = [];
 
   title = "Report Boat Breakage";
-  boats = UserFriendlyBoats.filter((s,i)=>{
+  boats = UserFriendlyBoats.filter((s, i) => {
     let yes: boolean = false;
-    Boats.forEach(j=>{
-      yes ? true: yes = i == j;
+    Boats.forEach(j => {
+      yes ? true : yes = i == j;
     })
     return yes;
   });
@@ -31,21 +45,71 @@ export class ReportIssueComponent {
   parts = Parts;
 
   breakages: BreakageInfo[];
-  breakageForm: FormGroup;
   loadingBreakages = true;
+
+  private uploader: FileUploader;
 
   constructor(
     private fb: FormBuilder,
     private snackBar: MatSnackBar,
     private breakageService: BoatBreakageService,
-    private dialogsService: DialogsService
-  ) {
+    private dialogsService: DialogsService,
+    private cloudinary: Cloudinary,
+  ) { }
+
+  ngOnInit() {
     this.createForm();
-    this.breakages = breakageService.recentItems;
+    this.breakages = this.breakageService.recentItems;
+    const uploaderOptions: FileUploaderOptions = {
+      url: `https://api.cloudinary.com/v1_1/${this.cloudinary.config().cloud_name}/upload`,
+      autoUpload: true,
+      isHTML5: true,
+      removeAfterUpload: true,
+      headers: [
+        {
+          name: 'X-Requested-With',
+          value: 'XMLHttpRequest'
+        }
+      ]
+    };
+
+    this.uploader = new FileUploader(uploaderOptions);
+
+        // Add custom tag for displaying the uploaded photo in the list
+        this.uploader.onBuildItemForm = (fileItem: any, form: FormData): any => {
+            form.append('upload_preset', this.cloudinary.config().upload_preset);
+            let tags = 'myphotoalbum';
+            if (this.title) {
+                form.append('context', `photo=${this.title}`);
+                tags = `myphotoalbum,${this.title}`;
+            }
+            form.append('tags', tags);
+            form.append('file', fileItem);
+
+            fileItem.withCredentials = false;
+            return { fileItem, form };
+        };
+        this.uploader.onCompleteItem = (item: any, response: string, status: number, headers: ParsedResponseHeaders) => {this.imageLoaded = true; var j = JSON.parse(response); this.imageID = j['public_id']; this.breakage[0].imageID = this.imageID;}
+        this.uploader.onProgressItem = (fileItem: any, progress: any) => {this.imageLoaded = false;}
   }
 
   /** Build the form */
   private createForm() {
+    this.imageID = "";
+    this.imageLoaded = true;
+
+    this.firstFormGroup = this.fb.group({
+      name: ['', Validators.required],
+      contact: ['', ContactValidator.emailAndMobile]
+    });
+
+    this.secondFormGroup = this.fb.group({
+      boatID: ['', Validators.required],
+      importance: ['', Validators.required],
+      part: ['', Validators.required],
+      details: ['', [Validators.required, Validators.maxLength(256)]]
+    });
+
     this.breakageForm = this.fb.group({
       name: ['', Validators.required],
       contact: ['', ContactValidator.emailAndMobile],
@@ -54,12 +118,27 @@ export class ReportIssueComponent {
       part: ['', Validators.required],
       details: ['', [Validators.required, Validators.maxLength(256)]]
     });
+
+    this.firstFormGroup.valueChanges.subscribe(data => this.onValueChanged(data));
+    this.secondFormGroup.valueChanges.subscribe(data => this.onValueChanged(data));
     this.breakageForm.valueChanges.subscribe(data => this.onValueChanged(data));
     this.onValueChanged(); // (re)set validation messages now
   }
 
   /** Update error messages due to validation */
   private onValueChanged(data?: any) {
+    this.breakage[0] = new BreakageInfo(
+      this.breakageForm.get("name").value,
+      this.breakageForm.get("contact").value,
+      BoatNameConversionHelper.numberFromUserFriendlyName(this.breakageForm.get("boatID").value),
+      ImportanceConversionHelper.numberFromImportance(this.breakageForm.get("importance").value),
+      this.breakageForm.get("part").value,
+      this.breakageForm.get("details").value,
+      null,
+      new Date(),
+      null,
+      this.imageID
+    );
     if (!this.breakageForm) { return; }
     const form = this.breakageForm;
 
@@ -120,42 +199,24 @@ export class ReportIssueComponent {
         this.breakageForm.get("details").value,
         null,
         new Date(),
-        null
+        null,
+        this.imageID
       );
       /* Confirm submission of data */
-      this.openDialog(breakage);
+      this.breakageService.addBreakageInfo(breakage).then(
+        () => (
+          this.snackBar.open("Breakage Succesfully Submited", "Close", {
+            duration: 2000,
+          }),
+          this.createForm()
+        )
+      )
+        .catch(
+        () =>
+          this.snackBar.open("Something Went Wrong", "Close", {
+            duration: 2000,
+          })
+        );
     }
-  }
-
-  /** Produce dialog message and handle user input from dialog */
-  public openDialog(breakage: BreakageInfo) {
-    let message = "";
-    message += "Name: " + breakage.name + '\n';
-    message += "Contact: " + breakage.contact + '\n';
-    message += "Boat: " + BoatNameConversionHelper.boatNameFromNumber(breakage.boatID) + '\n';
-    message += "Importance: " + ImportanceConversionHelper.importanceFromNumber(breakage.importance) + '\n';
-    message += "Part: " + breakage.part + '\n';
-    message += "Details: " + breakage.details + '\n';
-
-    this.dialogsService
-      .confirm('Confirm Submission', message, "Submit")
-      .subscribe(result => {
-        if (result) {
-          this.breakageService.addBreakageInfo(breakage).then(
-            () => (
-              this.snackBar.open("Breakage Succesfully Submited", "Close", {
-                duration: 2000,
-              }),
-              this.createForm()
-            )
-          )
-            .catch(
-            () =>
-              this.snackBar.open("Something Went Wrong", "Close", {
-                duration: 2000,
-              })
-            );
-        }
-      });
   }
 }

@@ -2,64 +2,95 @@
   <h2>{{title}}</h2>
   <mat-card-content>
     <form (ngSubmit)="onSubmit()" [formGroup]="breakageForm" novalidate>
+      <mat-vertical-stepper [linear]="isLinear">
+        <mat-step [stepControl]="firstFormGroup">
+          <ng-template matStepLabel>Fill out your name</ng-template>
 
-      <h3>Personal Details</h3>
+          <mat-input-container class="full-width"> <input matInput type="text" placeholder="Name" formControlName="name" required>
+            <mat-error *ngIf="formErrors.name">
+              {{formErrors.name}}
+            </mat-error>
+          </mat-input-container>
 
-      <mat-input-container class="full-width"> <input matInput type="text" placeholder="Name" formControlName="name" required>
-        <mat-error *ngIf="formErrors.name">
-          {{formErrors.name}}
-        </mat-error>
-      </mat-input-container>
+          <mat-input-container class="full-width">
+            <input matInput type="email" placeholder="Contact" formControlName="contact">
+            <mat-error *ngIf="formErrors.contact">
+              {{formErrors.contact}}
+            </mat-error>
+          </mat-input-container>
+          <div>
+            <button mat-button matStepperNext type="button">Next</button>
+          </div>
+        </mat-step>
+        <mat-step [stepControl]="secondFormGroup">
+          <ng-template matStepLabel>Breakage Info</ng-template>
+          <mat-form-field>
+            <mat-select placeholder="Boat Number" formControlName="boatID" required>
+              <mat-option *ngFor="let id of boats" [value]="id">{{id}}</mat-option>
+              <mat-error *ngIf="formErrors.boatID">
+                {{formErrors.boatID}}
+              </mat-error>
+            </mat-select>
+          </mat-form-field>
+          <br />
+          <mat-form-field>
+            <mat-select placeholder="Importance" formControlName="importance" required>
+              <mat-option *ngFor="let id of levels" [value]="id">{{id}}</mat-option>
+              <mat-error *ngIf="formErrors.importance">
+                {{formErrors.importance}}
+              </mat-error>
+            </mat-select>
+          </mat-form-field>
+          <br />
+          <mat-form-field>
+            <mat-select placeholder="Part" formControlName="part" required>
+              <mat-option *ngFor="let p of parts" [value]="p">{{p}}</mat-option>
+              <mat-error *ngIf="formErrors.part">
+                {{formErrors.part}}
+              </mat-error>
+            </mat-select>
+          </mat-form-field>
 
-      <mat-input-container class="full-width">
-        <input matInput type="email" placeholder="Contact" formControlName="contact">
-        <mat-error *ngIf="formErrors.contact">
-          {{formErrors.contact}}
-        </mat-error>
-      </mat-input-container>
+          <mat-input-container class="full-width">
+            <textarea matInput type="text" placeholder="Describe the Issue" formControlName="details" #details required rows="4" maxlength="256"> </textarea>
+            <mat-hint align="end">{{details.value.length}} / 256</mat-hint>
+            <mat-error *ngIf="formErrors.details">
+              {{formErrors.details}}
+            </mat-error>
+          </mat-input-container>
+        </mat-step>
 
-      <h3>Breakage Info</h3>
-      <mat-form-field>
-        <mat-select placeholder="Boat Number" formControlName="boatID" required>
-          <mat-option *ngFor="let id of boats" [value]="id">{{id}}</mat-option>
-          <mat-error *ngIf="formErrors.boatID">
-            {{formErrors.boatID}}
-          </mat-error>
-        </mat-select>
-      </mat-form-field>
-      <br />
-      <mat-form-field>
-        <mat-select placeholder="Importance" formControlName="importance" required>
-          <mat-option *ngFor="let id of levels" [value]="id">{{id}}</mat-option>
-          <mat-error *ngIf="formErrors.importance">
-            {{formErrors.importance}}
-          </mat-error>
-        </mat-select>
-      </mat-form-field>
-      <br />
-      <mat-form-field>
-        <mat-select placeholder="Part" formControlName="part" required>
-          <mat-option *ngFor="let p of parts" [value]="p">{{p}}</mat-option>
-          <mat-error *ngIf="formErrors.part">
-            {{formErrors.part}}
-          </mat-error>
-        </mat-select>
-      </mat-form-field>
+        <mat-step>
+          <ng-template matStepLabel>Upload Image</ng-template>
 
-      <mat-input-container class="full-width">
-        <textarea matInput type="text" placeholder="Describe the Issue" formControlName="details" #details required rows="4" maxlength="256"> </textarea>
-        <mat-hint align="end">{{details.value.length}} / 256</mat-hint>
-        <mat-error *ngIf="formErrors.details">
-          {{formErrors.details}}
-        </mat-error>
-      </mat-input-container>
+          <button mat-raised-button type="button" onclick="document.getElementById('file').click();">Select & Upload Image</button>
+          <input type="file" ng2FileSelect [uploader]="uploader" style="display:none;" id="file" name="file" />
+          <br />
+          <br />
 
-      <br />
-      <br />
-      <button mat-raised-button color="accent" type="submit">Submit</button>
+          <mat-progress-spinner *ngIf="!imageLoaded" mode="indeterminate"></mat-progress-spinner>
+
+          <cl-image *ngIf="imageID" quality="auto" fetch_format="auto" width="300" crop="scale" public-id={{imageID}}>
+            <cl-transformation border="2px_solid_rgb:000000" radius="10"></cl-transformation>
+          </cl-image>
+
+          <br />
+          <button mat-button matStepperPrevious type="button">Back</button>
+          <button mat-button matStepperNext type="button">Next</button>
+        </mat-step>
+
+        <mat-step>
+          <ng-template matStepLabel>Check Entry</ng-template>
+          <breakage-card [breakages]="breakage"></breakage-card>
+          <br />
+          <button mat-button matStepperPrevious type="button">Back</button>
+          <button mat-raised-button color="accent" type="submit">Submit</button>
+        </mat-step>
+      </mat-vertical-stepper>
     </form>
+
 
   </mat-card-content>
 </mat-card>
 <mat-progress-bar mode="indeterminate" *ngIf="breakages.length <= 0"></mat-progress-bar>
-<breakage-card [breakages]="breakages" (onRemove)="openDialog($event)"></breakage-card>
+<breakage-card [breakages]="breakages"></breakage-card>

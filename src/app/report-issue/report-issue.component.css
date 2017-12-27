@@ -5,3 +5,12 @@
 /deep/ .mat-option:hover {
   color: #29b6f6;
 }
+
+/deep/ .mat-vertical-stepper-header{
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+
+/deep/ .mat-vertical-content-container{
+  margin-left: 12px !important;
+}
