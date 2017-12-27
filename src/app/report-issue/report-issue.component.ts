@@ -47,7 +47,7 @@ export class ReportIssueComponent {
   breakages: BreakageInfo[];
   loadingBreakages = true;
 
-  private uploader: FileUploader;
+  uploader: FileUploader;
 
   constructor(
     private fb: FormBuilder,
