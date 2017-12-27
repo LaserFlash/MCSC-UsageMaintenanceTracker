@@ -54,7 +54,8 @@ export class BoatBreakageService {
         details: breakage.details,
         timestampFixed: null,
         timestamp: breakage.timestamp,
-        id: null
+        id: null,
+        imageID: breakage.imageID
       }
     ));
   }
@@ -76,7 +77,8 @@ export class BoatBreakageService {
             details: breakage.details,
             timestampFixed: new Date(),
             timestamp: breakage.timestamp,
-            id: null
+            id: null,
+            imageID: breakage.imageID
           }
         );
     this.remove(breakage);

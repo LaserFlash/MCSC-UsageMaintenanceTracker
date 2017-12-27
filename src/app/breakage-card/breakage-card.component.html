@@ -5,7 +5,7 @@
     <mat-card-subtitle>{{getImportanceName(item.importance)}}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <div fxLayout="row" fxLayout.xs="column" fxFlex>
+    <div fxLayout="row" fxLayout.lt-md="column" fxFlex>
       <div class="breakage-card-left">
         <ul class="breakage-card-list">
           <li *ngIf="item.part">
@@ -32,10 +32,22 @@
         </p>
       </div>
 
+      <div class="imageDiv" fxFlex>
+        <div fxLayout="col">
+          <div fxFlex="calc(50% -100px)"></div>
+          <div fxFlex>
+            <cl-image *ngIf="item.imageID" quality="auto" fetch_format="auto" width="200" crop="scale" public-id={{item.imageID}}>
+              <cl-transformation border="1px_solid_rgb:000000" radius="8"></cl-transformation>
+            </cl-image>
+          </div>
+          <div fxFlex="calc(50% -100px)"></div>
+        </div>
+      </div>
     </div>
 
+
   </mat-card-content>
-  <mat-card-actions>
+  <mat-card-actions *ngIf="buttonText">
     <button mat-button color="warn" (click)="openDialog(item)"><b>{{buttonText}}</b></button>
   </mat-card-actions>
 

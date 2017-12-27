@@ -8,7 +8,8 @@ export class BreakageInfo {
     public details: string,
     public timestampFixed: Date,
     public timestamp: Date,
-    public id: string
+    public id: string,
+    public imageID: string
   )
   {}
 }
