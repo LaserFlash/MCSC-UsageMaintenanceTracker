@@ -1,31 +1,34 @@
 <mat-card>
   <h2>{{title}}</h2>
   <mat-card-content>
-    <form (ngSubmit)="onSubmit()" [formGroup]="breakageForm" novalidate>
-      <mat-vertical-stepper [linear]="isLinear">
-        <mat-step [stepControl]="firstFormGroup">
+    <form (ngSubmit)="onSubmit()" [formGroup]="breakageForm">
+      <mat-vertical-stepper #stepper formArrayName="formArray" linear>
+        <mat-step formGroupName="0" [stepControl]="breakageForm.get('formArray').get([0])">
           <ng-template matStepLabel>Fill out your name</ng-template>
 
-          <mat-input-container class="full-width"> <input matInput type="text" placeholder="Name" formControlName="name" required>
+          <mat-form-field class="full-width">
+            <input matInput placeholder="First name, Last name" formControlName="name" required>
             <mat-error *ngIf="formErrors.name">
               {{formErrors.name}}
             </mat-error>
-          </mat-input-container>
+          </mat-form-field>
 
-          <mat-input-container class="full-width">
+          <mat-form-field class="full-width">
             <input matInput type="email" placeholder="Contact" formControlName="contact">
             <mat-error *ngIf="formErrors.contact">
               {{formErrors.contact}}
             </mat-error>
-          </mat-input-container>
-          <div>
-            <button mat-button matStepperNext type="button">Next</button>
-          </div>
+          </mat-form-field>
+
+          <br />
+          <button mat-button matStepperNext type="button">Next</button>
+
         </mat-step>
-        <mat-step [stepControl]="secondFormGroup">
-          <ng-template matStepLabel>Breakage Info</ng-template>
+
+        <mat-step formGroupName="1" [stepControl]="breakageForm.get('formArray').get([1])">
+          <ng-template matStepLabel>Enter Breakage Info</ng-template>
           <mat-form-field>
-            <mat-select placeholder="Boat Number" formControlName="boatID" required>
+            <mat-select placeholder="Boat Number" formControlName="boatID" name="boatNumber" required>
               <mat-option *ngFor="let id of boats" [value]="id">{{id}}</mat-option>
               <mat-error *ngIf="formErrors.boatID">
                 {{formErrors.boatID}}
@@ -34,7 +37,7 @@
           </mat-form-field>
           <br />
           <mat-form-field>
-            <mat-select placeholder="Importance" formControlName="importance" required>
+            <mat-select placeholder="Importance" formControlName="importance" name="importance" required>
               <mat-option *ngFor="let id of levels" [value]="id">{{id}}</mat-option>
               <mat-error *ngIf="formErrors.importance">
                 {{formErrors.importance}}
@@ -43,7 +46,7 @@
           </mat-form-field>
           <br />
           <mat-form-field>
-            <mat-select placeholder="Part" formControlName="part" required>
+            <mat-select placeholder="Part" formControlName="part" name="part" required>
               <mat-option *ngFor="let p of parts" [value]="p">{{p}}</mat-option>
               <mat-error *ngIf="formErrors.part">
                 {{formErrors.part}}
@@ -58,13 +61,16 @@
               {{formErrors.details}}
             </mat-error>
           </mat-input-container>
+          <br />
+          <button mat-button matStepperPrevious type="button">Back</button>
+          <button mat-button matStepperNext type="button">Next</button>
         </mat-step>
 
-        <mat-step>
+        <mat-step optional>
           <ng-template matStepLabel>Upload Image</ng-template>
 
           <button mat-raised-button type="button" onclick="document.getElementById('file').click();">Select & Upload Image</button>
-          <input type="file" ng2FileSelect [uploader]="uploader" style="display:none;" id="file" name="file" />
+          <input type="file" accept="image/*" ng2FileSelect [uploader]="uploader" style="display:none;" id="file" name="file" />
           <br />
           <br />
 
