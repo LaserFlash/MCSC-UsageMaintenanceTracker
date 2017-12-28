@@ -60,6 +60,8 @@ import { CloudinaryModule, CloudinaryConfiguration } from '@cloudinary/angular-5
 import { Cloudinary } from 'cloudinary-core';
 import { FileUploadModule } from 'ng2-file-upload';
 
+import { ServiceWorkerModule } from '@angular/service-worker';
+
 
 @NgModule({
   declarations: [
@@ -107,8 +109,9 @@ import { FileUploadModule } from 'ng2-file-upload';
     MatStepperModule,
     CloudinaryModule.forRoot({ Cloudinary }, { cloud_name: 'dhnh6uqep', upload_preset: 'oyywau4l' } as CloudinaryConfiguration),
     FileUploadModule,
+    ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production}),
   ],
-  providers: [BoatUsageService, BoatBreakageService, SafetyDocsService, ThemeTrackerService],
+  providers: [BoatUsageService, BoatBreakageService, SafetyDocsService, ThemeTrackerService,],
   bootstrap: [AppComponent]
 })
 export class AppModule {

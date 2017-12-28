@@ -17,6 +17,7 @@
       "tsconfig": "tsconfig.app.json",
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "",
+      "serviceWorker": true,
       "styles": [
         "styles.css",
         "theme.scss"
@@ -52,6 +53,7 @@
   },
   "defaults": {
     "styleExt": "css",
-    "component": {}
+    "component": {
+    }
   }
 }
