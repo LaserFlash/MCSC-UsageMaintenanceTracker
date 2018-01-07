@@ -38,7 +38,7 @@ export class SortFilterBarComponent {
 
   @ViewChild("startPicker") startPicker : ElementRef
   @ViewChild("endPicker") endPicker : ElementRef
-  private clearDates(){
+  clearDates(){
     this.startMaxDate = new Date();
     this.endMaxDate = new Date();
     this.endMinDate = new Date(1997,8,27);
@@ -47,12 +47,12 @@ export class SortFilterBarComponent {
     this.filter()
   }
 
-  private selectStart(date:any){
+  selectStart(date:any){
     this.endMinDate = date.value;
     this.filter()
   }
 
-  private selectEnd(date:any){
+  selectEnd(date:any){
     this.startMaxDate = date.value;
     this.filter()
   }
