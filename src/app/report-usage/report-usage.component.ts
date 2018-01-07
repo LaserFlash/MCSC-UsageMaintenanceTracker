@@ -44,7 +44,7 @@ export class ReportUsageComponent {
     this.usageForm = this.fb.group({
       boatID: ['', Validators.required],
       duration: ['', [Validators.required, Validators.pattern(/[0-9]+/), Validators.min(0)]],
-      date: new FormControl({value:this.maxDate,disabled:true},Validators.required)
+      date: new FormControl({value:this.maxDate},Validators.required)
     });
 
     this.usageForm.valueChanges
@@ -100,7 +100,7 @@ export class ReportUsageComponent {
         this.usageForm.get("duration").value,
         this.usageForm.get("date").value
       )
-      
+
       this.usageService.addUsageInfo(usage).then(
         () => (
           this.snackBar.open("Usage Succesfully Submited", "Close", {

@@ -28,9 +28,9 @@
               </tr>
               <tr>
                 <mat-form-field>
-                  <input matInput [matDatepicker]="picker" [max]="maxDate" formControlName="date" placeholder="Choose a Date" required>
+                  <input matInput [matDatepicker]="picker" [max]="maxDate" formControlName="date" readonly (focus)="picker.open()" (click)="picker.open()" placeholder="Choose a Date" required>
                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                  <mat-datepicker #picker disabled="false"></mat-datepicker>
+                  <mat-datepicker #picker></mat-datepicker>
 
                   <mat-error *ngIf="formErrors.date">
                     {{formErrors.date}}

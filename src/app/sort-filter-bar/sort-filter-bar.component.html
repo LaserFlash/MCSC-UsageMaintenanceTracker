@@ -38,14 +38,14 @@
     <div fxFlex.lt-lg fxFlex="200px">
       Between Dates <br />
       <mat-form-field>
-        <input matInput #startPicker [matDatepicker]="startPicker" [max]="startMaxDate" placeholder="Start Date" disabled (dateInput)="selectStart($event)">
+        <input matInput #startPicker (focus)="startPicker.open()" (click)="startPicker.open()" [matDatepicker]="startPicker" [max]="startMaxDate" placeholder="Start Date" readonly (dateInput)="selectStart($event)">
         <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
-        <mat-datepicker #startPicker disabled="false"></mat-datepicker>
+        <mat-datepicker #startPicker></mat-datepicker>
       </mat-form-field>
       <mat-form-field>
-        <input matInput #endPicker [matDatepicker]="endPicker" [max]="endMaxDate" [min]="endMinDate" placeholder="End Date" disabled (dateInput)="selectEnd($event)">
+        <input matInput #endPicker (focus)="endPicker.open()" (click)="endPicker.open()" [matDatepicker]="endPicker" [max]="endMaxDate" [min]="endMinDate" placeholder="End Date" readonly (dateInput)="selectEnd($event)">
         <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
-        <mat-datepicker #endPicker disabled="false"></mat-datepicker>
+        <mat-datepicker #endPicker></mat-datepicker>
       </mat-form-field>
       <button mat-button type="button" (click)="clearDates()">Clear Dates</button>
     </div>
