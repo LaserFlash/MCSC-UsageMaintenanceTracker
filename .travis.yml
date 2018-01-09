@@ -15,4 +15,9 @@ script:
    - ng build --prod --aot
 
 after_success:
-   - firebase deploy --token $FIREBASE_TOKEN
+   - deploy:
+      provider: firebase
+      token: $FIREBASE_TOKEN
+      local_dir: dist
+      on:
+         branch: webDev
