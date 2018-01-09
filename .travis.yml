@@ -19,4 +19,4 @@ deploy:
    token: $FIREBASE_TOKEN
    local_dir: dist
    on:
-      branch: webDev
+      branch: master
