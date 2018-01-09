@@ -107,7 +107,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     MatListModule,
     MatCheckboxModule,
     MatStepperModule,
-    CloudinaryModule.forRoot({ Cloudinary }, { cloud_name: 'dhnh6uqep', upload_preset: 'oyywau4l' } as CloudinaryConfiguration),
+    CloudinaryModule.forRoot({Cloudinary}, { cloud_name: 'dhnh6uqep', upload_preset: 'oyywau4l' }),
     FileUploadModule,
     ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production}),
   ],

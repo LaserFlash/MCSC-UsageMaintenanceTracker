@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef } from '@angular/core';
 import { BreakageInfo } from '../objects/breakageInfo';
 import { BoatBreakageService } from '../boat-breakage.service'
 
@@ -31,6 +31,54 @@ export class SortFilterBarComponent {
   partappliedFilters: string[] = [];
   sortBy: string = "Sort by";
 
+  startMaxDate:Date = new Date();
+  endMaxDate:Date = new Date();
+  endMinDate:Date = new Date(1997,8,27);
+
+
+  @ViewChild("startPicker") startPicker : ElementRef
+  @ViewChild("endPicker") endPicker : ElementRef
+  clearDates(){
+    this.startMaxDate = new Date();
+    this.endMaxDate = new Date();
+    this.endMinDate = new Date(1997,8,27);
+    this.startPicker.nativeElement.value = " ";
+    this.endPicker.nativeElement.value = " ";
+    this.filter()
+  }
+
+  selectStart(date:any){
+    this.endMinDate = date.value;
+    this.filter()
+  }
+
+  selectEnd(date:any){
+    this.startMaxDate = date.value;
+    this.filter()
+  }
+
+  private filter(){
+    let filtered;
+    /* Apply filters taking into account any boat filters also applied */
+    if (this.partappliedFilters.length == 0) {
+      filtered = this.original.filter(item => this.boatFilter(item));
+    } else {
+      filtered = this.breakages.filter(item => this.partFilter(item)).filter(item => this.boatFilter(item));
+    }
+
+    filtered = filtered.filter(item => {
+      if(item.timestampFixed != undefined){
+        return item.timestampFixed >= this.endMinDate && item.timestampFixed <= this.startMaxDate;
+      }
+      return item.timestamp >= this.endMinDate && item.timestamp <= this.startMaxDate;
+    })
+
+    this.breakages.splice(0, this.breakages.length);
+    for (let i = 0; i < filtered.length; i++) {
+      this.breakages.push(filtered[i]);
+    }
+  }
+
   /** Add a boat filter to the displayed data */
   private addFilter(key: string) {
     let index = this.appliedFilters.indexOf(key);
@@ -41,18 +89,7 @@ export class SortFilterBarComponent {
       this.appliedFilters.push(key);  //add filter
     }
 
-    let filtered;
-    /* Apply filters taking into account any part filters also applied */
-    if (this.appliedFilters.length == 0) {
-      filtered = this.original.filter(item => this.partFilter(item));
-    } else {
-      filtered = this.original.filter(item => this.boatFilter(item)).filter(item => this.partFilter(item));
-    }
-
-    this.breakages.splice(0, this.breakages.length);
-    for (let i = 0; i < filtered.length; i++) {
-      this.breakages.push(filtered[i]);
-    }
+    this.filter()
   }
 
   /** Add a part filter to the displayed data */
