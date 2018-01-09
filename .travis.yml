@@ -14,10 +14,9 @@ before_script:
 script:
    - ng build --prod --aot
 
-after_success:
-   - deploy:
-      provider: firebase
-      token: $FIREBASE_TOKEN
-      local_dir: dist
-      on:
-         branch: webDev
+deploy:
+   provider: firebase
+   token: $FIREBASE_TOKEN
+   local_dir: dist
+   on:
+      branch: webDev
