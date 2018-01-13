@@ -1,5 +1,12 @@
 .breakage-card {
   margin-top: 10px;
+  margin-bottom: 10px;
+}
+@media (min-width:1279px) {
+  .breakage-card {
+    padding-bottom: 0px;
+  }
+
 }
 
 .breakage-card-left {
@@ -12,7 +19,8 @@
 }
 
 .breakage-card-details {
-  padding-right: 20px;
+  padding-right: 16px;
+  margin-right: 24px;
 }
 
 .remove-button {
@@ -23,14 +31,20 @@
   text-align: center;
 }
 
-/deep/
-.mat-card-image{
-  margin-left: -8px !important;
+/deep/ .mat-card-image {
+  max-height: 300px !important;
+  object-fit: cover;
 }
-@media (min-width:600px){
-  /deep/
-  .mat-card-image{
-    margin-left: 12px !important;
-    max-width: 100% !important;
+
+@media (min-width:600px) {
+  /deep/ .mat-card-image {
+    margin-bottom: -5px !important;
+    max-height:500px !important;
+    object-fit: cover;
+    display: inline-block;
   }
+}
+
+.largeActions {
+  margin-bottom: 0px;
 }

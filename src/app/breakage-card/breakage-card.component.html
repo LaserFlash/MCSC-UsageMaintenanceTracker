@@ -1,14 +1,14 @@
 <mat-card [style.backgroundColor]="getBGColour(item.importance)" class="breakage-card" *ngFor="let item of breakages">
 
-  <div fxLayout="row" fxLayout.xs=column>
-    <div fxFlex=70>
+  <div fxLayout="row" fxLayout.lt-lg=column>
+    <div fxFlex=70 style="display: inline-block;">
       <mat-card-header>
         <img *ngIf="getBoatName(item.boatID)" mat-card-avatar src="assets/images/boat_{{item.boatID}}.webp" alt={{getBoatName(item.boatID)}} />
         <mat-card-title><b>{{getBoatName(item.boatID)}}</b><br /></mat-card-title>
         <mat-card-subtitle>{{getImportanceName(item.importance)}}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
-        <div fxLayout="row" fxLayout.lt-md="column" fxFlex>
+        <div fxLayout="row" fxLayout.xs="column" fxFlex>
           <div class="breakage-card-left">
             <ul class="breakage-card-list">
               <li *ngIf="item.part">
@@ -38,21 +38,19 @@
 
       </mat-card-content>
 
-      <mat-card-actions *ngIf="buttonText">
+      <mat-card-actions class="largeActions" fxHide.lt-lg *ngIf="buttonText">
         <button mat-button color="warn" (click)="openDialog(item)"><b>{{buttonText}}</b></button>
       </mat-card-actions>
     </div>
 
-    <div fxFlex>
-      <cl-image mat-card-image *ngIf="item.imageID" quality="auto" fetch_format="auto" width="200" crop="scale" public-id={{item.imageID}}>
-        <cl-transformation if="w_lt_600">
-        </cl-transformation>
-        <cl-transformation effect="blur:400" underlay={{item.imageID}} width="600" crop="scale">
-        </cl-transformation>
-        <cl-transformation if="end">
-        </cl-transformation>
-      </cl-image>
+    <div fxFlex *ngIf="item.imageID">
+      <img fxHide.lt-lg mat-card-image src="http://res.cloudinary.com/dhnh6uqep/image/upload/w_900,/c_scale,e_blur:1000,u_{{getUnderlay(item.imageID)}},w_900,h_1800,c_fill,/v1/{{item.imageID}}" />
+      <img fxHide fxHide.lt-lg=false mat-card-image src="http://res.cloudinary.com/dhnh6uqep/image/upload/h_600,/c_scale,e_blur:600,u_{{getUnderlay(item.imageID)}},w_1200,h_600,c_fill/v1/{{item.imageID}}" />
+
     </div>
 
   </div>
+  <mat-card-actions fxHide fxHide.lt-lg=false *ngIf="buttonText">
+    <button mat-button color="warn" (click)="openDialog(item)"><b>{{buttonText}}</b></button>
+  </mat-card-actions>
 </mat-card>
