@@ -50,4 +50,8 @@ export class BreakageCardComponent {
     if(n == 1) return "#fff263"
     if(n == 0) return "#6ab7ff"
   }
+
+  private getUnderlay(s:string){
+    return s.replace("/",":");
+  }
 }
