@@ -23,7 +23,14 @@
   text-align: center;
 }
 
-.imageDiv {
-  height: 100%;
-  width: 100%;
+/deep/
+.mat-card-image{
+  margin-left: -8px !important;
+}
+@media (min-width:600px){
+  /deep/
+  .mat-card-image{
+    margin-left: 12px !important;
+    max-width: 100% !important;
+  }
 }
