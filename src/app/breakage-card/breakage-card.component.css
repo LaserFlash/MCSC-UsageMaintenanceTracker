@@ -39,7 +39,7 @@
 @media (min-width:600px) {
   /deep/ .mat-card-image {
     margin-bottom: -5px !important;
-    max-height:500px !important;
+    min-height:350px !important;
     object-fit: cover;
     display: inline-block;
   }
