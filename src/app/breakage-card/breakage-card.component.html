@@ -43,8 +43,9 @@
       </mat-card-actions>
     </div>
 
-    <div fxFlex *ngIf="item.imageID">
-      <img fxHide.lt-lg mat-card-image src="https://res.cloudinary.com/dhnh6uqep/image/upload/w_900,/c_scale,e_blur:1000,u_{{getUnderlay(item.imageID)}},w_900,h_1800,c_fill,/v1/{{item.imageID}}" />
+    <div fxFlex *ngIf="item.imageID" (click)="openModal(item.imageID)">
+      <img
+      fxHide.lt-lg mat-card-image src="https://res.cloudinary.com/dhnh6uqep/image/upload/w_900,/c_scale,e_blur:1000,u_{{getUnderlay(item.imageID)}},w_900,h_1800,c_fill,/v1/{{item.imageID}}" />
       <img fxHide fxHide.lt-lg=false mat-card-image src="https://res.cloudinary.com/dhnh6uqep/image/upload/h_600,/c_scale,e_blur:600,u_{{getUnderlay(item.imageID)}},w_1200,h_600,c_fill/v1/{{item.imageID}}" />
 
     </div>
