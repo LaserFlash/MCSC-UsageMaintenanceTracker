@@ -62,7 +62,7 @@ export class BreakageCardComponent {
   }
 
   private openModal(id: string) {
-    let base = "https://res.cloudinary.com/dhnh6uqep/image/upload/v1/url"
+    let base = "https://res.cloudinary.com/dhnh6uqep/image/upload/q_auto//url"
     this.dialogsService.imageModal(base.replace("url",id));
   }
 }

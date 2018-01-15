@@ -32,7 +32,9 @@
           {{routeLink.label}}
       </a>
     </mat-nav-list>
-    <mat-list style="position: absolute; bottom: 15px;">
+    <br />
+    <button mat-button (click)="toggleDark(); sidenav.close()">TOGGLE DARK THEME</button>
+    <mat-list style="position: relative; height: auto; padding-top:64px">
       <a style="text-decoration: none;" href="https://laserflash.tk/" mat-list-item>
       ©2017 BrynTBennett
     </a>
@@ -40,8 +42,6 @@
       <img width="32" width="32" src="https://unpkg.com/simple-icons@latest/icons/github.svg" /> &nbsp; Source Code
     </a>
     </mat-list>
-    <br/>
-    <button mat-button (click)="toggleDark(); sidenav.close()">TOGGLE DARK THEME</button>
   </mat-sidenav>
 
   <div class="sidenav-content">
