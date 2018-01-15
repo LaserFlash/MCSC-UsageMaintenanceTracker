@@ -16,6 +16,7 @@ export class SortFilterBarComponent {
   @Input() original: BreakageInfo[];
 
   constructor(private breakageService: BoatBreakageService) { }
+  ngOnInit() { this.filter() }
 
   sortList: string[] = ["Newest", "Oldest", "Most Important", "Least Important", "Boat"];
   filterList: string[] = UserFriendlyBoats.filter((s, i) => {
