@@ -17,8 +17,8 @@
               <li>
                 <b>Reported by:</b> {{item.name}}
               </li>
-              <li>
-                {{item.contact}}
+              <li *ngIf="item.contact">
+                <b>Contact:</b> {{item.contact}}
               </li>
               <li *ngIf="item.timestamp">
                 <b>Reported:</b> {{dateDisplay(item.timestamp)}}
