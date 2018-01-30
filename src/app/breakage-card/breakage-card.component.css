@@ -33,12 +33,13 @@
 
 /deep/ .mat-card-image {
   max-height: 300px !important;
+  margin-bottom: -6px !important; 
   object-fit: cover;
 }
 
 @media (min-width:600px) {
   /deep/ .mat-card-image {
-    margin-bottom: -5px !important;
+    margin-bottom: -6px !important;
     min-height:350px !important;
     object-fit: cover;
     display: inline-block;
