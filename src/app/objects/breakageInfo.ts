@@ -10,6 +10,5 @@ export class BreakageInfo {
     public timestamp: Date = null,
     public id: string = null,
     public imageID: string = null
-  )
-  {}
+  ) {}
 }

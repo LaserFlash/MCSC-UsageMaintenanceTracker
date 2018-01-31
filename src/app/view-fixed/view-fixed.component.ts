@@ -8,7 +8,10 @@ import { DialogsService } from '../dialog/dialogs.service';
   templateUrl: './view-fixed.component.html',
   styleUrls: ['./view-fixed.component.css']
 })
-export class ViewFixedComponent{
+export class ViewFixedComponent {
+  breakages: BreakageInfo[];
+  original: BreakageInfo[];
+
   constructor(
     private breakageService: BoatBreakageService,
     private dialogsService: DialogsService
@@ -16,7 +19,4 @@ export class ViewFixedComponent{
     this.breakages = breakageService.fixedItems;
     this.original = breakageService.fixedItemsOriginal;
   }
-  breakages: BreakageInfo[];
-  original: BreakageInfo[];
-
 }

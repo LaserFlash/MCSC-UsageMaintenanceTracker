@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { DateAdapter } from '@angular/material';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
@@ -16,61 +16,18 @@ const NUMBER_REGEX = /[0-9]+/;
   styleUrls: ['./report-usage.component.css']
 })
 export class ReportUsageComponent {
-  constructor(
-    private dateAdapter: DateAdapter<Date>,
-    private usageService: BoatUsageService,
-    private fb: FormBuilder,
-    public snackBar: MatSnackBar
-    )
-    {
-      this.dateAdapter.setLocale('en-nz');
-      this.createForm();
-    }
 
-  title = "Report Boat Usage";
+  title = 'Report Boat Usage';
   maxDate = new Date();
-  boats = UserFriendlyBoats.filter((s,i)=>{
-    let yes: boolean = false;
-    Boats.forEach(j=>{
-      yes ? true: yes = i == j;
+  boats = UserFriendlyBoats.filter((s, i) => {
+    let yes = false;
+    Boats.forEach(j => {
+      yes ? true : yes = i === j;
     })
     return yes;
   });
 
   usageForm: FormGroup;
-
-  /** Build the form */
-  private createForm() {
-    this.usageForm = this.fb.group({
-      boatID: ['', Validators.required],
-      duration: ['', [Validators.required, Validators.pattern(/[0-9]+/), Validators.min(0)]],
-      date: new FormControl({value:this.maxDate},Validators.required)
-    });
-
-    this.usageForm.valueChanges
-      .subscribe(data => this.onValueChanged(data));
-
-    this.onValueChanged(); // (re)set validation messages now
-  }
-
-  /** Update error messages due to validation */
-  private onValueChanged(data?: any) {
-    if (!this.usageForm) { return; }
-    const form = this.usageForm;
-
-    for (const field in this.formErrors) {
-      // clear previous error message (if any)
-      this.formErrors[field] = '';
-      const control = form.get(field);
-
-      if (control && control.dirty && !control.valid) {
-        const messages = this.validationMessages[field];
-        for (const key in control.errors) {
-          this.formErrors[field] += messages[key] + ' ';
-        }
-      }
-    }
-  }
 
   formErrors = {
     'boatID': '',
@@ -92,18 +49,63 @@ export class ReportUsageComponent {
     }
   };
 
+  constructor(
+    private dateAdapter: DateAdapter<Date>,
+    private usageService: BoatUsageService,
+    private fb: FormBuilder,
+    public snackBar: MatSnackBar
+    ) {
+      this.dateAdapter.setLocale('en-nz');
+      this.createForm();
+    }
+
+  /** Build the form */
+  private createForm() {
+    this.usageForm = this.fb.group({
+      boatID: ['', Validators.required],
+      duration: ['', [Validators.required, Validators.pattern(/[0-9]+/), Validators.min(0)]],
+      date: new FormControl({value: this.maxDate}, Validators.required)
+    });
+
+    this.usageForm.valueChanges
+      .subscribe(data => this.onValueChanged(data));
+
+    this.onValueChanged(); // (re)set validation messages now
+  }
+
+  /** Update error messages due to validation */
+  private onValueChanged(data?: any) {
+    if (!this.usageForm) { return; }
+    const form = this.usageForm;
+
+    // tslint:disable-next-line:forin
+    for (const field in this.formErrors) {
+      // clear previous error message (if any)
+      this.formErrors[field] = '';
+      const control = form.get(field);
+
+      if (control && control.dirty && !control.valid) {
+        const messages = this.validationMessages[field];
+        // tslint:disable-next-line:forin
+        for (const key in control.errors) {
+          this.formErrors[field] += messages[key] + ' ';
+        }
+      }
+    }
+  }
+
   /** Build BreakageInfo Object from submited data */
   public onSubmit() {
     if (this.usageForm.valid) {
-      let usage = new UsageInfo(
-        BoatNameConversionHelper.numberFromUserFriendlyName(this.usageForm.get("boatID").value),
-        this.usageForm.get("duration").value,
-        this.usageForm.get("date").value
+      const usage = new UsageInfo(
+        BoatNameConversionHelper.numberFromUserFriendlyName(this.usageForm.get('boatID').value),
+        this.usageForm.get('duration').value,
+        this.usageForm.get('date').value
       )
 
       this.usageService.addUsageInfo(usage).then(
         () => (
-          this.snackBar.open("Usage Succesfully Submited", "Close", {
+          this.snackBar.open('Usage Succesfully Submited', 'Close', {
             duration: 2000,
           }),
           this.createForm()
@@ -111,7 +113,7 @@ export class ReportUsageComponent {
       )
         .catch(
         () =>
-          this.snackBar.open("Something Went Wrong", "Close", {
+          this.snackBar.open('Something Went Wrong', 'Close', {
             duration: 2000,
           })
         );

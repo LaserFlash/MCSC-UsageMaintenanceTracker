@@ -8,30 +8,30 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class BoatUsageService {
-  private itemsCollection : AngularFirestoreCollection<UsageInfo>
+  private itemsCollection: AngularFirestoreCollection<UsageInfo>
   public items: Observable<UsageInfo[]>;
 
   private sortedUsage : Observable<UsageInfo[]>;
-
+  
   public lastUsageEachBoat: UsageInfo[] = [];
 
-  public usageData:UsageInfo[] = [];
-  public usageTimes:number[] = [0,0,0,0,0,0,0,0];
+  public usageData: UsageInfo[] = [];
+  public usageTimes: number[] = [0, 0, 0, 0, 0, 0, 0, 0];
 
   public lastMonthUsageEachBoat: number[] = [0,0,0,0,0,0,0,0];
 
   constructor(db: AngularFirestore) {
-    this.itemsCollection = db.collection<UsageInfo>('/boatUsage', ref => ref.orderBy("date","desc").orderBy("boatID"));
+    this.itemsCollection = db.collection<UsageInfo>('/boatUsage', ref => ref.orderBy('date', 'desc').orderBy('boatID'));
     this.items = this.itemsCollection.valueChanges();
-    this.items.subscribe(val => { this.buildDataList(val,this.usageData); });
+    this.items.subscribe(val => { this.buildDataList(val, this.usageData); });
 
     this.sortedUsage = this.itemsCollection.valueChanges();
 
     this.sortedUsage.subscribe(val => {
-      var tmp: number[] = [];
+      const tmp: number[] = [];
       this.lastUsageEachBoat.length = 0;
       val.forEach(element => {
-        if(tmp.indexOf(element.boatID) < 0){
+        if (tmp.indexOf(element.boatID) < 0) {
           tmp.push(element.boatID);
           this.lastUsageEachBoat.push(element);
         }
@@ -61,11 +61,11 @@ export class BoatUsageService {
       )});
   }
 
-  addUsageInfo(usage: UsageInfo){
-    return Promise.resolve(this.itemsCollection.add({boatID:usage.boatID,duration:usage.duration,date:usage.date}));
+  addUsageInfo(usage: UsageInfo) {
+    return Promise.resolve(this.itemsCollection.add({boatID: usage.boatID, duration: usage.duration, date: usage.date}));
   }
 
-  private buildDataList(val: UsageInfo[], array: UsageInfo[]){
+  private buildDataList(val: UsageInfo[], array: UsageInfo[]) {
     array.length = 0;
     val.forEach(element => {
         array.push(element);
