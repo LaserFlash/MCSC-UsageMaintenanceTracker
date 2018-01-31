@@ -1,51 +1,55 @@
-<mat-card>
-  <h2>{{title}}</h2>
-  <mat-card-content>
-    <form (ngSubmit)="onSubmit()" [formGroup]="usageForm" novalidate>
-      <table>
-        <tr>
-          <td>
-            <mat-radio-group class="radio-group" formControlName="boatID" required>
-              <label> Boat Number</label>
-              <mat-radio-button class="radio-button" *ngFor="let id of boats" [value]="id">
-                {{id}}
-              </mat-radio-button>
-              <mat-error *ngIf="formErrors.boatID">
-                {{formErrors.boatID}}
-              </mat-error>
-            </mat-radio-group>
-            <br />
-          </td>
-          <td>
-            <table>
-              <tr>
-                <mat-input-container>
-                  <input matInput type="number" placeholder="Duration in hours" [min]="0" formControlName="duration" required>
-                  <mat-error *ngIf="formErrors.duration">
-                    {{formErrors.duration}}
+<div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px" class="card_bottom_pad">
+  <div fxFlex="50" fxLayout.lt-md="98">
+    <mat-card fxFlex>
+      <mat-card-title>{{title}}</mat-card-title>
+      <mat-card-content>
+        <form (ngSubmit)="onSubmit()" [formGroup]="usageForm" novalidate>
+          <table>
+            <tr>
+              <td>
+                <mat-radio-group class="radio-group" formControlName="boatID" required>
+                  <label> Boat Number</label>
+                  <mat-radio-button class="radio-button" *ngFor="let id of boats" [value]="id">
+                    {{id}}
+                  </mat-radio-button>
+                  <mat-error *ngIf="formErrors.boatID">
+                    {{formErrors.boatID}}
                   </mat-error>
-                </mat-input-container>
-              </tr>
-              <tr>
-                <mat-form-field>
-                  <input matInput [matDatepicker]="picker" [max]="maxDate" formControlName="date" readonly (focus)="picker.open()" (click)="picker.open()" placeholder="Choose a Date" required>
-                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                  <mat-datepicker #picker></mat-datepicker>
+                </mat-radio-group>
+                <br />
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <mat-input-container>
+                      <input matInput type="number" placeholder="Duration in hours" [min]="0" formControlName="duration" required>
+                      <mat-error *ngIf="formErrors.duration">
+                        {{formErrors.duration}}
+                      </mat-error>
+                    </mat-input-container>
+                  </tr>
+                  <tr>
+                    <mat-form-field>
+                      <input matInput [matDatepicker]="picker" [max]="maxDate" formControlName="date" readonly (focus)="picker.open()" (click)="picker.open()" placeholder="Choose a Date" required>
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
 
-                  <mat-error *ngIf="formErrors.date">
-                    {{formErrors.date}}
-                  </mat-error>
-                </mat-form-field>
-              </tr>
-            </table>
-          </td>
-        </tr>
-      </table>
-      <br />
-      <button mat-raised-button color="accent" type="submit">Submit</button>
-    </form>
+                      <mat-error *ngIf="formErrors.date">
+                        {{formErrors.date}}
+                      </mat-error>
+                    </mat-form-field>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <br />
+          <button mat-raised-button color="accent" type="submit">Submit</button>
+        </form>
 
-  </mat-card-content>
-</mat-card>
-<last-uses fxLayout="row" fxLayout.lt-md="column"></last-uses>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <last-uses fxFlex="100" fxFlex.lt-md="98"></last-uses>
+</div>
 <usage-graphs [dataLabel]="'Hours used'" [chartTitle]="'Total Boat Usage'" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px"></usage-graphs>

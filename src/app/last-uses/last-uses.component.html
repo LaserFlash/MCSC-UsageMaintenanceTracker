@@ -1,4 +1,4 @@
-<mat-card fxFlex="100" fxFlex.lt-md="98" class="card_top_pad card_bottom_pad">
+<mat-card>
   <mat-card-title>Last Use</mat-card-title>
   <mat-card-content>
     <mat-list>
@@ -7,7 +7,7 @@
         <h3 matLine> {{getBoatName(u.boatID)}} </h3>
         <p matLine>
           <span mat-line>{{u.duration}} hours</span>
-          <span mat-line> {{u.date | date}} </span>
+          <span mat-line>{{u.date | date}} </span>
         </p>
       </mat-list-item>
     </mat-list>
