@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { BreakageInfo } from '../objects/breakageInfo';
 import { BoatBreakageService } from '../boat-breakage.service'
 import { DialogsService } from '../dialog/dialogs.service';
-
-
 @Component({
   selector: 'view-issues',
   templateUrl: './view-issues.component.html',
@@ -12,6 +10,7 @@ import { DialogsService } from '../dialog/dialogs.service';
 export class ViewIssuesComponent {
   breakages: BreakageInfo[];
   original: BreakageInfo[];
+
   cardButtonText = 'Fix';
 
   constructor(
@@ -21,7 +20,6 @@ export class ViewIssuesComponent {
     this.breakages = breakageService.items;
     this.original = breakageService.original;
   }
-
 
   public openDialog(key: any) {
     this.dialogsService
