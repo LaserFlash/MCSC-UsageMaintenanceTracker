@@ -1,6 +1,22 @@
-<mat-card fxFlex="100" fxFlex.lt-md="98" class="card_top_pad">
+
+<mat-card fxFlex="70" fxFlex.lt-md="98"  style="height:100%;"class="card_bottom_pad">
   <mat-card-title>{{chartTitle}}</mat-card-title>
   <mat-card-content>
     <canvas baseChart [datasets]="chartData" [colors]="colors" [labels]="chartLabels" [options]="chartOptions" [legend]="chartLegend" [chartType]="chartType"></canvas>
   </mat-card-content>
+</mat-card>
+
+<mat-card fxFlex="30" fxFlex.lt-md="98" style="height:100%;" class="card_bottom_pad">
+    <mat-card-title>Usage Last Month</mat-card-title>
+    <mat-card-content>
+        <mat-list>
+            <mat-list-item *ngFor="let u of usageLastMonth; let i = index">
+              <img matListAvatar src="assets/images/boat_{{i}}.webp" alt={{getBoatName(u.boatID)}}>
+              <h3 matLine> {{getBoatName(i)}} </h3>
+              <p matLine>
+                <span mat-line>{{u}} hours</span>
+              </p>
+            </mat-list-item>
+          </mat-list>
+    </mat-card-content>
 </mat-card>

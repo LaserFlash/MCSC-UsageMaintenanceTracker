@@ -11,11 +11,14 @@ export class BoatUsageService {
   private itemsCollection: AngularFirestoreCollection<UsageInfo>
   public items: Observable<UsageInfo[]>;
 
-  private sortedUsage: Observable<UsageInfo[]>;
+  private sortedUsage : Observable<UsageInfo[]>;
+  
   public lastUsageEachBoat: UsageInfo[] = [];
 
   public usageData: UsageInfo[] = [];
   public usageTimes: number[] = [0, 0, 0, 0, 0, 0, 0, 0];
+
+  public lastMonthUsageEachBoat: number[] = [0,0,0,0,0,0,0,0];
 
   constructor(db: AngularFirestore) {
     this.itemsCollection = db.collection<UsageInfo>('/boatUsage', ref => ref.orderBy('date', 'desc').orderBy('boatID'));
@@ -36,13 +39,25 @@ export class BoatUsageService {
     });
 
     // TODO Do this better
-    /*Build or rearrange the UsageInfo into a list where each boats is in index order and added together*/
+    /* Build or rearrange the UsageInfo into a list where each boat is in index order and added together*/
     this.items.subscribe((list: UsageInfo[]) => {
       this.usageTimes.splice(0, this.usageTimes.length, 0, 0, 0, 0, 0);
       list.forEach((val: UsageInfo) => {
         const original = this.usageTimes[Boats.indexOf(val.boatID)];
         this.usageTimes.splice(Boats.indexOf(val.boatID), 1,  original + val.duration);
       }
+      )});
+
+      this.items.subscribe((list: UsageInfo[]) => {
+        this.lastMonthUsageEachBoat.splice(0, this.lastMonthUsageEachBoat.length, 0, 0, 0, 0, 0);
+        list.forEach((val: UsageInfo) => {
+          const lastDate = new Date();
+          lastDate.setMonth(lastDate.getMonth() - 1);
+          if (val.date > lastDate) {
+            const original = this.lastMonthUsageEachBoat[Boats.indexOf(val.boatID)];
+            this.lastMonthUsageEachBoat.splice(Boats.indexOf(val.boatID), 1,  original + val.duration);
+          }
+        }
       )});
   }
 
