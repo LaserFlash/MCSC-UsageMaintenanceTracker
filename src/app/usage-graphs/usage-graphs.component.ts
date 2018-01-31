@@ -3,6 +3,7 @@ import { UsageInfo } from '../objects/usageInfo';
 import { Boats, UserFriendlyBoats } from '../Utils/menuNames'
 
 import { BoatUsageService } from '../boat-usage.service'
+import { BoatNameConversionHelper } from '../Utils/nameConversion'
 
 
 @Component({
@@ -15,16 +16,6 @@ export class UsageGraphsComponent implements OnInit {
   @Input() chartTitle: string;
 
   chartData: any[] = [{ data: [0, 0, 0, 0, 0, 0, 0, 0], label: 'Hours Used' }];
-
-  constructor(private usageService: BoatUsageService) {}
-
-  ngOnInit(){
-    this.chartData = [{ data: this.usageService.usageTimes, label:this.dataLabel}];
-    this.usageService.items.subscribe(()=>{
-      this.chartData = [{ data: this.usageService.usageTimes, label:this.dataLabel}];
-    });
-  }
-
   colors: Array<any> = [{
     backgroundColor: 'rgba(66,165,245,1)',
     borderColor: 'rgba(225,10,241)',
@@ -40,15 +31,33 @@ export class UsageGraphsComponent implements OnInit {
     maintainAspectRatio: true,
   };
 
-  //Only use boat data for boats with a userfriendly name
+  // Only use boat data for boats with a userfriendly name
   chartLabels: string[] = UserFriendlyBoats.filter((s, i) => {
-    let yes: boolean = false;
+    let yes = false;
     Boats.forEach(j => {
-      yes ? true : yes = i == j;
+      yes ? true : yes = i === j;
     })
     return yes;
   });
 
   public chartType: string = 'bar';
   public chartLegend: boolean = true;
+
+  usageLastMonth: number[];
+
+  constructor(private usageService: BoatUsageService) {
+    this.usageLastMonth = usageService.lastMonthUsageEachBoat;
+  }
+
+  ngOnInit() {
+    this.chartData = [{ data: this.usageService.usageTimes, label:this.dataLabel}];
+    this.usageService.items.subscribe(()=>{
+      this.chartData = [{ data: this.usageService.usageTimes, label:this.dataLabel}];
+    });
+  }
+
+  private getBoatName(v) {
+    return BoatNameConversionHelper.boatNameFromNumber(v);
+  }
+
 }
