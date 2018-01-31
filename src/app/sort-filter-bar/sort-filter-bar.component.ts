@@ -15,6 +15,9 @@ export class SortFilterBarComponent implements OnInit {
   @Input() breakages: BreakageInfo[];
   @Input() original: BreakageInfo[];
 
+  @ViewChild('startPicker') startPicker: ElementRef
+  @ViewChild('endPicker') endPicker: ElementRef
+
   sortList: string[] = ['Newest', 'Oldest', 'Most Important', 'Least Important', 'Boat'];
   filterList: string[] = UserFriendlyBoats.filter((s, i) => {
     let yes = false;
@@ -33,14 +36,9 @@ export class SortFilterBarComponent implements OnInit {
   endMaxDate: Date = new Date();
   endMinDate: Date = new Date(1997, 8, 27);
 
-
-  @ViewChild('startPicker') startPicker: ElementRef
-  @ViewChild('endPicker') endPicker: ElementRef
-
   constructor(private breakageService: BoatBreakageService) { }
   ngOnInit() { this.filter() }
-
-
+ 
   clearDates() {
     this.startMaxDate = new Date();
     this.endMaxDate = new Date();
@@ -70,7 +68,7 @@ export class SortFilterBarComponent implements OnInit {
     }
 
     filtered = filtered.filter(item => {
-      if (item.timestampFixed !== undefined) {
+      if (item.timestampFixed != undefined) {
         return item.timestampFixed >= this.endMinDate && item.timestampFixed <= this.startMaxDate;
       }
       return item.timestamp >= this.endMinDate && item.timestamp <= this.startMaxDate;
@@ -86,7 +84,7 @@ export class SortFilterBarComponent implements OnInit {
   private addFilter(key: string) {
     const index = this.appliedFilters.indexOf(key);
     /* Remove filter if already applied */
-    if (index !== -1) {
+    if (index != -1) {
       this.appliedFilters.splice(index, 1);
     } else {
       this.appliedFilters.push(key);  // add filter
@@ -99,7 +97,7 @@ export class SortFilterBarComponent implements OnInit {
   private addPartFilter(key: string) {
     const index = this.partappliedFilters.indexOf(key);
     /* Remove filter if already applied */
-    if (index !== -1) {
+    if (index != -1) {
       this.partappliedFilters.splice(index, 1);
     } else {
       this.partappliedFilters.push(key);
@@ -150,14 +148,14 @@ export class SortFilterBarComponent implements OnInit {
     this.sortBy = sort;
     if (sort === 'Newest') {
       this.breakages.sort((a, b) => {
-        if (a.timestampFixed !== undefined && b.timestampFixed !== undefined) {
+        if (a.timestampFixed != undefined && b.timestampFixed != undefined) {
           return b.timestampFixed.getTime() - a.timestampFixed.getTime();
         }
         return b.timestamp.getTime() - a.timestamp.getTime();
       });
     } else if (sort === 'Oldest') {
       this.breakages.sort((a, b) => {
-        if (a.timestampFixed !== undefined && b.timestampFixed !== undefined) {
+        if (a.timestampFixed != undefined && b.timestampFixed != undefined) {
           return a.timestampFixed.getTime() - b.timestampFixed.getTime();
         }
         return a.timestamp.getTime() - b.timestamp.getTime();
@@ -172,5 +170,4 @@ export class SortFilterBarComponent implements OnInit {
       }
     }
   }
-
 }

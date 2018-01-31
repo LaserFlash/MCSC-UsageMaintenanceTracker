@@ -6,3 +6,11 @@
 .radio-button {
   margin: 5px;
 }
+
+.card_top_pad {
+  margin-top: 10px;
+}
+
+.card_bottom_pad {
+  margin-bottom: 10px;
+}

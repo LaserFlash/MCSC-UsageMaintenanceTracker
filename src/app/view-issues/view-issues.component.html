@@ -1,3 +1,3 @@
 <sort-filter-bar [breakages]="breakages" [original]="original"></sort-filter-bar>
 <mat-progress-bar mode="indeterminate" *ngIf = "breakages.length <= 0" ></mat-progress-bar>
-<breakage-card [buttonText]="cardButtonText" [breakages]="breakages" (onRemove)="openDialog($event)"></breakage-card>
+<breakage-card [breakages]="breakages" [buttonText]="cardButtonText"  (onRemove)="openDialog($event)"></breakage-card>

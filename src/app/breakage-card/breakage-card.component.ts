@@ -4,8 +4,6 @@ import { UserFriendlyBoats } from '../Utils/menuNames'
 import { BoatNameConversionHelper, ImportanceConversionHelper } from '../Utils/nameConversion'
 
 import { DialogsService } from '../dialog/dialogs.service';
-
-
 import { ThemeTrackerService } from '../theme-tracker.service'
 
 @Component({
@@ -27,13 +25,6 @@ export class BreakageCardComponent {
     this.isDarkTheme = themeTracker.isDark;
   }
 
-
-
-  /**Generate string to represent timestamp dd/mm/yyyy format*/
-  private dateDisplay(val) {
-    const date = new Date(val);
-    return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
-  }
   private openDialog(key: any) {
     this.onRemove.emit(key);
   }
