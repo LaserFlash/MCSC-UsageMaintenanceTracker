@@ -40,8 +40,8 @@ export class UsageGraphsComponent implements OnInit {
     return yes;
   });
 
-  public chartType: string = 'bar';
-  public chartLegend: boolean = true;
+  public chartType = 'bar';
+  public chartLegend = true;
 
   usageLastMonth: number[];
 
@@ -50,9 +50,9 @@ export class UsageGraphsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.chartData = [{ data: this.usageService.usageTimes, label:this.dataLabel}];
-    this.usageService.items.subscribe(()=>{
-      this.chartData = [{ data: this.usageService.usageTimes, label:this.dataLabel}];
+    this.chartData = [{ data: this.usageService.usageTimes, label: this.dataLabel}];
+    this.usageService.items.subscribe(() => {
+      this.chartData = [{ data: this.usageService.usageTimes, label: this.dataLabel}];
     });
   }
 

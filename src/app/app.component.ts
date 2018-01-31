@@ -18,13 +18,13 @@ export class AppComponent {
   { label: 'Safety Docs', link: 'safety' },
 ];
 
-  constructor(private themeTracker:ThemeTrackerService){
+  constructor(private themeTracker: ThemeTrackerService) {
     /* Apply theme at start */
     this.isDarkTheme = themeTracker.isDark;
   }
 
   /** Change state of dark theme, updating cookie */
-  public toggleDark(){
+  public toggleDark() {
     this.isDarkTheme = !this.isDarkTheme;
     this.themeTracker.setDark(this.isDarkTheme);
   }

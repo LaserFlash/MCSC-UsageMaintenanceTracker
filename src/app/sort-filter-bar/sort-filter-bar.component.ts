@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { BreakageInfo } from '../objects/breakageInfo';
 import { BoatBreakageService } from '../boat-breakage.service'
 
@@ -11,18 +11,15 @@ import { BoatNameConversionHelper } from '../Utils/nameConversion'
   styleUrls: ['./sort-filter-bar.component.css']
 })
 
-export class SortFilterBarComponent {
+export class SortFilterBarComponent implements OnInit {
   @Input() breakages: BreakageInfo[];
   @Input() original: BreakageInfo[];
 
-  constructor(private breakageService: BoatBreakageService) { }
-  ngOnInit() { this.filter() }
-
-  sortList: string[] = ["Newest", "Oldest", "Most Important", "Least Important", "Boat"];
+  sortList: string[] = ['Newest', 'Oldest', 'Most Important', 'Least Important', 'Boat'];
   filterList: string[] = UserFriendlyBoats.filter((s, i) => {
-    let yes: boolean = false;
+    let yes = false;
     Boats.forEach(j => {
-      yes ? true : yes = i == j;
+      yes ? true : yes = i === j;
     })
     return yes;
   });
@@ -30,45 +27,50 @@ export class SortFilterBarComponent {
   partfilterList: string[] = Parts;
   appliedFilters: string[] = [];
   partappliedFilters: string[] = [];
-  sortBy: string = "Sort by";
+  sortBy = 'Sort by';
 
-  startMaxDate:Date = new Date();
-  endMaxDate:Date = new Date();
-  endMinDate:Date = new Date(1997,8,27);
+  startMaxDate: Date = new Date();
+  endMaxDate: Date = new Date();
+  endMinDate: Date = new Date(1997, 8, 27);
 
 
-  @ViewChild("startPicker") startPicker : ElementRef
-  @ViewChild("endPicker") endPicker : ElementRef
-  clearDates(){
+  @ViewChild('startPicker') startPicker: ElementRef
+  @ViewChild('endPicker') endPicker: ElementRef
+
+  constructor(private breakageService: BoatBreakageService) { }
+  ngOnInit() { this.filter() }
+
+
+  clearDates() {
     this.startMaxDate = new Date();
     this.endMaxDate = new Date();
-    this.endMinDate = new Date(1997,8,27);
-    this.startPicker.nativeElement.value = " ";
-    this.endPicker.nativeElement.value = " ";
+    this.endMinDate = new Date(1997, 8, 27);
+    this.startPicker.nativeElement.value = ' ';
+    this.endPicker.nativeElement.value = ' ';
     this.filter()
   }
 
-  selectStart(date:any){
+  selectStart(date: any) {
     this.endMinDate = date.value;
     this.filter()
   }
 
-  selectEnd(date:any){
+  selectEnd(date: any) {
     this.startMaxDate = date.value;
     this.filter()
   }
 
-  private filter(){
+  private filter() {
     let filtered;
     /* Apply filters taking into account any boat filters also applied */
-    if (this.partappliedFilters.length == 0) {
+    if (this.partappliedFilters.length === 0) {
       filtered = this.original.filter(item => this.boatFilter(item));
     } else {
       filtered = this.breakages.filter(item => this.partFilter(item)).filter(item => this.boatFilter(item));
     }
 
     filtered = filtered.filter(item => {
-      if(item.timestampFixed != undefined){
+      if (item.timestampFixed !== undefined) {
         return item.timestampFixed >= this.endMinDate && item.timestampFixed <= this.startMaxDate;
       }
       return item.timestamp >= this.endMinDate && item.timestamp <= this.startMaxDate;
@@ -82,12 +84,12 @@ export class SortFilterBarComponent {
 
   /** Add a boat filter to the displayed data */
   private addFilter(key: string) {
-    let index = this.appliedFilters.indexOf(key);
+    const index = this.appliedFilters.indexOf(key);
     /* Remove filter if already applied */
-    if (index != -1) {
+    if (index !== -1) {
       this.appliedFilters.splice(index, 1);
     } else {
-      this.appliedFilters.push(key);  //add filter
+      this.appliedFilters.push(key);  // add filter
     }
 
     this.filter()
@@ -95,9 +97,9 @@ export class SortFilterBarComponent {
 
   /** Add a part filter to the displayed data */
   private addPartFilter(key: string) {
-    let index = this.partappliedFilters.indexOf(key);
+    const index = this.partappliedFilters.indexOf(key);
     /* Remove filter if already applied */
-    if (index != -1) {
+    if (index !== -1) {
       this.partappliedFilters.splice(index, 1);
     } else {
       this.partappliedFilters.push(key);
@@ -105,7 +107,7 @@ export class SortFilterBarComponent {
 
     let filtered;
     /* Apply filters taking into account any boat filters also applied */
-    if (this.partappliedFilters.length == 0) {
+    if (this.partappliedFilters.length === 0) {
       filtered = this.original.filter(item => this.boatFilter(item));
     } else {
       filtered = this.breakages.filter(item => this.partFilter(item)).filter(item => this.boatFilter(item));
@@ -119,12 +121,12 @@ export class SortFilterBarComponent {
 
   /** Get the data that meets the filter */
   private boatFilter(item) {
-    if (this.appliedFilters.length == 0) {
+    if (this.appliedFilters.length === 0) {
       return true;
     }
     return this.appliedFilters.some(
       filter => {
-        if (item.boatID == BoatNameConversionHelper.numberFromUserFriendlyName(filter)) {
+        if (item.boatID === BoatNameConversionHelper.numberFromUserFriendlyName(filter)) {
           return true;
         }
       });
@@ -132,12 +134,12 @@ export class SortFilterBarComponent {
 
   /** Get the data that meets the filter */
   private partFilter(item) {
-    if (this.partappliedFilters.length == 0) {
+    if (this.partappliedFilters.length === 0) {
       return true;
     }
     return this.partappliedFilters.some(
       filter => {
-        if (item.part == filter) {
+        if (item.part === filter) {
           return true;
         }
       });
@@ -146,27 +148,27 @@ export class SortFilterBarComponent {
   /** Sort the data */
   private changeSort(sort: string) {
     this.sortBy = sort;
-    if (sort == "Newest") {
+    if (sort === 'Newest') {
       this.breakages.sort((a, b) => {
-        if (a.timestampFixed != undefined && b.timestampFixed != undefined) {
+        if (a.timestampFixed !== undefined && b.timestampFixed !== undefined) {
           return b.timestampFixed.getTime() - a.timestampFixed.getTime();
         }
         return b.timestamp.getTime() - a.timestamp.getTime();
       });
-    } else if (sort == "Oldest") {
+    } else if (sort === 'Oldest') {
       this.breakages.sort((a, b) => {
-        if (a.timestampFixed != undefined && b.timestampFixed != undefined) {
+        if (a.timestampFixed !== undefined && b.timestampFixed !== undefined) {
           return a.timestampFixed.getTime() - b.timestampFixed.getTime();
         }
         return a.timestamp.getTime() - b.timestamp.getTime();
       });
-    } else if (sort == "Boat") {
-      this.breakages.sort((a, b) => { return a.boatID - b.boatID; });
+    } else if (sort === 'Boat') {
+      this.breakages.sort((a, b) => a.boatID - b.boatID);
     } else {
-      if (sort == "Most Important") {
-        this.breakages.sort((a, b) => { return b.importance - a.importance; });
-      } else if (sort == "Least Important") {
-        this.breakages.sort((a, b) => { return a.importance - b.importance; });
+      if (sort === 'Most Important') {
+        this.breakages.sort((a, b) => b.importance - a.importance);
+      } else if (sort === 'Least Important') {
+        this.breakages.sort((a, b) => a.importance - b.importance);
       }
     }
   }
