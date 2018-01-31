@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 import { ThemeTrackerService } from './theme-tracker.service'
 
 @Component({
@@ -6,7 +7,7 @@ import { ThemeTrackerService } from './theme-tracker.service'
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'WYST';
   isDarkTheme: boolean;
 
@@ -18,10 +19,21 @@ export class AppComponent {
   { label: 'Safety Docs', link: 'safety' },
 ];
 
-  constructor(private themeTracker: ThemeTrackerService) {
+  constructor(private themeTracker: ThemeTrackerService, private router: Router) {
     /* Apply theme at start */
     this.isDarkTheme = themeTracker.isDark;
   }
+
+  ngOnInit() {
+    this.router.events.subscribe((evt) => {
+        if (!(evt instanceof NavigationEnd)) {
+            return;
+        }
+        const element = document.getElementById('scrollId');
+        element.scrollIntoView();
+        window.scrollTo(0, 0)
+    });
+}
 
   /** Change state of dark theme, updating cookie */
   public toggleDark() {
