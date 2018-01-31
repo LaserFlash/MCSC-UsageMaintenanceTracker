@@ -35,8 +35,8 @@
       </div>
     </div>
     <div fxFlex></div>
-    <div fxFlex.lt-lg fxFlex="200px">
-      Between Dates <br />
+    <div fxFlex style="margin-left:16px">
+      Between Dates <br>
       <mat-form-field>
         <input matInput #startPicker (focus)="startPicker.open()" (click)="startPicker.open()" [matDatepicker]="startPicker" [max]="startMaxDate" placeholder="Start Date" readonly (dateInput)="selectStart($event)">
         <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
@@ -47,7 +47,8 @@
         <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
         <mat-datepicker #endPicker></mat-datepicker>
       </mat-form-field>
-      <button mat-button type="button" (click)="clearDates()">Clear Dates</button>
+      <br>
+      <button  style="margin-left:-16px" mat-button type="button" (click)="clearDates()">Clear Dates</button>
     </div>
   </div>
 
