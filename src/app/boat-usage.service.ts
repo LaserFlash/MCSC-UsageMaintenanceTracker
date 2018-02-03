@@ -11,14 +11,14 @@ export class BoatUsageService {
   private itemsCollection: AngularFirestoreCollection<UsageInfo>
   public items: Observable<UsageInfo[]>;
 
-  private sortedUsage : Observable<UsageInfo[]>;
-  
+  private sortedUsage: Observable<UsageInfo[]>;
+
   public lastUsageEachBoat: UsageInfo[] = [];
 
   public usageData: UsageInfo[] = [];
-  public usageTimes: number[] = [0, 0, 0, 0, 0, 0, 0, 0];
+  public usageTimes: number[] = [0, 0, 0, 0, 0];
 
-  public lastMonthUsageEachBoat: number[] = [0,0,0,0,0,0,0,0];
+  public lastMonthUsageEachBoat: number[] = [0, 0, 0, 0, 0];
 
   constructor(db: AngularFirestore) {
     this.itemsCollection = db.collection<UsageInfo>('/boatUsage', ref => ref.orderBy('date', 'desc').orderBy('boatID'));
