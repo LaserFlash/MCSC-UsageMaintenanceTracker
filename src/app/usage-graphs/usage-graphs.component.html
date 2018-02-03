@@ -11,7 +11,7 @@
     <mat-card-content>
         <mat-list>
             <mat-list-item *ngFor="let u of usageLastMonth; let i = index">
-              <img matListAvatar src="assets/images/boat_{{i}}.webp" alt={{getBoatName(u.boatID)}}>
+              <img matListAvatar src="assets/images/boat_{{i}}.png" alt={{getBoatName(u.boatID)}}>
               <h3 matLine> {{getBoatName(i)}} </h3>
               <p matLine>
                 <span mat-line>{{u}} hours</span>
