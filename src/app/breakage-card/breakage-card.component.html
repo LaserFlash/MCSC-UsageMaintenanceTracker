@@ -3,7 +3,7 @@
   <div fxLayout="row" fxLayout.lt-lg=column>
     <div fxFlex="grow" style="display: inline-block;">
       <mat-card-header>
-        <img *ngIf="getBoatName(item.boatID)" mat-card-avatar src="assets/images/boat_{{item.boatID}}.webp" alt={{getBoatName(item.boatID)}} />
+        <img *ngIf="getBoatName(item.boatID)" mat-card-avatar src="assets/images/boat_{{item.boatID}}.png" alt={{getBoatName(item.boatID)}} />
         <mat-card-title><b>{{getBoatName(item.boatID)}}</b><br /></mat-card-title>
         <mat-card-subtitle>{{getImportanceName(item.importance)}}</mat-card-subtitle>
       </mat-card-header>
