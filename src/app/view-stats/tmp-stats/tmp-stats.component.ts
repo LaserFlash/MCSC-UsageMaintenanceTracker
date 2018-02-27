@@ -11,5 +11,4 @@ export class TmpStatsComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }

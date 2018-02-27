@@ -75,6 +75,9 @@ import { FileUploadModule } from 'ng2-file-upload';
 
 import { ServiceWorkerModule } from '@angular/service-worker';
 
+import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import { HammerConfig } from './hammer.config'
+import 'hammerjs';
 
 @NgModule({
   declarations: [
@@ -134,7 +137,13 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     FileUploadModule,
     ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production}),
   ],
-  providers: [BoatUsageService, BoatBreakageService, SafetyDocsService, ThemeTrackerService,],
+  providers: [
+    BoatUsageService,
+    BoatBreakageService,
+    SafetyDocsService,
+    ThemeTrackerService,
+    {provide: HAMMER_GESTURE_CONFIG, useClass: HammerConfig}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
