@@ -26,9 +26,9 @@ export class AppComponent implements OnInit {
     /* Apply theme at start */
     this.isDarkTheme = themeTracker.isDark;
 
-    iconRegistry.addSvgIcon('report',
+    iconRegistry.addSvgIcon('docs',
                   sanitizer.bypassSecurityTrustResourceUrl('assets/images/file-document.svg'))
-                .addSvgIcon('docs',
+                .addSvgIcon('report',
                   sanitizer.bypassSecurityTrustResourceUrl('assets/images/clipboard-outline.svg'))
                 .addSvgIcon('stats',
                   sanitizer.bypassSecurityTrustResourceUrl('assets/images/poll.svg'))
