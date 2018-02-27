@@ -41,6 +41,13 @@ import { ReportIssueComponent } from './view-report/report-issue/report-issue.co
 import { ReportUsageComponent } from './view-report/report-usage/report-usage.component';
 import { ViewIssuesComponent } from './view-view/view-issues/view-issues.component';
 import { ViewFixedComponent } from './view-view/view-fixed/view-fixed.component';
+import { BoatPartsComponent } from './view-docs/boat-parts/boat-parts.component';
+import { SafetyDocsComponent } from './view-docs/safety-docs/safety-docs.component';
+import { ViewUsageComponent } from './view-view/view-usage/view-usage.component';
+import { ReportIncidentComponent } from './view-report/report-incident/report-incident.component';
+import { TmpStatsComponent } from './view-stats/tmp-stats/tmp-stats.component';
+
+
 import { AppRoutingModule } from './app-routing.module';
 import { BreakageCardComponent } from './shared/breakage-card/breakage-card.component';
 
@@ -58,7 +65,6 @@ import { environment } from '../environments/environment';
 
 import { CookieModule } from 'ngx-cookie';
 import { SortFilterBarComponent } from './shared/sort-filter-bar/sort-filter-bar.component';
-import { SafetyProceduresComponent } from './safety-procedures/safety-procedures.component';
 import { UsageGraphsComponent } from './view-report/report-usage/usage-graphs/usage-graphs.component';
 import { LastUsesComponent } from './view-report/report-usage/last-uses/last-uses.component';
 
@@ -84,9 +90,13 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     ReportUsageComponent,
     BreakageCardComponent,
     SortFilterBarComponent,
-    SafetyProceduresComponent,
     UsageGraphsComponent,
     LastUsesComponent,
+    SafetyDocsComponent,
+    BoatPartsComponent,
+    ViewUsageComponent,
+    ReportIncidentComponent,
+    TmpStatsComponent,
   ],
   imports: [
     BrowserModule,

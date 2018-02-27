@@ -17,7 +17,7 @@ import { Cloudinary } from '@cloudinary/angular-5.x';
 
 
 @Component({
-  selector: 'report-issue',
+  selector: 'app-report-issue',
   templateUrl: './report-issue.component.html',
   styleUrls: ['./report-issue.component.css']
 })

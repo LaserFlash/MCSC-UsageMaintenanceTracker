@@ -45,31 +45,25 @@
   </mat-sidenav>
   <div id="scrollId"></div>
   <div class="sidenav-content">
-    <div fxLayout="row">
-      <div fxFlex.gt-lg="calc(50% -1000px)" fxFlex="20" fxFlex.lt-md="2"></div>
-      <div fxFlex.gt-lg="1280px" fxFlex>
-        <router-outlet></router-outlet>
-      </div>
-      <div fxFlex.gt-lg="calc(50% -1000px)" fxFlex="20" fxFlex.lt-md="2"></div>
-    </div>
+    <router-outlet></router-outlet>
   </div>
 
   <!-- Bottom Navigation Bar -->
-  <div class="bottom-navigation bg-color-primary" fxHide.gt-sm>
-    <nav mat-tab-nav-bar>
-      <a fxFlex="calc(100/routeLinks.length)" mat-tab-link
-          *ngFor="let routeLink of routeLinks; let i = index"
-          [routerLink]="routeLink.link"
-          routerLinkActive #rla="routerLinkActive"
-          [active]="rla.isActive">
+    <div class="bottom-navigation bg-color-primary" fxHide.gt-sm>
+      <nav mat-tab-nav-bar>
+        <a fxFlex="calc(100/routeLinks.length)" mat-tab-link
+            *ngFor="let routeLink of routeLinks; let i = index"
+            [routerLink]="routeLink.link"
+            routerLinkActive #rla="routerLinkActive"
+            [active]="rla.isActive">
 
-            <div fxLayout="column">
-              <div fxFlex><mat-icon svgIcon="{{routeLink.link}}"></mat-icon></div>
-              <div style="margin-top: -10px;" fxFlex>{{routeLink.label}}</div>
-            </div>
-          
-      </a>
-    </nav>
-  </div>
+              <div fxLayout="column">
+                <div fxFlex><mat-icon svgIcon="{{routeLink.link}}"></mat-icon></div>
+                <div style="margin-top: -10px;" fxFlex>{{routeLink.label}}</div>
+              </div>
+            
+        </a>
+      </nav>
+    </div>
 </mat-sidenav-container>
 

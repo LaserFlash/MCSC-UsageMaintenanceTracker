@@ -1,0 +1,20 @@
+<mat-toolbar style="margin-top:-8px;" color="primary">
+    <span></span>
+    <nav fxFlex style="width:100%;" mat-tab-nav-bar>
+        <a style="width:33%;" mat-tab-link
+            *ngFor="let routeLink of routeLinks; let i = index"
+            [routerLink]="routeLink.link"
+            routerLinkActive #rla="routerLinkActive"
+            [active]="rla.isActive">
+           {{routeLink.label}}         
+        </a>
+    </nav>
+    <span></span>
+</mat-toolbar>
+<div fxLayout="row">
+    <div fxFlex.gt-lg="calc(50% -1000px)" fxFlex="20" fxFlex.lt-md="2"></div>
+    <div fxFlex.gt-lg="1280px" fxFlex>
+        <router-outlet></router-outlet>
+    </div>
+    <div fxFlex.gt-lg="calc(50% -1000px)" fxFlex="20" fxFlex.lt-md="2"></div>
+</div>

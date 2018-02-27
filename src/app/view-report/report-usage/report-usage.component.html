@@ -1,5 +1,5 @@
 <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px" class="card_bottom_pad">
-  <div fxFlex="50" fxLayout.lt-md="98">
+  <div fxFlex="60" fxLayout.lt-md="98">
     <mat-card fxFlex>
       <mat-card-title>{{title}}</mat-card-title>
       <mat-card-content>
@@ -50,6 +50,6 @@
       </mat-card-content>
     </mat-card>
   </div>
-  <last-uses fxFlex="100" fxFlex.lt-md="98"></last-uses>
+  <last-uses fxFlex fxFlex.lt-md="98"></last-uses>
 </div>
 <usage-graphs [dataLabel]="'Hours used'" [chartTitle]="'Total Boat Usage'" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px"></usage-graphs>
