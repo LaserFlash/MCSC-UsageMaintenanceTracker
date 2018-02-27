@@ -96,3 +96,9 @@ mat-sidenav-container.app-dark {
 /deep/ .mat-drawer-backdrop.mat-drawer-shown{
   background: none;
 }
+
+@media (max-width: 959px) {
+  .sidenav-content{
+    margin-bottom:54px;
+  }
+}

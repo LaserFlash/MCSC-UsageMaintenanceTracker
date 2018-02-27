@@ -24,19 +24,7 @@ export class ReportComponent implements OnInit {
     this.router = _router;
   }
 
-  ngOnInit() {
-    this.router.events.subscribe((evt) => {
-      if (!(evt instanceof NavigationEnd)) {
-          return;
-      }
-      const element = document.getElementById('scrollId');
-      setTimeout(function() {
-        element.scrollIntoView();
-        window.scrollTo(0, 0);
-    }, 300);
-
-  });
-  }
+  ngOnInit() {}
 
   swipe(action = this.SWIPE_ACTION.RIGHT) {
     const str = this.router.url;
