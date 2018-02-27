@@ -39,12 +39,14 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.router.events.subscribe((evt) => {
-        if (!(evt instanceof NavigationEnd)) {
-            return;
-        }
-        const element = document.getElementById('scrollId');
-        element.scrollIntoView();
-        window.scrollTo(0, 0)
+      if (!(evt instanceof NavigationEnd)) {
+        return;
+      }
+      const element = document.getElementById('scrollId');
+      setTimeout(function() {
+      element.scrollIntoView();
+      window.scrollTo(0, 0);
+      }, 500);
     });
 }
 
