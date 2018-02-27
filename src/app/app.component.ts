@@ -46,7 +46,7 @@ export class AppComponent implements OnInit {
       setTimeout(function() {
       element.scrollIntoView();
       window.scrollTo(0, 0);
-      }, 500);
+      }, 1);
     });
 }
 
