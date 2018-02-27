@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -30,6 +31,12 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { DialogsModule } from './dialog/dialogs.module';
 
 import { AppComponent } from './app.component';
+
+import { ReportComponent } from './report/report.component';
+import { ViewComponent } from './view/view.component';
+import { StatsComponent } from './stats/stats.component';
+import { DocsComponent } from './docs/docs.component';
+
 import { ReportIssueComponent } from './report-issue/report-issue.component';
 import { ReportUsageComponent } from './report-usage/report-usage.component';
 import { ViewIssuesComponent } from './view-issues/view-issues.component';
@@ -66,6 +73,11 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 @NgModule({
   declarations: [
     AppComponent,
+    ReportComponent,
+    ViewComponent,
+    StatsComponent,
+    DocsComponent,
+
     ReportIssueComponent,
     ViewIssuesComponent,
     ViewFixedComponent,
@@ -79,6 +91,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     MatSidenavModule,
     MatTabsModule,
     MatListModule,
