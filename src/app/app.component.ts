@@ -2,26 +2,39 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { ThemeTrackerService } from './theme-tracker.service'
 
+import {MatIconRegistry} from '@angular/material/icon';
+import {DomSanitizer} from '@angular/platform-browser';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  viewProviders: [MatIconRegistry]
 })
 export class AppComponent implements OnInit {
   title = 'WYST';
   isDarkTheme: boolean;
 
   routeLinks = [
-  { label: 'Report Usage', link: 'reportUsage' },
-  { label: 'Report Breakage', link: 'report' },
-  { label: 'View Breakages', link: 'reported' },
-  { label: 'View Fixed', link: 'fixed' },
-  { label: 'Safety Docs', link: 'safety' },
+  { label: 'Report', link: 'report'},
+  { label: 'View', link: 'view'},
+  { label: 'Stats', link: 'stats'},
+  { label: 'Docs', link: 'docs'},
 ];
 
-  constructor(private themeTracker: ThemeTrackerService, private router: Router) {
+  constructor(private themeTracker: ThemeTrackerService, private router: Router, iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
     /* Apply theme at start */
     this.isDarkTheme = themeTracker.isDark;
+
+    iconRegistry.addSvgIcon('docs',
+                  sanitizer.bypassSecurityTrustResourceUrl('assets/images/file-document.svg'))
+                .addSvgIcon('report',
+                  sanitizer.bypassSecurityTrustResourceUrl('assets/images/clipboard-outline.svg'))
+                .addSvgIcon('stats',
+                  sanitizer.bypassSecurityTrustResourceUrl('assets/images/poll.svg'))
+                .addSvgIcon('view',
+                  sanitizer.bypassSecurityTrustResourceUrl('assets/images/view-stream.svg'));
+
   }
 
   ngOnInit() {

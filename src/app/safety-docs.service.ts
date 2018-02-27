@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DocLink } from './objects/docLink';
+import { DocLink } from './Utils/objects/docLink';
 
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';

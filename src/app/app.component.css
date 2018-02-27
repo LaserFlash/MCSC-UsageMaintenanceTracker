@@ -5,7 +5,7 @@ mat-toolbar.mat-toolbar {
   left: 0;
   z-index: 10;
   padding: 0 16px 0 0;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .3);
+  /*box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .3);*/
 }
 
 .mat-toolbar {
@@ -49,11 +49,6 @@ mat-sidenav-container.app-dark {
   height: 150px;
 }
 
-/deep/ .mat-tab-link {
-  line-height: 28px !important;
-  height: 28px !important;
-}
-
 /deep/ .mat-tab-header {
   color: white !important;
   border-radius: 5px 5px 0px 0px;
@@ -61,11 +56,43 @@ mat-sidenav-container.app-dark {
 
 /deep/ .mat-tab-link {
   font-size: 16px;
+  line-height: 28px !important;
+  height: auto !important;
   opacity: 1 !important;
-  color: white !important;
+  color: lightsteelblue !important;
 }
 
 /deep/ .mat-ink-bar {
   background-color: #0077c2 !important;
   min-width: 120px;
+}
+
+.bottom-navigation{
+  position: fixed;
+  bottom: 0;
+  width:100%;
+  z-index: 10;
+}
+
+/deep/ .bottom-navigation .mat-tab-link{
+  padding-top: 4px !important;
+  padding-bottom: 2px !important;
+  padding-left: 4px !important;
+  padding-right: 4px !important;
+  color: lightsteelblue !important;
+}
+
+/deep/ .bottom-navigation .mat-tab-label-active{
+  color: white !important;
+}
+
+/deep/ .bottom-navigation .mat-ink-bar {
+  visibility: hidden !important;
+}
+
+/deep/ .app-dark .mat-drawer-backdrop.mat-drawer-shown{
+  background: none;
+}
+/deep/ .mat-drawer-backdrop.mat-drawer-shown{
+  background: none;
 }
