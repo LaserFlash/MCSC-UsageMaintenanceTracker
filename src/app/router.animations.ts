@@ -33,7 +33,23 @@ export const routerTransition = trigger('routerTransition', [
       ], { optional: true }),
     ])
   ]),
-  transition('* => 1', [
+  transition('2 => 1', [
+    query(':enter', style({ position: 'fixed', width: '100%' })
+    , { optional: true }),
+    query(':leave', style({position: 'absolute', width: '100%' })
+    , { optional: true }),
+    group([
+      query(':enter', [
+        style({ transform: 'translateX(-100%)' }),
+        animate('500ms cubic-bezier(.75,-0.48,.26,1.52)', style({ transform: 'translateX(0%)'})),
+      ], { optional: true }),
+      query(':leave', [
+        style({ transform: 'translateX(0%)' }),
+        animate('500ms cubic-bezier(.75,-0.48,.26,1.52)', style({ transform: 'translateX(100%)'})),
+      ], { optional: true }),
+    ])
+  ]),
+  transition('0 => 1', [
     query(':enter', style({ position: 'fixed', width: '100%' })
     , { optional: true }),
     query(':leave', style({position: 'absolute', width: '100%' })
