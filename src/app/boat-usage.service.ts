@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { UsageInfo } from './objects/usageInfo';
+import { UsageInfo } from './Utils/objects/usageInfo';
 import { Boats } from './Utils/menuNames'
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 

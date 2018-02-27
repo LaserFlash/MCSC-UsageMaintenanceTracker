@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { UsageInfo } from '../objects/usageInfo';
-import { Boats, UserFriendlyBoats } from '../Utils/menuNames'
+import { UsageInfo } from '../../../Utils/objects/usageInfo';
+import { Boats, UserFriendlyBoats } from '../../../Utils/menuNames'
 
-import { BoatUsageService } from '../boat-usage.service'
-import { BoatNameConversionHelper } from '../Utils/nameConversion'
+import { BoatUsageService } from '../../../boat-usage.service'
+import { BoatNameConversionHelper } from '../../../Utils/nameConversion'
 
 
 @Component({

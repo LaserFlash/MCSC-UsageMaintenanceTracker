@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { BreakageInfo } from '../objects/breakageInfo'
-import { UserFriendlyBoats } from '../Utils/menuNames'
-import { BoatNameConversionHelper, ImportanceConversionHelper } from '../Utils/nameConversion'
+import { BreakageInfo } from '../../Utils/objects/breakageInfo'
+import { UserFriendlyBoats } from '../../Utils/menuNames'
+import { BoatNameConversionHelper, ImportanceConversionHelper } from '../../Utils/nameConversion'
 
 import { DialogsService } from '../dialog/dialogs.service';
-import { ThemeTrackerService } from '../theme-tracker.service'
+import { ThemeTrackerService } from '../../theme-tracker.service'
 
 @Component({
   selector: 'breakage-card',

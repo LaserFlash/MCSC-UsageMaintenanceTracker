@@ -28,21 +28,21 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCheckboxModule } from '@angular/material';
 import { MatStepperModule } from '@angular/material/stepper';
 
-import { DialogsModule } from './dialog/dialogs.module';
+import { DialogsModule } from './shared/dialog/dialogs.module';
 
 import { AppComponent } from './app.component';
 
-import { ReportComponent } from './report/report.component';
-import { ViewComponent } from './view/view.component';
-import { StatsComponent } from './stats/stats.component';
-import { DocsComponent } from './docs/docs.component';
+import { ReportComponent } from './view-report/report.component';
+import { ViewComponent } from './view-view/view.component';
+import { StatsComponent } from './view-stats/stats.component';
+import { DocsComponent } from './view-docs/docs.component';
 
-import { ReportIssueComponent } from './report-issue/report-issue.component';
-import { ReportUsageComponent } from './report-usage/report-usage.component';
-import { ViewIssuesComponent } from './view-issues/view-issues.component';
-import { ViewFixedComponent } from './view-fixed/view-fixed.component';
+import { ReportIssueComponent } from './view-report/report-issue/report-issue.component';
+import { ReportUsageComponent } from './view-report/report-usage/report-usage.component';
+import { ViewIssuesComponent } from './view-view/view-issues/view-issues.component';
+import { ViewFixedComponent } from './view-view/view-fixed/view-fixed.component';
 import { AppRoutingModule } from './app-routing.module';
-import { BreakageCardComponent } from './breakage-card/breakage-card.component';
+import { BreakageCardComponent } from './shared/breakage-card/breakage-card.component';
 
 import { OverlayContainer } from '@angular/cdk/overlay';
 
@@ -57,10 +57,10 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { environment } from '../environments/environment';
 
 import { CookieModule } from 'ngx-cookie';
-import { SortFilterBarComponent } from './sort-filter-bar/sort-filter-bar.component';
+import { SortFilterBarComponent } from './shared/sort-filter-bar/sort-filter-bar.component';
 import { SafetyProceduresComponent } from './safety-procedures/safety-procedures.component';
-import { UsageGraphsComponent } from './usage-graphs/usage-graphs.component';
-import { LastUsesComponent } from './last-uses/last-uses.component';
+import { UsageGraphsComponent } from './view-report/report-usage/usage-graphs/usage-graphs.component';
+import { LastUsesComponent } from './view-report/report-usage/last-uses/last-uses.component';
 
 // Cloudinary module
 import { CloudinaryModule, CloudinaryConfiguration } from '@cloudinary/angular-5.x';

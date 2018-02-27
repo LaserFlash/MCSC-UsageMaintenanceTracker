@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes, Router } from '@angular/router';
 
-import { ReportComponent } from './report/report.component';
-import { ViewComponent } from './view/view.component';
-import { StatsComponent } from './stats/stats.component';
-import { DocsComponent } from './docs/docs.component';
+import { ReportComponent } from './view-report/report.component';
+import { ViewComponent } from './view-view/view.component';
+import { StatsComponent } from './view-stats/stats.component';
+import { DocsComponent } from './view-docs/docs.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/report', pathMatch: 'full' },

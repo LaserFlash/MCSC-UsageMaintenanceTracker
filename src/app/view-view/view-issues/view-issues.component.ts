@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { BreakageInfo } from '../objects/breakageInfo';
-import { BoatBreakageService } from '../boat-breakage.service'
-import { DialogsService } from '../dialog/dialogs.service';
+import { BreakageInfo } from '../../Utils/objects/breakageInfo';
+import { BoatBreakageService } from '../../boat-breakage.service'
+import { DialogsService } from '../../shared/dialog/dialogs.service';
 @Component({
   selector: 'view-issues',
   templateUrl: './view-issues.component.html',

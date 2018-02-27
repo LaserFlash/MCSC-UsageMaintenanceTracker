@@ -3,10 +3,10 @@ import { DateAdapter } from '@angular/material';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 
-import { BoatUsageService } from '../boat-usage.service'
-import { UsageInfo } from '../objects/usageInfo'
-import { Boats, UserFriendlyBoats } from '../Utils/menuNames'
-import { BoatNameConversionHelper } from '../Utils/nameConversion'
+import { BoatUsageService } from '../../boat-usage.service'
+import { UsageInfo } from '../../Utils/objects/usageInfo'
+import { Boats, UserFriendlyBoats } from '../../Utils/menuNames'
+import { BoatNameConversionHelper } from '../../Utils/nameConversion'
 
 const NUMBER_REGEX = /[0-9]+/;
 

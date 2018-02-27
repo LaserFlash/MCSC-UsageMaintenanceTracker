@@ -1,9 +1,9 @@
 import { Component, Input, ViewChild, ElementRef, OnInit } from '@angular/core';
-import { BreakageInfo } from '../objects/breakageInfo';
-import { BoatBreakageService } from '../boat-breakage.service'
+import { BreakageInfo } from '../../Utils/objects/breakageInfo';
+import { BoatBreakageService } from '../../boat-breakage.service'
 
-import { UserFriendlyBoats, Boats, Parts } from '../Utils/menuNames'
-import { BoatNameConversionHelper } from '../Utils/nameConversion'
+import { UserFriendlyBoats, Boats, Parts } from '../../Utils/menuNames'
+import { BoatNameConversionHelper } from '../../Utils/nameConversion'
 
 @Component({
   selector: 'sort-filter-bar',

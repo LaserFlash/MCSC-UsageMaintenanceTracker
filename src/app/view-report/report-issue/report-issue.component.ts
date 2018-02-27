@@ -4,13 +4,13 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { MatSnackBar } from '@angular/material';
 import { MatStepper } from '@angular/material';
 
-import { ContactValidator } from '../validators/CustomValidators';
-import { DialogsService } from '../dialog/dialogs.service';
-import { BreakageInfo } from '../objects/breakageInfo';
-import { BoatBreakageService } from '../boat-breakage.service';
+import { ContactValidator } from '../../Utils/validators/CustomValidators';
+import { DialogsService } from '../../shared/dialog/dialogs.service';
+import { BreakageInfo } from '../../Utils/objects/breakageInfo';
+import { BoatBreakageService } from '../../boat-breakage.service';
 
-import { Boats, UserFriendlyBoats, Levels, Parts } from '../Utils/menuNames';
-import { BoatNameConversionHelper, ImportanceConversionHelper } from '../Utils/nameConversion';
+import { Boats, UserFriendlyBoats, Levels, Parts } from '../../Utils/menuNames';
+import { BoatNameConversionHelper, ImportanceConversionHelper } from '../../Utils/nameConversion';
 
 import { FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
 import { Cloudinary } from '@cloudinary/angular-5.x';

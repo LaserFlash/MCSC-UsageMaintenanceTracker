@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BreakageInfo } from './objects/breakageInfo';
+import { BreakageInfo } from './Utils/objects/breakageInfo';
 
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
@@ -7,11 +7,11 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class BoatBreakageService {
-  private itemsCollectionBroken : AngularFirestoreCollection<BreakageInfo>;
-  private itemsCollectionFixed : AngularFirestoreCollection<BreakageInfo>;
+  private itemsCollectionBroken: AngularFirestoreCollection<BreakageInfo>;
+  private itemsCollectionFixed: AngularFirestoreCollection<BreakageInfo>;
 
-  public items: BreakageInfo[]=[];
-  public original: BreakageInfo[]=[];
+  public items: BreakageInfo[] = [];
+  public original: BreakageInfo[] = [];
   public recentItems: BreakageInfo[] = [];
   public fixedItems: BreakageInfo[] = [];
   public fixedItemsOriginal: BreakageInfo[] = [];

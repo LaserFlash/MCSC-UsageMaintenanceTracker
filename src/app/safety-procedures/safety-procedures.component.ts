@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DocLink } from '../objects/docLink';
+import { DocLink } from '../Utils/objects/docLink';
 
 import { SafetyDocsService } from '../safety-docs.service'
 
