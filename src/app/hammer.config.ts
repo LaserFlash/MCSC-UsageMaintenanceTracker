@@ -12,6 +12,9 @@ export class HammerConfig extends HammerGestureConfig {
     buildHammer(element: HTMLElement) {
         return new Hammer(element, {
             inputClass: Hammer.TouchInput,
+            cssProps: {
+                userSelect: 'auto',
+            },
             touchAction: 'pan-y'  // If using horizontal gestures - http://hammerjs.github.io/touch-action/
         });
     }
