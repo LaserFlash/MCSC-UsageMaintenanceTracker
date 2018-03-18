@@ -97,6 +97,11 @@ mat-sidenav-container.app-dark {
   background: none;
 }
 
+.nav-button{
+  width: 100%;
+  text-align: left;
+}
+
 @media (max-width: 959px) {
   .sidenav-content{
     margin-bottom:54px;
