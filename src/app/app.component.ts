@@ -55,4 +55,8 @@ export class AppComponent implements OnInit {
     this.isDarkTheme = !this.isDarkTheme;
     this.themeTracker.setDark(this.isDarkTheme);
   }
+
+  public print() {
+    window.print();
+  }
 }

@@ -25,7 +25,7 @@
 </mat-toolbar>
 
 <mat-sidenav-container class="content" fullscreen [class.app-dark]="isDarkTheme" >
-  <mat-sidenav class="sidenav" #sidenav mode="over">
+  <mat-sidenav class="sidenav noPrint" #sidenav mode="over">
     <img id="logo-image-drawer" src="assets/images/logo.png" alt="WYST Logo" />
     <mat-nav-list>
       <a mat-list-item *ngFor="let routeLink of routeLinks; let i = index" [routerLink]="routeLink.link" (click)="sidenav.close()">
@@ -33,7 +33,9 @@
       </a>
     </mat-nav-list>
     <br />
-    <button mat-button (click)="toggleDark(); sidenav.close()">TOGGLE DARK THEME</button>
+    <button mat-button (click)="toggleDark(); sidenav.close();">TOGGLE DARK THEME</button>
+    <br />
+    <button mat-button (click)="sidenav.close(); print();">PRINT</button>
     <mat-list style="position: relative; height: auto; padding-top:64px">
       <a style="text-decoration: none;" href="https://laserflash.tk/" mat-list-item>
       ©2017 BrynTBennett
