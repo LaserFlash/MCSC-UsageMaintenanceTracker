@@ -1,0 +1,5 @@
+@media print{
+    .content{
+        min-height:40cm;
+    }
+}
