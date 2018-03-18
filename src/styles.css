@@ -42,6 +42,14 @@
 	.breakage-card {
 		page-break-inside: avoid;
 	}
-	.section-to-print { overflow: auto !important; }
-
+	.section-to-print { 
+		overflow: auto !important; 
+	}
+	.mat-drawer-container {
+		overflow: visible !important;
+		
+	}
+	.mat-drawer-content {
+		overflow: visible !important;
+	}
   }
