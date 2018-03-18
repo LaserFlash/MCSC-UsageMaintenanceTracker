@@ -39,9 +39,14 @@
 		display: none !important;
 	}
 
-	.breakage-card {
-		page-break-inside: avoid;
+	.mat-card {
+		page-break-inside: avoid !important;
 	}
+
+	.print-no-split {
+		page-break-inside: avoid !important;
+	}
+
 	.section-to-print { 
 		overflow: auto !important; 
 	}
@@ -51,5 +56,5 @@
 	}
 	.mat-drawer-content {
 		overflow: visible !important;
-	}
+		}
   }

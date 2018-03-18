@@ -14,3 +14,9 @@
 .card_bottom_pad {
   margin-bottom: 10px;
 }
+
+@media print{
+  .content{
+      min-height:40cm;
+  }
+}

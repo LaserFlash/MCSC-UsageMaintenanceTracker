@@ -13,3 +13,9 @@ a:hover.app-dark{
     color: rgba(0, 0, 0, 0.54);
 }
 
+@media print{
+    .form {
+        min-width: 25cm;
+    }
+}
+
