@@ -18,3 +18,30 @@
 		display: none;
 	}
   }
+
+/* Apply when printing */
+
+@media print {
+	body * {
+	  visibility: hidden;
+	}
+	#section-to-print, #section-to-print * {
+	  visibility: visible;
+	}
+	#section-to-print {
+		overflow:visible !important;
+		position:absolute !important;
+		top:0;
+		left:0;
+	}
+
+	.noPrint{
+		display: none;
+	}
+
+	.breakage-card {
+		page-break-inside: avoid;
+	}
+	.section-to-print { overflow: auto !important; }
+
+  }
