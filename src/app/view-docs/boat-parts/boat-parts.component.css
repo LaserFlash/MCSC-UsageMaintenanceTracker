@@ -1,0 +1,5 @@
+@media print{
+    .form {
+        min-width: 25cm;
+    }
+}

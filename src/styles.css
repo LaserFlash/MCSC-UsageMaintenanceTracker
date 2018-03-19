@@ -18,3 +18,43 @@
 		display: none;
 	}
   }
+
+/* Apply when printing */
+
+@media print {
+	body * {
+	  visibility: hidden;
+	}
+	#section-to-print, #section-to-print * {
+	  visibility: visible;
+	}
+	#section-to-print {
+		overflow:visible !important;
+		position:absolute !important;
+		top:0;
+		left:0;
+	}
+
+	.noPrint{
+		display: none !important;
+	}
+
+	.mat-card {
+		page-break-inside: avoid !important;
+	}
+
+	.print-no-split {
+		page-break-inside: avoid !important;
+	}
+
+	.section-to-print { 
+		overflow: auto !important; 
+	}
+	.mat-drawer-container {
+		overflow: visible !important;
+		
+	}
+	.mat-drawer-content {
+		overflow: visible !important;
+		}
+  }

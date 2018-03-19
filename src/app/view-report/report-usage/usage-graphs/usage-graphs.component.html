@@ -1,12 +1,12 @@
 
-<mat-card fxFlex="70" fxFlex.lt-md="98"  style="height:100%;" class="card_bottom_pad">
+<mat-card fxFlex="70" fxFlex.lt-md="98"  style="height:100%;" class="card_bottom_pad print-no-split">
   <mat-card-title>{{chartTitle}}</mat-card-title>
   <mat-card-content>
     <canvas baseChart [datasets]="chartData" [colors]="colors" [labels]="chartLabels" [options]="chartOptions" [legend]="chartLegend" [chartType]="chartType"></canvas>
   </mat-card-content>
 </mat-card>
 
-<mat-card fxFlex="30" fxFlex.lt-md="98" style="height:100%;" class="card_bottom_pad">
+<mat-card fxFlex="30" fxFlex.lt-md="98" style="height:100%;" class="card_bottom_pad print-no-split">
     <mat-card-title>Usage Last Month</mat-card-title>
     <mat-card-content>
         <mat-list>
