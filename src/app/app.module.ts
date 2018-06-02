@@ -56,6 +56,7 @@ import { OverlayContainer } from '@angular/cdk/overlay';
 import { BoatUsageService } from './boat-usage.service'
 import { BoatBreakageService } from './boat-breakage.service'
 import { SafetyDocsService } from './safety-docs.service'
+import { BoatPartsService } from './boat-parts.service'
 import { ThemeTrackerService } from './theme-tracker.service'
 
 import { AngularFireModule } from 'angularfire2';
@@ -141,6 +142,7 @@ import 'hammerjs';
     BoatUsageService,
     BoatBreakageService,
     SafetyDocsService,
+    BoatPartsService,
     ThemeTrackerService,
     {provide: HAMMER_GESTURE_CONFIG, useClass: HammerConfig}
   ],
