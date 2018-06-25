@@ -23,12 +23,12 @@
                 <td>
                   <table>
                     <tr>
-                      <mat-input-container>
+                      <mat-form-field>
                         <input matInput type="number" placeholder="Duration in hours" [min]="0" formControlName="duration" required>
                         <mat-error *ngIf="formErrors.duration">
                           {{formErrors.duration}}
                         </mat-error>
-                      </mat-input-container>
+                      </mat-form-field>
                     </tr>
                     <tr>
                       <mat-form-field>

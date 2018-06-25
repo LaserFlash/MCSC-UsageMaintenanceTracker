@@ -21,10 +21,10 @@
                 <b>Contact:</b> {{item.contact}}
               </li>
               <li *ngIf="item.timestamp">
-                <b>Reported:</b> {{item.timestamp | date}}
+                <b>Reported:</b> {{makeDate(item.timestamp) | date}}
               </li>
               <li *ngIf="item.timestampFixed">
-                <b>Fixed:</b> {{item.timestampFixed | date}}
+                <b>Fixed:</b> {{makeDate(item.timestampFixed.toDate()) | date}}
               </li>
             </ul>
           </div>

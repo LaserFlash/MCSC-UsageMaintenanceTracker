@@ -1,60 +1,57 @@
 /* You can add global styles to this file, and also import other style files */
+
 ::-webkit-scrollbar {
-	width: 12px;
-	background-color: #F5F5F5;
+  width: 12px;
+  background-color: #F5F5F5;
 }
-::-webkit-scrollbar-thumb {	
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	background-color: #555;
+
+::-webkit-scrollbar-thumb {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+  background-color: #555;
 }
 
 ::-webkit-scrollbar-track {
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	background-color: #F5F5F5;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #F5F5F5;
 }
 
 @media (max-width: 959px) {
-	::-webkit-scrollbar {
-		display: none;
-	}
+  ::-webkit-scrollbar {
+    display: none;
   }
+}
 
 /* Apply when printing */
 
 @media print {
-	body * {
-	  visibility: hidden;
-	}
-	#section-to-print, #section-to-print * {
-	  visibility: visible;
-	}
-	#section-to-print {
-		overflow:visible !important;
-		position:absolute !important;
-		top:0;
-		left:0;
-	}
-
-	.noPrint{
-		display: none !important;
-	}
-
-	.mat-card {
-		page-break-inside: avoid !important;
-	}
-
-	.print-no-split {
-		page-break-inside: avoid !important;
-	}
-
-	.section-to-print { 
-		overflow: auto !important; 
-	}
-	.mat-drawer-container {
-		overflow: visible !important;
-		
-	}
-	.mat-drawer-content {
-		overflow: visible !important;
-		}
+  body * {
+    visibility: hidden;
   }
+  #section-to-print, #section-to-print * {
+    visibility: visible;
+  }
+  #section-to-print {
+    overflow: visible !important;
+    position: absolute !important;
+    top: 0;
+    left: 0;
+  }
+  .noPrint {
+    display: none !important;
+  }
+  .mat-card {
+    page-break-inside: avoid !important;
+  }
+  .print-no-split {
+    page-break-inside: avoid !important;
+  }
+  .section-to-print {
+    overflow: auto !important;
+  }
+  .mat-drawer-container {
+    overflow: visible !important;
+  }
+  .mat-drawer-content {
+    overflow: visible !important;
+  }
+}

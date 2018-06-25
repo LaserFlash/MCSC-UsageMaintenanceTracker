@@ -37,8 +37,10 @@ export class SortFilterBarComponent implements OnInit {
   endMinDate: Date = new Date(1997, 8, 27);
 
   constructor(private breakageService: BoatBreakageService) { }
-  ngOnInit() { this.filter() }
- 
+  ngOnInit() {
+    this.resetFilter()
+  }
+
   clearDates() {
     this.startMaxDate = new Date();
     this.endMaxDate = new Date();
@@ -56,6 +58,13 @@ export class SortFilterBarComponent implements OnInit {
   selectEnd(date: any) {
     this.startMaxDate = date.value;
     this.filter()
+  }
+
+  private resetFilter(){
+    this.breakages.splice(0, this.breakages.length);
+    for (let i = 0; i < this.original.length; i++) {
+      this.breakages.push(this.original[i]);
+    }
   }
 
   private filter() {
@@ -149,16 +158,16 @@ export class SortFilterBarComponent implements OnInit {
     if (sort === 'Newest') {
       this.breakages.sort((a, b) => {
         if (a.timestampFixed != undefined && b.timestampFixed != undefined) {
-          return b.timestampFixed.getTime() - a.timestampFixed.getTime();
+          return b.timestampFixed.toDate().getTime() - a.timestampFixed.toDate().getTime();
         }
-        return b.timestamp.getTime() - a.timestamp.getTime();
+        return b.timestamp.toDate().getTime() - a.timestamp.toDate().getTime();
       });
     } else if (sort === 'Oldest') {
       this.breakages.sort((a, b) => {
         if (a.timestampFixed != undefined && b.timestampFixed != undefined) {
-          return a.timestampFixed.getTime() - b.timestampFixed.getTime();
+          return a.timestampFixed.toDate().getTime() - b.timestampFixed.toDate().getTime();
         }
-        return a.timestamp.getTime() - b.timestamp.getTime();
+        return a.timestamp.toDate().getTime() - b.timestamp.toDate().getTime();
       });
     } else if (sort === 'Boat') {
       this.breakages.sort((a, b) => a.boatID - b.boatID);
