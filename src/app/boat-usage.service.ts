@@ -53,7 +53,7 @@ export class BoatUsageService {
         list.forEach((val: UsageInfo) => {
           const lastDate = new Date();
           lastDate.setMonth(lastDate.getMonth() - 1);
-          if (val.date > lastDate) {
+          if (val.date.toDate() > lastDate) {
             const original = this.lastMonthUsageEachBoat[Boats.indexOf(val.boatID)];
             this.lastMonthUsageEachBoat.splice(Boats.indexOf(val.boatID), 1,  original + val.duration);
           }
