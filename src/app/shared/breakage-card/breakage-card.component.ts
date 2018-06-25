@@ -58,4 +58,14 @@ export class BreakageCardComponent {
     const base = 'https://res.cloudinary.com/dhnh6uqep/image/upload/q_auto//url'
     this.dialogsService.imageModal(base.replace('url', id));
   }
+
+  private makeDate(date: any) {
+    try {
+      return date.toDate();
+    }
+    catch (error) {
+      return date;
+    }
+
+  }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BreakageInfo } from '../../Utils/objects/breakageInfo';
 import { BoatBreakageService } from '../../boat-breakage.service'
 import { DialogsService } from '../../shared/dialog/dialogs.service';
@@ -7,19 +7,21 @@ import { DialogsService } from '../../shared/dialog/dialogs.service';
   templateUrl: './view-issues.component.html',
   styleUrls: ['./view-issues.component.css']
 })
-export class ViewIssuesComponent {
+export class ViewIssuesComponent implements OnInit {
   breakages: BreakageInfo[];
   original: BreakageInfo[];
 
   cardButtonText = 'Fix';
 
+  ngOnInit() {
+    this.breakages = this.breakageService.getItems();
+    this.original = this.breakageService.getOriginal();
+  }
+
   constructor(
     private breakageService: BoatBreakageService,
     private dialogsService: DialogsService
-  ) {
-    this.breakages = breakageService.items;
-    this.original = breakageService.original;
-  }
+  ) {}
 
   public openDialog(key: any) {
     this.dialogsService
