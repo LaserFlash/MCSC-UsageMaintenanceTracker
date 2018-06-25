@@ -53,7 +53,7 @@ export class BoatUsageService {
         list.forEach((val: UsageInfo) => {
           const lastDate = new Date();
           lastDate.setMonth(lastDate.getMonth() - 1);
-          if (val.date.toDate() > lastDate) {
+          if (this.makeDate(val.date) > lastDate) {
             const original = this.lastMonthUsageEachBoat[Boats.indexOf(val.boatID)];
             this.lastMonthUsageEachBoat.splice(Boats.indexOf(val.boatID), 1,  original + val.duration);
           }
@@ -70,6 +70,15 @@ export class BoatUsageService {
     val.forEach(element => {
         array.push(element);
     });
+  }
+
+  private makeDate(date: any){
+    try {
+      return date.toDate();
+    }
+    catch(error){
+      return date;
+    }
   }
 
 }
