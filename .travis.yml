@@ -17,7 +17,6 @@ script:
 deploy:
    provider: firebase
    token: $FIREBASE_TOKEN
-   project: NPYC-UsageMaintenanceTracker
    skip_cleanup: true
    on:
       branch: master
