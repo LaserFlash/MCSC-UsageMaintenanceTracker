@@ -15,14 +15,13 @@ export const Levels: string[] = [
 ];
 
 export const Parts: string[] = [
-  'Sails',
   'Hull',
-  'Deck Fittings',
-  'Mast',
-  'Boom',
-  'Halyards / Sheets',
-  'Rudder / Tiller',
-  'Control Lines',
-  'Cover',
+  'Pontoons',
+  'Engine',
+  'Steering',
+  'Safety Equipment',
+  'Prop',
+  'Radio',
+  'Safety Equipment',
   'Other'
 ];
