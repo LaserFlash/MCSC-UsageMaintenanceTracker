@@ -1,7 +1,7 @@
 {
   "index": "/index.html",
   "assetGroups": [{
-    "name": "WYST",
+    "name": "NPYC",
     "installMode": "prefetch",
     "resources": {
       "files": [
