@@ -3,5 +3,8 @@ service cloud.firestore {
     match /{document=**} {
       allow read, write;
     }
+    match /safetyDocs/{docs} {
+      allow read;
+    }
   }
 }
