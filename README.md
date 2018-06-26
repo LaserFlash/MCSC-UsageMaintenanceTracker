@@ -1,8 +1,10 @@
 [![Build Status](https://travis-ci.org/LaserFlash/NPYC-UsageMaintenanceTracker.svg?branch=master)](https://travis-ci.org/LaserFlash/NPYC-UsageMaintenanceTracker)
 
-# WYST Maintenance
+# NPYC UsageMaintenanceTracker
 
-Source code for the web app hosted at wyst-stuff.tk
-Built using Angular5 and Material2.
+Source code for the web app hosted at
+https://npyc-usagemaintenancetracker.firebaseapp.com/ Built using Angular6 and
+Material2.
 
-Records and provides information relating to boats and safety for the Wellington Youth Sailing Trust.
+Records and provides information relating to boats and safety for the New
+Plymouth Yacgt Club.
