@@ -59,11 +59,10 @@ mat-sidenav-container.app-dark {
   line-height: 28px !important;
   height: auto !important;
   opacity: 1 !important;
-  color: lightsteelblue !important;
+  color: black !important;
 }
 
 /deep/ .mat-ink-bar {
-  background-color: #0077c2 !important;
   min-width: 120px;
 }
 
@@ -79,7 +78,7 @@ mat-sidenav-container.app-dark {
   padding-bottom: 2px !important;
   padding-left: 4px !important;
   padding-right: 4px !important;
-  color: lightsteelblue !important;
+  color: black !important;
 }
 
 /deep/ .bottom-navigation .mat-tab-label-active{

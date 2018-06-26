@@ -17,14 +17,13 @@ mat-toolbar.mat-toolbar {
     line-height: 28px !important;
     height: auto !important;
     opacity: 1 !important;
-    color: lightsteelblue !important;
+    color: black !important;
 }
 /deep/ .mat-tab-label-active{
     color: white !important;
 }
 
 /deep/ .mat-ink-bar {
-    background-color: #0077c2 !important;
     min-width: 120px;
 }
 
