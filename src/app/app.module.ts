@@ -28,6 +28,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCheckboxModule } from '@angular/material';
 import { MatStepperModule } from '@angular/material/stepper';
 
+import { MaterialTimeControlModule } from './modules/mat-time-control/mat-time-control.module';
+
 import { DialogsModule } from './shared/dialog/dialogs.module';
 
 import { AppComponent } from './app.component';
@@ -134,9 +136,10 @@ import 'hammerjs';
     MatListModule,
     MatCheckboxModule,
     MatStepperModule,
-    CloudinaryModule.forRoot({Cloudinary}, { cloud_name: 'dhnh6uqep', upload_preset: 'oyywau4l' }),
+    MaterialTimeControlModule,
+    CloudinaryModule.forRoot({ Cloudinary }, { cloud_name: 'dhnh6uqep', upload_preset: 'oyywau4l' }),
     FileUploadModule,
-    ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production}),
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
@@ -145,7 +148,7 @@ import 'hammerjs';
     SafetyDocsService,
     BoatPartsService,
     ThemeTrackerService,
-    {provide: HAMMER_GESTURE_CONFIG, useClass: HammerConfig}
+    { provide: HAMMER_GESTURE_CONFIG, useClass: HammerConfig }
   ],
   bootstrap: [AppComponent]
 })
