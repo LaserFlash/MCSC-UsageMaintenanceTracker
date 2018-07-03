@@ -23,10 +23,10 @@
                 <td>
                   <table>
                     <tr>
-                        <w-mat-timepicker color="primary" label="Select Start Time" [(userTime)]="startTime"></w-mat-timepicker>
+                      <w-mat-timepicker color="primary" label="Select Start Time" [(userTime)]="startTime"></w-mat-timepicker>
                     </tr>
                     <tr>
-                        <w-mat-timepicker color="primary" label="Select End Time" [(userTime)]="endTime"></w-mat-timepicker>
+                      <w-mat-timepicker color="primary" label="Select End Time" [(userTime)]="endTime"></w-mat-timepicker>
                     </tr>
                     <tr>
                       <mat-form-field>
@@ -46,6 +46,20 @@
                           {{formErrors.driver}}
                         </mat-error>
                       </mat-form-field>
+                    </tr>
+
+                    <tr>
+                      <div formArrayName="notableCrew">
+                        <label>Notable Crew</label> <br />
+                        <div *ngFor="let item of usageForm.get('notableCrew').controls; let i = index;">
+                          <mat-form-field [formGroupName]="i">
+                            <input formControlName="name" type="text" matInput placeholder="Crew {{i+1}}">
+                          </mat-form-field>
+                          <button *ngIf="i > 0 || i !== usageForm.get('notableCrew').controls.length - 1" mat-icon-button type="button" (click)="removeCrew(i)"><mat-icon>remove</mat-icon></button>
+                          <button *ngIf="i >= usageForm.get('notableCrew').controls.length - 1" mat-icon-button type="button" (click)="addArrayCrew()"><mat-icon>add</mat-icon></button>
+                        </div>
+                      </div>
+
                     </tr>
                   </table>
                 </td>

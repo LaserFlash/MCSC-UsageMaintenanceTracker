@@ -4,6 +4,7 @@ export class UsageInfo {
     public startTime: Date,
     public endTime: Date,
     public duration: number,
-    public driver: string
+    public driver: string,
+    public otherCrew: [{}]
   ) {}
 }

@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { DateAdapter } from '@angular/material';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators, FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 
 import { BoatUsageService } from '../../boat-usage.service'
@@ -49,7 +49,7 @@ export class ReportUsageComponent {
       'required': 'Date is required.'
     },
     'driver': {
-      'required' : 'Driver / Skipper name is required.'
+      'required': 'Driver / Skipper name is required.'
     }
   };
 
@@ -69,6 +69,7 @@ export class ReportUsageComponent {
       boatID: ['', Validators.required],
       date: new FormControl({ value: this.maxDate }, Validators.required),
       driver: ['', Validators.required],
+      notableCrew: this.fb.array([this.createArrayCrew()]),
     });
 
     this.usageForm.valueChanges
@@ -76,6 +77,24 @@ export class ReportUsageComponent {
 
     this.onValueChanged(); // (re)set validation messages now
   }
+
+  private createArrayCrew(): FormGroup {
+    return this.fb.group({
+      name: ['', null]
+    });
+  }
+
+  private addArrayCrew(): void {
+    this.crew = this.usageForm.get('notableCrew') as FormArray;
+    this.crew.push(this.createArrayCrew());
+  }
+
+  private removeCrew(i:number): void {
+    if (i === undefined) return;
+    this.crew = this.usageForm.get('notableCrew') as FormArray;
+    this.crew.removeAt(i);
+}
+
 
   /** Update error messages due to validation */
   private onValueChanged(data?: any) {
@@ -101,12 +120,15 @@ export class ReportUsageComponent {
   /** Build BreakageInfo Object from submited data */
   public onSubmit() {
     if (this.usageForm.valid) {
+
+      let crew = this.usageForm.get('notableCrew').value;
       const usage = new UsageInfo(
         BoatNameConversionHelper.numberFromUserFriendlyName(this.usageForm.get('boatID').value),
         this.buildTimeDate(this.usageForm.get('date').value, this.startTime),
         this.buildTimeDate(this.usageForm.get('date').value, this.endTime),
         null
-        this.usageForm.get('driver').value
+        this.usageForm.get('driver').value,
+        crew
       )
 
       this.usageService.addUsageInfo(usage).then(
