@@ -43,6 +43,8 @@ export class ReportUsageComponent {
 
   formErrors = {
     'boatID': '',
+    'startTime' : '',
+    'endTime' : '',
     'date': '',
     'driver': '',
     'windSpeed': '',
