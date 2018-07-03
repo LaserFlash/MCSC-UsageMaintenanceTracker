@@ -6,100 +6,118 @@
         <mat-card-title>{{title}}</mat-card-title>
         <mat-card-content>
           <form (ngSubmit)="onSubmit()" [formGroup]="usageForm" novalidate>
-            <table>
-              <tr>
-                <td>
-                  <mat-radio-group class="radio-group" formControlName="boatID" required>
-                    <label> Boat Number</label>
-                    <mat-radio-button class="radio-button" *ngFor="let id of boats" [value]="id">
-                      {{id}}
-                    </mat-radio-button>
-                    <mat-error *ngIf="formErrors.boatID">
-                      {{formErrors.boatID}}
+            <mat-vertical-stepper #stepper formArrayName="formArray" [linear]="isLinear">
+              <mat-step formGroupName="0" [stepControl]="usageForm.get('formArray').get([0])">
+                <ng-template matStepLabel>Boat</ng-template>
+                <label>Select the boat you used</label>
+                <br />
+                <mat-form-field>
+                <mat-select placeholder="Boat Name" formControlName="boatID" required>
+
+                  <mat-option *ngFor="let id of boats" [value]="id">{{id}}</mat-option>
+                  <mat-error *ngIf="formErrors.boatID">
+                    {{formErrors.boatID}}
+                  </mat-error>
+
+                </mat-select>
+              </mat-form-field>
+                <br />
+                <br />
+                <button mat-button matStepperNext type="button">Next</button>
+              </mat-step>
+              <mat-step formGroupName="1" [stepControl]="usageForm.get('formArray').get([1])">
+                <ng-template matStepLabel>When</ng-template>
+
+                <label>Start Time</label> <br />
+                <w-mat-timepicker color="primary" label="Select Start Time" [(userTime)]="startTime"></w-mat-timepicker>
+
+                <br />
+                <label>End Time</label> <br />
+                <w-mat-timepicker color="primary" label="Select End Time" [(userTime)]="endTime"></w-mat-timepicker>
+                <br />
+                <label>Date</label> <br />
+                <mat-form-field>
+                  <input matInput [matDatepicker]="picker" [max]="maxDate" formControlName="date" readonly (focus)="picker.open()" (click)="picker.open()" placeholder="Choose a Date" required>
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+
+                  <mat-error *ngIf="formErrors.date">
+                    {{formErrors.date}}
+                  </mat-error>
+                </mat-form-field>
+
+                <br />
+                <button mat-button matStepperPrevious type="button">Back</button>
+                <button mat-button matStepperNext type="button">Next</button>
+              </mat-step>
+              <mat-step formGroupName="2" [stepControl]="usageForm.get('formArray').get([2])">
+                <ng-template matStepLabel>People</ng-template>
+
+                <label>Driver</label> <br />
+                <mat-form-field>
+                  <input matInput formControlName="driver" placeholder="Boat Driver" required type="text">
+                  <mat-error *ngIf="formErrors.driver">
+                    {{formErrors.driver}}
+                  </mat-error>
+                </mat-form-field>
+
+                <br />
+
+                <div formArrayName="notableCrew">
+                  <label>Notable Crew</label> <br />
+                  <div *ngFor="let item of formCrewArray.controls; let i = index;">
+                    <mat-form-field [formGroupName]="i">
+                      <input formControlName="name" type="text" matInput placeholder="Crew {{i+1}}">
+                    </mat-form-field>
+                    <button *ngIf="i > 0 || i !== formCrewArray.controls.length - 1" mat-icon-button type="button" (click)="removeCrew(i)"><mat-icon>remove</mat-icon></button>
+                    <button *ngIf="i >= formCrewArray.controls.length - 1" mat-icon-button type="button" (click)="addArrayCrew()"><mat-icon>add</mat-icon></button>
+                  </div>
+                </div>
+
+                <br />
+                <button mat-button matStepperPrevious type="button">Back</button>
+                <button mat-button matStepperNext type="button">Next</button>
+              </mat-step>
+              <mat-step formGroupName="3" [stepControl]="usageForm.get('formArray').get([3])">
+                <ng-template matStepLabel>Weather Conditions</ng-template>
+
+                <label>Conditions</label> <br />
+                <mat-form-field>
+                  <mat-select placeholder="Wind Speed" formControlName="windSpeed" name="windSpeed" required>
+                    <mat-option *ngFor="let id of windSpeed" [value]="id">{{id}}</mat-option>
+                    <mat-error *ngIf="formErrors.windSpeed">
+                      {{formErrors.windSpeed}}
                     </mat-error>
-                  </mat-radio-group>
-                  <br />
-                </td>
-                <td>
-                  <table>
-                    <tr>
-                      <w-mat-timepicker color="primary" label="Select Start Time" [(userTime)]="startTime"></w-mat-timepicker>
-                    </tr>
-                    <tr>
-                      <w-mat-timepicker color="primary" label="Select End Time" [(userTime)]="endTime"></w-mat-timepicker>
-                    </tr>
-                    <tr>
-                      <mat-form-field>
-                        <input matInput [matDatepicker]="picker" [max]="maxDate" formControlName="date" readonly (focus)="picker.open()" (click)="picker.open()" placeholder="Choose a Date" required>
-                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
+                  </mat-select>
+                </mat-form-field>
 
-                        <mat-error *ngIf="formErrors.date">
-                          {{formErrors.date}}
-                        </mat-error>
-                      </mat-form-field>
-                    </tr>
-                    <tr>
-                      <mat-form-field>
-                        <input matInput formControlName="driver" placeholder="Boat Driver" required type="text">
-                        <mat-error *ngIf="formErrors.driver">
-                          {{formErrors.driver}}
-                        </mat-error>
-                      </mat-form-field>
-                    </tr>
+                <br />
 
-                    <tr>
-                      <div formArrayName="notableCrew">
-                        <label>Notable Crew</label> <br />
-                        <div *ngFor="let item of formCrewArray.controls; let i = index;">
-                          <mat-form-field [formGroupName]="i">
-                            <input formControlName="name" type="text" matInput placeholder="Crew {{i+1}}">
-                          </mat-form-field>
-                          <button *ngIf="i > 0 || i !== formCrewArray.controls.length - 1" mat-icon-button type="button" (click)="removeCrew(i)"><mat-icon>remove</mat-icon></button>
-                          <button *ngIf="i >= formCrewArray.controls.length - 1" mat-icon-button type="button" (click)="addArrayCrew()"><mat-icon>add</mat-icon></button>
-                        </div>
-                      </div>
+                <mat-form-field>
+                  <mat-select placeholder="Wind Direction" formControlName="windDirection" name="windDirection" required>
+                    <mat-option *ngFor="let id of windDirection" [value]="id">{{id}}</mat-option>
+                    <mat-error *ngIf="formErrors.windDirection">
+                      {{formErrors.windDirection}}
+                    </mat-error>
+                  </mat-select>
+                </mat-form-field>
 
-                    </tr>
-                    <tr>
-                      <label>Conditions</label> <br />
-                      <mat-form-field>
-                        <mat-select placeholder="Wind Speed" formControlName="windSpeed" name="windSpeed" required>
-                          <mat-option *ngFor="let id of windSpeed" [value]="id">{{id}}</mat-option>
-                          <mat-error *ngIf="formErrors.windSpeed">
-                            {{formErrors.windSpeed}}
-                          </mat-error>
-                        </mat-select>
-                      </mat-form-field>
+                <br />
 
-                      <br />
+                <mat-form-field>
+                  <mat-select placeholder="Water State" formControlName="waterState" name="waterState" required>
+                    <mat-option *ngFor="let id of waterState" [value]="id">{{id}}</mat-option>
+                    <mat-error *ngIf="formErrors.waterState">
+                      {{formErrors.waterState}}
+                    </mat-error>
+                  </mat-select>
+                </mat-form-field>
 
-                      <mat-form-field>
-                        <mat-select placeholder="Wind Direction" formControlName="windDirection" name="windDirection" required>
-                          <mat-option *ngFor="let id of windDirection" [value]="id">{{id}}</mat-option>
-                          <mat-error *ngIf="formErrors.windDirection">
-                            {{formErrors.windDirection}}
-                          </mat-error>
-                        </mat-select>
-                      </mat-form-field>
-
-                      <br />
-
-                      <mat-form-field>
-                        <mat-select placeholder="Water State" formControlName="waterState" name="waterState" required>
-                          <mat-option *ngFor="let id of waterState" [value]="id">{{id}}</mat-option>
-                          <mat-error *ngIf="formErrors.waterState">
-                            {{formErrors.waterState}}
-                          </mat-error>
-                        </mat-select>
-                      </mat-form-field>
-                    </tr>
-                  </table>
-                </td>
-              </tr>
-            </table>
-            <br />
-            <button mat-raised-button color="accent" type="submit">Submit</button>
+                <br />
+                <button mat-button matStepperPrevious type="button">Back</button>
+                <button mat-raised-button color="accent" type="submit">Submit</button>
+              </mat-step>
+            </mat-vertical-stepper>
           </form>
 
         </mat-card-content>

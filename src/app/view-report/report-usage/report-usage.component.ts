@@ -1,7 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { DateAdapter } from '@angular/material';
 import { FormBuilder, FormGroup, FormArray, Validators, FormControl } from '@angular/forms';
+
 import { MatSnackBar } from '@angular/material';
+import { MatStepper } from '@angular/material';
 
 import { BoatUsageService } from '../../boat-usage.service'
 import { UsageInfo } from '../../Utils/objects/usageInfo'
@@ -17,8 +19,12 @@ const NUMBER_REGEX = /[0-9]+/;
 })
 export class ReportUsageComponent {
 
+  @ViewChild('stepper') stepper: MatStepper;
+
   title = 'Report Boat Usage';
   maxDate = new Date();
+
+  isLinear = true;
 
   windSpeed = WindTypes;
   windDirection = WindDirection;
@@ -50,7 +56,7 @@ export class ReportUsageComponent {
 
   validationMessages = {
     'boatID': {
-      'required': 'Boat is required.'
+      'required': 'You must select a boat.'
     },
     'date': {
       'required': 'Date is required.'
@@ -82,19 +88,28 @@ export class ReportUsageComponent {
   /** Build the form */
   private createForm() {
     this.usageForm = this.fb.group({
-      boatID: ['', Validators.required],
-      date: new FormControl({ value: this.maxDate }, Validators.required),
-      driver: ['', Validators.required],
-      notableCrew: this.fb.array([this.createArrayCrew()]),
-      windSpeed: ['', Validators.required],
-      windDirection: ['', Validators.required],
-      waterState: ['', Validators.required],
+      formArray: this.fb.array([
+        this.fb.group({
+          boatID: ['', Validators.required],
+        }),
+        this.fb.group({
+          date: new FormControl({ value: this.maxDate }, Validators.required),
+        }),
+        this.fb.group({
+          driver: ['', Validators.required],
+          notableCrew: this.fb.array([this.createArrayCrew()]),
+        }),
+        this.fb.group({
+          windSpeed: ['', Validators.required],
+          windDirection: ['', Validators.required],
+          waterState: ['', Validators.required],
+        })
+      ])
     });
-
     this.usageForm.valueChanges
       .subscribe(data => this.onValueChanged(data));
 
-    this.onValueChanged(); // (re)set validation messages now
+    this.onValueChanged(); // (re)set validation messages no
   }
 
   private createArrayCrew(): FormGroup {
@@ -104,18 +119,17 @@ export class ReportUsageComponent {
   }
 
   private addArrayCrew(): void {
-    var crew = this.usageForm.get('notableCrew') as FormArray;
+    var crew = this.usageForm.get('formArray').get([2]).get('notableCrew') as FormArray;
     crew.push(this.createArrayCrew());
   }
 
   private removeCrew(i: number): void {
     if (i === undefined) return;
-    var crew = this.usageForm.get('notableCrew') as FormArray;
+    var crew = this.usageForm.get('formArray').get([2]).get('notableCrew') as FormArray;
     crew.removeAt(i);
   }
 
-  get formCrewArray() { return <FormArray>this.usageForm.get('notableCrew'); }
-
+  get formCrewArray() { return <FormArray>this.usageForm.get('formArray').get([2]).get('notableCrew'); }
 
   /** Update error messages due to validation */
   private onValueChanged(data?: any) {
@@ -126,7 +140,7 @@ export class ReportUsageComponent {
     for (const field in this.formErrors) {
       // clear previous error message (if any)
       this.formErrors[field] = '';
-      const control = form.get(field);
+      const control = this.findFieldControl(form, field);
 
       if (control && control.dirty && !control.valid) {
         const messages = this.validationMessages[field];
@@ -138,21 +152,33 @@ export class ReportUsageComponent {
     }
   }
 
+  /**
+  * Given a form (assuming formArray) and a field loop through the formArray to
+  * find the control that belongs with the field.
+  */
+  private findFieldControl(form, field) {
+    for (var i = 0; i < 4; i++) {
+      let control = form.get('formArray').get([i]).get(field)
+      if (control) return control;
+    }
+  }
+
   /** Build BreakageInfo Object from submited data */
   public onSubmit() {
     if (this.usageForm.valid) {
 
-      let crew = this.usageForm.get('notableCrew').value;
+      let crew = this.usageForm.get('formArray').get([2]).get('notableCrew').value;
+
       const usage = new UsageInfo(
-        BoatNameConversionHelper.numberFromUserFriendlyName(this.usageForm.get('boatID').value),
-        this.buildTimeDate(this.usageForm.get('date').value, this.startTime),
-        this.buildTimeDate(this.usageForm.get('date').value, this.endTime),
+        BoatNameConversionHelper.numberFromUserFriendlyName(this.usageForm.get('formArray').get([0]).get('boatID').value),
+        this.buildTimeDate(this.usageForm.get('formArray').get([1]).get('date').value, this.startTime),
+        this.buildTimeDate(this.usageForm.get('formArray').get([1]).get('date').value, this.endTime),
         null,
-        this.usageForm.get('driver').value,
+        this.usageForm.get('formArray').get([2]).get('driver').value,
         crew,
-        WindSpeedConversionHelper.numberFromUserFriendlyName(this.usageForm.get('windSpeed').value),
-        WindDirectionConversionHelper.numberFromUserFriendlyName(this.usageForm.get('windDirection').value),
-        WaterStateConversionHelper.numberFromUserFriendlyName(this.usageForm.get('waterState').value)
+        WindSpeedConversionHelper.numberFromUserFriendlyName(this.usageForm.get('formArray').get([3]).get('windSpeed').value),
+        WindDirectionConversionHelper.numberFromUserFriendlyName(this.usageForm.get('formArray').get([3]).get('windDirection').value),
+        WaterStateConversionHelper.numberFromUserFriendlyName(this.usageForm.get('formArray').get([3]).get('waterState').value)
       )
 
       this.usageService.addUsageInfo(usage).then(
@@ -160,7 +186,8 @@ export class ReportUsageComponent {
           this.snackBar.open('Usage Succesfully Submited', 'Close', {
             duration: 2000,
           }),
-          this.createForm()
+          this.createForm(),
+          this.stepper.selectedIndex = 0
         )
       )
         .catch(

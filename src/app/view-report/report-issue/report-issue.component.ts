@@ -122,11 +122,11 @@ export class ReportIssueComponent implements OnInit {
       return { fileItem, form };
     };
     this.uploader.onCompleteItem = (item: any, response: string, status: number, headers: ParsedResponseHeaders) => {
-       this.imageLoaded = true;
-       const j = JSON.parse(response);
-       this.imageID = j['public_id'];
-       this.breakage[0].imageID = this.imageID;
-      }
+      this.imageLoaded = true;
+      const j = JSON.parse(response);
+      this.imageID = j['public_id'];
+      this.breakage[0].imageID = this.imageID;
+    }
     this.uploader.onProgressItem = (fileItem: any, progress: any) => { this.imageLoaded = false; }
   }
 
@@ -215,10 +215,10 @@ export class ReportIssueComponent implements OnInit {
         )
       )
         .catch(
-        () =>
-        this.snackBar.open('Something Went Wrong', 'Close', {
-          duration: 2000,
-        })
+          () =>
+            this.snackBar.open('Something Went Wrong', 'Close', {
+              duration: 2000,
+            })
         );
     }
   }
