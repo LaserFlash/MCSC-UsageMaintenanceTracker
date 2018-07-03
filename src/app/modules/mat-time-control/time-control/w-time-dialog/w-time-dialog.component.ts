@@ -25,7 +25,6 @@ export class WTimeDialogComponent {
 
         this.userTime = data.time;
         this.color = data.color;
-        console.log('this.color', this.color);
     }
 
     public revert() {
