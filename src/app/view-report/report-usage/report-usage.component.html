@@ -51,12 +51,12 @@
                     <tr>
                       <div formArrayName="notableCrew">
                         <label>Notable Crew</label> <br />
-                        <div *ngFor="let item of usageForm.get('notableCrew').controls; let i = index;">
+                        <div *ngFor="let item of formCrewArray.controls; let i = index;">
                           <mat-form-field [formGroupName]="i">
                             <input formControlName="name" type="text" matInput placeholder="Crew {{i+1}}">
                           </mat-form-field>
-                          <button *ngIf="i > 0 || i !== usageForm.get('notableCrew').controls.length - 1" mat-icon-button type="button" (click)="removeCrew(i)"><mat-icon>remove</mat-icon></button>
-                          <button *ngIf="i >= usageForm.get('notableCrew').controls.length - 1" mat-icon-button type="button" (click)="addArrayCrew()"><mat-icon>add</mat-icon></button>
+                          <button *ngIf="i > 0 || i !== formCrewArray.controls.length - 1" mat-icon-button type="button" (click)="removeCrew(i)"><mat-icon>remove</mat-icon></button>
+                          <button *ngIf="i >= formCrewArray.controls.length - 1" mat-icon-button type="button" (click)="addArrayCrew()"><mat-icon>add</mat-icon></button>
                         </div>
                       </div>
 
@@ -84,7 +84,7 @@
                       </mat-form-field>
 
                       <br />
-                    
+
                       <mat-form-field>
                         <mat-select placeholder="Water State" formControlName="waterState" name="waterState" required>
                           <mat-option *ngFor="let id of waterState" [value]="id">{{id}}</mat-option>

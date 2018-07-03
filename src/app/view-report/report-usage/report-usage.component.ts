@@ -25,8 +25,8 @@ export class ReportUsageComponent {
   waterState = WaterState;
 
   //TODO put in ngInit and dynamiclly set hour and minute
-  private startTime = { hour: 7, minute: 15, meriden: 'AM', format: 12 };
-  private endTime = { hour: 7, minute: 15, meriden: 'AM', format: 12 };
+  startTime = { hour: 7, minute: 15, meriden: 'AM', format: 12 };
+  endTime = { hour: 7, minute: 15, meriden: 'AM', format: 12 };
 
   boats = UserFriendlyBoats.filter((s, i) => {
 
@@ -43,7 +43,7 @@ export class ReportUsageComponent {
     'boatID': '',
     'date': '',
     'driver': '',
-    'windSpeed: ' '',
+    'windSpeed': '',
     'windDirection': '',
     'waterState': ''
   };
@@ -104,15 +104,17 @@ export class ReportUsageComponent {
   }
 
   private addArrayCrew(): void {
-    this.crew = this.usageForm.get('notableCrew') as FormArray;
-    this.crew.push(this.createArrayCrew());
+    var crew = this.usageForm.get('notableCrew') as FormArray;
+    crew.push(this.createArrayCrew());
   }
 
   private removeCrew(i: number): void {
     if (i === undefined) return;
-    this.crew = this.usageForm.get('notableCrew') as FormArray;
-    this.crew.removeAt(i);
+    var crew = this.usageForm.get('notableCrew') as FormArray;
+    crew.removeAt(i);
   }
+
+  get formCrewArray() { return <FormArray>this.usageForm.get('notableCrew'); }
 
 
   /** Update error messages due to validation */
@@ -145,7 +147,7 @@ export class ReportUsageComponent {
         BoatNameConversionHelper.numberFromUserFriendlyName(this.usageForm.get('boatID').value),
         this.buildTimeDate(this.usageForm.get('date').value, this.startTime),
         this.buildTimeDate(this.usageForm.get('date').value, this.endTime),
-        null
+        null,
         this.usageForm.get('driver').value,
         crew,
         WindSpeedConversionHelper.numberFromUserFriendlyName(this.usageForm.get('windSpeed').value),
