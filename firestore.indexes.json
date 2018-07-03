@@ -2,7 +2,7 @@
   "indexes": [{
     "collectionId": "boatUsage",
     "fields": [{
-        "fieldPath": "date",
+        "fieldPath": "endTime",
         "mode": "DESCENDING"
       },
       {

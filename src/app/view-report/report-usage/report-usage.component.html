@@ -23,12 +23,10 @@
                 <td>
                   <table>
                     <tr>
-                      <mat-form-field>
-                        <input matInput type="number" placeholder="Duration in hours" [min]="0" formControlName="duration" required>
-                        <mat-error *ngIf="formErrors.duration">
-                          {{formErrors.duration}}
-                        </mat-error>
-                      </mat-form-field>
+                        <w-mat-timepicker color="primary" label="Select Start Time" [(userTime)]="startTime"></w-mat-timepicker>
+                    </tr>
+                    <tr>
+                        <w-mat-timepicker color="primary" label="Select End Time" [(userTime)]="endTime"></w-mat-timepicker>
                     </tr>
                     <tr>
                       <mat-form-field>

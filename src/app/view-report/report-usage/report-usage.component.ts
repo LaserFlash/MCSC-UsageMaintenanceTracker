@@ -19,7 +19,13 @@ export class ReportUsageComponent {
 
   title = 'Report Boat Usage';
   maxDate = new Date();
+
+  //TODO put in ngInit and dynamiclly set hour and minute
+  private startTime = { hour: 7, minute: 15, meriden: 'AM', format: 12 };
+  private endTime = { hour: 7, minute: 15, meriden: 'AM', format: 12 };
+
   boats = UserFriendlyBoats.filter((s, i) => {
+
     let yes = false;
     Boats.forEach(j => {
       yes ? true : yes = i === j;
@@ -31,18 +37,12 @@ export class ReportUsageComponent {
 
   formErrors = {
     'boatID': '',
-    'duration': '',
     'date': ''
   };
 
   validationMessages = {
     'boatID': {
       'required': 'Boat is required.'
-    },
-    'duration': {
-      'required': 'Duration is required.',
-      'min': 'Duration must be at least 0',
-      'pattern': 'Duration must be at least 0'
     },
     'date': {
       'required': 'Date is required.'
@@ -54,17 +54,16 @@ export class ReportUsageComponent {
     private usageService: BoatUsageService,
     private fb: FormBuilder,
     public snackBar: MatSnackBar
-    ) {
-      this.dateAdapter.setLocale('en-nz');
-      this.createForm();
-    }
+  ) {
+    this.dateAdapter.setLocale('en-nz');
+    this.createForm();
+  }
 
   /** Build the form */
   private createForm() {
     this.usageForm = this.fb.group({
       boatID: ['', Validators.required],
-      duration: ['', [Validators.required, Validators.pattern(/[0-9]+/), Validators.min(0)]],
-      date: new FormControl({value: this.maxDate}, Validators.required)
+      date: new FormControl({ value: this.maxDate }, Validators.required)
     });
 
     this.usageForm.valueChanges
@@ -99,8 +98,9 @@ export class ReportUsageComponent {
     if (this.usageForm.valid) {
       const usage = new UsageInfo(
         BoatNameConversionHelper.numberFromUserFriendlyName(this.usageForm.get('boatID').value),
-        this.usageForm.get('duration').value,
-        this.usageForm.get('date').value
+        this.buildTimeDate(this.usageForm.get('date').value, this.startTime),
+        this.buildTimeDate(this.usageForm.get('date').value, this.endTime),
+        null
       )
 
       this.usageService.addUsageInfo(usage).then(
@@ -112,11 +112,31 @@ export class ReportUsageComponent {
         )
       )
         .catch(
-        () =>
-          this.snackBar.open('Something Went Wrong', 'Close', {
-            duration: 2000,
-          })
+          () =>
+            this.snackBar.open('Something Went Wrong', 'Close', {
+              duration: 2000,
+            })
         );
+
     }
+
+  }
+
+  /**
+  * Given a time and a date combine them together
+  **/
+  private buildTimeDate(date: Date, time) {
+    var hour = time.hour;
+    var minutes = time.minute;
+
+    if (time.format === 12) {
+      if (time.meriden === 'PM') {
+        if (hour !== 12) {
+          hour += 12;
+        }
+      }
+    }
+    let timeDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), hour, minutes);
+    return timeDate;
   }
 }
