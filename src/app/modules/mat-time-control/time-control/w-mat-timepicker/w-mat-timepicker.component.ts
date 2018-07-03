@@ -24,8 +24,6 @@ export class WMatTimePickerComponent implements OnInit {
     constructor(private dialog: MatDialog) { }
 
     ngOnInit() {
-      console.log(this.label)
-
         if (!this.userTime) {
 
             this.userTime = {
