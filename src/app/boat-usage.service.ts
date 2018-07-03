@@ -62,7 +62,7 @@ export class BoatUsageService {
   }
 
   addUsageInfo(usage: UsageInfo) {
-    return Promise.resolve(this.itemsCollection.add({boatID: usage.boatID, duration: usage.duration, date: usage.date}));
+    return Promise.resolve(this.itemsCollection.add(Object.assign({},usage)));
   }
 
   private buildDataList(val: UsageInfo[], array: UsageInfo[]) {
