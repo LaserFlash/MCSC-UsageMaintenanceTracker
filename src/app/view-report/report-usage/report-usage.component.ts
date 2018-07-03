@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { DateAdapter } from '@angular/material';
-import { FormBuilder, FormGroup, FormArray, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators, FormControl, AbstractControl } from '@angular/forms';
 
 import { MatSnackBar } from '@angular/material';
 import { MatStepper } from '@angular/material';
@@ -30,10 +30,6 @@ export class ReportUsageComponent {
   windDirection = WindDirection;
   waterState = WaterState;
 
-  //TODO put in ngInit and dynamiclly set hour and minute
-  startTime = { hour: 7, minute: 15, meriden: 'AM', format: 12 };
-  endTime = { hour: 7, minute: 15, meriden: 'AM', format: 12 };
-
   boats = UserFriendlyBoats.filter((s, i) => {
 
     let yes = false;
@@ -57,6 +53,12 @@ export class ReportUsageComponent {
   validationMessages = {
     'boatID': {
       'required': 'You must select a boat.'
+    },
+    'startTime': {
+      'required': 'Start time is required'
+    },
+    'endTime': {
+      'required': 'End time is required'
     },
     'date': {
       'required': 'Date is required.'
@@ -93,8 +95,10 @@ export class ReportUsageComponent {
           boatID: ['', Validators.required],
         }),
         this.fb.group({
-          date: new FormControl({ value: this.maxDate }, Validators.required),
-        }),
+          startTime: ['', Validators.required],
+          endTime: ['', Validators.required],
+          date: new FormControl({ value: this.maxDate }, Validators.required)
+        }, { validator: this.checkDateRange.bind(this) }),
         this.fb.group({
           driver: ['', Validators.required],
           notableCrew: this.fb.array([this.createArrayCrew()]),
@@ -110,6 +114,10 @@ export class ReportUsageComponent {
       .subscribe(data => this.onValueChanged(data));
 
     this.onValueChanged(); // (re)set validation messages no
+  }
+
+  checkDateRange(c: AbstractControl) {
+    return c.get('startTime').value < c.get('endTime').value ? null : { notInRange: true }
   }
 
   private createArrayCrew(): FormGroup {
@@ -171,8 +179,8 @@ export class ReportUsageComponent {
 
       const usage = new UsageInfo(
         BoatNameConversionHelper.numberFromUserFriendlyName(this.usageForm.get('formArray').get([0]).get('boatID').value),
-        this.buildTimeDate(this.usageForm.get('formArray').get([1]).get('date').value, this.startTime),
-        this.buildTimeDate(this.usageForm.get('formArray').get([1]).get('date').value, this.endTime),
+        this.buildTimeDate(this.usageForm.get('formArray').get([1]).get('date').value, this.usageForm.get('formArray').get([1]).get('startTime').value),
+        this.buildTimeDate(this.usageForm.get('formArray').get([1]).get('date').value, this.usageForm.get('formArray').get([1]).get('endTime').value),
         null,
         this.usageForm.get('formArray').get([2]).get('driver').value,
         crew,
@@ -196,26 +204,23 @@ export class ReportUsageComponent {
               duration: 2000,
             })
         );
-
     }
+  }
 
+  getStartTime() {
+    console.log(this.usageForm.get('formArray').get([1]).get("startTime"))
   }
 
   /**
   * Given a time and a date combine them together
   **/
-  private buildTimeDate(date: Date, time) {
-    var hour = time.hour;
-    var minutes = time.minute;
-
-    if (time.format === 12) {
-      if (time.meriden === 'PM') {
-        if (hour !== 12) {
-          hour += 12;
-        }
-      }
-    }
-    let timeDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), hour, minutes);
+  private buildTimeDate(date: Date, timeString: string) {
+    console.log(timeString);
+    var time = timeString.split(":");
+    var hour = parseInt(time[0]);
+    var minute = parseInt(time[1]);
+    let timeDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), hour, minute);
+    console.log(timeDate)
     return timeDate;
   }
 }

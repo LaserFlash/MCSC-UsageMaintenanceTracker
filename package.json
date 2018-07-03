@@ -26,6 +26,7 @@
     "@angular/router": "^6.0.3",
     "@angular/service-worker": "^6.0.3",
     "@cloudinary/angular-5.x": "^1.0.1",
+    "amazing-time-picker": "^1.5.3",
     "angularfire2": "^5.0.0-rc.11",
     "chart.js": "^2.7.2",
     "classlist.js": "^1.1.20150312",
