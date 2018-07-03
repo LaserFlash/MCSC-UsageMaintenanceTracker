@@ -39,6 +39,14 @@
                         </mat-error>
                       </mat-form-field>
                     </tr>
+                    <tr>
+                      <mat-form-field>
+                        <input matInput formControlName="driver" placeholder="Boat Driver" required type="text">
+                        <mat-error *ngIf="formErrors.driver">
+                          {{formErrors.driver}}
+                        </mat-error>
+                      </mat-form-field>
+                    </tr>
                   </table>
                 </td>
               </tr>

@@ -3,6 +3,7 @@ export class UsageInfo {
     public boatID: number,
     public startTime: Date,
     public endTime: Date,
-    public duration: number
+    public duration: number,
+    public driver: string
   ) {}
 }

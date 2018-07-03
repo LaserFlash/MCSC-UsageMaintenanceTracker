@@ -37,7 +37,8 @@ export class ReportUsageComponent {
 
   formErrors = {
     'boatID': '',
-    'date': ''
+    'date': '',
+    'driver': ''
   };
 
   validationMessages = {
@@ -46,6 +47,9 @@ export class ReportUsageComponent {
     },
     'date': {
       'required': 'Date is required.'
+    },
+    'driver': {
+      'required' : 'Driver / Skipper name is required.'
     }
   };
 
@@ -63,7 +67,8 @@ export class ReportUsageComponent {
   private createForm() {
     this.usageForm = this.fb.group({
       boatID: ['', Validators.required],
-      date: new FormControl({ value: this.maxDate }, Validators.required)
+      date: new FormControl({ value: this.maxDate }, Validators.required),
+      driver: ['', Validators.required],
     });
 
     this.usageForm.valueChanges
@@ -101,6 +106,7 @@ export class ReportUsageComponent {
         this.buildTimeDate(this.usageForm.get('date').value, this.startTime),
         this.buildTimeDate(this.usageForm.get('date').value, this.endTime),
         null
+        this.usageForm.get('driver').value
       )
 
       this.usageService.addUsageInfo(usage).then(
