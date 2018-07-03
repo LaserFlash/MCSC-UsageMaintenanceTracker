@@ -61,6 +61,39 @@
                       </div>
 
                     </tr>
+                    <tr>
+                      <label>Conditions</label> <br />
+                      <mat-form-field>
+                        <mat-select placeholder="Wind Speed" formControlName="windSpeed" name="windSpeed" required>
+                          <mat-option *ngFor="let id of windSpeed" [value]="id">{{id}}</mat-option>
+                          <mat-error *ngIf="formErrors.windSpeed">
+                            {{formErrors.windSpeed}}
+                          </mat-error>
+                        </mat-select>
+                      </mat-form-field>
+
+                      <br />
+
+                      <mat-form-field>
+                        <mat-select placeholder="Wind Direction" formControlName="windDirection" name="windDirection" required>
+                          <mat-option *ngFor="let id of windDirection" [value]="id">{{id}}</mat-option>
+                          <mat-error *ngIf="formErrors.windDirection">
+                            {{formErrors.windDirection}}
+                          </mat-error>
+                        </mat-select>
+                      </mat-form-field>
+
+                      <br />
+                    
+                      <mat-form-field>
+                        <mat-select placeholder="Water State" formControlName="waterState" name="waterState" required>
+                          <mat-option *ngFor="let id of waterState" [value]="id">{{id}}</mat-option>
+                          <mat-error *ngIf="formErrors.waterState">
+                            {{formErrors.waterState}}
+                          </mat-error>
+                        </mat-select>
+                      </mat-form-field>
+                    </tr>
                   </table>
                 </td>
               </tr>

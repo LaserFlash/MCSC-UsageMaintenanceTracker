@@ -5,6 +5,9 @@ export class UsageInfo {
     public endTime: Date,
     public duration: number,
     public driver: string,
-    public otherCrew: [{}]
-  ) {}
+    public otherCrew: [{}],
+    public windSpeed: number,
+    public windDirection: number,
+    public waterState: number
+  ) { }
 }

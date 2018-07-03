@@ -5,8 +5,8 @@ import { MatSnackBar } from '@angular/material';
 
 import { BoatUsageService } from '../../boat-usage.service'
 import { UsageInfo } from '../../Utils/objects/usageInfo'
-import { Boats, UserFriendlyBoats } from '../../Utils/menuNames'
-import { BoatNameConversionHelper } from '../../Utils/nameConversion'
+import { Boats, UserFriendlyBoats, WindTypes, WindDirection, WaterState } from '../../Utils/menuNames'
+import { BoatNameConversionHelper, WindSpeedConversionHelper, WindDirectionConversionHelper, WaterStateConversionHelper } from '../../Utils/nameConversion'
 
 const NUMBER_REGEX = /[0-9]+/;
 
@@ -19,6 +19,10 @@ export class ReportUsageComponent {
 
   title = 'Report Boat Usage';
   maxDate = new Date();
+
+  windSpeed = WindTypes;
+  windDirection = WindDirection;
+  waterState = WaterState;
 
   //TODO put in ngInit and dynamiclly set hour and minute
   private startTime = { hour: 7, minute: 15, meriden: 'AM', format: 12 };
@@ -38,7 +42,10 @@ export class ReportUsageComponent {
   formErrors = {
     'boatID': '',
     'date': '',
-    'driver': ''
+    'driver': '',
+    'windSpeed: ' '',
+    'windDirection': '',
+    'waterState': ''
   };
 
   validationMessages = {
@@ -50,6 +57,15 @@ export class ReportUsageComponent {
     },
     'driver': {
       'required': 'Driver / Skipper name is required.'
+    },
+    'windSpeed': {
+      'required': 'An item must be selected'
+    },
+    'windDirection': {
+      'required': 'An item must be selected'
+    },
+    'waterState': {
+      'required': 'An item must be selected'
     }
   };
 
@@ -70,6 +86,9 @@ export class ReportUsageComponent {
       date: new FormControl({ value: this.maxDate }, Validators.required),
       driver: ['', Validators.required],
       notableCrew: this.fb.array([this.createArrayCrew()]),
+      windSpeed: ['', Validators.required],
+      windDirection: ['', Validators.required],
+      waterState: ['', Validators.required],
     });
 
     this.usageForm.valueChanges
@@ -89,11 +108,11 @@ export class ReportUsageComponent {
     this.crew.push(this.createArrayCrew());
   }
 
-  private removeCrew(i:number): void {
+  private removeCrew(i: number): void {
     if (i === undefined) return;
     this.crew = this.usageForm.get('notableCrew') as FormArray;
     this.crew.removeAt(i);
-}
+  }
 
 
   /** Update error messages due to validation */
@@ -128,7 +147,10 @@ export class ReportUsageComponent {
         this.buildTimeDate(this.usageForm.get('date').value, this.endTime),
         null
         this.usageForm.get('driver').value,
-        crew
+        crew,
+        WindSpeedConversionHelper.numberFromUserFriendlyName(this.usageForm.get('windSpeed').value),
+        WindDirectionConversionHelper.numberFromUserFriendlyName(this.usageForm.get('windDirection').value),
+        WaterStateConversionHelper.numberFromUserFriendlyName(this.usageForm.get('waterState').value)
       )
 
       this.usageService.addUsageInfo(usage).then(
