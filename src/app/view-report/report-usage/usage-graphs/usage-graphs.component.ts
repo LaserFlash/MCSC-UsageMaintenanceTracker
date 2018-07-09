@@ -60,4 +60,8 @@ export class UsageGraphsComponent implements OnInit {
     return BoatNameConversionHelper.boatNameFromNumber(v);
   }
 
+  private shortDuration(duration) {
+    return Number.parseFloat(duration).toPrecision(2).toString()
+  }
+
 }

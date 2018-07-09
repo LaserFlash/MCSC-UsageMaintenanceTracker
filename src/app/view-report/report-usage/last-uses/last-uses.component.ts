@@ -23,4 +23,7 @@ export class LastUsesComponent implements OnInit {
   private getBoatName(v) {
     return BoatNameConversionHelper.boatNameFromNumber(v);
   }
+  private shortDuration(duration) {
+    return Number.parseFloat(duration).toPrecision(2).toString()
+  }
 }

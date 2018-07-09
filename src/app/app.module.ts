@@ -24,9 +24,12 @@ import { MatSelectModule } from '@angular/material';
 import { MatMenuModule } from '@angular/material';
 import { MatChipsModule } from '@angular/material';
 import { MatProgressBarModule } from '@angular/material';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCheckboxModule } from '@angular/material';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatDividerModule } from '@angular/material/divider';
+
 import { AmazingTimePickerModule } from 'amazing-time-picker';
 
 import { DialogsModule } from './shared/dialog/dialogs.module';
@@ -80,6 +83,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { HammerConfig } from './hammer.config'
 import 'hammerjs';
+import { UsageCardComponent } from './view-view/view-usage/usage-card/usage-card.component';
 
 @NgModule({
   declarations: [
@@ -102,6 +106,7 @@ import 'hammerjs';
     ViewUsageComponent,
     ReportIncidentComponent,
     TmpStatsComponent,
+    UsageCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -121,6 +126,7 @@ import 'hammerjs';
     MatNativeDateModule,
     ReactiveFormsModule,
     MatSelectModule,
+    MatDividerModule,
     FlexLayoutModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule.enablePersistence(),
@@ -135,6 +141,7 @@ import 'hammerjs';
     MatListModule,
     MatCheckboxModule,
     MatStepperModule,
+    MatExpansionModule,
     AmazingTimePickerModule ,
     CloudinaryModule.forRoot({ Cloudinary }, { cloud_name: 'dhnh6uqep', upload_preset: 'oyywau4l' }),
     FileUploadModule,

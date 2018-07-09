@@ -14,7 +14,7 @@
               <img matListAvatar src="assets/images/boat_{{i}}.png" alt={{getBoatName(u.boatID)}}>
               <h3 matLine> {{getBoatName(i)}} </h3>
               <p matLine>
-                <span mat-line>{{u}} hours</span>
+                <span mat-line>{{shortDuration(u)}} hours</span>
               </p>
             </mat-list-item>
           </mat-list>

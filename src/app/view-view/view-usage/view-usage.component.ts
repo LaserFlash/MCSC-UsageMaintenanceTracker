@@ -12,6 +12,8 @@ import { BoatNameConversionHelper } from '../../Utils/nameConversion'
 })
 export class ViewUsageComponent implements OnInit {
 
+  usages: UsageInfo[] = [];
+
   boats = UserFriendlyBoats.filter((s, i) => {
     let yes = false;
     Boats.forEach(j => {
@@ -25,6 +27,7 @@ export class ViewUsageComponent implements OnInit {
     ) {}
 
   ngOnInit() {
+    this.usages = this.usageService.usageData;
   }
 
 }

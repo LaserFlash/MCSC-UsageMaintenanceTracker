@@ -1,0 +1,50 @@
+.descriptionItem {
+  min-width: 20ch;
+  max-width: 20ch;
+}
+
+.nameWidth {
+  min-width: 15ch;
+  max-width: 15ch
+}
+
+.smallPadding {
+  padding: 0px 24px 0px 0px;
+}
+
+.titleMinWidth {
+  min-width: calc(10ch + 70px);
+}
+
+.headerMinHeight {
+  min-height: 4em !important;
+}
+
+.contentTopDivider {
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.listHeading {
+  margin-bottom: 0.25em !important;
+}
+
+.compactList .mat-list-item {
+  height: auto !important;
+  padding-bottom: 0.25em;
+}
+
+.listItemTitle {
+  padding-right: 0.25em;
+}
+
+@media (max-width:599px) {
+  .headerMinHeight {
+    min-height: 7em !important;
+  }
+
+  .listPadding {
+    padding-bottom: 4px !important;
+    height: auto !important;
+    margin-bottom: -1em;
+  }
+}
