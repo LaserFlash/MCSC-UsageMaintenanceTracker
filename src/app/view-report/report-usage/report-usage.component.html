@@ -30,7 +30,7 @@
 
                 <label>Start Time</label> <br />
                 <mat-form-field>
-                  <input matInput atp-time-picker formControlName="startTime" type="time" theme="light" start='00:00' end='23:59' arrowStyle="{'background': 'orange', 'color': 'white'}" />
+                  <input matInput formControlName="startTime" type="time" theme="light" start='00:00' end='23:59' arrowStyle="{'background': 'orange', 'color': 'white'}" />
                   <mat-error *ngIf="formErrors.startTime">
                     {{formErrors.startTime}}
                   </mat-error>
@@ -38,7 +38,7 @@
 
                 <br /><label>End Time</label> <br />
                 <mat-form-field>
-                  <input matInput atp-time-picker formControlName="endTime" type="time" theme="light" start='00:00' end='23:59' arrowStyle="{'background': 'orange', 'color': 'white'}" />
+                  <input matInput formControlName="endTime" type="time" theme="light" start='00:00' end='23:59' arrowStyle="{'background': 'orange', 'color': 'white'}" />
                   <mat-error *ngIf="formErrors.endTime">
                     {{formErrors.endTime}}
                   </mat-error>

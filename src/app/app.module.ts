@@ -30,8 +30,6 @@ import { MatCheckboxModule } from '@angular/material';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatDividerModule } from '@angular/material/divider';
 
-import { AmazingTimePickerModule } from 'amazing-time-picker';
-
 import { DialogsModule } from './shared/dialog/dialogs.module';
 
 import { AppComponent } from './app.component';
@@ -142,7 +140,6 @@ import { UsageCardComponent } from './view-view/view-usage/usage-card/usage-card
     MatCheckboxModule,
     MatStepperModule,
     MatExpansionModule,
-    AmazingTimePickerModule ,
     CloudinaryModule.forRoot({ Cloudinary }, { cloud_name: 'dhnh6uqep', upload_preset: 'oyywau4l' }),
     FileUploadModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
