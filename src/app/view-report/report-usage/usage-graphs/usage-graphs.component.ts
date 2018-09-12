@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UsageInfo } from '../../../Utils/objects/usageInfo';
-import { Boats, UserFriendlyBoats } from '../../../Utils/menuNames'
+import { Boats, UserFriendlyBoats } from '../../../Utils/menuNames';
 
-import { BoatUsageService } from '../../../boat-usage.service'
-import { BoatNameConversionHelper } from '../../../Utils/nameConversion'
+import { BoatUsageService } from '../../../boat-usage.service';
+import { BoatNameConversionHelper } from '../../../Utils/nameConversion';
 
 
 @Component({
@@ -36,7 +36,7 @@ export class UsageGraphsComponent implements OnInit {
     let yes = false;
     Boats.forEach(j => {
       yes ? true : yes = i === j;
-    })
+    });
     return yes;
   });
 
@@ -61,7 +61,7 @@ export class UsageGraphsComponent implements OnInit {
   }
 
   private shortDuration(duration) {
-    return Number.parseFloat(duration).toPrecision(2).toString()
+    return Number.parseFloat(duration).toPrecision(2).toString();
   }
 
 }

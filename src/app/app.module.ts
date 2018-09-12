@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FlexLayoutModule } from "@angular/flex-layout";
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { ChartsModule } from 'ng2-charts';
 
@@ -55,11 +55,11 @@ import { BreakageCardComponent } from './shared/breakage-card/breakage-card.comp
 
 import { OverlayContainer } from '@angular/cdk/overlay';
 
-import { BoatUsageService } from './boat-usage.service'
-import { BoatBreakageService } from './boat-breakage.service'
-import { SafetyDocsService } from './safety-docs.service'
-import { BoatPartsService } from './boat-parts.service'
-import { ThemeTrackerService } from './theme-tracker.service'
+import { BoatUsageService } from './boat-usage.service';
+import { BoatBreakageService } from './boat-breakage.service';
+import { SafetyDocsService } from './safety-docs.service';
+import { BoatPartsService } from './boat-parts.service';
+import { ThemeTrackerService } from './theme-tracker.service';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
@@ -79,7 +79,7 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
-import { HammerConfig } from './hammer.config'
+import { HammerConfig } from './hammer.config';
 import 'hammerjs';
 import { UsageCardComponent } from './view-view/view-usage/usage-card/usage-card.component';
 

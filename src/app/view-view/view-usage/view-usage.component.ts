@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { BoatUsageService } from '../../boat-usage.service'
-import { UsageInfo } from '../../Utils/objects/usageInfo'
-import { Boats, UserFriendlyBoats } from '../../Utils/menuNames'
-import { BoatNameConversionHelper } from '../../Utils/nameConversion'
+import { BoatUsageService } from '../../boat-usage.service';
+import { UsageInfo } from '../../Utils/objects/usageInfo';
+import { Boats, UserFriendlyBoats } from '../../Utils/menuNames';
+import { BoatNameConversionHelper } from '../../Utils/nameConversion';
 
 @Component({
   selector: 'app-view-usage',
@@ -18,7 +18,7 @@ export class ViewUsageComponent implements OnInit {
     let yes = false;
     Boats.forEach(j => {
       yes ? true : yes = i === j;
-    })
+    });
     return yes;
   });
 

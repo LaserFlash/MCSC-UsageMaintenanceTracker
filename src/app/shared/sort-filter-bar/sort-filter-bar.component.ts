@@ -1,9 +1,9 @@
 import { Component, Input, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { BreakageInfo } from '../../Utils/objects/breakageInfo';
-import { BoatBreakageService } from '../../boat-breakage.service'
+import { BoatBreakageService } from '../../boat-breakage.service';
 
-import { UserFriendlyBoats, Boats, Parts } from '../../Utils/menuNames'
-import { BoatNameConversionHelper } from '../../Utils/nameConversion'
+import { UserFriendlyBoats, Boats, Parts } from '../../Utils/menuNames';
+import { BoatNameConversionHelper } from '../../Utils/nameConversion';
 
 @Component({
   selector: 'sort-filter-bar',
@@ -15,15 +15,15 @@ export class SortFilterBarComponent implements OnInit {
   @Input() breakages: BreakageInfo[];
   @Input() original: BreakageInfo[];
 
-  @ViewChild('startPicker') startPicker: ElementRef
-  @ViewChild('endPicker') endPicker: ElementRef
+  @ViewChild('startPicker') startPicker: ElementRef;
+  @ViewChild('endPicker') endPicker: ElementRef;
 
   sortList: string[] = ['Newest', 'Oldest', 'Most Important', 'Least Important', 'Boat'];
   filterList: string[] = UserFriendlyBoats.filter((s, i) => {
     let yes = false;
     Boats.forEach(j => {
       yes ? true : yes = i === j;
-    })
+    });
     return yes;
   });
 
@@ -38,7 +38,7 @@ export class SortFilterBarComponent implements OnInit {
 
   constructor(private breakageService: BoatBreakageService) { }
   ngOnInit() {
-    this.resetFilter()
+    this.resetFilter();
   }
 
   clearDates() {
@@ -47,20 +47,20 @@ export class SortFilterBarComponent implements OnInit {
     this.endMinDate = new Date(1997, 8, 27);
     this.startPicker.nativeElement.value = ' ';
     this.endPicker.nativeElement.value = ' ';
-    this.filter()
+    this.filter();
   }
 
   selectStart(date: any) {
     this.endMinDate = date.value;
-    this.filter()
+    this.filter();
   }
 
   selectEnd(date: any) {
     this.startMaxDate = date.value;
-    this.filter()
+    this.filter();
   }
 
-  private resetFilter(){
+  private resetFilter() {
     this.breakages.splice(0, this.breakages.length);
     for (let i = 0; i < this.original.length; i++) {
       this.breakages.push(this.original[i]);
@@ -81,7 +81,7 @@ export class SortFilterBarComponent implements OnInit {
         return item.timestampFixed >= this.endMinDate && item.timestampFixed <= this.startMaxDate;
       }
       return item.timestamp >= this.endMinDate && item.timestamp <= this.startMaxDate;
-    })
+    });
 
     this.breakages.splice(0, this.breakages.length);
     for (let i = 0; i < filtered.length; i++) {
@@ -99,7 +99,7 @@ export class SortFilterBarComponent implements OnInit {
       this.appliedFilters.push(key);  // add filter
     }
 
-    this.filter()
+    this.filter();
   }
 
   /** Add a part filter to the displayed data */

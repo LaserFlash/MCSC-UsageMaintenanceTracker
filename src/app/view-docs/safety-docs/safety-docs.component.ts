@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DocLink } from '../../Utils/objects/docLink';
 
-import { SafetyDocsService } from '../../safety-docs.service'
+import { SafetyDocsService } from '../../safety-docs.service';
 
 @Component({
   selector: 'app-safety-docs',
@@ -10,7 +10,7 @@ import { SafetyDocsService } from '../../safety-docs.service'
 })
 export class SafetyDocsComponent implements OnInit {
   links: DocLink[];
-  constructor(private safetyDocsService: SafetyDocsService,) {
+  constructor(private safetyDocsService: SafetyDocsService, ) {
     this.links = safetyDocsService.safetyDocLinks;
   }
 

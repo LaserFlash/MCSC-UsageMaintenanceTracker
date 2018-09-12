@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { BreakageInfo } from '../../Utils/objects/breakageInfo';
-import { BoatBreakageService } from '../../boat-breakage.service'
+import { BoatBreakageService } from '../../boat-breakage.service';
 import { DialogsService } from '../../shared/dialog/dialogs.service';
 @Component({
   selector: 'view-fixed',

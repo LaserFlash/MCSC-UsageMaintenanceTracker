@@ -44,7 +44,7 @@ export const WindDirection: string[] = [
   'NW',
   'SE',
   'SW'
-]
+];
 
 export const WaterState: string[] = [
   'Calm (Glassy)',
@@ -54,4 +54,4 @@ export const WaterState: string[] = [
   'Moderate (1-2m)',
   'Rough (2-4m)',
   'Very Rough (4-6m)'
-]
+];

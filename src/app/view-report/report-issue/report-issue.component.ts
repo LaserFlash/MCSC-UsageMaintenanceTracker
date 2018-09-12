@@ -40,7 +40,7 @@ export class ReportIssueComponent implements OnInit {
     let yes = false;
     Boats.forEach(j => {
       yes ? true : yes = i === j;
-    })
+    });
     return yes;
   });
 
@@ -126,8 +126,8 @@ export class ReportIssueComponent implements OnInit {
       const j = JSON.parse(response);
       this.imageID = j['public_id'];
       this.breakage[0].imageID = this.imageID;
-    }
-    this.uploader.onProgressItem = (fileItem: any, progress: any) => { this.imageLoaded = false; }
+    };
+    this.uploader.onProgressItem = (fileItem: any, progress: any) => { this.imageLoaded = false; };
   }
 
   /** Build the form */

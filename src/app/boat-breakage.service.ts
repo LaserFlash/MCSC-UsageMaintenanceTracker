@@ -13,13 +13,13 @@ export class BoatBreakageService {
 
   private items: BreakageInfo[] = [];
 
-  public getItems(){
+  public getItems() {
     return this.items;
   }
 
   private original: BreakageInfo[] = [];
 
-  public getOriginal(){
+  public getOriginal() {
     return this.original;
   }
 
@@ -42,7 +42,7 @@ export class BoatBreakageService {
           const data = action.payload.doc.data() as BreakageInfo;
           const id = action.payload.doc.id;
           return { ...data, id };
-        })
+        });
       })
     );
     this.itemsData.subscribe(val => { this.buildBreakages(val, this.items); });

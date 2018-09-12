@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { BoatPartsService } from '../../boat-parts.service'
+import { BoatPartsService } from '../../boat-parts.service';
 import { DocLink } from '../../Utils/objects/docLink';
 
 @Component({
@@ -10,7 +10,7 @@ import { DocLink } from '../../Utils/objects/docLink';
 })
 export class BoatPartsComponent implements OnInit {
   links: DocLink[];
-  constructor(private boatPartsService: BoatPartsService,) {
+  constructor(private boatPartsService: BoatPartsService, ) {
     this.links = boatPartsService.boatPartsLinks;
   }
 

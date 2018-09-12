@@ -15,7 +15,7 @@ export class ReportComponent implements OnInit {
     {label: 'Usage' , link: 'usage'},
     {label: 'Breakages' , link: 'issue'},
     {label: 'Incidents' , link: 'incident'},
-  ]
+  ];
 
   SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
 

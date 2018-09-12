@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { UsageInfo } from '../../../Utils/objects/usageInfo'
-import { BoatNameConversionHelper, WindSpeedConversionHelper, WindDirectionConversionHelper, WaterStateConversionHelper } from "../../../Utils/nameConversion"
+import { UsageInfo } from '../../../Utils/objects/usageInfo';
+import { BoatNameConversionHelper, WindSpeedConversionHelper, WindDirectionConversionHelper, WaterStateConversionHelper } from '../../../Utils/nameConversion';
 @Component({
   selector: 'usage-card',
   templateUrl: './usage-card.component.html',
@@ -32,7 +32,7 @@ export class UsageCardComponent implements OnInit {
   }
 
   private shortDuration(duration) {
-    return Number.parseFloat(duration).toPrecision(2).toString()
+    return Number.parseFloat(duration).toPrecision(2).toString();
   }
 
 

@@ -11,7 +11,7 @@ import { ViewUsageComponent } from './view-view/view-usage/view-usage.component'
 import { ViewFixedComponent } from './view-view/view-fixed/view-fixed.component';
 import { ViewIssuesComponent } from './view-view/view-issues/view-issues.component';
 
-import { StatsComponent } from './view-stats/stats.component'
+import { StatsComponent } from './view-stats/stats.component';
 import { TmpStatsComponent } from './view-stats/tmp-stats/tmp-stats.component';
 
 import { DocsComponent } from './view-docs/docs.component';

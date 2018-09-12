@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { UsageInfo } from './Utils/objects/usageInfo';
-import { Boats } from './Utils/menuNames'
+import { Boats } from './Utils/menuNames';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 
 import { Observable } from 'rxjs/Observable';
@@ -8,7 +8,7 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class BoatUsageService {
-  private itemsCollection: AngularFirestoreCollection<UsageInfo>
+  private itemsCollection: AngularFirestoreCollection<UsageInfo>;
   public items: Observable<UsageInfo[]>;
 
   private sortedUsage: Observable<UsageInfo[]>;
@@ -47,7 +47,7 @@ export class BoatUsageService {
         const original = this.usageTimes[Boats.indexOf(val.boatID)];
         this.usageTimes.splice(Boats.indexOf(val.boatID), 1, original + val.duration);
       }
-      )
+      );
 });
 
     this.items.subscribe((list: UsageInfo[]) => {
@@ -60,7 +60,7 @@ export class BoatUsageService {
           this.lastMonthUsageEachBoat.splice(Boats.indexOf(val.boatID), 1, original + val.duration);
         }
       }
-      )
+      );
     });
   }
 
@@ -78,8 +78,7 @@ export class BoatUsageService {
   private makeDate(date: any) {
     try {
       return date.toDate();
-    }
-    catch (error) {
+    } catch (error) {
       return date;
     }
   }

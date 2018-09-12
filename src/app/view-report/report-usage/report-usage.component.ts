@@ -5,10 +5,10 @@ import { FormBuilder, FormGroup, FormArray, Validators, FormControl, AbstractCon
 import { MatSnackBar } from '@angular/material';
 import { MatStepper } from '@angular/material';
 
-import { BoatUsageService } from '../../boat-usage.service'
-import { UsageInfo } from '../../Utils/objects/usageInfo'
-import { Boats, UserFriendlyBoats, WindTypes, WindDirection, WaterState } from '../../Utils/menuNames'
-import { BoatNameConversionHelper, WindSpeedConversionHelper, WindDirectionConversionHelper, WaterStateConversionHelper } from '../../Utils/nameConversion'
+import { BoatUsageService } from '../../boat-usage.service';
+import { UsageInfo } from '../../Utils/objects/usageInfo';
+import { Boats, UserFriendlyBoats, WindTypes, WindDirection, WaterState } from '../../Utils/menuNames';
+import { BoatNameConversionHelper, WindSpeedConversionHelper, WindDirectionConversionHelper, WaterStateConversionHelper } from '../../Utils/nameConversion';
 
 const NUMBER_REGEX = /[0-9]+/;
 
@@ -35,7 +35,7 @@ export class ReportUsageComponent {
     let yes = false;
     Boats.forEach(j => {
       yes ? true : yes = i === j;
-    })
+    });
     return yes;
   });
 
@@ -119,7 +119,7 @@ export class ReportUsageComponent {
   }
 
   checkDateRange(c: AbstractControl) {
-    return c.get('startTime').value < c.get('endTime').value ? null : { notInRange: true }
+    return c.get('startTime').value < c.get('endTime').value ? null : { notInRange: true };
   }
 
   private createArrayCrew(): FormGroup {
@@ -129,13 +129,13 @@ export class ReportUsageComponent {
   }
 
   private addArrayCrew(): void {
-    var crew = this.usageForm.get('formArray').get([2]).get('notableCrew') as FormArray;
+    const crew = this.usageForm.get('formArray').get([2]).get('notableCrew') as FormArray;
     crew.push(this.createArrayCrew());
   }
 
   private removeCrew(i: number): void {
-    if (i === undefined) return;
-    var crew = this.usageForm.get('formArray').get([2]).get('notableCrew') as FormArray;
+    if (i === undefined) { return; }
+    const crew = this.usageForm.get('formArray').get([2]).get('notableCrew') as FormArray;
     crew.removeAt(i);
   }
 
@@ -167,9 +167,9 @@ export class ReportUsageComponent {
   * find the control that belongs with the field.
   */
   private findFieldControl(form, field) {
-    for (var i = 0; i < 4; i++) {
-      let control = form.get('formArray').get([i]).get(field)
-      if (control) return control;
+    for (let i = 0; i < 4; i++) {
+      const control = form.get('formArray').get([i]).get(field);
+      if (control) { return control; }
     }
   }
 
@@ -177,7 +177,7 @@ export class ReportUsageComponent {
   public onSubmit() {
     if (this.usageForm.valid) {
 
-      let crew = this.usageForm.get('formArray').get([2]).get('notableCrew').value;
+      const crew = this.usageForm.get('formArray').get([2]).get('notableCrew').value;
 
       const usage = new UsageInfo(
         BoatNameConversionHelper.numberFromUserFriendlyName(this.usageForm.get('formArray').get([0]).get('boatID').value),
@@ -189,7 +189,7 @@ export class ReportUsageComponent {
         WindSpeedConversionHelper.numberFromUserFriendlyName(this.usageForm.get('formArray').get([3]).get('windSpeed').value),
         WindDirectionConversionHelper.numberFromUserFriendlyName(this.usageForm.get('formArray').get([3]).get('windDirection').value),
         WaterStateConversionHelper.numberFromUserFriendlyName(this.usageForm.get('formArray').get([3]).get('waterState').value)
-      )
+      );
 
       this.usageService.addUsageInfo(usage).then(
         () => (
@@ -210,7 +210,7 @@ export class ReportUsageComponent {
   }
 
   getStartTime() {
-    console.log(this.usageForm.get('formArray').get([1]).get("startTime"))
+    console.log(this.usageForm.get('formArray').get([1]).get('startTime'));
   }
 
   /**
@@ -218,11 +218,11 @@ export class ReportUsageComponent {
   **/
   private buildTimeDate(date: Date, timeString: string) {
     console.log(timeString);
-    var time = timeString.split(":");
-    var hour = parseInt(time[0]);
-    var minute = parseInt(time[1]);
-    let timeDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), hour, minute);
-    console.log(timeDate)
+    const time = timeString.split(':');
+    const hour = parseInt(time[0]);
+    const minute = parseInt(time[1]);
+    const timeDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), hour, minute);
+    console.log(timeDate);
     return timeDate;
   }
 }

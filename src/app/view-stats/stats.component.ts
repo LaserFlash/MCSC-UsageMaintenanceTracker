@@ -14,7 +14,7 @@ export class StatsComponent implements OnInit {
     {label: 'Usage' , link: 'usage'},
     {label: 'Breakages' , link: 'issue'},
     {label: 'Fixed' , link: 'fixed'}
-  ]
+  ];
   SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
 
   router: Router;
