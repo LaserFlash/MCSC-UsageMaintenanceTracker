@@ -101,6 +101,11 @@ mat-sidenav-container.app-dark {
   text-align: left;
 }
 
+/deep/
+.fullscreen {
+    width: auto !important;
+}
+
 @media (max-width: 959px) {
   .sidenav-content{
     margin-bottom:54px;
