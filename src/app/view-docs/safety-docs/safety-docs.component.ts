@@ -14,7 +14,7 @@ import { MatSnackBar } from '@angular/material';
 export class SafetyDocsComponent implements OnInit {
   links: DocLinkID[];
   editMode: Boolean = false;
-  constructor(private safetyDocsService: SafetyDocsService, private FIREBASE_AUTH: AuthenticationService, private snackBar: MatSnackBar, ) {
+  constructor(private safetyDocsService: SafetyDocsService, public FIREBASE_AUTH: AuthenticationService, private snackBar: MatSnackBar, ) {
     this.links = safetyDocsService.safetyDocLinks;
   }
 

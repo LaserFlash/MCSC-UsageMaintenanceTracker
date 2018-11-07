@@ -8,7 +8,7 @@ import { AuthenticationService } from '../../authentication.service';
 })
 export class SignupComponent implements OnInit {
 
-  constructor(private FIREBASE_AUTH: AuthenticationService) { }
+  constructor(public FIREBASE_AUTH: AuthenticationService) { }
 
   ngOnInit() {
   }
