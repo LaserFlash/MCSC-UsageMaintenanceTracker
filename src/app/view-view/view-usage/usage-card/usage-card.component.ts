@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UsageInfo } from '../../../Utils/objects/usageInfo';
-import { BoatNameConversionHelper, WindSpeedConversionHelper, WindDirectionConversionHelper, WaterStateConversionHelper } from '../../../Utils/nameConversion';
+import { WindSpeedConversionHelper, WindDirectionConversionHelper, WaterStateConversionHelper } from '../../../Utils/nameConversion';
+import { KnownBoatsService } from '../../../known-boats.service';
 @Component({
   selector: 'usage-card',
   templateUrl: './usage-card.component.html',
@@ -10,13 +11,13 @@ export class UsageCardComponent implements OnInit {
 
   @Input() usages: UsageInfo[];
 
-  constructor() { }
+  constructor(private BOATS: KnownBoatsService) { }
 
   ngOnInit() {
   }
 
   private getBoatName(v) {
-    return BoatNameConversionHelper.boatNameFromNumber(v);
+    return this.BOATS.getBoatName(v);
   }
 
   private getWindSpeed(v) {

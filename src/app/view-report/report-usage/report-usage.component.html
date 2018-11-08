@@ -14,7 +14,7 @@
                 <mat-form-field>
                   <mat-select placeholder="Boat Name" formControlName="boatID" required>
 
-                    <mat-option *ngFor="let id of boats" [value]="id">{{id}}</mat-option>
+                    <mat-option *ngFor="let boat of boats" [value]="boat.id">{{boat.name}}</mat-option>
                     <mat-error *ngIf="formErrors.boatID">
                       {{formErrors.boatID}}
                     </mat-error>

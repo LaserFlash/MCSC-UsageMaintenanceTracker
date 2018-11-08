@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -28,6 +29,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCheckboxModule } from '@angular/material';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDividerModule } from '@angular/material/divider';
 
 import { DialogsModule } from './shared/dialog/dialogs.module';
@@ -52,6 +54,7 @@ import { TmpStatsComponent } from './view-stats/tmp-stats/tmp-stats.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { BreakageCardComponent } from './shared/breakage-card/breakage-card.component';
+import { UsageCardComponent } from './view-view/view-usage/usage-card/usage-card.component';
 
 import { OverlayContainer } from '@angular/cdk/overlay';
 
@@ -60,9 +63,7 @@ import { BoatBreakageService } from './boat-breakage.service';
 import { SafetyDocsService } from './safety-docs.service';
 import { BoatPartsService } from './boat-parts.service';
 import { ThemeTrackerService } from './theme-tracker.service';
-
-import { AngularFireModule } from 'angularfire2';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AuthenticationService } from './authentication.service';
 
 import { environment } from '../environments/environment';
 
@@ -79,9 +80,39 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
-import { HammerConfig } from './hammer.config';
+import { HammerConfig } from './hammer.config'
 import 'hammerjs';
-import { UsageCardComponent } from './view-view/view-usage/usage-card/usage-card.component';
+import { SignupComponent } from './authenticate/signup/signup.component';
+
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import {
+  AuthMethods,
+  AuthProvider,
+  AuthProviderWithCustomConfig,
+  CredentialHelper,
+  FirebaseUIAuthConfig,
+  FirebaseUIModule
+} from 'firebaseui-angular';
+import { InlineEditInputComponent } from './shared/inline-edit-input/inline-edit-input.component';
+import { AdminComponent } from './admin/admin.component';
+import { ModifyBoatsComponent } from './modify-boats/modify-boats.component';
+import { InlineEditInputBoatsComponent } from './modify-boats/inline-edit-input-boats/inline-edit-input-boats.component';
+
+
+const firebaseUiAuthConfig: FirebaseUIAuthConfig = {
+  providers: [
+    AuthProvider.Google,
+    AuthProvider.Password,
+  ],
+  method: AuthMethods.Popup,
+  credentialHelper: CredentialHelper.AccountChooser,
+  autoUpgradeAnonymousUsers: true,
+  disableSignInSuccessCallback: true
+};
+
 
 @NgModule({
   declarations: [
@@ -90,12 +121,12 @@ import { UsageCardComponent } from './view-view/view-usage/usage-card/usage-card
     ViewComponent,
     StatsComponent,
     DocsComponent,
-
     ReportIssueComponent,
     ViewIssuesComponent,
     ViewFixedComponent,
     ReportUsageComponent,
     BreakageCardComponent,
+    UsageCardComponent,
     SortFilterBarComponent,
     UsageGraphsComponent,
     LastUsesComponent,
@@ -104,7 +135,11 @@ import { UsageCardComponent } from './view-view/view-usage/usage-card/usage-card
     ViewUsageComponent,
     ReportIncidentComponent,
     TmpStatsComponent,
-    UsageCardComponent,
+    SignupComponent,
+    InlineEditInputComponent,
+    InlineEditInputBoatsComponent,
+    AdminComponent,
+    ModifyBoatsComponent
   ],
   imports: [
     BrowserModule,
@@ -119,15 +154,21 @@ import { UsageCardComponent } from './view-view/view-usage/usage-card/usage-card
     AppRoutingModule,
     MatCardModule,
     MatRadioModule,
+    MatExpansionModule,
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
     ReactiveFormsModule,
+    MatTooltipModule,
+    FormsModule,
     MatSelectModule,
     MatDividerModule,
     FlexLayoutModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule.enablePersistence(),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
+    FirebaseUIModule.forRoot(firebaseUiAuthConfig),
     MatSnackBarModule,
     CookieModule.forRoot(),
     DialogsModule,
@@ -139,10 +180,8 @@ import { UsageCardComponent } from './view-view/view-usage/usage-card/usage-card
     MatListModule,
     MatCheckboxModule,
     MatStepperModule,
-    MatExpansionModule,
     CloudinaryModule.forRoot({ Cloudinary }, { cloud_name: 'dhnh6uqep', upload_preset: 'oyywau4l' }),
     FileUploadModule,
-    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
@@ -151,6 +190,7 @@ import { UsageCardComponent } from './view-view/view-usage/usage-card/usage-card
     SafetyDocsService,
     BoatPartsService,
     ThemeTrackerService,
+    AuthenticationService,
     { provide: HAMMER_GESTURE_CONFIG, useClass: HammerConfig }
   ],
   bootstrap: [AppComponent]

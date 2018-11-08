@@ -18,49 +18,56 @@ import { DocsComponent } from './view-docs/docs.component';
 import { BoatPartsComponent } from './view-docs/boat-parts/boat-parts.component';
 import { SafetyDocsComponent } from './view-docs/safety-docs/safety-docs.component';
 
+import { AdminComponent} from './admin/admin.component';
+
 
 const routes: Routes = [
-  { path: '', redirectTo: 'report', pathMatch: 'full'},
-  { path: 'report', component: ReportComponent,
+  { path: '', redirectTo: 'report', pathMatch: 'full' },
+  {
+    path: 'report', component: ReportComponent,
     children: [
-      { path: '', redirectTo: 'usage', pathMatch: 'full'},
-      { path: 'usage', component: ReportUsageComponent, data: { state: '0' }},
-      { path: 'issue', component: ReportIssueComponent, data: { state: '1' }},
-      { path: 'incident', component: ReportIncidentComponent, data: { state: '2' }},
+      { path: '', redirectTo: 'usage', pathMatch: 'full' },
+      { path: 'usage', component: ReportUsageComponent, data: { state: '0' } },
+      { path: 'issue', component: ReportIssueComponent, data: { state: '1' } },
+      { path: 'incident', component: ReportIncidentComponent, data: { state: '2' } },
       { path: '**', redirectTo: '' },
     ]
-},
-  { path: 'view', component: ViewComponent,
-  children: [
-    { path: '', redirectTo: 'usage', pathMatch: 'full'},
-    { path: 'usage', component: ViewUsageComponent, data: { state: '0' }},
-    { path: 'issue', component: ViewIssuesComponent, data: { state: '1' }},
-    { path: 'fixed', component: ViewFixedComponent, data: { state: '2' }},
-    { path: '**', redirectTo: '' },
-  ]
-},
-  { path: 'stats', component: TmpStatsComponent,
-  children: [
-    { path: '', redirectTo: 'usage', pathMatch: 'full'},
-    { path: 'usage', component: TmpStatsComponent, data: { state: '0' }},
-    { path: 'issue', component: TmpStatsComponent, data: { state: '1' }},
-    { path: 'fixed', component: TmpStatsComponent, data: { state: '2' }},
-    { path: '**', redirectTo: ''},
-  ]
-},
-  { path: 'docs', component: DocsComponent,
-  children: [
-    { path: '', redirectTo: 'safety', pathMatch: 'full'},
-    { path: 'safety', component: SafetyDocsComponent, data: { state: '0' }},
-    { path: 'parts', component: BoatPartsComponent, data: { state: '1' }},
-    { path: '**', redirectTo: ''},
-  ]
-},
-  { path: '**', redirectTo: 'report'},
+  },
+  {
+    path: 'view', component: ViewComponent,
+    children: [
+      { path: '', redirectTo: 'usage', pathMatch: 'full' },
+      { path: 'usage', component: ViewUsageComponent, data: { state: '0' } },
+      { path: 'issue', component: ViewIssuesComponent, data: { state: '1' } },
+      { path: 'fixed', component: ViewFixedComponent, data: { state: '2' } },
+      { path: '**', redirectTo: '' },
+    ]
+  },
+  {
+    path: 'stats', component: TmpStatsComponent,
+    children: [
+      { path: '', redirectTo: 'usage', pathMatch: 'full' },
+      { path: 'usage', component: TmpStatsComponent, data: { state: '0' } },
+      { path: 'issue', component: TmpStatsComponent, data: { state: '1' } },
+      { path: 'fixed', component: TmpStatsComponent, data: { state: '2' } },
+      { path: '**', redirectTo: '' },
+    ]
+  },
+  {
+    path: 'docs', component: DocsComponent,
+    children: [
+      { path: '', redirectTo: 'safety', pathMatch: 'full' },
+      { path: 'safety', component: SafetyDocsComponent, data: { state: '0' } },
+      { path: 'parts', component: BoatPartsComponent, data: { state: '1' } },
+      { path: '**', redirectTo: '' },
+    ]
+  },
+  { path: 'admin', component: AdminComponent },
+  { path: '**', redirectTo: 'report' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

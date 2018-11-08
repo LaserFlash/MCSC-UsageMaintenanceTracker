@@ -28,9 +28,25 @@
   <mat-sidenav class="sidenav noPrint" #sidenav mode="over">
     <img id="logo-image-drawer" src="assets/images/logo.png" alt="NPYC Logo" />
     <mat-nav-list>
+
+      <hr />
+      <h3 matSubheader>Tasks</h3>
       <a mat-list-item *ngFor="let routeLink of routeLinks; let i = index" [routerLink]="routeLink.link" (click)="sidenav.close()">
           {{routeLink.label}}
       </a>
+      <ng-container *ngIf=AUTH.isAdmin>
+      <hr />
+      <h3 matSubheader>Admin</h3>
+      <a mat-list-item
+          [routerLink]="adminLink.link"
+          (click)="sidenav.close()">
+          {{adminLink.label}}
+      </a>
+      </ng-container>
+      <hr />
+      <h3 matSubheader>Account</h3>
+      <signup></signup>
+      <hr />
     </mat-nav-list>
     <br />
     <button mat-button class="nav-button" (click)="toggleDark(); sidenav.close();">TOGGLE DARK THEME</button>

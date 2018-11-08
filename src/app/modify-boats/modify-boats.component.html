@@ -1,0 +1,13 @@
+<div class="noPrint" fxFlex.gt-lg="calc(50% -1280px)" fxFlex="20" fxFlex.lt-md="2"></div>
+<div fxFlex.gt-lg="1280px" fxFlex>
+  <mat-card class="form">
+    <mat-list>
+      <h3 mat-subheader>Boat Database</h3>
+      <div *ngFor="let info of boatInfo">
+        <app-inline-edit-input-boats [value]="info" (update)="setDocItem($event)"></app-inline-edit-input-boats>
+      </div>
+      <button mat-icon-button (click)="addItem()"><mat-icon>add</mat-icon></button>
+    </mat-list>
+  </mat-card>
+</div>
+<div class="noPrint" fxFlex.gt-lg="calc(50% -1280px)" fxFlex="20" fxFlex.lt-md="2"></div>

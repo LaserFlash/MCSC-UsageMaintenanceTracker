@@ -1,14 +1,4 @@
-import {UserFriendlyBoats, Levels, WindTypes, WindDirection, WaterState} from '../Utils/menuNames';
-
-export class BoatNameConversionHelper {
-  public static boatNameFromNumber(n) {
-    return UserFriendlyBoats[n];
-  }
-
-  public static numberFromUserFriendlyName(s) {
-    return UserFriendlyBoats.indexOf(s);
-  }
-}
+import { Levels, WindTypes, WindDirection, WaterState } from '../Utils/menuNames'
 
 export class ImportanceConversionHelper {
   public static numberFromImportance(s) {

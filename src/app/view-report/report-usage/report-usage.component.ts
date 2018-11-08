@@ -6,9 +6,11 @@ import { MatSnackBar } from '@angular/material';
 import { MatStepper } from '@angular/material';
 
 import { BoatUsageService } from '../../boat-usage.service';
+import { KnownBoatsService } from '../../known-boats.service';
 import { UsageInfo } from '../../Utils/objects/usageInfo';
-import { Boats, UserFriendlyBoats, WindTypes, WindDirection, WaterState } from '../../Utils/menuNames';
-import { BoatNameConversionHelper, WindSpeedConversionHelper, WindDirectionConversionHelper, WaterStateConversionHelper } from '../../Utils/nameConversion';
+import { BoatID } from '../../Utils/objects/boat';
+import { WindTypes, WindDirection, WaterState } from '../../Utils/menuNames';
+import { WindSpeedConversionHelper, WindDirectionConversionHelper, WaterStateConversionHelper } from '../../Utils/nameConversion';
 
 const NUMBER_REGEX = /[0-9]+/;
 
@@ -23,28 +25,14 @@ export class ReportUsageComponent {
 
   title = 'Report Boat Usage';
   maxDate = new Date();
-
-  isLinear = true;
-
-  windSpeed = WindTypes;
-  windDirection = WindDirection;
-  waterState = WaterState;
-
-  boats = UserFriendlyBoats.filter((s, i) => {
-
-    let yes = false;
-    Boats.forEach(j => {
-      yes ? true : yes = i === j;
-    });
-    return yes;
-  });
+  boats: BoatID[];
 
   usageForm: FormGroup;
 
   formErrors = {
     'boatID': '',
-    'startTime' : '',
-    'endTime' : '',
+    'startTime': '',
+    'endTime': '',
     'date': '',
     'driver': '',
     'windSpeed': '',
@@ -83,10 +71,16 @@ export class ReportUsageComponent {
     private dateAdapter: DateAdapter<Date>,
     private usageService: BoatUsageService,
     private fb: FormBuilder,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    private BOATS: KnownBoatsService
   ) {
     this.dateAdapter.setLocale('en-nz');
     this.createForm();
+    BOATS.boatInformation.subscribe((boats) => {
+      this.boats = boats.filter((boat) => {
+        return boat.selectable;
+      });
+    })
   }
 
   /** Build the form */
@@ -180,7 +174,7 @@ export class ReportUsageComponent {
       const crew = this.usageForm.get('formArray').get([2]).get('notableCrew').value;
 
       const usage = new UsageInfo(
-        BoatNameConversionHelper.numberFromUserFriendlyName(this.usageForm.get('formArray').get([0]).get('boatID').value),
+        this.usageForm.get('formArray').get([0]).get('boatID').value,
         this.buildTimeDate(this.usageForm.get('formArray').get([1]).get('date').value, this.usageForm.get('formArray').get([1]).get('startTime').value),
         this.buildTimeDate(this.usageForm.get('formArray').get([1]).get('date').value, this.usageForm.get('formArray').get([1]).get('endTime').value),
         null,

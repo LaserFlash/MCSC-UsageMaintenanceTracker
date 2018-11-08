@@ -8,9 +8,11 @@ import { ContactValidator } from '../../Utils/validators/CustomValidators';
 import { DialogsService } from '../../shared/dialog/dialogs.service';
 import { BreakageInfo } from '../../Utils/objects/breakageInfo';
 import { BoatBreakageService } from '../../boat-breakage.service';
+import { KnownBoatsService } from '../../known-boats.service';
 
-import { Boats, UserFriendlyBoats, Levels, Parts } from '../../Utils/menuNames';
-import { BoatNameConversionHelper, ImportanceConversionHelper } from '../../Utils/nameConversion';
+import { BoatID } from '../../Utils/objects/boat'
+import { Levels, Parts } from '../../Utils/menuNames';
+import { ImportanceConversionHelper } from '../../Utils/nameConversion';
 
 import { FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
 import { Cloudinary } from '@cloudinary/angular-5.x';
@@ -36,13 +38,7 @@ export class ReportIssueComponent implements OnInit {
   breakage: BreakageInfo[] = [];
 
   title = 'Report Boat Breakage';
-  boats = UserFriendlyBoats.filter((s, i) => {
-    let yes = false;
-    Boats.forEach(j => {
-      yes ? true : yes = i === j;
-    });
-    return yes;
-  });
+  boats: BoatID [];
 
   breakages: BreakageInfo[];
   loadingBreakages = true;
@@ -84,9 +80,16 @@ export class ReportIssueComponent implements OnInit {
     private fb: FormBuilder,
     private snackBar: MatSnackBar,
     private breakageService: BoatBreakageService,
+    private BOATS: KnownBoatsService,
     private dialogsService: DialogsService,
     private cloudinary: Cloudinary,
-  ) { }
+  ) {
+    BOATS.boatInformation.subscribe( boats => {
+      this.boats = boats.filter(boat =>{
+        return boat.selectable;
+      });
+    });
+  }
 
 
   ngOnInit() {
@@ -159,7 +162,7 @@ export class ReportIssueComponent implements OnInit {
     this.breakage[0] = new BreakageInfo(
       this.breakageForm.get('formArray').get([0]).get('name').value,
       this.breakageForm.get('formArray').get([0]).get('contact').value,
-      BoatNameConversionHelper.numberFromUserFriendlyName(this.breakageForm.get('formArray').get([1]).get('boatID').value),
+      this.breakageForm.get('formArray').get([1]).get('boatID').value,
       ImportanceConversionHelper.numberFromImportance(this.breakageForm.get('formArray').get([1]).get('importance').value),
       this.breakageForm.get('formArray').get([1]).get('part').value,
       this.breakageForm.get('formArray').get([1]).get('details').value,
@@ -195,7 +198,7 @@ export class ReportIssueComponent implements OnInit {
       const breakage = new BreakageInfo(
         this.breakageForm.get('formArray').get([0]).get('name').value,
         this.breakageForm.get('formArray').get([0]).get('contact').value,
-        BoatNameConversionHelper.numberFromUserFriendlyName(this.breakageForm.get('formArray').get([1]).get('boatID').value),
+        this.breakageForm.get('formArray').get([1]).get('boatID').value,
         ImportanceConversionHelper.numberFromImportance(this.breakageForm.get('formArray').get([1]).get('importance').value),
         this.breakageForm.get('formArray').get([1]).get('part').value,
         this.breakageForm.get('formArray').get([1]).get('details').value,

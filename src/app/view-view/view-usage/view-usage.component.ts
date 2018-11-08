@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { BoatUsageService } from '../../boat-usage.service';
-import { UsageInfo } from '../../Utils/objects/usageInfo';
-import { Boats, UserFriendlyBoats } from '../../Utils/menuNames';
-import { BoatNameConversionHelper } from '../../Utils/nameConversion';
+import { BoatUsageService } from '../../boat-usage.service'
+import { UsageInfo } from '../../Utils/objects/usageInfo'
+import { KnownBoatsService } from '../../known-boats.service';
+
 
 @Component({
   selector: 'app-view-usage',
@@ -12,19 +12,16 @@ import { BoatNameConversionHelper } from '../../Utils/nameConversion';
 })
 export class ViewUsageComponent implements OnInit {
 
-  usages: UsageInfo[] = [];
-
-  boats = UserFriendlyBoats.filter((s, i) => {
-    let yes = false;
-    Boats.forEach(j => {
-      yes ? true : yes = i === j;
-    });
-    return yes;
-  });
-
+  boats;
+  usages;
   constructor(
     private usageService: BoatUsageService,
-    ) {}
+    private BOATS: KnownBoatsService
+  ) {
+    BOATS.boatInformation.subscribe(boats => {
+      this.boats = boats;
+    });
+  }
 
   ngOnInit() {
     this.usages = this.usageService.usageData;

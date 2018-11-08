@@ -13,7 +13,7 @@
         <span>
           <button mat-button [matMenuTriggerFor]="filter"><mat-icon>filter_list</mat-icon> Filter by Boat</button>
           <mat-menu #filter="matMenu">
-            <button mat-menu-item *ngFor="let filter of filterList" (click)="addFilter(filter)"> {{filter}} </button>
+            <button mat-menu-item *ngFor="let filter of filterList" (click)="addFilter(filter.id)"> {{filter.name}} </button>
           </mat-menu>
         </span>
         <span>
