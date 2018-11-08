@@ -27,6 +27,12 @@ export class ReportUsageComponent {
   maxDate = new Date();
   boats: BoatID[];
 
+  isLinear = true;
+
+  windSpeed = WindTypes;
+  windDirection = WindDirection;
+  waterState = WaterState;
+
   usageForm: FormGroup;
 
   formErrors = {
