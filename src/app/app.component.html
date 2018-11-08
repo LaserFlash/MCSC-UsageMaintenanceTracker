@@ -1,7 +1,7 @@
 <mat-toolbar color="primary">
   <button style="margin-left:5px;" mat-icon-button (click)="sidenav.toggle()">
-      <mat-icon>menu</mat-icon>
-    </button>
+    <mat-icon>menu</mat-icon>
+  </button>
   <span id="menuSpacer"></span>
   <span><img id="menuLogo" src="assets/images/logoNoText.png" alt="NPYC Logo" /></span>
   <span id="menuSpacer"></span>
@@ -13,35 +13,29 @@
 
   <span fxHide.lt-md>
     <nav mat-tab-nav-bar>
-      <a mat-tab-link
-          *ngFor="let routeLink of routeLinks; let i = index"
-          [routerLink]="routeLink.link"
-          routerLinkActive #rla="routerLinkActive"
-          [active]="rla.isActive">
-          {{routeLink.label}}
+      <a mat-tab-link *ngFor="let routeLink of routeLinks" [routerLink]="routeLink.link" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">
+        {{routeLink.label}}
       </a>
     </nav>
   </span>
 </mat-toolbar>
 
-<mat-sidenav-container class="content" fullscreen [class.app-dark]="isDarkTheme" >
+<mat-sidenav-container class="content" fullscreen [class.app-dark]="isDarkTheme">
   <mat-sidenav class="sidenav noPrint" #sidenav mode="over">
     <img id="logo-image-drawer" src="assets/images/logo.png" alt="NPYC Logo" />
     <mat-nav-list>
 
       <hr />
       <h3 matSubheader>Tasks</h3>
-      <a mat-list-item *ngFor="let routeLink of routeLinks; let i = index" [routerLink]="routeLink.link" (click)="sidenav.close()">
-          {{routeLink.label}}
+      <a mat-list-item *ngFor="let routeLink of routeLinks" [routerLink]="routeLink.link" (click)="sidenav.close()">
+        {{routeLink.label}}
       </a>
-      <ng-container *ngIf=AUTH.isAdmin>
-      <hr />
-      <h3 matSubheader>Admin</h3>
-      <a mat-list-item
-          [routerLink]="adminLink.link"
-          (click)="sidenav.close()">
+      <ng-container *ngIf=isAdmin>
+        <hr />
+        <h3 matSubheader>Admin</h3>
+        <a mat-list-item [routerLink]="adminLink.link" (click)="sidenav.close()">
           {{adminLink.label}}
-      </a>
+        </a>
       </ng-container>
       <hr />
       <h3 matSubheader>Account</h3>
@@ -63,24 +57,24 @@
   </mat-sidenav>
 
   <div id="scrollId" class="sidenav-content">
-   <div id="section-to-print"><router-outlet></router-outlet></div>
+    <div id="section-to-print">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 
   <!-- Bottom Navigation Bar -->
-    <div class="bottom-navigation bg-color-primary" fxHide.gt-sm>
-      <nav mat-tab-nav-bar>
-        <a fxFlex="calc(100%/{{routeLinks.length}})" mat-tab-link
-            *ngFor="let routeLink of routeLinks; let i = index"
-            [routerLink]="routeLink.link"
-            routerLinkActive #rla="routerLinkActive"
-            [active]="rla.isActive">
+  <div class="bottom-navigation bg-color-primary" fxHide.gt-sm>
+    <nav mat-tab-nav-bar>
+      <a fxFlex="calc(100%/{{routeLinks.length}})" mat-tab-link *ngFor="let routeLink of routeLinks" [routerLink]="routeLink.link" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">
 
-              <div fxLayout="column">
-                <div fxFlex><mat-icon svgIcon="{{routeLink.link}}"></mat-icon></div>
-                <div style="margin-top: -10px;" fxFlex>{{routeLink.label}}</div>
-              </div>
+        <div fxLayout="column">
+          <div fxFlex>
+            <mat-icon svgIcon="{{routeLink.link}}"></mat-icon>
+          </div>
+          <div style="margin-top: -10px;" fxFlex>{{routeLink.label}}</div>
+        </div>
 
-        </a>
-      </nav>
-    </div>
+      </a>
+    </nav>
+  </div>
 </mat-sidenav-container>

@@ -1,71 +1,79 @@
 import { Injectable } from '@angular/core';
 import { UsageInfo } from './Utils/objects/usageInfo';
-import { Boats } from './Utils/menuNames';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 
+import { KnownBoatsService } from './known-boats.service';
 import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 
 @Injectable()
 export class BoatUsageService {
   private itemsCollection: AngularFirestoreCollection<UsageInfo>;
-  public items: Observable<UsageInfo[]>;
+  private sortedByDate: UsageInfo[];
 
-  private sortedUsage: Observable<UsageInfo[]>;
+  public lastEachBoat: BehaviorSubject<UsageInfo[]> = new BehaviorSubject([]);
+  public lastMonthEachBoat: BehaviorSubject<{ boat: string, duration: number }[]> = new BehaviorSubject([]);
+  public usageTimes: BehaviorSubject<{ boat: string, duration: number }[]> = new BehaviorSubject([]);
+  public usageData: BehaviorSubject<UsageInfo[]> = new BehaviorSubject([]);
 
-  public lastUsageEachBoat: UsageInfo[] = [];
-
-  public usageData: UsageInfo[] = [];
-  public usageTimes: number[] = [0, 0, 0, 0, 0];
-
-  public lastMonthUsageEachBoat: number[] = [0, 0, 0, 0, 0];
-
-  constructor(db: AngularFirestore) {
+  constructor(db: AngularFirestore, BOATS: KnownBoatsService) {
     this.itemsCollection = db.collection<UsageInfo>('/boatUsage', ref => ref.orderBy('endTime', 'desc').orderBy('boatID'));
-    this.items = this.itemsCollection.valueChanges();
-    this.items.subscribe(val => { this.buildDataList(val, this.usageData); });
-
-    this.sortedUsage = this.itemsCollection.valueChanges();
-
-    this.sortedUsage.subscribe(val => {
-      const tmp: number[] = [];
-      this.lastUsageEachBoat.length = 0;
-
-      val.forEach(element => {
-        if (tmp.indexOf(element.boatID) < 0) {
-          tmp.push(element.boatID);
-          this.lastUsageEachBoat.push(element);
-        }
+    this.itemsCollection.valueChanges().subscribe((data) => {
+      // Sort usage for easier manipulation
+      this.sortedByDate = data.sort((a, b) => {
+        return b.startTime.toDate() - a.startTime.toDate();
       });
-    });
 
-    // TODO Do this better
-    /* Build or rearrange the UsageInfo into a list where each boat is in index order and added together*/
-    this.items.subscribe((list: UsageInfo[]) => {
-      this.usageTimes.splice(0, this.usageTimes.length, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-      list.forEach((val: UsageInfo) => {
-        const original = this.usageTimes[Boats.indexOf(val.boatID)];
-        this.usageTimes.splice(Boats.indexOf(val.boatID), 1, original + val.duration);
-      }
-      );
-});
+      this.usageData.next(this.sortedByDate);
 
-    this.items.subscribe((list: UsageInfo[]) => {
-      this.lastMonthUsageEachBoat.splice(0, this.lastMonthUsageEachBoat.length, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-      list.forEach((val: UsageInfo) => {
-        const lastDate = new Date();
-        lastDate.setMonth(lastDate.getMonth() - 1);
-        if (this.makeDate(val.endTime) > lastDate) {
-          const original = this.lastMonthUsageEachBoat[Boats.indexOf(val.boatID)];
-          this.lastMonthUsageEachBoat.splice(Boats.indexOf(val.boatID), 1, original + val.duration);
+      // Get the last usage for each boat
+      const seen = {};
+      this.lastEachBoat.next(this.sortedByDate.filter((usage) => {
+        if (!seen[usage.boatID]) {
+          seen[usage.boatID] = usage;
+          return true;
+        } else {
+          return false;
         }
-      }
-      );
+      }));
+
+      // Total the usage in the last month
+      let totals = {};
+      const currentDate = new Date();
+      const recordsInMonth = this.sortedByDate.filter((usage) => {
+        const date = usage.startTime.toDate();
+        if (date.getMonth() === currentDate.getMonth() && date.getFullYear() === currentDate.getFullYear()) {
+          return true;
+        }
+        return false;
+      });
+      recordsInMonth.forEach(usage => {
+        if (!totals[usage.boatID]) { totals[usage.boatID] = 0; }
+        totals[usage.boatID] += usage.duration;
+      });
+      const lmeb: { boat: string, duration: number }[] = [];
+      Object.keys(totals).forEach(key => {
+        lmeb.push({ boat: key, duration: totals[key] });
+      });
+      this.lastMonthEachBoat.next(lmeb);
+
+      // Total usage all time
+      totals = {};
+      this.sortedByDate.forEach(usage => {
+        if (!totals[usage.boatID]) { totals[usage.boatID] = 0; }
+        totals[usage.boatID] += usage.duration;
+      });
+      const ut: { boat: string, duration: number }[] = [];
+      Object.keys(totals).forEach(key => {
+        ut.push({ boat: key, duration: totals[key] });
+      });
+      this.usageTimes.next(ut);
     });
   }
 
   addUsageInfo(usage: UsageInfo) {
-    return Promise.resolve(this.itemsCollection.add(Object.assign({}, usage)));
+    return Promise.resolve(this.itemsCollection.add({ ...usage }));
   }
 
   private buildDataList(val: UsageInfo[], array: UsageInfo[]) {
@@ -78,7 +86,8 @@ export class BoatUsageService {
   private makeDate(date: any) {
     try {
       return date.toDate();
-    } catch (error) {
+    }
+    catch (error) {
       return date;
     }
   }

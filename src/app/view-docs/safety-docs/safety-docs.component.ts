@@ -13,16 +13,21 @@ import { MatSnackBar } from '@angular/material';
 })
 export class SafetyDocsComponent implements OnInit {
   links: DocLinkID[];
-  editMode: Boolean = false;
+  editMode: boolean = false;
+  admin: boolean;
+
   constructor(private safetyDocsService: SafetyDocsService, public FIREBASE_AUTH: AuthenticationService, private snackBar: MatSnackBar, ) {
     this.links = safetyDocsService.safetyDocLinks;
+    FIREBASE_AUTH.isAdmin.subscribe(bool => {
+      this.admin = bool;
+    })
   }
 
   ngOnInit() {
   }
 
   isAdmin(): Boolean {
-    return this.FIREBASE_AUTH.isAdmin;
+    return this.admin;
   }
 
   editModeToggle() {

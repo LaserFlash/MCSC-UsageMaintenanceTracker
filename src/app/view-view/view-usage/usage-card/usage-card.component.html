@@ -4,7 +4,7 @@
       <mat-panel-title class="titleMinWidth">
         <mat-list>
           <mat-list-item>
-            <img matListAvatar src="assets/images/boat_{{u.boatID}}.png" alt={{getBoatName(u.boatID)}}>
+            <img matListAvatar src="assets/images/boat_{{u.boatID}}.png" onerror="if (this.src !== 'assets/images/noImage.png') this.src = 'assets/images/noImage.png';" alt={{getBoatName(u.boatID)}} />
             <h3 matLine> {{getBoatName(u.boatID)}} </h3>
           </mat-list-item>
         </mat-list>

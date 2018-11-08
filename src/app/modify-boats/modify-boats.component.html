@@ -1,13 +1,23 @@
-<div class="noPrint" fxFlex.gt-lg="calc(50% -1280px)" fxFlex="20" fxFlex.lt-md="2"></div>
-<div fxFlex.gt-lg="1280px" fxFlex>
-  <mat-card class="form">
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Boat Database
+      </mat-panel-title>
+      <mat-panel-description>
+        Displays the known boats and allows for modification
+      </mat-panel-description>
+    </mat-expansion-panel-header>
     <mat-list>
-      <h3 mat-subheader>Boat Database</h3>
+      <h3 mat-subheader>Boats</h3>
       <div *ngFor="let info of boatInfo">
         <app-inline-edit-input-boats [value]="info" (update)="setDocItem($event)"></app-inline-edit-input-boats>
       </div>
-      <button mat-icon-button (click)="addItem()"><mat-icon>add</mat-icon></button>
+      <button mat-icon-button (click)="addItem()">
+        <mat-icon>add</mat-icon>
+      </button>
     </mat-list>
-  </mat-card>
-</div>
-<div class="noPrint" fxFlex.gt-lg="calc(50% -1280px)" fxFlex="20" fxFlex.lt-md="2"></div>
+  </mat-expansion-panel>
+</mat-accordion>
+
+<div class="bottomSpace"></div>

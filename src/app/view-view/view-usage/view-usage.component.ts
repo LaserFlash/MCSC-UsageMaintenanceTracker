@@ -24,7 +24,9 @@ export class ViewUsageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.usages = this.usageService.usageData;
+    this.usageService.usageData.subscribe(data => {
+      this.usages = data;
+    });
   }
 
 }

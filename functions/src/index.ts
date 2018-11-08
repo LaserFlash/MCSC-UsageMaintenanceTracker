@@ -28,9 +28,16 @@ exports.calculateDuration = functions.firestore
 
 exports.createProfile = functions.auth.user()
   .onCreate((userRecord, context) => {
-    return admin.database().ref(`/userProfile/${userRecord.uid}`).set({
-      email: userRecord.email,
-      name: userRecord.displayName,
-      role: "user"
-    });
+    admin.auth().getUser(userRecord.uid)
+      .then(function(userData) {
+        console.log("Successfully fetched user data:", userData.toJSON());
+        return admin.database().ref(`/userProfile/${userData.uid}`).set({
+          email: userData.email,
+          name: userData.displayName,
+          role: "user"
+        });
+      })
+      .catch(function(error) {
+        console.log("Error fetching user data:", error);
+      });
   });

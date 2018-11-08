@@ -7,15 +7,19 @@ import { AuthenticationService } from '../../authentication.service';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
+  public authState: boolean;
 
-  constructor(public FIREBASE_AUTH: AuthenticationService) { }
+  constructor(public FIREBASE_AUTH: AuthenticationService) {
+    FIREBASE_AUTH.authState.subscribe(bool => {
+      this.authState = bool;
+    });
+  }
 
   ngOnInit() {
   }
 
-  logout(){
-      console.log("Logging Out");
-      this.FIREBASE_AUTH.logout();
+  logout() {
+    this.FIREBASE_AUTH.logout();
   }
 
 }

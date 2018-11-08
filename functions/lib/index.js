@@ -3,24 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 admin.initializeApp();
-exports.createProfile = functions.auth.user()
-    .onCreate((userRecord, context) => {
-    return admin.database().ref(`/userProfile/${userRecord.uid}`).set({
-        email: userRecord.email,
-        name: userRecord.displayName,
-        role: "user"
-    });
-});
-//# sourceMappingURL=index.js.map
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const functions = require("firebase-functions");
-// // Start writing Firebase Functions
-// // https://firebase.google.com/docs/functions/typescript
-//
-// export const helloWorld = functions.https.onRequest((request, response) => {
-//  response.send("Hello from Firebase!");
-// });
 // Listen for updates to any `boatUsage` document.
 exports.calculateDuration = functions.firestore
     .document('boatUsage/{id}')
@@ -40,5 +22,20 @@ exports.calculateDuration = functions.firestore
     return change.after.ref.set({
         duration: (data.endTime - data.startTime) / (3600000)
     }, { merge: true });
+});
+exports.createProfile = functions.auth.user()
+    .onCreate((userRecord, context) => {
+    admin.auth().getUser(userRecord.uid)
+        .then(function (userData) {
+        console.log("Successfully fetched user data:", userData.toJSON());
+        return admin.database().ref(`/userProfile/${userData.uid}`).set({
+            email: userData.email,
+            name: userData.displayName,
+            role: "user"
+        });
+    })
+        .catch(function (error) {
+        console.log("Error fetching user data:", error);
+    });
 });
 //# sourceMappingURL=index.js.map

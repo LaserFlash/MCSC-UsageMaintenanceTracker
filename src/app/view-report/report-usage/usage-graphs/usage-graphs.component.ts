@@ -36,22 +36,27 @@ export class UsageGraphsComponent implements OnInit {
   public chartType = 'bar';
   public chartLegend = true;
 
-  usageLastMonth: number[];
+  usageLastMonth: { boat: string, duration: number }[];
 
   constructor(private usageService: BoatUsageService, private BOATS: KnownBoatsService) {
-    this.usageLastMonth = usageService.lastMonthUsageEachBoat;
+    usageService.lastMonthEachBoat.subscribe(usages => {
+      this.usageLastMonth = usages;
+    });
   }
 
   ngOnInit() {
-    this.chartData = [{ data: this.usageService.usageTimes, label: this.dataLabel}];
-    this.usageService.items.subscribe(() => {
-      this.chartData = [{ data: this.usageService.usageTimes, label: this.dataLabel}];
+
+    this.usageService.usageTimes.subscribe((data) => {
+      const builtLabelList = [];
+      const builtDataList = [];
+      Object.keys(data).forEach(key => {
+        builtDataList.push(data[key].duration);
+        builtLabelList.push(this.BOATS.getBoatName(data[key].boat));
+      });
+      this.chartData[0].data = builtDataList;
+      this.chartLabels = builtLabelList;
     });
-    this.BOATS.boatInformation.subscribe( boats => {
-        this.chartLabels = boats.map((boat) => {
-           return boat.name;
-         });
-    });
+
   }
 
   private getBoatName(v) {

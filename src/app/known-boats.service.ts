@@ -62,7 +62,7 @@ export class KnownBoatsService {
   }
 
   getBoatName(key: string): string {
-    const boatFound =  this.boats.find((boat) => {
+    const boatFound = this.boats.find((boat) => {
       return boat.id === String(key);
     });
     if (boatFound) {

@@ -14,10 +14,12 @@ export class LastUsesComponent implements OnInit {
   usage: UsageInfo[];
 
   constructor(private boatUsageService: BoatUsageService, private BOATS: KnownBoatsService) {
-    this.usage = boatUsageService.lastUsageEachBoat;
+    boatUsageService.lastEachBoat.subscribe(usages => {
+      this.usage = usages;
+    });
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   private getBoatName(v) {
     return this.BOATS.getBoatName(v);

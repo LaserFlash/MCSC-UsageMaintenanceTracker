@@ -1,8 +1,8 @@
 export class UsageInfo {
   constructor(
-    public boatID: number,
-    public startTime: Date,
-    public endTime: Date,
+    public boatID: string,
+    public startTime: any,
+    public endTime: any,
     public duration: number,
     public driver: string,
     public otherCrew: [{}],

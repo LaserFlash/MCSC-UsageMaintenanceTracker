@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from '../authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminComponent implements OnInit {
 
-  constructor() { }
+  constructor(private AUTH: AuthenticationService, private ROUTER: Router) { }
 
   ngOnInit() {
+    this.AUTH.isAdmin.subscribe(state => {
+      if (!state) {
+        this.ROUTER.navigateByUrl('/report/usage');
+      }
+    });
   }
 
 }
