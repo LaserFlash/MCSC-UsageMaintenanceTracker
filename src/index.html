@@ -35,46 +35,67 @@
   <base href="/" />
   <style>
     .centered {
-      display: block;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      margin-top: -235px;
-      margin-left: -235px;
+      position: absolute;
+      margin: auto;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 40vh;
     }
 
-    .loading {
-      animation: loading 1s infinite;
+    .spinner {
+      margin: 70vh auto 0;
+      width: 70px;
+      text-align: center;
     }
 
-    @keyframes loading {
-      0% {
-        transform: scale( .75);
-      }
-      20% {
-        transform: scale( 1);
-      }
-      40% {
-        transform: scale( .75);
-      }
-      60% {
-        transform: scale( 1);
-      }
-      80% {
-        transform: scale( .75);
-      }
+    .spinner>div {
+      width: 18px;
+      height: 18px;
+      background-color: #333;
+
+      border-radius: 100%;
+      display: inline-block;
+      -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+      animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+    }
+
+    .spinner .bounce1 {
+      -webkit-animation-delay: -0.32s;
+      animation-delay: -0.32s;
+    }
+
+    .spinner .bounce2 {
+      -webkit-animation-delay: -0.16s;
+      animation-delay: -0.16s;
+    }
+
+    @-webkit-keyframes sk-bouncedelay {
+
+      0%,
+      80%,
       100% {
-        transform: scale( .75);
+        -webkit-transform: scale(0)
+      }
+
+      40% {
+        -webkit-transform: scale(1.0)
       }
     }
 
+    @keyframes sk-bouncedelay {
 
-    @-webkit-keyframes rotation {
-      from {
-        -webkit-transform: rotate(0deg);
+      0%,
+      80%,
+      100% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
       }
-      to {
-        -webkit-transform: rotate(359deg);
+
+      40% {
+        -webkit-transform: scale(1.0);
+        transform: scale(1.0);
       }
     }
   </style>
@@ -84,12 +105,18 @@
 
 <body>
   <noscript>
-  This site requires JavaScript to function
-</noscript>
+    This site requires JavaScript to function
+  </noscript>
   <section class="mat-typography">
     <app-root>
-      <img class="loading centered" src="assets/images/logo.png" alt="Wellington Youth Sailing Trust Logo" />
+      <img class="loading centered" src="assets/images/logo.png" alt="NPYC Logo" />
+      <div class="spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+      </div>
     </app-root>
   </section>
 </body>
+
 </html>
