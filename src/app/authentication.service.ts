@@ -17,7 +17,7 @@ export class AuthenticationService {
       }
 
       if (data != null) {
-        data = this.afAuth.auth.currentUser.getIdTokenResult().then((idTokenResult) => {
+        this.afAuth.auth.currentUser.getIdTokenResult().then((idTokenResult) => {
           // Confirm the user is an Admin.
           if (!!idTokenResult.claims.admin) {
             this.isAdmin.next(true);
@@ -25,6 +25,8 @@ export class AuthenticationService {
             this.isAdmin.next(false);
           }
           this.authState.next(true);
+        }).catch(() => {
+          this.isAdmin.next(false);
         });
       }
     });
