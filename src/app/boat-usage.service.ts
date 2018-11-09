@@ -73,6 +73,7 @@ export class BoatUsageService {
   }
 
   addUsageInfo(usage: UsageInfo) {
+    usage.duration = (usage.endTime - usage.startTime) / (3600000);
     return Promise.resolve(this.itemsCollection.add({ ...usage }));
   }
 
@@ -81,15 +82,6 @@ export class BoatUsageService {
     val.forEach(element => {
       array.push(element);
     });
-  }
-
-  private makeDate(date: any) {
-    try {
-      return date.toDate();
-    }
-    catch (error) {
-      return date;
-    }
   }
 
 }
