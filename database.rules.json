@@ -3,11 +3,11 @@
     ".read": false,
     ".write": false,
     "userProfile": {
-      ".read": "root.child('userProfile').child(auth.uid).child('role').val() === 'admin'",
-      ".write": "root.child('userProfile').child(auth.uid).child('role').val() === 'admin'",
+      ".read": "auth.token.admin === true",
+      ".write": "auth.token.admin === true",
       "$uid": {
-      ".read": "$uid === auth.uid || root.child('userProfile').child(auth.uid).child('role').val() === 'admin'",
-      ".write": "root.child('userProfile').child(auth.uid).child('role').val() === 'admin'"
+      ".read": "$uid === auth.uid || auth.token.admin === true",
+      ".write": "auth.token.admin === true",
       }
   	}
   }

@@ -19,23 +19,19 @@ service cloud.firestore {
         allow write: if isAdmin();
     }
 
-    match /userProfile/{profile} {
-        allow read;
-        allow write: if false;
-    }
-
     match /boats/{boat} {
       allow read;
       allow write: if isAdmin();
     }
 
+    match /boatSpecs/{doc} {
+      allow read;
+    }
+
 
     function isAdmin() {
-     return 'admin' == getRole();
+     return request.auth.token.admin == true;
     }
 
-    function getRole() {
-         return get(/databases/$(database)/documents/userProfile/$(request.auth.uid)).data.role;
-    }
   }
 }

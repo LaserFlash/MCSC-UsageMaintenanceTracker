@@ -41,3 +41,12 @@ exports.createProfile = functions.auth.user()
         console.log("Error fetching user data:", error);
       });
   });
+
+exports.updateUserClaims = functions.database.ref('/userProfile/{uid}/role').onWrite((snapshot, context) => {
+  const role = snapshot.after.val();
+  console.log("Updating custom claims: ", role);
+  if (role === 'admin') {
+    return admin.auth().setCustomUserClaims(context.params.uid, { admin: true });
+  }
+  return admin.auth().setCustomUserClaims(context.params.uid, { admin: false })
+});

@@ -12,11 +12,13 @@
         </mat-list-item>
         <app-inline-edit-input *ngIf="editMode" [value]="link" (delete)="deleteDocItem($event)" (update)="setDocItem($event)"></app-inline-edit-input>
       </div>
-      <button *ngIf="editMode" mat-icon-button (click)="addItem()"><mat-icon>add</mat-icon></button>
+      <button *ngIf="editMode" mat-icon-button (click)="addItem()">
+        <mat-icon>add</mat-icon>
+      </button>
     </mat-list>
 
     <div *ngIf="FIREBASE_AUTH.isAdmin">
-      <button mat-button (click)="editModeToggle()">Edit Mode</button>
+      <button mat-button *ngIf="admin" (click)="editModeToggle()">Edit Mode</button>
     </div>
   </mat-card>
 </div>
