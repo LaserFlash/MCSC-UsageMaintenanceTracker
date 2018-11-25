@@ -128,7 +128,11 @@ export class SortFilterBarComponent implements OnInit {
   }
 
   private timeFilter(item) {
-    return item.timestamp.toDate() >= this.endMinDate && item.timestamp.toDate() <= this.startMaxDate;
+    let time = item.timestamp;
+    if (item.timestampFixed) {
+      time = item.timestampFixed;
+    }
+    return time.toDate() >= this.endMinDate && time.toDate() <= this.startMaxDate;
   }
 
   private changeSort(sort: string) {
