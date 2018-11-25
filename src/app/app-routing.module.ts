@@ -18,7 +18,7 @@ import { DocsComponent } from './view-docs/docs.component';
 import { BoatPartsComponent } from './view-docs/boat-parts/boat-parts.component';
 import { SafetyDocsComponent } from './view-docs/safety-docs/safety-docs.component';
 
-import { AdminComponent} from './admin/admin.component';
+import { AdminComponent } from './admin/admin.component';
 
 
 const routes: Routes = [
@@ -30,7 +30,7 @@ const routes: Routes = [
       { path: 'usage', component: ReportUsageComponent, data: { state: '0' } },
       { path: 'issue', component: ReportIssueComponent, data: { state: '1' } },
       { path: 'incident', component: ReportIncidentComponent, data: { state: '2' } },
-      { path: '**', redirectTo: '' },
+      { path: '**', redirectTo: 'usage' },
     ]
   },
   {
@@ -50,7 +50,7 @@ const routes: Routes = [
       { path: 'usage', component: TmpStatsComponent, data: { state: '0' } },
       { path: 'issue', component: TmpStatsComponent, data: { state: '1' } },
       { path: 'fixed', component: TmpStatsComponent, data: { state: '2' } },
-      { path: '**', redirectTo: '' },
+      { path: '**', redirectTo: 'usage' },
     ]
   },
   {
@@ -59,7 +59,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'safety', pathMatch: 'full' },
       { path: 'safety', component: SafetyDocsComponent, data: { state: '0' } },
       { path: 'parts', component: BoatPartsComponent, data: { state: '1' } },
-      { path: '**', redirectTo: '' },
+      { path: '**', redirectTo: 'safety' },
     ]
   },
   { path: 'admin', component: AdminComponent },

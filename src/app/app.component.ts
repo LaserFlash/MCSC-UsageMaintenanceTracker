@@ -63,6 +63,15 @@ export class AppComponent implements OnInit {
     this.themeTracker.setDark(this.isDarkTheme);
   }
 
+
+  public getRouteLink(linkSuffix: string) {
+    return linkSuffix + '/' + this.getSubRoute();
+  }
+
+  private getSubRoute() {
+    return this.router.url.split('/')[2];
+  }
+
   public print() {
     window.print();
   }
