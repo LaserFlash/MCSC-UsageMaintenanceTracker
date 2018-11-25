@@ -109,7 +109,6 @@ export class SortFilterBarComponent implements OnInit {
     return this.appliedFilters.some(
       filter => {
         if (String(item.boatID) === String(filter)) {
-          console.log("boat")
           return true;
         }
       });
@@ -123,14 +122,12 @@ export class SortFilterBarComponent implements OnInit {
     return this.partappliedFilters.some(
       filter => {
         if (item.part === filter) {
-          console.log("part")
           return true;
         }
       });
   }
 
   private timeFilter(item) {
-    console.log(item);
     return item.timestamp.toDate() >= this.endMinDate && item.timestamp.toDate() <= this.startMaxDate;
   }
 
