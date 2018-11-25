@@ -65,7 +65,7 @@
   <!-- Bottom Navigation Bar -->
   <div class="bottom-navigation bg-color-primary" fxHide.gt-sm>
     <nav mat-tab-nav-bar>
-      <a fxFlex="calc(100%/{{routeLinks.length}})" mat-tab-link *ngFor="let routeLink of routeLinks" [routerLink]="getRouteLink(routeLink.link)" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">
+      <a fxFlex="calc(100%/{{routeLinks.length}})" mat-tab-link *ngFor="let routeLink of routeLinks" [routerLink]="getRouteLink(routeLink.link)" [active]="checkActive(routeLink.link)">
 
         <div fxLayout="column">
           <div fxFlex>
