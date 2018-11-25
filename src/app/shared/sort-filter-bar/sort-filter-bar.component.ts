@@ -67,7 +67,7 @@ export class SortFilterBarComponent implements OnInit {
   private filter() {
     let filtered;
     /* Apply filters taking into account any boat filters also applied */
-    filtered = this.original.filter(item => this.partFilter(item)).filter(item => this.boatFilter(item));
+    filtered = this.original.filter(item => this.partFilter(item)).filter(item => this.boatFilter(item)).filter(item => this.timeFilter(item));
 
     this.breakages.splice(0, this.breakages.length);
     for (let i = 0; i < filtered.length; i++) {
@@ -127,6 +127,11 @@ export class SortFilterBarComponent implements OnInit {
           return true;
         }
       });
+  }
+
+  private timeFilter(item) {
+    console.log(item);
+    return item.timestamp.toDate() >= this.endMinDate && item.timestamp.toDate() <= this.startMaxDate;
   }
 
   private changeSort(sort: string) {
