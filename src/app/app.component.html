@@ -13,7 +13,7 @@
 
   <span fxHide.lt-md>
     <nav mat-tab-nav-bar>
-      <a mat-tab-link *ngFor="let routeLink of routeLinks" [routerLink]="getRouteLink(routeLink.link)" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">
+      <a mat-tab-link *ngFor="let routeLink of routeLinks" [routerLink]="getRouteLink(routeLink.link)" [active]="checkActive(routeLink.link)">
         {{routeLink.label}}
       </a>
     </nav>

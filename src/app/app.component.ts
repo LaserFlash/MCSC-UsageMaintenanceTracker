@@ -72,6 +72,9 @@ export class AppComponent implements OnInit {
     return this.router.url.split('/')[2];
   }
 
+  public checkActive(link) {
+    return this.router.url.split('/')[1] === link;
+  }
   public print() {
     window.print();
   }
