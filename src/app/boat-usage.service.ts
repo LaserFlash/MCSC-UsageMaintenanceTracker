@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { UsageInfo } from './Utils/objects/usageInfo';
-import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 
 import { KnownBoatsService } from './known-boats.service';
 import { Observable } from 'rxjs/Observable';
