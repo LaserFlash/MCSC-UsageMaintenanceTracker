@@ -1,6 +1,6 @@
 {
   "projects": {
-    "default": "npyc-usagemaintenancetracker",
-    "dev": "npyc-dev"
+    "default": "triya-usagemaintenancetracker",
+    "dev": "triya-dev"
   }
 }

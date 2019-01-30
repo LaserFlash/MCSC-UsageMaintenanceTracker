@@ -13,7 +13,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   viewProviders: [MatIconRegistry]
 })
 export class AppComponent implements OnInit {
-  title = 'NPYC';
+  title = 'TRIYA';
   isDarkTheme: boolean;
   isAdmin: boolean;
   routeLinks = [

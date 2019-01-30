@@ -1,7 +1,7 @@
 {
   "index": "/index.html",
   "assetGroups": [{
-    "name": "NPYC",
+    "name": "TRIYA",
     "installMode": "prefetch",
     "resources": {
       "files": [
