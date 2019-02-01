@@ -1,20 +1,15 @@
 {
   "name": "TRIYA Usage and Maintenace Tracker",
   "short_name": "TRIYA Boats",
-  "theme_color": "#AFB42B",
-  "background_color": "#AFB42B",
+  "theme_color": "#d32f2f",
+  "background_color": "#d32f2f",
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
   "icons": [
       {
-          "src": "assets/favicon/android-chrome-192x192.png",
-          "sizes": "192x192",
-          "type": "image/png"
-      },
-      {
-          "src": "assets/favicon/android-chrome-256x256.png",
-          "sizes": "256x256",
+          "src": "android-chrome-96x96.png",
+          "sizes": "96x96",
           "type": "image/png"
       }
   ],
