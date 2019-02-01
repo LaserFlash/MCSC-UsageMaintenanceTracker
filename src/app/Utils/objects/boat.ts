@@ -5,6 +5,7 @@ export class Boat {
   constructor(
     public name: string,
     public selectable: boolean,
+    public type1: boolean,
   ) { }
 }
 

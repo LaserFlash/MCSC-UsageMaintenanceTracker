@@ -20,3 +20,12 @@
       min-height:40cm;
   }
 }
+
+.radio-group {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.radio-button {
+  margin: 5px;
+}

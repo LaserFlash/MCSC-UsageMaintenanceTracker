@@ -32,10 +32,12 @@ export class ReportUsageComponent {
   windSpeed = WindTypes;
   windDirection = WindDirection;
   waterState = WaterState;
+  boatTypes = [{ name: 'RiB', checked: true }, { name: '420', checked: false }];
 
-  usageForm: FormGroup;
+  public usageForm: FormGroup;
 
   formErrors = {
+    'boatType': '',
     'boatID': '',
     'startTime': '',
     'endTime': '',
@@ -47,6 +49,9 @@ export class ReportUsageComponent {
   };
 
   validationMessages = {
+    'boatType': {
+      'required': 'We need to know the type of boat'
+    },
     'boatID': {
       'required': 'You must select a boat.'
     },
@@ -86,7 +91,7 @@ export class ReportUsageComponent {
       this.boats = boats.filter((boat) => {
         return boat.selectable;
       });
-    })
+    });
   }
 
   /** Build the form */
@@ -94,6 +99,7 @@ export class ReportUsageComponent {
     this.usageForm = this.fb.group({
       formArray: this.fb.array([
         this.fb.group({
+          boatType: ['', Validators.required],
           boatID: ['', Validators.required],
         }),
         this.fb.group({
@@ -112,9 +118,14 @@ export class ReportUsageComponent {
         })
       ])
     });
+    /* Setup default boat type selection */
+    this.usageForm.get('formArray').get([0]).patchValue({
+      boatType: 'RiB'
+    });
+
+    /* Manage value changes */
     this.usageForm.valueChanges
       .subscribe(data => this.onValueChanged(data));
-
     this.onValueChanged(); // (re)set validation messages no
   }
 
@@ -224,5 +235,14 @@ export class ReportUsageComponent {
     const timeDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), hour, minute);
     console.log(timeDate);
     return timeDate;
+  }
+
+  /**
+  * Display boats only of the given type
+  * A boat is relevant if it belongs to the previously selected type
+  **/
+  relevantBoatsFromType(boat: BoatID): boolean {
+    return boat.type1 && this.usageForm.get('formArray').get([0]).value.boatType === 'RiB' ||
+      !boat.type1 && this.usageForm.get('formArray').get([0]).value.boatType === '420';
   }
 }

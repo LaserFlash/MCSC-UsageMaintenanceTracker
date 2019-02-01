@@ -13,19 +13,34 @@
               -->
               <mat-step formGroupName="0" [stepControl]="usageForm.get('formArray').get([0])">
                 <ng-template matStepLabel>Boat</ng-template>
+
+                <label>Type of boat used</label>
+                <br />
+
+                <mat-radio-group class="radio-group" formControlName="boatType" required>
+                  <mat-radio-button class="radio-button" *ngFor="let type of boatTypes" [value]="type.name" [checked]="type.checked">{{type.name}}</mat-radio-button>
+                  <mat-error *ngIf="formErrors.boatType">
+                    {{formErrors.boatType}}
+                  </mat-error>
+                </mat-radio-group>
+                <br />
+                <br />
+
+
                 <label>Select the boat you used</label>
                 <br />
                 <mat-form-field>
                   <mat-select placeholder="Boat Name" formControlName="boatID" required>
-
-                    <mat-option *ngFor="let boat of boats" [value]="boat.id">{{boat.name}}</mat-option>
-                    <mat-error *ngIf="formErrors.boatID">
-                      {{formErrors.boatID}}
-                    </mat-error>
-
+                    <ng-container *ngFor=" let boat of boats">
+                      <ng-container *ngIf="relevantBoatsFromType(boat)">
+                        <mat-option [value]="boat.id">{{boat.name}}</mat-option>
+                        <mat-error *ngIf="formErrors.boatID">
+                          {{formErrors.boatID}}
+                        </mat-error>
+                      </ng-container>
+                    </ng-container>
                   </mat-select>
                 </mat-form-field>
-                <br />
                 <br />
                 <button mat-button matStepperNext type="button">Next</button>
               </mat-step>
