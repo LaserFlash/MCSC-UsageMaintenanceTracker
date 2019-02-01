@@ -242,7 +242,7 @@ export class ReportIssueComponent implements OnInit {
   * Function called when selected boat type changes.
   * Changes the parts to be displayed based on the selected boat type
   **/
-  boatTypeChange(event: MdRadioChange) {
+  boatTypeChange(event: MatRadioChange) {
     if (event.value === 'RiB') {
       this.parts = PartsRiB;
     } else {
