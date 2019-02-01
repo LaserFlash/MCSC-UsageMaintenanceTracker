@@ -126,7 +126,7 @@ export class ReportUsageComponent {
     /* Manage value changes */
     this.usageForm.valueChanges
       .subscribe(data => this.onValueChanged(data));
-    this.onValueChanged(); // (re)set validation messages no
+    this.onValueChanged(); // (re)set validation messages now
   }
 
   checkDateRange(c: AbstractControl) {
