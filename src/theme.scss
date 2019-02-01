@@ -2,7 +2,7 @@
 @include mat-core();
 $primary: mat-palette($mat-red, 600);
 $accent:  mat-palette($mat-red);
-$warn:    mat-palette($mat-yellow);
+$warn:    mat-palette($mat-orange);
 
 $theme:  mat-light-theme($primary, $accent, $warn);
 
@@ -11,7 +11,7 @@ $theme:  mat-light-theme($primary, $accent, $warn);
 .app-dark {
   $dark-primary: mat-palette($mat-red, 600);
   $dark-accent:  mat-palette($mat-red);
-  $dark-warn:    mat-palette($mat-yellow);
+  $dark-warn:    mat-palette($mat-orange);
 
   $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
 
