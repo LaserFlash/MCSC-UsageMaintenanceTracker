@@ -5,6 +5,10 @@
     <mat-card-content>
       <form (ngSubmit)="onSubmit()" [formGroup]="breakageForm">
         <mat-vertical-stepper #stepper formArrayName="formArray" [linear]="isLinear">
+
+          <!--
+            Personal details
+            -->
           <mat-step formGroupName="0" [stepControl]="breakageForm.get('formArray').get([0])">
             <ng-template matStepLabel>Fill out your name</ng-template>
 
@@ -27,6 +31,10 @@
 
           </mat-step>
 
+
+          <!--
+            Issue details
+            -->
           <mat-step formGroupName="1" [stepControl]="breakageForm.get('formArray').get([1])">
             <ng-template matStepLabel>Enter Breakage Info</ng-template>
             <mat-form-field>
@@ -68,6 +76,9 @@
             <button mat-button matStepperNext type="button">Next</button>
           </mat-step>
 
+          <!--
+            Image Upload
+            -->
           <mat-step optional>
             <ng-template matStepLabel>Upload Image</ng-template>
 
@@ -87,6 +98,9 @@
             <button mat-button matStepperNext type="button">Next</button>
           </mat-step>
 
+          <!--
+            Check the entered information
+            -->
           <mat-step>
             <ng-template matStepLabel>Check Entry</ng-template>
 
