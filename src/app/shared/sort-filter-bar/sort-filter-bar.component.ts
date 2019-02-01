@@ -2,7 +2,7 @@ import { Component, Input, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { BreakageInfo } from '../../Utils/objects/breakageInfo';
 import { BoatBreakageService } from '../../boat-breakage.service';
 
-import { Parts } from '../../Utils/menuNames'
+import { PartsRiB, Parts420 } from '../../Utils/menuNames'
 import { KnownBoatsService } from '../../known-boats.service'
 
 @Component({
@@ -21,7 +21,7 @@ export class SortFilterBarComponent implements OnInit {
   sortList: string[] = ['Newest', 'Oldest', 'Most Important', 'Least Important', 'Boat'];
   filterList;
 
-  partfilterList: string[] = Parts;
+  partfilterList: string[] = PartsRiB.concat(Parts420);
   appliedFilters: string[] = [];
   partappliedFilters: string[] = [];
   sortBy = 'Sort by';
