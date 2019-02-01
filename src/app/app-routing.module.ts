@@ -40,7 +40,7 @@ const routes: Routes = [
       { path: 'usage', component: ViewUsageComponent, data: { state: '0' } },
       { path: 'issue', component: ViewIssuesComponent, data: { state: '1' } },
       { path: 'fixed', component: ViewFixedComponent, data: { state: '2' } },
-      { path: '**', redirectTo: '' },
+      { path: '**', redirectTo: 'usage' },
     ]
   },
   {
