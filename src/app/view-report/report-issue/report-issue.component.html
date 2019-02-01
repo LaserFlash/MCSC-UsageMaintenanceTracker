@@ -37,12 +37,29 @@
             -->
           <mat-step formGroupName="1" [stepControl]="breakageForm.get('formArray').get([1])">
             <ng-template matStepLabel>Enter Breakage Info</ng-template>
+
+            <label>Type of boat used</label>
+            <br />
+
+            <mat-radio-group class="radio-group" formControlName="boatType" required>
+              <mat-radio-button class="radio-button" *ngFor="let type of boatTypes" (change)="boatTypeChange($event)" [value]="type.name" [checked]="type.checked">{{type.name}}</mat-radio-button>
+              <mat-error *ngIf="formErrors.boatType">
+                {{formErrors.boatType}}
+              </mat-error>
+            </mat-radio-group>
+            <br />
+            <br />
+
             <mat-form-field>
               <mat-select placeholder="Boat Number" formControlName="boatID" name="boatNumber" required>
-                <mat-option *ngFor="let boat of boats" [value]="boat.id">{{boat.name}}</mat-option>
-                <mat-error *ngIf="formErrors.boatID">
-                  {{formErrors.boatID}}
-                </mat-error>
+                <ng-container *ngFor="let boat of boats">
+                  <ng-container *ngIf="relevantItemsFromType(boat)">
+                    <mat-option [value]="boat.id">{{boat.name}}</mat-option>
+                    <mat-error *ngIf="formErrors.boatID">
+                      {{formErrors.boatID}}
+                    </mat-error>
+                  </ng-container>
+                </ng-container>
               </mat-select>
             </mat-form-field>
             <br />
@@ -57,10 +74,12 @@
             <br />
             <mat-form-field>
               <mat-select placeholder="Part" formControlName="part" name="part" required>
-                <mat-option *ngFor="let p of parts" [value]="p">{{p}}</mat-option>
-                <mat-error *ngIf="formErrors.part">
-                  {{formErrors.part}}
-                </mat-error>
+                <ng-container *ngFor="let p of parts">
+                  <mat-option [value]="p">{{p}}</mat-option>
+                  <mat-error *ngIf="formErrors.part">
+                    {{formErrors.part}}
+                  </mat-error>
+                </ng-container>
               </mat-select>
             </mat-form-field>
 

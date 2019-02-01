@@ -14,3 +14,12 @@
 /deep/ .mat-vertical-content-container{
   margin-left: 12px !important;
 }
+
+.radio-group {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.radio-button {
+  margin: 5px;
+}

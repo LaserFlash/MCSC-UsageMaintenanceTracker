@@ -11,7 +11,7 @@ import { BoatBreakageService } from '../../boat-breakage.service';
 import { KnownBoatsService } from '../../known-boats.service';
 
 import { BoatID } from '../../Utils/objects/boat'
-import { Levels, Parts } from '../../Utils/menuNames';
+import { Levels, PartsRiB, Parts420 } from '../../Utils/menuNames';
 import { ImportanceConversionHelper } from '../../Utils/nameConversion';
 
 import { FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
@@ -32,13 +32,14 @@ export class ReportIssueComponent implements OnInit {
   imageID = '';
 
   levels = Levels;
-  parts = Parts;
+  parts = PartsRiB;
 
   breakageForm: FormGroup;
   breakage: BreakageInfo[] = [];
 
   title = 'Report Boat Breakage';
-  boats: BoatID [];
+  boatTypes = [{ name: 'RiB', checked: true }, { name: '420', checked: false }];
+  boats: BoatID[];
 
   breakages: BreakageInfo[];
   loadingBreakages = true;
@@ -48,6 +49,7 @@ export class ReportIssueComponent implements OnInit {
   formErrors = {
     'name': '',
     'contact': '',
+    'boatType': '',
     'boatID': '',
     'importance': '',
     'part': '',
@@ -60,6 +62,9 @@ export class ReportIssueComponent implements OnInit {
     },
     'contact': {
       'notEmailmobile': 'Contact must be email or mobile'
+    },
+    'boatType': {
+      'required': 'We need to know the type of boat'
     },
     'boatID': {
       'required': 'Boat number is required'
@@ -84,8 +89,8 @@ export class ReportIssueComponent implements OnInit {
     private dialogsService: DialogsService,
     private cloudinary: Cloudinary,
   ) {
-    BOATS.boatInformation.subscribe( boats => {
-      this.boats = boats.filter(boat =>{
+    BOATS.boatInformation.subscribe(boats => {
+      this.boats = boats.filter(boat => {
         return boat.selectable;
       });
     });
@@ -145,12 +150,18 @@ export class ReportIssueComponent implements OnInit {
           contact: ['', ContactValidator.emailAndMobile],
         }),
         this.fb.group({
+          boatType: ['', Validators.required],
           boatID: ['', Validators.required],
           importance: ['', Validators.required],
           part: ['', Validators.required],
           details: ['', [Validators.required, Validators.maxLength(256)]]
         }),
       ])
+    });
+
+    /* Setup default boat type selection */
+    this.breakageForm.get('formArray').get([1]).patchValue({
+      boatType: 'RiB'
     });
 
     this.breakageForm.valueChanges.subscribe(data => this.onValueChanged(data));
@@ -162,6 +173,7 @@ export class ReportIssueComponent implements OnInit {
     this.breakage[0] = new BreakageInfo(
       this.breakageForm.get('formArray').get([0]).get('name').value,
       this.breakageForm.get('formArray').get([0]).get('contact').value,
+      this.breakageForm.get('formArray').get([1]).get('boatType').value,
       this.breakageForm.get('formArray').get([1]).get('boatID').value,
       ImportanceConversionHelper.numberFromImportance(this.breakageForm.get('formArray').get([1]).get('importance').value),
       this.breakageForm.get('formArray').get([1]).get('part').value,
@@ -224,5 +236,26 @@ export class ReportIssueComponent implements OnInit {
             })
         );
     }
+  }
+
+  /**
+  * Function called when selected boat type changes.
+  * Changes the parts to be displayed based on the selected boat type
+  **/
+  boatTypeChange(event: MdRadioChange) {
+    if (event.value === 'RiB') {
+      this.parts = PartsRiB;
+    } else {
+      this.parts = Parts420;
+    }
+  }
+
+  /**
+  * Display items only for boats of the given type
+  * A boat is relevant if it belongs to the previously selected type
+  **/
+  relevantItemsFromType(boat: BoatID): boolean {
+    return boat.type1 && this.breakageForm.get('formArray').get([1]).value.boatType === 'RiB' ||
+      !boat.type1 && this.breakageForm.get('formArray').get([1]).value.boatType === '420';
   }
 }

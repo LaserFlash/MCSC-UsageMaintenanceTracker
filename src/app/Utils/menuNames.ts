@@ -14,7 +14,7 @@ export const Levels: string[] = [
   'Low (not affecting use)'
 ];
 
-export const Parts: string[] = [
+export const PartsRiB: string[] = [
   'Hull',
   'Pontoons',
   'Engine',
@@ -23,6 +23,19 @@ export const Parts: string[] = [
   'Prop',
   'Radio',
   'Safety Equipment',
+  'Other'
+];
+
+export const Parts420: string[] = [
+  'Hull',
+  'Rudder',
+  'Centre Plate',
+  'Control Lines',
+  'Spinnaker',
+  'Trapeze',
+  'Jib',
+  'Mainsail',
+  'Sheets',
   'Other'
 ];
 
