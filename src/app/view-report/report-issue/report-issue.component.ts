@@ -173,7 +173,6 @@ export class ReportIssueComponent implements OnInit {
     this.breakage[0] = new BreakageInfo(
       this.breakageForm.get('formArray').get([0]).get('name').value,
       this.breakageForm.get('formArray').get([0]).get('contact').value,
-      this.breakageForm.get('formArray').get([1]).get('boatType').value,
       this.breakageForm.get('formArray').get([1]).get('boatID').value,
       ImportanceConversionHelper.numberFromImportance(this.breakageForm.get('formArray').get([1]).get('importance').value),
       this.breakageForm.get('formArray').get([1]).get('part').value,
