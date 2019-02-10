@@ -14,19 +14,6 @@
               <mat-step formGroupName="0" [stepControl]="usageForm.get('formArray').get([0])">
                 <ng-template matStepLabel>Boat</ng-template>
 
-                <label>Type of boat used</label>
-                <br />
-
-                <mat-radio-group class="radio-group" formControlName="boatType" required>
-                  <mat-radio-button class="radio-button" *ngFor="let type of boatTypes" [value]="type.name" [checked]="type.checked">{{type.name}}</mat-radio-button>
-                  <mat-error *ngIf="formErrors.boatType">
-                    {{formErrors.boatType}}
-                  </mat-error>
-                </mat-radio-group>
-                <br />
-                <br />
-
-
                 <label>Select the boat you used</label>
                 <br />
                 <mat-form-field>

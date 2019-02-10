@@ -33,7 +33,7 @@ export class ReportIssueComponent implements OnInit {
   imageID = '';
 
   levels = Levels;
-  parts = PartsRiB;
+  parts = Parts420;
 
   breakageForm: FormGroup;
   breakage: BreakageInfo[] = [];
@@ -50,7 +50,6 @@ export class ReportIssueComponent implements OnInit {
   formErrors = {
     'name': '',
     'contact': '',
-    'boatType': '',
     'boatID': '',
     'importance': '',
     'part': '',
@@ -63,9 +62,6 @@ export class ReportIssueComponent implements OnInit {
     },
     'contact': {
       'notEmailmobile': 'Contact must be email or mobile'
-    },
-    'boatType': {
-      'required': 'We need to know the type of boat'
     },
     'boatID': {
       'required': 'Boat number is required'
@@ -151,18 +147,12 @@ export class ReportIssueComponent implements OnInit {
           contact: ['', ContactValidator.emailAndMobile],
         }),
         this.fb.group({
-          boatType: ['', Validators.required],
           boatID: ['', Validators.required],
           importance: ['', Validators.required],
           part: ['', Validators.required],
           details: ['', [Validators.required, Validators.maxLength(256)]]
         }),
       ])
-    });
-
-    /* Setup default boat type selection */
-    this.breakageForm.get('formArray').get([1]).patchValue({
-      boatType: 'RiB'
     });
 
     this.breakageForm.valueChanges.subscribe(data => this.onValueChanged(data));
@@ -255,7 +245,6 @@ export class ReportIssueComponent implements OnInit {
   * A boat is relevant if it belongs to the previously selected type
   **/
   relevantItemsFromType(boat: BoatID): boolean {
-    return boat.type1 && this.breakageForm.get('formArray').get([1]).value.boatType === 'RiB' ||
-      !boat.type1 && this.breakageForm.get('formArray').get([1]).value.boatType === '420';
+    return true;
   }
 }

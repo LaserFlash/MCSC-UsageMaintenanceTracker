@@ -38,18 +38,6 @@
           <mat-step formGroupName="1" [stepControl]="breakageForm.get('formArray').get([1])">
             <ng-template matStepLabel>Enter Breakage Info</ng-template>
 
-            <label>Type of boat used</label>
-            <br />
-
-            <mat-radio-group class="radio-group" formControlName="boatType" required>
-              <mat-radio-button class="radio-button" *ngFor="let type of boatTypes" (change)="boatTypeChange($event)" [value]="type.name" [checked]="type.checked">{{type.name}}</mat-radio-button>
-              <mat-error *ngIf="formErrors.boatType">
-                {{formErrors.boatType}}
-              </mat-error>
-            </mat-radio-group>
-            <br />
-            <br />
-
             <mat-form-field>
               <mat-select placeholder="Boat Number" formControlName="boatID" name="boatNumber" required>
                 <ng-container *ngFor="let boat of boats">
