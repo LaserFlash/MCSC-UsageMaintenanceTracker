@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "TRIYA-UsageMaintenaceTracker": {
+    "mcsc-UsageMaintenaceTracker": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -54,18 +54,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "TRIYA-UsageMaintenaceTracker:build"
+            "browserTarget": "mcsc-UsageMaintenaceTracker:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "TRIYA-UsageMaintenaceTracker:build:production"
+              "browserTarget": "mcsc-UsageMaintenaceTracker:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "TRIYA-UsageMaintenaceTracker:build"
+            "browserTarget": "mcsc-UsageMaintenaceTracker:build"
           }
         },
         "test": {
@@ -102,7 +102,7 @@
         }
       }
     },
-    "TRIYA-UsageMaintenaceTracker-e2e": {
+    "mcsc-UsageMaintenaceTracker-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -110,11 +110,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "TRIYA-UsageMaintenaceTracker:serve"
+            "devServerTarget": "mcsc-UsageMaintenaceTracker:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "TRIYA-UsageMaintenaceTracker:serve:production"
+              "devServerTarget": "mcsc-UsageMaintenaceTracker:serve:production"
             }
           }
         },
@@ -130,5 +130,5 @@
       }
     }
   },
-  "defaultProject": "TRIYA-UsageMaintenaceTracker"
+  "defaultProject": "mcsc-UsageMaintenaceTracker"
 }
