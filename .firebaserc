@@ -1,6 +1,6 @@
 {
   "projects": {
-    "default": "triya-usagemaintenancetracker",
-    "dev": "triya-dev"
+    "default": "mcsc-usagemaintenancetracker",
+    "dev": "mcsc-dev"
   }
 }

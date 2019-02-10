@@ -5,13 +5,13 @@ import { CookieService, CookieOptions } from 'ngx-cookie';
 export class ThemeTrackerService {
   public isDark: boolean;
   constructor(private cookieService: CookieService) {
-    this.isDark = this.cookieService.get('TRIYA') === '1';
+    this.isDark = this.cookieService.get('mcsc') === '1';
    }
 
   public setDark(b: boolean) {
     this.isDark = b;
     const cookieOptions: CookieOptions = { expires: new Date(32525112147000)};
-    this.cookieService.put('TRIYA', (b ? 1 : 0).toString(), cookieOptions);
+    this.cookieService.put('mcsc', (b ? 1 : 0).toString(), cookieOptions);
   }
 
 }

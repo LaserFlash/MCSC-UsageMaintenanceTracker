@@ -1,7 +1,7 @@
 {
   "index": "/index.html",
   "assetGroups": [{
-    "name": "TRIYA",
+    "name": "mcsc",
     "installMode": "prefetch",
     "resources": {
       "files": [
