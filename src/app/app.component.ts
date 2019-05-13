@@ -6,6 +6,8 @@ import { AuthenticationService } from './authentication.service';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 
+import { environment } from '../environments/environment';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -14,6 +16,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class AppComponent implements OnInit {
   title = 'MCSC';
+  build: string;
   isDarkTheme: boolean;
   isAdmin: boolean;
   routeLinks = [
@@ -41,6 +44,8 @@ export class AppComponent implements OnInit {
     AUTH.isAdmin.subscribe(value => {
       this.isAdmin = value;
     });
+
+    this.build = environment.version;
 
   }
 

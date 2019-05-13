@@ -1,5 +1,6 @@
 export const environment = {
   production: false,
+  version: 'DEV',
   firebase: {
     apiKey: 'AIzaSyDAhImfg1rxJWb7ir___HnDlP5Ov4lULfM',
     authDomain: 'mcsc-usagemaintenancetracker.firebaseapp.com',
