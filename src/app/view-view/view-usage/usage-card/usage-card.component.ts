@@ -9,7 +9,7 @@ import { KnownBoatsService } from '../../../known-boats.service';
 })
 export class UsageCardComponent implements OnInit {
 
-  @Input() usages: UsageInfo[];
+  @Input() usage: UsageInfo;
 
   constructor(private BOATS: KnownBoatsService) { }
 

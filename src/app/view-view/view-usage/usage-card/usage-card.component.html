@@ -1,11 +1,11 @@
-<mat-accordion fxFlex="100" [multi]="true">
-  <mat-expansion-panel *ngFor="let u of usages">
+<div>
+  <mat-expansion-panel>
     <mat-expansion-panel-header class="headerMinHeight smallPadding">
       <mat-panel-title class="titleMinWidth">
         <mat-list>
           <mat-list-item>
-            <img matListAvatar src="assets/images/boat_{{u.boatID}}.png" onerror="if (this.src !== 'assets/images/noImage.png') this.src = 'assets/images/noImage.png';" alt={{getBoatName(u.boatID)}} />
-            <h3 matLine> {{getBoatName(u.boatID)}} </h3>
+            <img matListAvatar src="assets/images/boat_{{usage.boatID}}.png" onerror="if (this.src !== 'assets/images/noImage.png') this.src = 'assets/images/noImage.png';" alt={{getBoatName(usage.boatID)}} />
+            <h3 matLine> {{getBoatName(usage.boatID)}} </h3>
           </mat-list-item>
         </mat-list>
       </mat-panel-title>
@@ -13,15 +13,15 @@
         <!-- Driver Name Block -->
         <mat-list fxFlex class="listPadding">
           <mat-list-item class="nameWidth">
-            <span>{{u.driver}}</span>
+            <span>{{usage.driver}}</span>
           </mat-list-item>
         </mat-list>
 
         <!--Date Time Block -->
         <mat-list fxFlex>
           <mat-list-item>
-            <span mat-line>{{u.endTime.toDate() | date}}</span>
-            <span mat-line>{{shortDuration(u.duration)}} hours</span>
+            <span mat-line>{{usage.endTime.toDate() | date}}</span>
+            <span mat-line>{{shortDuration(usage.duration)}} hours</span>
           </mat-list-item>
         </mat-list>
       </mat-panel-description>
@@ -29,16 +29,16 @@
 
     <div class="contentTopDivider" fxLayout="row" fxLayout.lt-sm="column">
       <!--Other Crew List -->
-      <div fxFlex="40" *ngIf="u.otherCrew.length > 1">
+      <div fxFlex="40" *ngIf="usage.otherCrew.length > 1">
         <h3 class="listHeading">Crew:</h3>
         <mat-list class="compactList">
-          <mat-list-item *ngFor="let person of u.otherCrew">
+          <mat-list-item *ngFor="let person of usage.otherCrew">
             {{person.name}}
           </mat-list-item>
         </mat-list>
       </div>
 
-      <mat-divider *ngIf="u.otherCrew.length > 1" [vertical]="true"></mat-divider>
+      <mat-divider *ngIf="usage.otherCrew.length > 1" [vertical]="true"></mat-divider>
 
       <!-- Weather Conditions -->
       <div fxFlex>
@@ -46,15 +46,15 @@
         <mat-list class="compactList">
           <mat-list-item>
             <span class="listItemTitle">Wind Strength:</span>
-            <span>{{getWindSpeed(u.windSpeed)}}</span>
+            <span>{{getWindSpeed(usage.windSpeed)}}</span>
           </mat-list-item>
           <mat-list-item>
             <span class="listItemTitle">Wind Direction:</span>
-            <span>{{getWindDirection(u.windDirection)}}</span>
+            <span>{{getWindDirection(usage.windDirection)}}</span>
           </mat-list-item>
           <mat-list-item>
             <span class="listItemTitle">Sea State:</span>
-            <span>{{getSeaState(u.waterState)}}</span>
+            <span>{{getSeaState(usage.waterState)}}</span>
           </mat-list-item>
         </mat-list>
 
@@ -62,4 +62,4 @@
     </div>
 
   </mat-expansion-panel>
-</mat-accordion>
+</div>

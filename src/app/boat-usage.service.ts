@@ -5,10 +5,18 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { KnownBoatsService } from './known-boats.service';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { map, tap, scan, mergeMap, throttleTime } from 'rxjs/operators';
 
 
 @Injectable()
 export class BoatUsageService {
+
+  public infiniteUsages: Observable<any[]>;
+  private offset = new BehaviorSubject( new Date());
+
+  batch_size = 10;
+  theEnd = false;
+
   private itemsCollection: AngularFirestoreCollection<UsageInfo>;
   private sortedByDate: UsageInfo[];
 
@@ -17,7 +25,7 @@ export class BoatUsageService {
   public usageTimes: BehaviorSubject<{ boat: string, duration: number }[]> = new BehaviorSubject([]);
   public usageData: BehaviorSubject<UsageInfo[]> = new BehaviorSubject([]);
 
-  constructor(db: AngularFirestore, BOATS: KnownBoatsService) {
+  constructor(private db: AngularFirestore, BOATS: KnownBoatsService) {
     this.itemsCollection = db.collection<UsageInfo>('/boatUsage', ref => ref.orderBy('endTime', 'desc').orderBy('boatID'));
     this.itemsCollection.valueChanges().subscribe((data) => {
       // Sort usage for easier manipulation
@@ -70,6 +78,43 @@ export class BoatUsageService {
       });
       this.usageTimes.next(ut);
     });
+
+    const batchMap = this.offset.pipe(
+      throttleTime(500),
+      mergeMap(n => this.getBatch(n, this.batch_size)),
+      scan((acc, batch) => {
+        return { ...acc, ...batch };
+      }, {})
+    );
+
+    this.infiniteUsages = batchMap.pipe(map(v => Object.values(v)));
+
+  }
+
+  getBatch(offset, batch_size) {
+    return this.db
+      .collection<UsageInfo>('/boatUsage', ref => ref.orderBy('endTime', 'desc').startAfter(offset).limit(batch_size))
+      .snapshotChanges()
+      .pipe(
+        tap(arr => (arr.length ? null : (this.theEnd = true))),
+        map(arr => {
+          return arr.reduce((acc, cur) => {
+            const id = cur.payload.doc.id;
+            const data = cur.payload.doc.data();
+            return { ...acc, [id]: data };
+          }, {});
+        })
+      );
+  }
+
+  nextBatch(e, offset, end, total) {
+    if (this.theEnd) {
+      return;
+    }
+
+    if (end === total) {
+      this.offset.next(offset);
+    }
   }
 
   addUsageInfo(usage: UsageInfo) {

@@ -37,11 +37,14 @@
   padding-right: 0.25em;
 }
 
-@media (max-width:599px) {
-  .headerMinHeight {
-    min-height: 7em !important;
-  }
+.headerMinHeight {
+  min-height: 80px !important;
+}
 
+@media (max-width:600px) {
+  .headerMinHeight {
+    height: 130px !important;
+  }
   .listPadding {
     padding-bottom: 4px !important;
     height: auto !important;

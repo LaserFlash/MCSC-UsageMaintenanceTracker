@@ -57,6 +57,8 @@ import { BreakageCardComponent } from './shared/breakage-card/breakage-card.comp
 import { UsageCardComponent } from './view-view/view-usage/usage-card/usage-card.component';
 
 import { OverlayContainer } from '@angular/cdk/overlay';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+
 
 import { BoatUsageService } from './boat-usage.service';
 import { BoatBreakageService } from './boat-breakage.service';
@@ -182,6 +184,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     CloudinaryModule.forRoot({ Cloudinary }, { cloud_name: 'dhnh6uqep', upload_preset: 'oyywau4l' }),
     FileUploadModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
+    ScrollingModule,
   ],
   providers: [
     BoatUsageService,

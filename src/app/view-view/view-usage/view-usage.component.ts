@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { BoatUsageService } from '../../boat-usage.service'
 import { UsageInfo } from '../../Utils/objects/usageInfo'
 import { KnownBoatsService } from '../../known-boats.service';
+
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 
 
 @Component({
@@ -11,9 +13,11 @@ import { KnownBoatsService } from '../../known-boats.service';
   styleUrls: ['./view-usage.component.css']
 })
 export class ViewUsageComponent implements OnInit {
+  @ViewChild(CdkVirtualScrollViewport)
+  viewport: CdkVirtualScrollViewport;
 
   boats;
-  usages;
+  infiniteUsages;
   constructor(
     public usageService: BoatUsageService,
     private BOATS: KnownBoatsService
