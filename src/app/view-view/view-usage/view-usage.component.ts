@@ -15,7 +15,7 @@ export class ViewUsageComponent implements OnInit {
   boats;
   usages;
   constructor(
-    private usageService: BoatUsageService,
+    public usageService: BoatUsageService,
     private BOATS: KnownBoatsService
   ) {
     BOATS.boatInformation.subscribe(boats => {
@@ -23,10 +23,26 @@ export class ViewUsageComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this.usageService.usageData.subscribe(data => {
-      this.usages = data;
-    });
+  ngOnInit() { }
+
+
+  geNextBatch(e, offset) {
+    offset = offset == undefined ? new Date() : offset.endTime;
+    const end = this.viewport.getRenderedRange().end;
+    const total = this.viewport.getDataLength();
+
+    this.usageService.nextBatch(e, offset, end, total);
   }
 
+
+  trackByIdx(i) {
+    return i;
+  }
+
+  getItemHeight(){
+    if (window.innerWidth <= 599) {
+      return 130;
+    }
+    return 80;
+  }
 }

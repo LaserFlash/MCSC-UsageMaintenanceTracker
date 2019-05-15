@@ -16,23 +16,23 @@ export class UsageCardComponent implements OnInit {
   ngOnInit() {
   }
 
-  private getBoatName(v) {
+  getBoatName(v) {
     return this.BOATS.getBoatName(v);
   }
 
-  private getWindSpeed(v) {
+  getWindSpeed(v) {
     return WindSpeedConversionHelper.windSpeedFromNumber(v);
   }
 
-  private getWindDirection(v) {
+  getWindDirection(v) {
     return WindDirectionConversionHelper.windDirectionFromNumber(v);
   }
 
-  private getSeaState(v) {
+  getSeaState(v) {
     return WaterStateConversionHelper.waterStateFromNumber(v);
   }
 
-  private shortDuration(duration) {
+  shortDuration(duration) {
     return Number.parseFloat(duration).toPrecision(2).toString();
   }
 
