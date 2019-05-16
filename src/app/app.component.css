@@ -114,3 +114,7 @@ mat-sidenav-container.app-dark {
     margin-bottom: 54px;
   }
 }
+
+.content {
+  height: 100vh;
+}
