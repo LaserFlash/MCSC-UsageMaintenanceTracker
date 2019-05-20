@@ -1,3 +1,7 @@
+/deep/ body {
+  margin: 0 0 0 0 !important;
+}
+
 mat-toolbar.mat-toolbar {
   position: fixed;
   top: 0;
@@ -9,10 +13,11 @@ mat-toolbar.mat-toolbar {
 }
 
 .mat-toolbar {
-    height:56px;
+  height: 56px;
 }
-.sidenav{
-    margin-top: 56px;
+
+.sidenav {
+  margin-top: 56px;
 }
 
 mat-sidenav-container {
@@ -22,9 +27,11 @@ mat-sidenav-container {
 mat-sidenav-container.app-dark {
   background: #212121;
 }
+
 .sidenav-content {
-  padding-top:64px;
+  padding-top: 64px;
 }
+
 .toolbar-spacer {
   flex: 1 1 auto;
 }
@@ -66,14 +73,14 @@ mat-sidenav-container.app-dark {
   min-width: 120px;
 }
 
-.bottom-navigation{
+.bottom-navigation {
   position: fixed;
   bottom: 0;
-  width:100%;
+  width: 100%;
   z-index: 10;
 }
 
-/deep/ .bottom-navigation .mat-tab-link{
+/deep/ .bottom-navigation .mat-tab-link {
   padding-top: 4px !important;
   padding-bottom: 2px !important;
   padding-left: 4px !important;
@@ -81,7 +88,7 @@ mat-sidenav-container.app-dark {
   color: black !important;
 }
 
-/deep/ .bottom-navigation .mat-tab-label-active{
+/deep/ .bottom-navigation .mat-tab-label-active {
   color: white !important;
 }
 
@@ -89,25 +96,21 @@ mat-sidenav-container.app-dark {
   visibility: hidden !important;
 }
 
-/deep/ .app-dark .mat-drawer-backdrop.mat-drawer-shown{
-  background: none;
-}
-/deep/ .mat-drawer-backdrop.mat-drawer-shown{
+/deep/ .app-dark .mat-drawer-backdrop.mat-drawer-shown {
   background: none;
 }
 
-.nav-button{
+/deep/ .mat-drawer-backdrop.mat-drawer-shown {
+
+}
+
+.nav-button {
   width: 100%;
   text-align: left;
 }
 
-/deep/
-.fullscreen {
-    width: auto !important;
-}
-
 @media (max-width: 959px) {
-  .sidenav-content{
-    margin-bottom:54px;
+  .sidenav-content {
+    margin-bottom: 54px;
   }
 }
