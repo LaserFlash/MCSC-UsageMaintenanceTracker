@@ -22,8 +22,12 @@
 
 <mat-sidenav-container class="content" [class.app-dark]="isDarkTheme" hasBackdrop="true">
   <mat-sidenav class="sidenav noPrint" #sidenav mode="push" fixedInViewport="true">
+<<<<<<< HEAD
     <img id="logo-image-drawer" src="assets/images/logo.png" alt="MCSC Logo" />
     <mat-nav-list>
+=======
+    <img id="logo-image-drawer" src="assets/images/logo.png" alt="WYST Logo" />
+>>>>>>> f19745c... Condense side nav & split functionality areas
 
       <hr />
       <h3 matSubheader>Tasks</h3>
@@ -46,11 +50,12 @@
     <button mat-button class="nav-button" (click)="toggleDark(); sidenav.close();">TOGGLE DARK THEME</button>
     <br />
     <button mat-button class="nav-button" (click)="sidenav.close(); print();">PRINT</button>
-    <mat-list style="position: relative; height: auto; padding-top:64px">
+    <hr />
+    <mat-list style="position: relative; height: auto;">
       <a style="text-decoration: none;" href="https://laserflash.tk/" mat-list-item>
         ©2017 BrynTBennett
       </a>
-      <a style="text-decoration: none;" href="https://github.com/LaserFlash/mcsc-UsageMaintenanceTracker" mat-list-item>
+      <a style="text-decoration: none;" href="https://github.com/LaserFlash/WYST-Maintenance" mat-list-item>
         <img width="32" width="32" src="https://unpkg.com/simple-icons@latest/icons/github.svg" /> &nbsp; Source Code
       </a>
       <mat-list-item>
@@ -59,24 +64,26 @@
     </mat-list>
   </mat-sidenav>
 
-  <div id="scrollId" class="sidenav-content">
-    <div id="section-to-print">
-      <router-outlet></router-outlet>
+  <mat-sidenav-content class="noScroll">
+    <div id="scrollId" class="sidenav-content">
+      <div id="section-to-print">
+        <router-outlet></router-outlet>
+      </div>
     </div>
-  </div>
+    <!-- Bottom Navigation Bar -->
+    <div class="bottom-navigation bg-color-primary" fxHide.gt-sm>
+      <nav mat-tab-nav-bar>
+        <a fxFlex="calc(100%/{{routeLinks.length}})" mat-tab-link *ngFor="let routeLink of routeLinks" [routerLink]="getRouteLink(routeLink.link)" [active]="checkActive(routeLink.link)">
 
-  <!-- Bottom Navigation Bar -->
-  <div class="bottom-navigation bg-color-primary" fxHide.gt-sm>
-    <nav mat-tab-nav-bar>
-      <a fxFlex="calc(100%/{{routeLinks.length}})" mat-tab-link *ngFor="let routeLink of routeLinks" [routerLink]="getRouteLink(routeLink.link)" [active]="checkActive(routeLink.link)">
-
-        <div fxLayout="column">
-          <div fxFlex>
-            <mat-icon svgIcon="{{routeLink.link}}"></mat-icon>
+          <div fxLayout="column">
+            <div fxFlex>
+              <mat-icon svgIcon="{{routeLink.link}}"></mat-icon>
+            </div>
+            <div style="margin-top: -10px;" fxFlex>{{routeLink.label}}</div>
           </div>
-          <div style="margin-top: -10px;" fxFlex>{{routeLink.label}}</div>
-        </div>
 
-      </a>
-    </nav>
-  </div>
+        </a>
+      </nav>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
