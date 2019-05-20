@@ -21,11 +21,11 @@ mat-toolbar.mat-toolbar {
 }
 
 mat-sidenav-container {
-  background: #eceff1;
+  background: var(--bg-colour);
 }
 
-mat-sidenav-container.app-dark {
-  background: #212121;
+/deep/ html{
+  background: var(--bg-colour);
 }
 
 .sidenav-content {
@@ -115,6 +115,6 @@ mat-sidenav-container.app-dark {
   }
 }
 
-.content {
-  height: 100vh;
+.filler {
+  background: black;
 }

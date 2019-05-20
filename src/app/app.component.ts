@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+
 import { ThemeTrackerService } from './theme-tracker.service';
 import { AuthenticationService } from './authentication.service';
 
@@ -18,6 +19,7 @@ export class AppComponent implements OnInit {
   title = 'MCSC';
   build: string;
   isDarkTheme: boolean;
+  public themeBackground = "#eceff1";
   isAdmin: boolean;
   routeLinks = [
     { label: 'Report', link: 'report' },
@@ -28,9 +30,16 @@ export class AppComponent implements OnInit {
 
   adminLink = { label: 'Admin Panel', link: 'admin' };
 
-  constructor(private themeTracker: ThemeTrackerService, private router: Router, iconRegistry: MatIconRegistry, sanitizer: DomSanitizer, public AUTH: AuthenticationService) {
+  @HostBinding("attr.style")
+  public get valueAsStyle(): any {
+    return this.sanitizer.bypassSecurityTrustStyle(`--bg-colour: ${this.themeBackground}`);
+  }
+
+
+  constructor(private themeTracker: ThemeTrackerService, private router: Router, iconRegistry: MatIconRegistry, private sanitizer: DomSanitizer, public AUTH: AuthenticationService) {
     /* Apply theme at start */
     this.isDarkTheme = themeTracker.isDark;
+    this.setBackground();
 
     iconRegistry.addSvgIcon('docs',
       sanitizer.bypassSecurityTrustResourceUrl('assets/images/file-document.svg'))
@@ -66,6 +75,16 @@ export class AppComponent implements OnInit {
   public toggleDark() {
     this.isDarkTheme = !this.isDarkTheme;
     this.themeTracker.setDark(this.isDarkTheme);
+
+    this.setBackground();
+  }
+
+  private setBackground(){
+    if (this.isDarkTheme) {
+      this.themeBackground = "#212121"
+    } else {
+      this.themeBackground = "#eceff1";
+    }
   }
 
 

@@ -23,7 +23,6 @@
 }
 
 /* Apply when printing */
-
 @media print {
   body * {
     visibility: hidden;
