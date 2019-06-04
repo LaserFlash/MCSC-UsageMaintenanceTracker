@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 
 import { KnownBoatsService } from '../../../../core/constants/known-boats/known-boats.service';
-import { UsageInfo, UsageInfoID } from '../.../../../core/objects/usageInfo';
+import { UsageInfo, UsageInfoID } from '../../../../core/objects/usageInfo';
 
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -16,14 +16,14 @@ export class BoatUsageService {
 
   public pageIndex = 0;
   public currentSelectedUsages: BehaviorSubject<UsageInfoID[]> = new BehaviorSubject(null);
-  private previousUsageSet: UsageInfoID[] = [];
+  private previousUsageSet: any[] = [];
   public batch_size: number = 20;
 
   totalNumberOfUsages: BehaviorSubject<number> = new BehaviorSubject(0);
 
   constructor(private db: AngularFirestore, BOATS: KnownBoatsService) {
     this.db.doc('/stats/totalUsageItems').valueChanges().subscribe(numRecords => {
-      this.totalNumberOfUsages.next(numRecords.numberOfDocs);
+      this.totalNumberOfUsages.next((numRecords as any ).numberOfDocs);
     })
     this.getBatch().subscribe(val => { this.currentSelectedUsages.next(val) });
   }
