@@ -39,7 +39,7 @@
       </mat-card-content>
 
       <mat-card-actions class="largeActions" fxHide.lt-lg *ngIf="buttonText">
-        <button mat-button color="warn" (click)="openDialog(item)"><b>{{buttonText}}</b></button>
+        <button mat-flat-button color="warn" (click)="openDialog(item)"><b>{{buttonText}}</b></button>
       </mat-card-actions>
     </div>
 
@@ -50,6 +50,6 @@
 
   </div>
   <mat-card-actions fxHide fxHide.lt-lg=false *ngIf="buttonText">
-    <button mat-button color="warn" (click)="openDialog(item)"><b>{{buttonText}}</b></button>
+    <button mat-flat-button color="warn" (click)="openDialog(item)"><b>{{buttonText}}</b></button>
   </mat-card-actions>
 </mat-card>
