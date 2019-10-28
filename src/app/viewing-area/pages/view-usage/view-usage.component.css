@@ -4,6 +4,6 @@
     }
 }
 
-cdk-virtual-scroll-viewport {
-  height: 100vh;
+.controls {
+  margin-top: 16px; 
 }

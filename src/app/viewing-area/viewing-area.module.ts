@@ -32,11 +32,10 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { ChartsModule } from 'ng2-charts';
 import { FlexLayoutModule } from '@angular/flex-layout';
-
-import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
   declarations: [
@@ -65,8 +64,8 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     MatInputModule,
     MatButtonModule,
     MatExpansionModule,
+    MatPaginatorModule,
     ChartsModule,
-    ScrollingModule
   ],
   providers: [
     BoatBreakageService,

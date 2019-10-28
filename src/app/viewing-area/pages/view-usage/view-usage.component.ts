@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
 
 import { UsageInfo } from '../../../core/objects/usageInfo';
 import { BoatUsageService } from './providers/boat-usage.service';
-import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 
 
 @Component({
@@ -11,38 +11,40 @@ import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
   styleUrls: ['./view-usage.component.css']
 })
 export class ViewUsageComponent implements OnInit {
-  @ViewChild(CdkVirtualScrollViewport, { static: true })
-  viewport: CdkVirtualScrollViewport;
 
-  infiniteUsages;
+  // MatPaginator Output
+  pageEvent: PageEvent;
+  totalNumberItems = 0;
+  pageSizeOptions = [5, 10, 20, 40, 50, 100];
+  usages;
+
   constructor(
     public usageService: BoatUsageService,
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.usageService.totalNumberOfUsages.subscribe(val => {
+      this.totalNumberItems = val;
+    });
+    this.usageService.currentSelectedUsages.subscribe(val => { this.usages = val })
+  }
 
 
-  getNextBatch(e, offset) {
-    /* If Viewport not their don't get batch */
-    if (!this.viewport){
-      return;
+  getUsages(event?: PageEvent) {
+    let offset = -1;
+    if (event.pageSize != this.usageService.batch_size) {
+      return this.usageService.updateBatch(event.pageSize);
     }
-    offset = !offset ? new Date() : offset.endTime;
-    const end = this.viewport.getRenderedRange().end;
-    const total = this.viewport.getDataLength();
-
-    return this.usageService.nextBatch(e, offset, end, total);
+    if (event.pageIndex > event.previousPageIndex) {
+      return this.usageService.forwardBatch(event.pageSize - 1)
+      offset = event.pageSize - 1;
+    } else if (event.pageIndex < event.previousPageIndex) {
+      return this.usageService.backBatch(event.pageSize - 1)
+    }
   }
 
 
   trackByIdx(i) {
     return i;
-  }
-
-  getItemHeight() {
-    if (window.innerWidth <= 599) {
-      return 130;
-    }
-    return 80;
   }
 }

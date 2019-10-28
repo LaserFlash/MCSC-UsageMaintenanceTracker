@@ -11,3 +11,7 @@ export class UsageInfo {
     public waterState: number
   ) { }
 }
+
+export class UsageInfoID extends UsageInfo {
+  id: string;
+}

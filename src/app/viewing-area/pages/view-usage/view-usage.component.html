@@ -1,7 +1,9 @@
-<ng-container *ngIf="usageService.infiniteUsages | async as usages">
-  <cdk-virtual-scroll-viewport itemSize={{getItemHeight()}} (scrolledIndexChange)="getNextBatch($event, usages[usages.length - 1])">
-      <div *cdkVirtualFor="let u of usages; let i = index; trackBy: trackByIdx">
-          <usage-card fxFlex="100" [usage]="u"></usage-card>
-      </div>
-  </cdk-virtual-scroll-viewport>
-</ng-container>
+<div class="noPrint" fxFlex.gt-lg="calc(50% -1280px)" fxFlex="20" fxFlex.lt-md="2"></div>
+<div fxFlex.gt-lg="1280px" fxFlex="100" fxLayout="column">
+  <usage-card fxGrow *ngFor="let u of usageService.currentSelectedUsages | async; let i = index; trackBy: trackByIdx" [usage]="u"></usage-card>
+  <mat-card class="controls" fxFlex="100">
+    <mat-paginator [length]="totalNumberItems" [pageSize]="usageService.batch_size" [pageSizeOptions]="pageSizeOptions" [pageIndex]="usageService.pageIndex" (page)="getUsages($event)">
+    </mat-paginator>
+  </mat-card>
+</div>
+<div class="noPrint" fxFlex.gt-lg="calc(50% -1280px)" fxFlex="20" fxFlex.lt-md="2"></div>
