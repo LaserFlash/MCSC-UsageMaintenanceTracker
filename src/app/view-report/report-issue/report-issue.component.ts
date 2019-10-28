@@ -64,7 +64,7 @@ export class ReportIssueComponent implements OnInit {
       'notEmailmobile': 'Contact must be email or mobile'
     },
     'boatID': {
-      'required': 'Boat number is required'
+      'required': 'Boat name is required'
     },
     'importance': {
       'required': 'Category is required'
