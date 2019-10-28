@@ -23,7 +23,7 @@ exports.calculateDuration = functions.firestore
         return null;
     }
     //Calculate duration
-    const duration = (data.endTime - data.startTime) / (3600000);
+    const duration = (data.endTime.toDate() - data.startTime.toDate()) / (3600000);
     console.log("The duration is: ", duration);
     // Then return a promise of a set operation to update the count
     return change.after.ref.set({
