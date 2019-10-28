@@ -1,0 +1,10 @@
+<mat-list-item class="edit-item" [style.background-color]="remove ? '#ff8a80' : ''" [style.background-color]="done ? '#ccff90' : ''">
+  <div fxLayout='row wrap' fxLayoutGap="20px" class="inputs">
+    <mat-form-field>
+      <input matInput placeholder="Boat Name" [(ngModel)]="updatedDoc.name" />
+    </mat-form-field>
+    <mat-checkbox matTooltip="Indicates if the boat will be selectable when reporting" matInput [(ngModel)]="updatedDoc.selectable" labelPosition='before'>Used</mat-checkbox>
+  </div>
+  <button mat-stroked-button (click)="submitEdit()">Save</button>
+</mat-list-item>
+<mat-divider></mat-divider>

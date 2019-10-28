@@ -1,0 +1,22 @@
+.edit-item{
+  height: 100% !important;
+  padding-top: 16px !important;
+}
+
+.inputs {
+  margin-right: 16px;
+}
+
+mat-form-field {
+  margin-bottom: -3ex !important;
+}
+mat-checkbox {
+    padding-top: 3ex !important;
+    padding-bottom: 6px !important;
+}
+
+@media print{
+    .form {
+        min-width: 25cm;
+    }
+}

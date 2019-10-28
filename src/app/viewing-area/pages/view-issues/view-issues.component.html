@@ -1,0 +1,15 @@
+<div fxFlex.gt-lg="calc(50% -1280px)" fxFlex="20" fxFlex.lt-md="2"></div>
+<div fxFlex.gt-lg="1280px" fxFlex>
+  <sort-filter-bar [breakages]="breakages" [original]="original"></sort-filter-bar>
+  <mat-progress-bar mode="indeterminate" *ngIf="breakages.length <= 0"></mat-progress-bar>
+  <breakage-card [breakages]="breakages" [buttonText]="cardButtonText" (remove)="remove($event)"></breakage-card>
+  <mat-card *ngIf="breakages.length <= 0">
+    <mat-card-title>
+      Searching for isues with the boats
+    </mat-card-title>
+    <mat-card-content>
+      We will keep looking for issues for you, but it could be there are none at the moment.
+    </mat-card-content>
+  </mat-card>
+</div>
+<div fxFlex.gt-lg="calc(50% -1280px)" fxFlex="20" fxFlex.lt-md="2"></div>

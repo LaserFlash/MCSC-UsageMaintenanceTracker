@@ -1,0 +1,23 @@
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Boat Database
+      </mat-panel-title>
+      <mat-panel-description>
+        Displays the known boats and allows for modification
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-selection-list>
+      <h3 mat-subheader>Boats</h3>
+      <div *ngFor="let info of boatInfo">
+        <app-inline-edit-input-boats [value]="info" (update)="setDocItem($event)"></app-inline-edit-input-boats>
+      </div>
+      <button mat-icon-button (click)="addItem()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </mat-selection-list>
+  </mat-expansion-panel>
+</mat-accordion>
+
+<div class="bottomSpace"></div>

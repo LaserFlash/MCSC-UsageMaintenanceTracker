@@ -1,0 +1,25 @@
+<div class="noPrint" fxFlex.gt-lg="calc(50% -1280px)" fxFlex="20" fxFlex.lt-md="2"></div>
+<div fxFlex.gt-lg="1280px" fxFlex>
+  <mat-card class="form">
+    <mat-list>
+      <h3 mat-subheader>Health and Safety Documents</h3>
+      <div *ngFor="let link of links">
+        <mat-list-item *ngIf="!editMode">
+          <a mat-list-item href="{{link.url}}" target="_blank">
+            <mat-icon mat-list-icon>insert_drive_file</mat-icon>
+            {{link.title}}
+          </a>
+        </mat-list-item>
+        <app-inline-edit-input *ngIf="editMode" [value]="link" (delete)="deleteDocItem($event)" (update)="setDocItem($event)"></app-inline-edit-input>
+      </div>
+      <button *ngIf="editMode" mat-icon-button (click)="addItem()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </mat-list>
+
+    <div *ngIf="admin">
+      <button mat-button *ngIf="admin" (click)="editModeToggle()">Edit Mode</button>
+    </div>
+  </mat-card>
+</div>
+<div class="noPrint" fxFlex.gt-lg="calc(50% -1280px)" fxFlex="20" fxFlex.lt-md="2"></div>

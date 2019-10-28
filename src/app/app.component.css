@@ -24,7 +24,7 @@ mat-sidenav-container {
   background: var(--bg-colour);
 }
 
-/deep/ html{
+/deep/ html {
   background: var(--bg-colour);
 }
 
@@ -100,9 +100,7 @@ mat-sidenav-container {
   background: none;
 }
 
-/deep/ .mat-drawer-backdrop.mat-drawer-shown {
-
-}
+/deep/ .mat-drawer-backdrop.mat-drawer-shown {}
 
 .nav-button {
   width: 100%;

@@ -1,0 +1,129 @@
+<div fxFlex.gt-lg="calc(50% -1280px)" fxFlex="20" fxFlex.lt-md="2"></div>
+<div fxFlex.gt-lg="1280px" fxFlex>
+  <mat-card>
+    <h2>{{title}}</h2>
+    <mat-card-content>
+      <form (ngSubmit)="onSubmit()" [formGroup]="breakageForm">
+        <mat-vertical-stepper #stepper formArrayName="formArray" [linear]="isLinear">
+
+          <!--
+            Personal details
+            -->
+          <mat-step formGroupName="0" [stepControl]="breakageForm.get('formArray').get([0])">
+            <ng-template matStepLabel>Fill out your name</ng-template>
+
+            <mat-form-field class="full-width">
+              <input matInput placeholder="First name, Last name" formControlName="name" required>
+              <mat-error *ngIf="formErrors.name">
+                {{formErrors.name}}
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="full-width">
+              <input matInput type="email" placeholder="Contact" formControlName="contact">
+              <mat-error *ngIf="formErrors.contact">
+                {{formErrors.contact}}
+              </mat-error>
+            </mat-form-field>
+
+            <br />
+            <button mat-button matStepperNext type="button">Next</button>
+
+          </mat-step>
+
+
+          <!--
+            Issue details
+            -->
+          <mat-step formGroupName="1" [stepControl]="breakageForm.get('formArray').get([1])">
+            <ng-template matStepLabel>Enter Breakage Info</ng-template>
+
+            <mat-form-field>
+              <mat-select placeholder="Boat Name" formControlName="boatID" name="boatNumber" required>
+                <ng-container *ngFor="let boat of boats">
+                    <mat-option [value]="boat.id">{{boat.name}}</mat-option>
+                    <mat-error *ngIf="formErrors.boatID">
+                      {{formErrors.boatID}}
+                    </mat-error>
+                </ng-container>
+              </mat-select>
+            </mat-form-field>
+            <br />
+            <mat-form-field>
+              <mat-select placeholder="Importance" formControlName="importance" name="importance" required>
+                <mat-option *ngFor="let id of levels" [value]="id">{{id}}</mat-option>
+                <mat-error *ngIf="formErrors.importance">
+                  {{formErrors.importance}}
+                </mat-error>
+              </mat-select>
+            </mat-form-field>
+            <br />
+            <mat-form-field>
+              <mat-select placeholder="Part" formControlName="part" name="part" required>
+                <ng-container *ngFor="let p of parts">
+                  <mat-option [value]="p">{{p}}</mat-option>
+                  <mat-error *ngIf="formErrors.part">
+                    {{formErrors.part}}
+                  </mat-error>
+                </ng-container>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field matInput class="full-width">
+              <textarea matInput type="text" placeholder="Describe the Issue" formControlName="details" #details required rows="4" maxlength="256"> </textarea>
+              <mat-hint align="end">{{details.value.length}} / 256</mat-hint>
+              <mat-error *ngIf="formErrors.details">
+                {{formErrors.details}}
+              </mat-error>
+            </mat-form-field>
+            <br />
+            <button mat-button matStepperPrevious type="button">Back</button>
+            <button mat-button matStepperNext type="button">Next</button>
+          </mat-step>
+
+          <!--
+            Image Upload
+            -->
+          <mat-step optional>
+            <ng-template matStepLabel>Upload Image</ng-template>
+
+            <button mat-raised-button type="button" onclick="document.getElementById('file').click();">Select & Upload Image</button>
+            <input type="file" accept="image/*" ng2FileSelect [uploader]="uploader" style="display:none;" id="file" name="file" />
+            <br />
+            <br />
+
+            <mat-progress-spinner *ngIf="!imageLoaded" mode="indeterminate"></mat-progress-spinner>
+
+            <cl-image *ngIf="imageID" quality="auto" fetch_format="auto" width="300" crop="scale" public-id={{imageID}}>
+              <cl-transformation border="2px_solid_rgb:000000" radius="10"></cl-transformation>
+            </cl-image>
+
+            <br />
+            <button mat-button matStepperPrevious type="button">Back</button>
+            <button mat-button matStepperNext type="button">Next</button>
+          </mat-step>
+
+          <!--
+            Check the entered information
+            -->
+          <mat-step>
+            <ng-template matStepLabel>Check Entry</ng-template>
+
+            <breakage-card [breakages]="breakage"></breakage-card>
+
+            <br />
+            <button mat-button matStepperPrevious type="button">Back</button>
+            <button mat-raised-button color="accent" type="submit">Submit</button>
+          </mat-step>
+        </mat-vertical-stepper>
+      </form>
+
+
+    </mat-card-content>
+  </mat-card>
+
+  <mat-progress-bar mode="indeterminate" *ngIf="breakages.length <= 0"></mat-progress-bar>
+  <breakage-card [breakages]="breakages"></breakage-card>
+
+</div>
+<div fxFlex.gt-lg="calc(50% -1280px)" fxFlex="20" fxFlex.lt-md="2"></div>

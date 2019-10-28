@@ -1,0 +1,7 @@
+<ng-container *ngIf="usageService.infiniteUsages | async as usages">
+  <cdk-virtual-scroll-viewport itemSize={{getItemHeight()}} (scrolledIndexChange)="getNextBatch($event, usages[usages.length - 1])">
+      <div *cdkVirtualFor="let u of usages; let i = index; trackBy: trackByIdx">
+          <usage-card fxFlex="100" [usage]="u"></usage-card>
+      </div>
+  </cdk-virtual-scroll-viewport>
+</ng-container>
