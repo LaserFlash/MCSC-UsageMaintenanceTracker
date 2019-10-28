@@ -4,7 +4,7 @@ import { DocLinkID } from '../../Utils/objects/docLink';
 import { SafetyDocsService } from '../../safety-docs.service';
 import { AuthenticationService } from '../../authentication.service';
 
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-safety-docs',

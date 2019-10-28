@@ -1,5 +1,6 @@
 import { DialogsService } from './dialogs.service';
-import { MatDialogModule, MatButtonModule  } from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 import { NgModule } from '@angular/core';
 
 import { ConfirmDialog } from './confirm-dialog.component';

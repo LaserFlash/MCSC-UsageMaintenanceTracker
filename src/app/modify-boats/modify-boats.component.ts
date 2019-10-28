@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Boat, BoatID } from '../Utils/objects/boat';
 import { KnownBoatsService } from '../known-boats.service';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'modify-boats',

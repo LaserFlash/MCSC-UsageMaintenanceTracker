@@ -13,7 +13,7 @@ import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
   styleUrls: ['./view-usage.component.css']
 })
 export class ViewUsageComponent implements OnInit {
-  @ViewChild(CdkVirtualScrollViewport)
+  @ViewChild(CdkVirtualScrollViewport, {static: false})
   viewport: CdkVirtualScrollViewport;
 
   boats;

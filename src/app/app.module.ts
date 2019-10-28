@@ -9,25 +9,25 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { ChartsModule } from 'ng2-charts';
 
-import { MatSidenavModule } from '@angular/material';
-import { MatTabsModule } from '@angular/material';
-import { MatListModule } from '@angular/material';
-import { MatToolbarModule } from '@angular/material';
-import { MatButtonModule } from '@angular/material';
-import { MatIconModule } from '@angular/material';
-import { MatCardModule } from '@angular/material';
-import { MatRadioModule } from '@angular/material';
-import { MatInputModule } from '@angular/material';
-import { MatDatepickerModule } from '@angular/material';
-import { MatNativeDateModule } from '@angular/material';
-import { MatSnackBarModule } from '@angular/material';
-import { MatSelectModule } from '@angular/material';
-import { MatMenuModule } from '@angular/material';
-import { MatChipsModule } from '@angular/material';
-import { MatProgressBarModule } from '@angular/material';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatListModule } from '@angular/material/list';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSelectModule } from '@angular/material/select';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatCheckboxModule } from '@angular/material';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDividerModule } from '@angular/material/divider';
@@ -69,7 +69,7 @@ import { AuthenticationService } from './authentication.service';
 
 import { environment } from '../environments/environment';
 
-import { CookieModule } from 'ngx-cookie';
+import { CookieService } from 'ngx-cookie-service';
 import { SortFilterBarComponent } from './shared/sort-filter-bar/sort-filter-bar.component';
 import { UsageGraphsComponent } from './view-report/report-usage/usage-graphs/usage-graphs.component';
 import { LastUsesComponent } from './view-report/report-usage/last-uses/last-uses.component';
@@ -170,7 +170,6 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     AngularFireAuthModule,
     FirebaseUIModule.forRoot(firebaseUiAuthConfig),
     MatSnackBarModule,
-    CookieModule.forRoot(),
     DialogsModule,
     MatMenuModule,
     MatChipsModule,
@@ -193,6 +192,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     BoatPartsService,
     ThemeTrackerService,
     AuthenticationService,
+    CookieService,
     { provide: HAMMER_GESTURE_CONFIG, useClass: HammerConfig }
   ],
   bootstrap: [AppComponent]

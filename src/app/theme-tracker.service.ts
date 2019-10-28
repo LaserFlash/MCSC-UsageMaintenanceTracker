@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CookieService, CookieOptions } from 'ngx-cookie';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable()
 export class ThemeTrackerService {
@@ -10,8 +10,7 @@ export class ThemeTrackerService {
 
   public setDark(b: boolean) {
     this.isDark = b;
-    const cookieOptions: CookieOptions = { expires: new Date(32525112147000)};
-    this.cookieService.put('mcsc', (b ? 1 : 0).toString(), cookieOptions);
+    this.cookieService.set('mcsc', (b ? 1 : 0).toString());
   }
 
 }

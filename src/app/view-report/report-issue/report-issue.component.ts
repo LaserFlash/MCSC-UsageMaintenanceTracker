@@ -1,9 +1,9 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 
-import { MatSnackBar } from '@angular/material';
-import { MatStepper } from '@angular/material';
-import { MatRadioChange } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatStepper } from '@angular/material/stepper';
+import { MatRadioChange } from '@angular/material/radio';
 
 import { ContactValidator } from '../../Utils/validators/CustomValidators';
 import { DialogsService } from '../../shared/dialog/dialogs.service';
@@ -26,7 +26,7 @@ import { Cloudinary } from '@cloudinary/angular-5.x';
 })
 
 export class ReportIssueComponent implements OnInit {
-  @ViewChild('stepper') stepper: MatStepper;
+  @ViewChild('stepper', {static: false}) stepper: MatStepper;
 
   isLinear = true;
   imageLoaded = true;
