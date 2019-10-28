@@ -18,7 +18,7 @@
 }
 
 .titleMinWidth {
-  min-width: calc(10ch + 70px);
+  min-width: calc(20ch + 70px);
 }
 
 .headerMinHeight {
