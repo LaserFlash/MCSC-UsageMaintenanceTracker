@@ -7,7 +7,7 @@
       ".write": "auth.token.admin === true",
       "$uid": {
       ".read": "$uid === auth.uid || auth.token.admin === true",
-      ".write": "auth.token.admin === true",
+      ".write": "auth.token.admin === true"
       }
   	}
   }
